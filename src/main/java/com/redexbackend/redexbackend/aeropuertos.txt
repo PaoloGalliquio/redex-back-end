@@ -1,0 +1,40 @@
+01;SKBO;Bogota;Colombia;bogo;America del Sur
+02;SEQM;Quito;Ecuador;quit;America del Sur
+03;SVMI;Caracas;Venezuela;cara;America del Sur
+04;SBBR;Brasilia;Brasil;bras;America del Sur
+05;SPIM;Lima;Perú;lima;America del Sur
+06;SLLP;La Paz;Bolivia;lapa;America del Sur
+07;SCEL;Santiago de Chile;Chile;sant;America del Sur
+08;SABE;Buenos Aires;Argentina;buen;America del Sur
+09;SGAS;Asunción;Paraguay;asun;America del Sur
+10;SUAA;Motenvideo;Uruguay;mont;America del Sur
+11;LATI;Tirana;Albania;tira;Europa
+12;EDDI;Berlin;Alemania;berl;Europa
+13;LOWW;Viena;Austria;vien;Europa
+14;EBCI;Bruselas;Belgica;brus;Europa
+15;UMMS;Minsk;Bielorrusia;mins;Europa
+16;LBSF;Sofia;Bulgaria;sofi;Europa
+17;LKPR;Praga;Checa;prag;Europa
+18;LDZA;Zagreb;Croacia;zagr;Europa
+19;EKCH;Copenhague;Dinamarca;cope;Europa
+20;LZIB;Bratislava;Eslovaquia;brat;Europa
+21;LJLJ;Liubliana;Eslovenia;liub;Europa
+22;LEMD;Madrid;España;madr;Europa
+23;EETN;Tallin;Estonia;tall;Europa
+24;EFHK;Helsinki;Finlandia;hels;Europa
+25;LFPG;Paris;Francia;pari;Europa
+26;LGAV;Atenas;Grecia;aten;Europa
+27;EHAM;Amsterdam;Holanda;amst;Europa
+28;LHBP;Budapest;Hungría;buda;Europa
+29;EIDW;Dublin;Irlanda (Eire);dubl;Europa
+30;BIKF;Reykjavik;Islandia;reyk;Europa
+31;LIRA;Roma;Italia;roma;Europa
+32;EVRA;Riga;Letonia;riga;Europa
+33;ELLX;Luxemburgo;Luxemburgo;luxe;Europa
+34;LMML;LaValletta;Malta;lava;Europa
+35;ENGM;Oslo;Noruega;oslo;Europa
+36;EPMO;Varsovia;Polonia;vars;Europa
+37;LPPT;Lisboa;Portugal;lisb;Europa
+38;EGLL;Londres;Reino Unido;lond;Europa
+39;ESKN;Estocolmo;Suecia;esto;Europa
+40;LSZB;Berna;Suiza;bern;Europa
