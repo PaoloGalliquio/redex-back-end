@@ -1,22 +1,19 @@
 package com.redexbackend.models;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
 
 public class Graph {
-  private Set<Node> nodes = new HashSet<>();
+  private HashMap<String, Node> nodes = new HashMap<>();
 
-  public void addNode(Node nodeA) {
-    nodes.add(nodeA);
+  public void addNode(String key, Node value) {
+    nodes.put(key, value);
   }
 
-  //region Constructores, Gettes y Setters
-  public Set<Node> getNodes() {
+  public HashMap<String,Node> getNodes() {
     return this.nodes;
   }
 
-  public void setNodes(Set<Node> nodes) {
+  public void setNodes(HashMap<String,Node> nodes) {
     this.nodes = nodes;
   }
-  //endregion
 }

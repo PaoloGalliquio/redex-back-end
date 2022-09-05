@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
-import java.util.Set;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,22 +24,26 @@ public class RedexBackEndApplication {
 		Graph mapa = new Graph();
 
 		for(HashMap.Entry<String, Node> aeropuerto : aeropuertos.entrySet()){
-			mapa.addNode(aeropuerto.getValue());
+			mapa.addNode(aeropuerto.getKey(), aeropuerto.getValue());
 		}
 
-		mapa = Dijkstra.calculateShortestPathFromSource(mapa, aeropuertos.get("BIKF"));
+		String origen = "LZIB";
+		String destino = "BIKF";
 
-		Set<Node> nodes = mapa.getNodes();
+		mapa = Dijkstra.calculateShortestPathFromSource(mapa, aeropuertos.get(origen));
 
-		System.out.println("------------------");
-		System.out.println("Tiempo más corto de " + aeropuertos.get("BIKF").getAeropuerto().getCiudad() + " a " + 
-		nodes.iterator().next().getAeropuerto().getCiudad() + " es " + nodes.iterator().next().getDistance()/60 + ":" + nodes.iterator().next().getDistance()%60);
-		System.out.println("Recorrido:");
-		System.out.print(aeropuertos.get("BIKF").getAeropuerto().getCiudad());
-		for(Node aeropuerto : nodes.iterator().next().getShortestPath()){
-			System.out.print(" -> " + aeropuerto.getAeropuerto().getCiudad());
+		System.out.println(
+			aeropuertos.get(origen).getAeropuerto().getCiudad() + 
+			" -> " + 
+			mapa.getNodes().get(destino).getAeropuerto().getCiudad() + 
+			" : " +
+			mapa.getNodes().get(destino).getDistance()/60 +
+			":" +
+			mapa.getNodes().get(destino).getDistance()%60);
+
+		for(Node node : mapa.getNodes().get(destino).getShortestPath()){
+			System.out.println(" - " + node.getAeropuerto().getCiudad());
 		}
-		System.out.println("\n------------------");
 
 		SpringApplication.run(RedexBackEndApplication.class, args);
 	}
