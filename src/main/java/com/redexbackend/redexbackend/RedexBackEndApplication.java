@@ -32,6 +32,14 @@ public class RedexBackEndApplication {
 
 		mapa = Dijkstra.calculateShortestPathFromSource(mapa, aeropuertos.get(origen));
 
+		String minutos;
+
+		if(mapa.getNodes().get(destino).getDistance()%60 < 10){
+			minutos = "0" + mapa.getNodes().get(destino).getDistance()%60; 
+		}else{
+			minutos = "" + mapa.getNodes().get(destino).getDistance()%60;
+		}
+
 		System.out.println(
 			aeropuertos.get(origen).getAeropuerto().getCiudad() + 
 			" -> " + 
@@ -39,8 +47,8 @@ public class RedexBackEndApplication {
 			" : " +
 			mapa.getNodes().get(destino).getDistance()/60 +
 			":" +
-			mapa.getNodes().get(destino).getDistance()%60);
-
+			minutos
+		);
 		for(Node node : mapa.getNodes().get(destino).getShortestPath()){
 			System.out.println(" - " + node.getAeropuerto().getCiudad());
 		}
@@ -52,7 +60,7 @@ public class RedexBackEndApplication {
 		HashMap<String, Node> aeropuertos = new HashMap<>();
 		String[] informacion;
 		String line;
-		File aeropuertosFile = new File("D:\\aaaaa\\0 PUCP\\2022-II\\DP1\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\aeropuertos.txt");
+		File aeropuertosFile = new File(".\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\aeropuertos.txt");
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(aeropuertosFile));
 			while((line = br.readLine()) != null){
@@ -72,7 +80,7 @@ public class RedexBackEndApplication {
 		HashMap<String, Integer> timezones = new HashMap<>();
 		String[] informacion;
 		String line;
-		File timezonesFile = new File("D:\\aaaaa\\0 PUCP\\2022-II\\DP1\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\timezones.txt");
+		File timezonesFile = new File(".\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\timezones.txt");
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(timezonesFile));
 			while((line = br.readLine()) != null){
@@ -91,7 +99,7 @@ public class RedexBackEndApplication {
 		String[] informacion;
 		int tiempo;
 		String line;
-		File vuelosFile = new File("D:\\aaaaa\\0 PUCP\\2022-II\\DP1\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
+		File vuelosFile = new File(".\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(vuelosFile));
 			while((line = br.readLine()) != null){
