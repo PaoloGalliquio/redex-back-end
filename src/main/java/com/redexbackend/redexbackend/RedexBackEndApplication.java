@@ -19,6 +19,7 @@ public class RedexBackEndApplication {
 	public static void main(String[] args){
 		HashMap<String, Node> aeropuertos = leerAeropuertos();
 		HashMap<String, Integer> timeZones = obtenerTimeZones();
+		//HashMap<String, > envios = obtenerPedidos();
 		agregarDestinos(aeropuertos, timeZones);
 		Graph mapa = new Graph();
 
