@@ -4,10 +4,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.Scanner;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.redexbackend.models.AStar;
 import com.redexbackend.models.Aeropuerto;
 import com.redexbackend.models.Dijkstra;
 import com.redexbackend.models.Graph;
@@ -23,34 +25,57 @@ public class RedexBackEndApplication {
 		agregarDestinos(aeropuertos, timeZones);
 		Graph mapa = new Graph();
 
-		for(HashMap.Entry<String, Node> aeropuerto : aeropuertos.entrySet()){
-			mapa.addNode(aeropuerto.getKey(), aeropuerto.getValue());
-		}
+		//Ciudades origen y destino
 
 		String origen = "LZIB";
 		String destino = "BIKF";
 
-		mapa = Dijkstra.calculateShortestPathFromSource(mapa, aeropuertos.get(origen));
+		//Escoger algoritmo
 
-		String minutos;
+		Scanner lectura = new Scanner (System.in);
 
-		if(mapa.getNodes().get(destino).getDistance()%60 < 10){
-			minutos = "0" + mapa.getNodes().get(destino).getDistance()%60; 
-		}else{
-			minutos = "" + mapa.getNodes().get(destino).getDistance()%60;
+		System.out.println("Escoja el algoritmo: D para Dijkstra - A para A*");
+
+		String algoritmo = lectura.next();
+
+		if(algoritmo.equalsIgnoreCase("A")){
+			//Astar
+			aeropuertos.get(origen).g = 0;
+
+			Node answer = AStar.aStar(aeropuertos.get(origen), aeropuertos.get(destino));
+			AStar.printPath(answer);
 		}
+		else if(algoritmo.equalsIgnoreCase("D")){
+			//Dijsktra
 
-		System.out.println(
-			aeropuertos.get(origen).getAeropuerto().getCiudad() + 
-			" -> " + 
-			mapa.getNodes().get(destino).getAeropuerto().getCiudad() + 
-			" : " +
-			mapa.getNodes().get(destino).getDistance()/60 +
-			":" +
-			minutos
-		);
-		for(Node node : mapa.getNodes().get(destino).getShortestPath()){
-			System.out.println(" - " + node.getAeropuerto().getCiudad());
+			for(HashMap.Entry<String, Node> aeropuerto : aeropuertos.entrySet()){
+				mapa.addNode(aeropuerto.getKey(), aeropuerto.getValue());
+			}
+
+			mapa = Dijkstra.calculateShortestPathFromSource(mapa, aeropuertos.get(origen));
+
+			String minutos;
+
+			if(mapa.getNodes().get(destino).getDistance()%60 < 10){
+				minutos = "0" + mapa.getNodes().get(destino).getDistance()%60; 
+			}else{
+				minutos = "" + mapa.getNodes().get(destino).getDistance()%60;
+			}
+
+			System.out.println(
+				aeropuertos.get(origen).getAeropuerto().getCiudad() + 
+				" -> " + 
+				mapa.getNodes().get(destino).getAeropuerto().getCiudad() + 
+				" : " +
+				mapa.getNodes().get(destino).getDistance()/60 +
+				":" +
+				minutos
+			);
+			for(Node node : mapa.getNodes().get(destino).getShortestPath()){
+				System.out.println(" - " + node.getAeropuerto().getCiudad());
+			}
+		}else{
+			System.out.println("XD");
 		}
 
 		SpringApplication.run(RedexBackEndApplication.class, args);

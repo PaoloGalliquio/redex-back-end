@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Node {
+public class Node implements Comparable<Node>{
   private Aeropuerto aeropuerto;
 
   private List<Node> shortestPath = new LinkedList<>();
@@ -12,6 +12,26 @@ public class Node {
   private Integer distance = Integer.MAX_VALUE;
 
   HashMap<Node, Integer> adjacentNodes = new HashMap<>();
+
+  //AStar
+
+  public int f = Integer.MAX_VALUE;
+  public int g = Integer.MAX_VALUE;
+
+  //public int h = Integer.MAX_VALUE;
+
+  public int h = 0;
+
+  public Node parent = null;
+
+  @Override
+  public int compareTo(Node n) {
+      return Integer.compare(this.f, n.f);
+  }
+
+  public int calculateHeuristic(Node target){
+      return this.h;
+  }
 
   public void addDestination(Node destination, int distance) {
     adjacentNodes.put(destination, distance);
