@@ -168,6 +168,6 @@ public class RedexBackEndApplication {
 		// 	System.out.println("Duración: " + duracion/60 + ":" + duracion%60);
 		// }
 
-		return duracion;
+		return duracion + 60;
 	}
 }
