@@ -12,7 +12,6 @@ public class AStar{
         PriorityQueue<Node> openList = new PriorityQueue<>();
     
         start.f = start.g + start.calculateHeuristic(target);
-        System.out.println("heuristica: "+start.calculateHeuristic(target));
         openList.add(start);
     
         System.out.println("Solucion A*");
@@ -35,14 +34,12 @@ public class AStar{
                     m.parent = n;
                     m.g = totalWeight;
                     m.f = m.g + m.calculateHeuristic(target);
-                    System.out.println("heuristica: "+m.calculateHeuristic(target));
                     openList.add(m);
                 } else {
                     if(totalWeight < m.g){
                         m.parent = n;
                         m.g = totalWeight;
                         m.f = m.g + m.calculateHeuristic(target);
-                        System.out.println("heuristica: "+m.calculateHeuristic(target));
     
                         if(closedList.contains(m)){
                             closedList.remove(m);
@@ -68,9 +65,8 @@ public class AStar{
     
         while(n.parent != null){
             ids.add(n.getAeropuerto().getCiudad());
-            if(n.parent != null)minutos += n.parent.getAdjacentNodes().get(n) + 60;
+            if(n.parent != null)minutos += n.parent.getAdjacentNodes().get(n);
             n = n.parent;
-            System.out.println("minutos: "+minutos);
         }
         ids.add(n.getAeropuerto().getCiudad());
         Collections.reverse(ids);
