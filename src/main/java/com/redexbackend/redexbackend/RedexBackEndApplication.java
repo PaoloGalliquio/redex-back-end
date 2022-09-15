@@ -85,7 +85,7 @@ public class RedexBackEndApplication {
 		HashMap<String, Node> aeropuertos = new HashMap<>();
 		String[] informacion;
 		String line;
-		File aeropuertosFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\aeropuertos.txt");
+		File aeropuertosFile = new File(System.getProperty("user.dir") + "\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\aeropuertos.txt");
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(aeropuertosFile));
 			while((line = br.readLine()) != null){
@@ -105,7 +105,7 @@ public class RedexBackEndApplication {
 		HashMap<String, Integer> timezones = new HashMap<>();
 		String[] informacion;
 		String line;
-		File timezonesFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\timezones.txt");
+		File timezonesFile = new File(System.getProperty("user.dir") + "\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\timezones.txt");
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(timezonesFile));
 			while((line = br.readLine()) != null){
@@ -124,7 +124,7 @@ public class RedexBackEndApplication {
 		String[] informacion;
 		int tiempo;
 		String line;
-		File vuelosFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
+		File vuelosFile = new File(System.getProperty("user.dir") + "\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(vuelosFile));
 			while((line = br.readLine()) != null){
