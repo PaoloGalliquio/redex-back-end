@@ -78,7 +78,7 @@ public class RedexBackEndApplication {
 			System.out.println("XD");
 		}
 
-		SpringApplication.run(RedexBackEndApplication.class, args);
+		//SpringApplication.run(RedexBackEndApplication.class, args);
 	}
 
 	private static HashMap<String, Node> leerAeropuertos(){

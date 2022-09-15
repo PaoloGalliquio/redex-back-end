@@ -18,8 +18,7 @@ public class AStar{
         System.out.println("==============================================");
         System.out.println("Origen: " + start.getAeropuerto().getCiudad());
         System.out.println("Destino: " + target.getAeropuerto().getCiudad());
-        System.out.println("==============================================");
-        System.out.println("Ruta:");
+        System.out.print("Duracion: ");
 
         while(!openList.isEmpty()){
             Node n = openList.peek();
@@ -57,8 +56,8 @@ public class AStar{
     }
 
     public static void printPath(Node target){
-        Node n = target;
-    
+        Node n = target, aux;
+        int minutos = 0;
         if(n==null)
             return;
     
@@ -66,13 +65,24 @@ public class AStar{
     
         while(n.parent != null){
             ids.add(n.getAeropuerto().getCiudad());
+            if(n.parent != null)minutos += n.parent.getAdjacentNodes().get(n) + 60;
             n = n.parent;
         }
         ids.add(n.getAeropuerto().getCiudad());
         Collections.reverse(ids);
 
+        minAHora(minutos);
+        System.out.println("==============================================");
+        System.out.println("Ruta:");
+
         for(String id : ids){
             System.out.println("    " + id);
         }
+    }
+
+    public static void minAHora(int min){
+        int horas = min / 60;
+        int minutos = min % 60;
+        System.out.println(horas + ":" + minutos);
     }
 }
