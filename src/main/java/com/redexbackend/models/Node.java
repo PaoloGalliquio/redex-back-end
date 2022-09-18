@@ -29,15 +29,18 @@ public class Node implements Comparable<Node>{
       return Integer.compare(this.f, n.f);
   }
 
-  public int calculateHeuristic(Node target){
+  public int calculateHeuristic(Node start, Node target){
     
-    /*//Propuesta de heurística:
+    //Propuesta de heurística:
     //Calcular el tiempo de un hipotético vuelo directo entre el punto actual
     //y el destino considerando una velocidad fija para no afectar
     //las comparaciones
     
     final int R = 6371; // radio de la Tierra
-    double lat1=4.710785964156131,lon1=-74.14538536583756,lat2=-12.021256252425848,lon2=-77.11144078946839,vprom=550;
+    double lat1=start.getAeropuerto().getLatitud(),
+    lon1=start.getAeropuerto().getLongitud(),
+    lat2=target.getAeropuerto().getLatitud(),
+    lon2=target.getAeropuerto().getLongitud(),vprom=550;
 
     double latDistance = Math.toRadians(lat2 - lat1);
     double lonDistance = Math.toRadians(lon2 - lon1);
@@ -47,7 +50,9 @@ public class Node implements Comparable<Node>{
     double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     double distance = R * c * 1000 / 1000; // distancia en km
     double tiempo = distance/vprom; //horas
-    System.out.println(tiempo);*/
+    int horas = (int)tiempo;
+    double minutos = 60*(tiempo-horas);
+    this.h = horas*60 +(int)minutos;
     
     return this.h;
   }

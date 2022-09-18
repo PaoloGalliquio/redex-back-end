@@ -7,22 +7,28 @@ public class Aeropuerto {
   private String pais;
   private String ciudadAbre;
   private String continente;
+  private double latitud;
+  private double longitud;
 
-  public Aeropuerto(int id, String codigo, String ciudad, String pais, String ciudadAbre, String continente) {
+  public Aeropuerto(int id, String codigo, String ciudad, String pais, String ciudadAbre, String continente, double latitud, double longitud) {
     this.id = id;
     this.codigo = codigo;
     this.ciudad = ciudad;
     this.pais = pais;
     this.ciudadAbre = ciudadAbre;
     this.continente = continente;
+    this.latitud = latitud;
+    this.longitud = longitud;
   }
-  public Aeropuerto(String id, String codigo, String ciudad, String pais, String ciudadAbre, String continente) {
+  public Aeropuerto(String id, String codigo, String ciudad, String pais, String ciudadAbre, String continente, String latitud, String longitud) {
     this.id = Integer.parseInt(id);
     this.codigo = codigo;
     this.ciudad = ciudad;
     this.pais = pais;
     this.ciudadAbre = ciudadAbre;
     this.continente = continente;
+    this.latitud = Double.parseDouble(latitud);
+    this.longitud = Double.parseDouble(longitud);
   }
   
   public int getId() {
@@ -71,6 +77,22 @@ public class Aeropuerto {
 
   public void setContinente(String continente) {
     this.continente = continente;
+  }
+
+  public double getLatitud() {
+    return this.latitud;
+  }
+
+  public void setLatitud(double latitud) {
+    this.latitud = latitud;
+  }
+
+  public double getLongitud() {
+    return this.longitud;
+  }
+
+  public void setLongitud(double longitud) {
+    this.longitud = longitud;
   }
 }
 

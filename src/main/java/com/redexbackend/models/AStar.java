@@ -11,7 +11,7 @@ public class AStar{
         PriorityQueue<Node> closedList = new PriorityQueue<>();
         PriorityQueue<Node> openList = new PriorityQueue<>();
     
-        start.f = start.g + start.calculateHeuristic(target);
+        start.f = start.g + start.calculateHeuristic(start, target);
         openList.add(start);
     
         System.out.println("Solucion A*");
@@ -33,13 +33,13 @@ public class AStar{
                 if(!openList.contains(m) && !closedList.contains(m)){
                     m.parent = n;
                     m.g = totalWeight;
-                    m.f = m.g + m.calculateHeuristic(target);
+                    m.f = m.g + m.calculateHeuristic(m, target);
                     openList.add(m);
                 } else {
                     if(totalWeight < m.g){
                         m.parent = n;
                         m.g = totalWeight;
-                        m.f = m.g + m.calculateHeuristic(target);
+                        m.f = m.g + m.calculateHeuristic(m, target);
     
                         if(closedList.contains(m)){
                             closedList.remove(m);

@@ -90,7 +90,7 @@ public class RedexBackEndApplication {
 			BufferedReader br = new BufferedReader(new FileReader(aeropuertosFile));
 			while((line = br.readLine()) != null){
 				informacion = line.split(";");
-				Node aeropuerto = new Node(new Aeropuerto(informacion[0], informacion[1], informacion[2], informacion[3], informacion[4], informacion[5]));
+				Node aeropuerto = new Node(new Aeropuerto(informacion[0], informacion[1], informacion[2], informacion[3], informacion[4], informacion[5], informacion[6], informacion[7]));
 				aeropuertos.put(informacion[1], aeropuerto);
 			}
 			br.close();
