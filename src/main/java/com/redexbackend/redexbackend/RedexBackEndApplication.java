@@ -10,8 +10,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.redexbackend.models.AStar;
-import com.redexbackend.models.Aeropuerto;
+import com.redexbackend.models.AeropuertoF;
 import com.redexbackend.models.Dijkstra;
+import com.redexbackend.models.Envio;
 import com.redexbackend.models.Graph;
 import com.redexbackend.models.Node;
 
@@ -21,7 +22,7 @@ public class RedexBackEndApplication {
 		Graph mapa = new Graph();
 		HashMap<String, Node> aeropuertos = leerAeropuertos();
 		HashMap<String, Integer> timeZones = obtenerTimeZones();
-		//HashMap<String, > envios = obtenerPedidos();
+		//HashMap<String, Envio> envios = obtenerEnvios();
 
 		agregarDestinos(aeropuertos, timeZones);
 
@@ -90,7 +91,7 @@ public class RedexBackEndApplication {
 			BufferedReader br = new BufferedReader(new FileReader(aeropuertosFile));
 			while((line = br.readLine()) != null){
 				informacion = line.split(";");
-				Node aeropuerto = new Node(new Aeropuerto(informacion[0], informacion[1], informacion[2], informacion[3], informacion[4], informacion[5], informacion[6], informacion[7]));
+				Node aeropuerto = new Node(new AeropuertoF(informacion[0], informacion[1], informacion[2], informacion[3], informacion[4], informacion[5], informacion[6], informacion[7]));
 				aeropuertos.put(informacion[1], aeropuerto);
 			}
 			br.close();

@@ -2,28 +2,28 @@ package com.redexbackend.models;
 
 import java.util.List;
 
-public class Aeropuerto {
+public class Ciudad {
   private int id;
   private String codigo;
   private String nombre;
-  private int capacidad;
-  private int cantidadReservada;
+  private String UTC;
+  private int husoHorario;
   private double latitud;
   private double longitud;
-  private Ciudad ciudad;
-  private List<Vuelo> vuelos;
+  private Aeropuerto aeropuerto;
+  private Pais pais;
   private int estado;
 
-  public Aeropuerto(int id, String codigo, String nombre, int capacidad, int cantidadReservada, double latitud, double longitud, Ciudad ciudad, List<Vuelo> vuelos, int estado) {
+  public Ciudad(int id, String codigo, String nombre, String UTC, int husoHorario, double latitud, double longitud, Aeropuerto aeropuerto, Pais pais, int estado) {
     this.id = id;
     this.codigo = codigo;
     this.nombre = nombre;
-    this.capacidad = capacidad;
-    this.cantidadReservada = cantidadReservada;
+    this.UTC = UTC;
+    this.husoHorario = husoHorario;
     this.latitud = latitud;
     this.longitud = longitud;
-    this.ciudad = ciudad;
-    this.vuelos = vuelos;
+    this.aeropuerto = aeropuerto;
+    this.pais = pais;
     this.estado = estado;
   }
 
@@ -51,20 +51,20 @@ public class Aeropuerto {
     this.nombre = nombre;
   }
 
-  public int getCapacidad() {
-    return this.capacidad;
+  public String getUTC() {
+    return this.UTC;
   }
 
-  public void setCapacidad(int capacidad) {
-    this.capacidad = capacidad;
+  public void setUTC(String UTC) {
+    this.UTC = UTC;
   }
 
-  public int getCantidadReservada() {
-    return this.cantidadReservada;
+  public int getHusoHorario() {
+    return this.husoHorario;
   }
 
-  public void setCantidadReservada(int cantidadReservada) {
-    this.cantidadReservada = cantidadReservada;
+  public void setHusoHorario(int husoHorario) {
+    this.husoHorario = husoHorario;
   }
 
   public double getLatitud() {
@@ -83,20 +83,20 @@ public class Aeropuerto {
     this.longitud = longitud;
   }
 
-  public Ciudad getCiudad() {
-    return this.ciudad;
+  public Aeropuerto getAeropuerto() {
+    return this.aeropuerto;
   }
 
-  public void setCiudad(Ciudad ciudad) {
-    this.ciudad = ciudad;
+  public void setAeropuerto(Aeropuerto aeropuerto) {
+    this.aeropuerto = aeropuerto;
   }
 
-  public List<Vuelo> getVuelos() {
-    return this.vuelos;
+  public Pais getPais() {
+    return this.pais;
   }
 
-  public void setVuelos(List<Vuelo> vuelos) {
-    this.vuelos = vuelos;
+  public void setPais(Pais pais) {
+    this.pais = pais;
   }
 
   public int getEstado() {
@@ -106,6 +106,5 @@ public class Aeropuerto {
   public void setEstado(int estado) {
     this.estado = estado;
   }
-
+  
 }
-

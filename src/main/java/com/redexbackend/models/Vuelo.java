@@ -1,69 +1,81 @@
 package com.redexbackend.models;
 
+import java.sql.Date;
+
 public class Vuelo {
-  private Aeropuerto origen;
-  private Aeropuerto destino;
-  private int horaSalida;
-  private int minutoSalida;
-  private int horaLlegada;
-  private int minutoLlegada;
+  private String codigo;
+  private Aeropuerto aeropuertoPartido;
+  private Aeropuerto aeropuertoDestino;
+  private Date fechaPartida;
+  private Date fechaDestino;
+  private PlanDeVuelo planDeVuelo;
+  private int estado;
 
-
-  public Vuelo(Aeropuerto origen, Aeropuerto destino, int horaSalida, int minutoSalida, int horaLlegada, int minutoLlegada) {
-    this.origen = origen;
-    this.destino = destino;
-    this.horaSalida = horaSalida;
-    this.minutoSalida = minutoSalida;
-    this.horaLlegada = horaLlegada;
-    this.minutoLlegada = minutoLlegada;
+  public Vuelo(String codigo, Aeropuerto aeropuertoPartido, Aeropuerto aeropuertoDestino, Date fechaPartida, Date fechaDestino, PlanDeVuelo planDeVuelo, int estado) {
+    this.codigo = codigo;
+    this.aeropuertoPartido = aeropuertoPartido;
+    this.aeropuertoDestino = aeropuertoDestino;
+    this.fechaPartida = fechaPartida;
+    this.fechaDestino = fechaDestino;
+    this.planDeVuelo = planDeVuelo;
+    this.estado = estado;
   }
 
-  public Aeropuerto getOrigen() {
-    return this.origen;
+  public String getCodigo() {
+    return this.codigo;
   }
 
-  public void setOrigen(Aeropuerto origen) {
-    this.origen = origen;
+  public void setCodigo(String codigo) {
+    this.codigo = codigo;
   }
 
-  public Aeropuerto getDestino() {
-    return this.destino;
+  public Aeropuerto getAeropuertoPartido() {
+    return this.aeropuertoPartido;
   }
 
-  public void setDestino(Aeropuerto destino) {
-    this.destino = destino;
+  public void setAeropuertoPartido(Aeropuerto aeropuertoPartido) {
+    this.aeropuertoPartido = aeropuertoPartido;
   }
 
-  public int getHoraSalida() {
-    return this.horaSalida;
+  public Aeropuerto getAeropuertoDestino() {
+    return this.aeropuertoDestino;
   }
 
-  public void setHoraSalida(int horaSalida) {
-    this.horaSalida = horaSalida;
+  public void setAeropuertoDestino(Aeropuerto aeropuertoDestino) {
+    this.aeropuertoDestino = aeropuertoDestino;
   }
 
-  public int getMinutoSalida() {
-    return this.minutoSalida;
+  public Date getFechaPartida() {
+    return this.fechaPartida;
   }
 
-  public void setMinutoSalida(int minutoSalida) {
-    this.minutoSalida = minutoSalida;
+  public void setFechaPartida(Date fechaPartida) {
+    this.fechaPartida = fechaPartida;
   }
 
-  public int getHoraLlegada() {
-    return this.horaLlegada;
+  public Date getFechaDestino() {
+    return this.fechaDestino;
   }
 
-  public void setHoraLlegada(int horaLlegada) {
-    this.horaLlegada = horaLlegada;
+  public void setFechaDestino(Date fechaDestino) {
+    this.fechaDestino = fechaDestino;
   }
 
-  public int getMinutoLlegada() {
-    return this.minutoLlegada;
+  public PlanDeVuelo getPlanDeVuelo() {
+    return this.planDeVuelo;
   }
 
-  public void setMinutoLlegada(int minutoLlegada) {
-    this.minutoLlegada = minutoLlegada;
+  public void setPlanDeVuelo(PlanDeVuelo planDeVuelo) {
+    this.planDeVuelo = planDeVuelo;
   }
+
+  public int getEstado() {
+    return this.estado;
+  }
+
+  public void setEstado(int estado) {
+    this.estado = estado;
+  }
+  
 
 }

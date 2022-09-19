@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Node implements Comparable<Node>{
-  private Aeropuerto aeropuerto;
+  private AeropuertoF aeropuerto;
 
   private List<Node> shortestPath = new LinkedList<>();
 
@@ -62,15 +62,15 @@ public class Node implements Comparable<Node>{
   }
 
   //region Constructores, Gettes y Setters
-  public Node(Aeropuerto aeropuerto) {
+  public Node(AeropuertoF aeropuerto) {
     this.aeropuerto = aeropuerto;
   }
 
-  public Aeropuerto getAeropuerto() {
+  public AeropuertoF getAeropuerto() {
     return this.aeropuerto;
   }
 
-  public void setAeropuerto(Aeropuerto aeropuerto) {
+  public void setAeropuerto(AeropuertoF aeropuerto) {
     this.aeropuerto = aeropuerto;
   }
 

@@ -1,29 +1,37 @@
 package com.redexbackend.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Aeropuerto {
+public class Pais {
   private int id;
   private String codigo;
   private String nombre;
-  private int capacidad;
-  private int cantidadReservada;
   private double latitud;
   private double longitud;
-  private Ciudad ciudad;
-  private List<Vuelo> vuelos;
+  private List<Ciudad> ciudades;
+  private Continente continente;
   private int estado;
 
-  public Aeropuerto(int id, String codigo, String nombre, int capacidad, int cantidadReservada, double latitud, double longitud, Ciudad ciudad, List<Vuelo> vuelos, int estado) {
+  public Pais(int id, String codigo, String nombre, double latitud, double longitud, List<Ciudad> ciudades, Continente continente, int estado) {
     this.id = id;
     this.codigo = codigo;
     this.nombre = nombre;
-    this.capacidad = capacidad;
-    this.cantidadReservada = cantidadReservada;
     this.latitud = latitud;
     this.longitud = longitud;
-    this.ciudad = ciudad;
-    this.vuelos = vuelos;
+    this.ciudades = ciudades;
+    this.continente = continente;
+    this.estado = estado;
+  }
+
+  public Pais(int id, String codigo, String nombre, double latitud, double longitud, Continente continente, int estado) {
+    this.id = id;
+    this.codigo = codigo;
+    this.nombre = nombre;
+    this.latitud = latitud;
+    this.longitud = longitud;
+    this.ciudades = new ArrayList<Ciudad>();
+    this.continente = continente;
     this.estado = estado;
   }
 
@@ -51,22 +59,6 @@ public class Aeropuerto {
     this.nombre = nombre;
   }
 
-  public int getCapacidad() {
-    return this.capacidad;
-  }
-
-  public void setCapacidad(int capacidad) {
-    this.capacidad = capacidad;
-  }
-
-  public int getCantidadReservada() {
-    return this.cantidadReservada;
-  }
-
-  public void setCantidadReservada(int cantidadReservada) {
-    this.cantidadReservada = cantidadReservada;
-  }
-
   public double getLatitud() {
     return this.latitud;
   }
@@ -83,20 +75,20 @@ public class Aeropuerto {
     this.longitud = longitud;
   }
 
-  public Ciudad getCiudad() {
-    return this.ciudad;
+  public List<Ciudad> getCiudades() {
+    return this.ciudades;
   }
 
-  public void setCiudad(Ciudad ciudad) {
-    this.ciudad = ciudad;
+  public void setCiudades(List<Ciudad> ciudades) {
+    this.ciudades = ciudades;
   }
 
-  public List<Vuelo> getVuelos() {
-    return this.vuelos;
+  public Continente getContinente() {
+    return this.continente;
   }
 
-  public void setVuelos(List<Vuelo> vuelos) {
-    this.vuelos = vuelos;
+  public void setContinente(Continente continente) {
+    this.continente = continente;
   }
 
   public int getEstado() {
@@ -106,6 +98,5 @@ public class Aeropuerto {
   public void setEstado(int estado) {
     this.estado = estado;
   }
-
+  
 }
-
