@@ -1,5 +1,6 @@
 package com.redexbackend.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Aeropuerto {
@@ -24,6 +25,19 @@ public class Aeropuerto {
     this.longitud = longitud;
     this.ciudad = ciudad;
     this.vuelos = vuelos;
+    this.estado = estado;
+  }
+
+  public Aeropuerto(int id, String codigo, String nombre, int capacidad, int cantidadReservada, double latitud, double longitud, Ciudad ciudad, int estado) {
+    this.id = id;
+    this.codigo = codigo;
+    this.nombre = nombre;
+    this.capacidad = capacidad;
+    this.cantidadReservada = cantidadReservada;
+    this.latitud = latitud;
+    this.longitud = longitud;
+    this.ciudad = ciudad;
+    this.vuelos = new ArrayList<Vuelo>();
     this.estado = estado;
   }
 

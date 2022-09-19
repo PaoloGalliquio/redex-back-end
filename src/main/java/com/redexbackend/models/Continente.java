@@ -7,31 +7,25 @@ public class Continente {
   private int id;
   private String codigo;
   private String nombre;
-  private double latitud;
-  private double longitud;
   private double politicaLocal;
   private double politicaIntercontinental;
   private List<Pais> paises;
   private int estado;
 
-  public Continente(int id, String codigo, String nombre, double latitud, double longitud, double politicaLocal, double politicaIntercontinental, List<Pais> paises, int estado) {
+  public Continente(int id, String codigo, String nombre, double politicaLocal, double politicaIntercontinental, List<Pais> paises, int estado) {
     this.id = id;
     this.codigo = codigo;
     this.nombre = nombre;
-    this.latitud = latitud;
-    this.longitud = longitud;
     this.politicaLocal = politicaLocal;
     this.politicaIntercontinental = politicaIntercontinental;
     this.paises = paises;
     this.estado = estado;
   }
 
-  public Continente(int id, String codigo, String nombre, double latitud, double longitud, double politicaLocal, double politicaIntercontinental, int estado) {
+  public Continente(int id, String codigo, String nombre, double politicaLocal, double politicaIntercontinental, int estado) {
     this.id = id;
     this.codigo = codigo;
     this.nombre = nombre;
-    this.latitud = latitud;
-    this.longitud = longitud;
     this.politicaLocal = politicaLocal;
     this.politicaIntercontinental = politicaIntercontinental;
     this.paises = new ArrayList<Pais>();
@@ -60,22 +54,6 @@ public class Continente {
 
   public void setNombre(String nombre) {
     this.nombre = nombre;
-  }
-
-  public double getLatitud() {
-    return this.latitud;
-  }
-
-  public void setLatitud(double latitud) {
-    this.latitud = latitud;
-  }
-
-  public double getLongitud() {
-    return this.longitud;
-  }
-
-  public void setLongitud(double longitud) {
-    this.longitud = longitud;
   }
 
   public double getPoliticaLocal() {

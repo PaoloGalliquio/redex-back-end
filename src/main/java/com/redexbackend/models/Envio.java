@@ -1,6 +1,7 @@
 package com.redexbackend.models;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,23 @@ public class Envio {
     this.correoCliente = correoCliente;
     this.planesDeVuelo = new ArrayList<PlanDeVuelo>();
     this.estado = estado;
+  }
+
+  public Envio(String codigo, String fechaEnvio, String horaEnvio, Aeropuerto aeropuertoPartida, Aeropuerto aeropuertoDestino, String numeroPaquetes) {
+    this.id = Integer.parseInt(codigo.substring(4,13));
+    this.codigo = codigo;
+    this.aeropuertoPartida = aeropuertoPartida;
+    this.aeropuertoDestino = aeropuertoDestino;
+    this.numeroPaquetes = Integer.parseInt(numeroPaquetes);
+    String yy = fechaEnvio.substring(0,3);
+    String mm = fechaEnvio.substring(4,5);
+    String dd = fechaEnvio.substring(6,7);
+    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    try{
+      this.fechaEnvio = formato.parse(yy + "-" + mm + "-" + dd + " " + horaEnvio + ":00");
+    }catch(Exception ex){
+      System.out.println("Se ha producido un error: " + ex.getMessage());
+    }
   }
 
   public int getId() {

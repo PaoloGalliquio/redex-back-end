@@ -1,6 +1,6 @@
 package com.redexbackend.models;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Vuelo {
   private String codigo;

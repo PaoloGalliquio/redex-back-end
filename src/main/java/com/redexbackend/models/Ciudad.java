@@ -1,7 +1,5 @@
 package com.redexbackend.models;
 
-import java.util.List;
-
 public class Ciudad {
   private int id;
   private String codigo;
@@ -23,6 +21,18 @@ public class Ciudad {
     this.latitud = latitud;
     this.longitud = longitud;
     this.aeropuerto = aeropuerto;
+    this.pais = pais;
+    this.estado = estado;
+  }
+
+  public Ciudad(int id, String codigo, String nombre, String UTC, int husoHorario, double latitud, double longitud, Pais pais, int estado) {
+    this.id = id;
+    this.codigo = codigo;
+    this.nombre = nombre;
+    this.UTC = UTC;
+    this.husoHorario = husoHorario;
+    this.latitud = latitud;
+    this.longitud = longitud;
     this.pais = pais;
     this.estado = estado;
   }

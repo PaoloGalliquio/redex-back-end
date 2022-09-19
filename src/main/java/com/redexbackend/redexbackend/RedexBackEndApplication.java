@@ -10,27 +10,34 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.redexbackend.models.AStar;
+import com.redexbackend.models.Aeropuerto;
 import com.redexbackend.models.AeropuertoF;
+import com.redexbackend.models.Ciudad;
+import com.redexbackend.models.Continente;
 import com.redexbackend.models.Dijkstra;
 import com.redexbackend.models.Envio;
 import com.redexbackend.models.Graph;
 import com.redexbackend.models.Node;
+import com.redexbackend.models.Pais;
 
 @SpringBootApplication
 public class RedexBackEndApplication {
 	public static void main(String[] args){
 		Graph mapa = new Graph();
 		HashMap<String, Node> aeropuertos = leerAeropuertos();
-		HashMap<String, Integer> timeZones = obtenerTimeZones();
-		//HashMap<String, Envio> envios = obtenerEnvios();
+		HashMap<String, Integer> timeZones = leerTimeZones();
+		HashMap<String, Envio> envios = leerEnvios(aeropuertos);
 
-		agregarDestinos(aeropuertos, timeZones);
-
-		//Ciudades origen y destino
 		String origen = "LZIB";
 		String destino = "BIKF";
+		
+		agregarDestinos(aeropuertos, timeZones);
+		resultado(mapa, aeropuertos, origen, destino);
 
-		//Escoger algoritmo
+		//SpringApplication.run(RedexBackEndApplication.class, args);
+	}
+	
+	private static void resultado(Graph mapa, HashMap<String, Node> aeropuertos, String origen, String destino){
 		Scanner lectura = new Scanner (System.in);
 		System.out.println("Escoja el algoritmo: D para Dijkstra - A para A*");
 		String algoritmo = lectura.next();
@@ -43,7 +50,6 @@ public class RedexBackEndApplication {
 			System.out.println("No es una opción correcta");
 		
 		lectura.close();
-		//SpringApplication.run(RedexBackEndApplication.class, args);
 	}
 
 	private static void imprimirAstar(HashMap<String, Node> aeropuertos, String origen, String destino){
@@ -102,7 +108,7 @@ public class RedexBackEndApplication {
 		return aeropuertos;
 	}
 
-	private static HashMap<String, Integer> obtenerTimeZones(){
+	private static HashMap<String, Integer> leerTimeZones(){
 		HashMap<String, Integer> timezones = new HashMap<>();
 		String[] informacion;
 		String line;
@@ -119,6 +125,34 @@ public class RedexBackEndApplication {
 			System.out.println("Se ha producido un error: " + ex.getMessage());
 		}
 		return timezones;
+	}
+
+	private static HashMap<String, Envio> leerEnvios(HashMap<String, Node> aeropuertos){
+		HashMap<String, Envio> envios = new HashMap<>();
+		Continente continente = new Continente(0, "ASur", "América del Sur", 0, 0, 1);
+		Pais pais = new Pais(0, "PER", "Perú", continente, 1);
+		Ciudad ciudad = new Ciudad(0, "LIM", "Lima", "UTC-5", -5, -12.024105, -77.112165, pais, 1);
+		String[] informacion, destinoNumPaquetes;
+		String line;
+		File enviosFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\envios_historicos.v01\\pack_enviado_BIKF.txt");
+		try{
+			BufferedReader br = new BufferedReader(new FileReader(enviosFile));
+			while((line = br.readLine()) != null){
+				informacion = line.split("-");
+				destinoNumPaquetes = informacion[3].split(":");
+				AeropuertoF salidaF = aeropuertos.get("BIKF").getAeropuerto();
+				AeropuertoF destinoF = aeropuertos.get(destinoNumPaquetes[0]).getAeropuerto();
+				Aeropuerto salida = new Aeropuerto(0, salidaF.getCodigo(), salidaF.getCodigo(), 300, 300, salidaF.getLatitud(), salidaF.getLongitud(), ciudad, 1);
+				Aeropuerto destino = new Aeropuerto(1, destinoF.getCodigo(), destinoF.getCodigo(), 300, 300, destinoF.getLatitud(), destinoF.getLongitud(), ciudad, 1);
+				Envio envio = new Envio(informacion[0], informacion[1],informacion[2], salida, destino, destinoNumPaquetes[1]);
+				envios.put(envio.getCodigo(), envio);
+			}
+			br.close();
+		}
+		catch(Exception ex){
+			System.out.println("Se ha producido un error: " + ex.getMessage());
+		}
+		return envios;
 	}
 
 	private static void agregarDestinos(HashMap<String, Node> aeropuertos, HashMap<String, Integer> timeZones){
