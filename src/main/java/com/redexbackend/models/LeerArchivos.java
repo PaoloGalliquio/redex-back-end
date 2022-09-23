@@ -146,13 +146,14 @@ public class LeerArchivos {
 		return envios;
 	}
 
-	public HashMap<String, Vuelo> leerVuelos(HashMap<String, Node> aeropuertos){
+	public HashMap<String, Vuelo> leerVuelos(HashMap<String, Node> aeropuertos, HashMap<String, Integer> timeZones){
 		ZoneId defaultZoneId = ZoneId.systemDefault();
 		LocalDate localDate = LocalDate.now();
 		Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
 		HashMap<String, Vuelo> vuelos = new HashMap<>();
 		String[] informacion;
 		String line;
+		int tiempo;
 		File timezonesFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(timezonesFile));
@@ -161,6 +162,8 @@ public class LeerArchivos {
 				Vuelo vuelo = new Vuelo(informacion[0] + informacion[1], aeropuertos.get(informacion[0]).getAeropuerto(), aeropuertos.get(informacion[1]).getAeropuerto(), date, aeropuertos.get(informacion[0]).getAeropuerto().getCapacidad(), 1);
 				aeropuertos.get(informacion[0]).getAeropuerto().addVuelo(vuelo);
 				vuelos.put(informacion[0] + informacion[1], vuelo);
+				tiempo = obtenerTiempo(timeZones, aeropuertos.get(informacion[0]), informacion[2], aeropuertos.get(informacion[1]), informacion[3]);
+				aeropuertos.get(informacion[0]).addDestination(aeropuertos.get(informacion[1]), tiempo);
 			}
 			br.close();
 		}
