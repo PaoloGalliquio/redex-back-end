@@ -31,7 +31,6 @@ public class RedexBackEndApplication {
 		HashMap<String, Integer> timeZones = lector.leerTimeZones();
 		HashMap<String, Vuelo> vuelos = lector.leerVuelos(aeropuertos, timeZones);
 		HashMap<String, Envio> envios = lector.leerEnvios(aeropuertos);
-		//lector.agregarDestinos(aeropuertos, timeZones);
 
 		Graph mapa = new Graph();
 
