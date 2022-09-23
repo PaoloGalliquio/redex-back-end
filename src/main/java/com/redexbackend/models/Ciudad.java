@@ -37,6 +37,16 @@ public class Ciudad {
     this.estado = estado;
   }
 
+  public Ciudad(String id, String codigo, String nombre, String latitud, String longitud, Pais pais, int estado) {
+    this.id = Integer.parseInt(id);
+    this.codigo = codigo;
+    this.nombre = nombre;
+    this.latitud = Double.parseDouble(latitud);
+    this.longitud = Double.parseDouble(longitud);
+    this.pais = pais;
+    this.estado = estado;
+  }
+
   public int getId() {
     return this.id;
   }

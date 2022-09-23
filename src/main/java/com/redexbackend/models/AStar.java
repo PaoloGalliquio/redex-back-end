@@ -64,11 +64,11 @@ public class AStar{
         List<String> ids = new ArrayList<>();
     
         while(n.parent != null){
-            ids.add(n.getAeropuerto().getCiudad());
+            ids.add(n.getAeropuerto().getCiudad().getCodigo());
             if(n.parent != null)minutos += n.parent.getAdjacentNodes().get(n);
             n = n.parent;
         }
-        ids.add(n.getAeropuerto().getCiudad());
+        ids.add(n.getAeropuerto().getCiudad().getCodigo());
         Collections.reverse(ids);
 
         minAHora(minutos);

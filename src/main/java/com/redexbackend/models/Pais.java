@@ -29,6 +29,15 @@ public class Pais {
     this.estado = estado;
   }
 
+  public Pais(String id, String codigo, String nombre, Continente continente, int estado) {
+    this.id = Integer.parseInt(id);
+    this.codigo = codigo;
+    this.nombre = nombre;
+    this.ciudades = new ArrayList<Ciudad>();
+    this.continente = continente;
+    this.estado = estado;
+  }
+
   public int getId() {
     return this.id;
   }

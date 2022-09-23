@@ -1,0 +1,6 @@
+1;AMN;24;48;America del Norte
+2;AMS;24;48;America del Sur
+3;AMC;24;48;America del Central
+4;EUR;24;48;Europa
+5;ASI;24;48;Asia
+6;OCE;24;48;Oceania

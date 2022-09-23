@@ -9,14 +9,16 @@ public class Vuelo {
   private Date fechaPartida;
   private Date fechaDestino;
   private PlanDeVuelo planDeVuelo;
+  private int capacidad;
   private int estado;
 
-  public Vuelo(String codigo, Aeropuerto aeropuertoPartido, Aeropuerto aeropuertoDestino, Date fechaPartida, Date fechaDestino, PlanDeVuelo planDeVuelo, int estado) {
+  public Vuelo(String codigo, Aeropuerto aeropuertoPartido, Aeropuerto aeropuertoDestino, Date fechaPartida, Date fechaDestino, int capacidad, PlanDeVuelo planDeVuelo, int estado) {
     this.codigo = codigo;
     this.aeropuertoPartido = aeropuertoPartido;
     this.aeropuertoDestino = aeropuertoDestino;
     this.fechaPartida = fechaPartida;
     this.fechaDestino = fechaDestino;
+    this.capacidad = capacidad;
     this.planDeVuelo = planDeVuelo;
     this.estado = estado;
   }
@@ -67,6 +69,14 @@ public class Vuelo {
 
   public void setPlanDeVuelo(PlanDeVuelo planDeVuelo) {
     this.planDeVuelo = planDeVuelo;
+  }
+
+  public int getCapacidad() {
+    return this.capacidad;
+  }
+
+  public void setCapacidad(int capacidad) {
+    this.capacidad = capacidad;
   }
 
   public int getEstado() {

@@ -32,6 +32,20 @@ public class Continente {
     this.estado = estado;
   }
 
+  public Continente(String id, String codigo, String nombre, String politicaLocal, String politicaIntercontinental, int estado) {
+    this.id = Integer.parseInt(id);
+    this.codigo = codigo;
+    this.nombre = nombre;
+    this.politicaLocal = Double.parseDouble(politicaLocal);
+    this.politicaIntercontinental = Double.parseDouble(politicaIntercontinental);
+    this.paises = new ArrayList<Pais>();
+    this.estado = estado;
+  }
+
+  public void addPais(Pais pais){
+    this.paises.add(pais);
+  }
+
   public int getId() {
     return this.id;
   }

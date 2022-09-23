@@ -20,6 +20,7 @@ public class Dijkstra {
       unsettledNodes.remove(currentNode);
       for (HashMap.Entry<Node, Integer> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
         Node adjacentNode = adjacencyPair.getKey();
+        // Aqui
         Integer edgeWeight = adjacencyPair.getValue();
         if (!settledNodes.contains(adjacentNode)) {
           calculateMinimumDistance(adjacentNode, edgeWeight, currentNode);
