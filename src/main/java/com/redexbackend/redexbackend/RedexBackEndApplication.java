@@ -18,6 +18,7 @@ import com.redexbackend.models.Graph;
 import com.redexbackend.models.LeerArchivos;
 import com.redexbackend.models.Node;
 import com.redexbackend.models.Pais;
+import com.redexbackend.models.Vuelo;
 
 @SpringBootApplication
 public class RedexBackEndApplication {
@@ -28,15 +29,15 @@ public class RedexBackEndApplication {
 		HashMap<String, Ciudad> ciudades = lector.leerCiudades(paises);
 		HashMap<String, Node> aeropuertos = lector.leerAeropuertos(ciudades);
 		HashMap<String, Integer> timeZones = lector.leerTimeZones();
+		HashMap<String, Vuelo> vuelos = lector.leerVuelos(aeropuertos);
 		HashMap<String, Envio> envios = lector.leerEnvios(aeropuertos);
-		
+		//lector.agregarDestinos(aeropuertos, timeZones);
+
 		Graph mapa = new Graph();
 
 		String origen = "LZIB";
 		String destino = "BIKF";
 		
-		agregarDestinos(aeropuertos, timeZones);
-
 		resultado(mapa, aeropuertos, origen, destino);
 
 		//SpringApplication.run(RedexBackEndApplication.class, args);
@@ -80,68 +81,16 @@ public class RedexBackEndApplication {
 		}
 
 		System.out.println(
-			aeropuertos.get(origen).getAeropuerto().getCiudad() + 
+			aeropuertos.get(origen).getAeropuerto().getCiudad().getNombre() + 
 			" -> " + 
-			mapa.getNodes().get(destino).getAeropuerto().getCiudad() + 
+			mapa.getNodes().get(destino).getAeropuerto().getCiudad().getNombre() + 
 			" : " +
 			mapa.getNodes().get(destino).getDistance()/60 +
 			":" +
 			minutos
 		);
 		for(Node node : mapa.getNodes().get(destino).getShortestPath()){
-			System.out.println(" - " + node.getAeropuerto().getCiudad());
+			System.out.println(" - " + node.getAeropuerto().getCiudad().getNombre());
 		}
 	}
-
-	private static void agregarDestinos(HashMap<String, Node> aeropuertos, HashMap<String, Integer> timeZones){
-		String[] informacion;
-		int tiempo;
-		String line;
-		File vuelosFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
-		try{
-			BufferedReader br = new BufferedReader(new FileReader(vuelosFile));
-			while((line = br.readLine()) != null){
-				informacion = line.split("-");
-				tiempo = obtenerTiempo(timeZones, aeropuertos.get(informacion[0]), informacion[2], aeropuertos.get(informacion[1]), informacion[3]);
-				aeropuertos.get(informacion[0]).addDestination(aeropuertos.get(informacion[1]), tiempo);
-			}
-			br.close();
-		}
-		catch(Exception ex){
-			System.out.println("Se ha producido un error: " + ex.getMessage());
-		}
-	}
-
-	private static int obtenerTiempo(HashMap<String, Integer> timeZones, Node aeropuertoSalida, String salida, Node aeropuertoLlegada, String llegada){
-		int duracion;
-		String[] salidaSplit = salida.split(":");
-		String[] llegadaSplit = llegada.split(":");
-		int UTCSalida = timeZones.get(aeropuertoSalida.getAeropuerto().getCodigo());
-		int UTCLlegada = timeZones.get(aeropuertoLlegada.getAeropuerto().getCodigo());
-
-		int hSalida = Integer.parseInt(salidaSplit[0]) - UTCSalida;
-		int mSalida = Integer.parseInt(salidaSplit[1]);
-		
-		int hLlegada = Integer.parseInt(llegadaSplit[0]) - UTCLlegada;
-		int mLlegada = Integer.parseInt(llegadaSplit[1]);
-
-		if(UTCLlegada < UTCSalida)
-			duracion = (24 + hLlegada - hSalida) * 60 + (mLlegada - mSalida);
-		else
-			duracion = (hLlegada - hSalida) * 60 + (mLlegada - mSalida);
-		
-		if(duracion < 0)
-			duracion += 24*60;
-
-		//if(aeropuertoSalida.getAeropuerto().getContinente().equals(aeropuertoLlegada.getAeropuerto().getContinente())){
-		//if(duracion < 20 || duracion <= 0){
-		// 	System.out.println("------------------");
-		// 	System.out.println(aeropuertoSalida.getAeropuerto().getCiudad() + " (" + salida + ")(UTC" + timeZones.get(aeropuertoSalida.getAeropuerto().getCodigo()) + ")");
-		// 	System.out.println(aeropuertoLlegada.getAeropuerto().getCiudad() + " (" + llegada + ")(UTC" + timeZones.get(aeropuertoLlegada.getAeropuerto().getCodigo()) + ")");
-		// 	System.out.println("Duración: " + duracion/60 + ":" + duracion%60);
-		// }
-
-		return duracion + 60;
-	}
-
 }

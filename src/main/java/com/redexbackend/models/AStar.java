@@ -16,8 +16,8 @@ public class AStar{
     
         System.out.println("Solucion A*");
         System.out.println("==============================================");
-        System.out.println("Origen: " + start.getAeropuerto().getCiudad());
-        System.out.println("Destino: " + target.getAeropuerto().getCiudad());
+        System.out.println("Origen: " + start.getAeropuerto().getCiudad().getNombre());
+        System.out.println("Destino: " + target.getAeropuerto().getCiudad().getNombre());
         System.out.print("Duracion: ");
 
         while(!openList.isEmpty()){

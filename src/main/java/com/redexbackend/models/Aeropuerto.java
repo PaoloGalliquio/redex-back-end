@@ -54,6 +54,13 @@ public class Aeropuerto {
     this.estado = estado;
   }
 
+  public void addVuelo(Vuelo vuelo){
+    if(vuelos == null)
+      vuelos = new ArrayList<Vuelo>();
+    
+    vuelos.add(vuelo);
+  }
+
   public int getId() {
     return this.id;
   }

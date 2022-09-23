@@ -1,8 +1,11 @@
 package com.redexbackend.models;
 
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Vuelo {
+  private static final AtomicInteger count = new AtomicInteger(0); 
+  private int id;
   private String codigo;
   private Aeropuerto aeropuertoPartido;
   private Aeropuerto aeropuertoDestino;
@@ -12,7 +15,8 @@ public class Vuelo {
   private int capacidad;
   private int estado;
 
-  public Vuelo(String codigo, Aeropuerto aeropuertoPartido, Aeropuerto aeropuertoDestino, Date fechaPartida, Date fechaDestino, int capacidad, PlanDeVuelo planDeVuelo, int estado) {
+  public Vuelo(int id, String codigo, Aeropuerto aeropuertoPartido, Aeropuerto aeropuertoDestino, Date fechaPartida, Date fechaDestino, int capacidad, PlanDeVuelo planDeVuelo, int estado) {
+    this.id = id;
     this.codigo = codigo;
     this.aeropuertoPartido = aeropuertoPartido;
     this.aeropuertoDestino = aeropuertoDestino;
@@ -21,6 +25,24 @@ public class Vuelo {
     this.capacidad = capacidad;
     this.planDeVuelo = planDeVuelo;
     this.estado = estado;
+  }
+
+  public Vuelo(String codigo, Aeropuerto aeropuertoPartido, Aeropuerto aeropuertoDestino, Date fechaPartida, int capacidad, int estado) {
+    id = count.incrementAndGet();
+    this.codigo = codigo;
+    this.aeropuertoPartido = aeropuertoPartido;
+    this.aeropuertoDestino = aeropuertoDestino;
+    this.fechaPartida = fechaPartida;
+    this.capacidad = capacidad;
+    this.estado = estado;
+  }
+
+  public int getId() {
+    return this.id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public String getCodigo() {

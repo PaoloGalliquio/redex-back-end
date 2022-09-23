@@ -43,6 +43,8 @@ public class Continente {
   }
 
   public void addPais(Pais pais){
+    if(paises == null)
+      paises = new ArrayList<Pais>();
     this.paises.add(pais);
   }
 
