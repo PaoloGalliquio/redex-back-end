@@ -3,7 +3,9 @@ package com.redexbackend.models;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.HashMap;
@@ -146,10 +148,29 @@ public class LeerArchivos {
 		return envios;
 	}
 
+	public Date obtenerFecha(String hora){
+		String[] hm = hora.split(":", 2);
+		Date horaTransformada = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), 
+		Calendar.getInstance().get(Calendar.MONTH), 
+		Calendar.getInstance().get(Calendar.DAY_OF_MONTH), Integer.parseInt(hm[0]), Integer.parseInt(hm[1])).getTime();
+		return horaTransformada;
+	}
+
+	public int obtenerCapacidad(HashMap<String, Node>aeropuertos, String origen, String destino){
+		String continenteOrigen = aeropuertos.get(origen).getAeropuerto().getCiudad().getPais().getContinente().getCodigo();
+		String continenteDestino = aeropuertos.get(destino).getAeropuerto().getCiudad().getPais().getContinente().getCodigo();
+
+		if(continenteOrigen == continenteDestino){
+			if(continenteOrigen == "EUR")return 250;
+			else return 300;
+		}else{
+			return 350;
+		}
+	}
+
 	public HashMap<String, Vuelo> leerVuelos(HashMap<String, Node> aeropuertos, HashMap<String, Integer> timeZones){
 		ZoneId defaultZoneId = ZoneId.systemDefault();
 		LocalDate localDate = LocalDate.now();
-		Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
 		HashMap<String, Vuelo> vuelos = new HashMap<>();
 		String[] informacion;
 		String line;
@@ -159,7 +180,10 @@ public class LeerArchivos {
 			BufferedReader br = new BufferedReader(new FileReader(timezonesFile));
 			while((line = br.readLine()) != null){
 				informacion = line.split("-");
-				Vuelo vuelo = new Vuelo(informacion[0] + informacion[1], aeropuertos.get(informacion[0]).getAeropuerto(), aeropuertos.get(informacion[1]).getAeropuerto(), date, aeropuertos.get(informacion[0]).getAeropuerto().getCapacidad(), 1);
+				Date horaLlegada = obtenerFecha(informacion[2]);
+				Date horaSalida = obtenerFecha(informacion[3]);
+				int capacidad = obtenerCapacidad(aeropuertos, informacion[0], informacion[1]);
+				Vuelo vuelo = new Vuelo(informacion[0] + informacion[1], aeropuertos.get(informacion[0]).getAeropuerto(), aeropuertos.get(informacion[1]).getAeropuerto(), horaSalida, horaLlegada, capacidad /*Por mientras ga */, 1, true);
 				aeropuertos.get(informacion[0]).getAeropuerto().addVuelo(vuelo);
 				vuelos.put(informacion[0] + informacion[1], vuelo);
 				tiempo = obtenerTiempo(timeZones, aeropuertos.get(informacion[0]), informacion[2], aeropuertos.get(informacion[1]), informacion[3]);

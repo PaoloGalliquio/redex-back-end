@@ -26,9 +26,22 @@ public class AStar{
                 return n;
             }
     
-            for(HashMap.Entry<Node, Integer> edge : n.getAdjacentNodes().entrySet()){
-                Node m = edge.getKey();
-                int totalWeight = n.g + edge.getValue();
+            for(Vuelo vuelo : n.getAeropuerto().getVuelos()){
+
+                System.out.print(vuelo.getAeropuertoDestino().getCodigo() + " - ");
+                System.out.println(vuelo.getCapacidad());
+
+                //Agregar la hora actual
+
+                //Transformar las horas de destino y de llegada a minutos
+
+                //Date fecha = vuelo.getFechaDestino() - vuelo.getFechaPartida();
+
+                //System.out.println("Hora llegada: " + vuelo.getFechaDestino());
+                //System.out.println("Hora salida: " + vuelo.getFechaPartida());
+
+                /* 
+                int totalWeight = n.g;
     
                 if(!openList.contains(m) && !closedList.contains(m)){
                     m.parent = n;
@@ -47,6 +60,8 @@ public class AStar{
                         }
                     }
                 }
+
+                */
             }
     
             openList.remove(n);

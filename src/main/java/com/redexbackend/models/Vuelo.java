@@ -14,8 +14,9 @@ public class Vuelo {
   private PlanDeVuelo planDeVuelo;
   private int capacidad;
   private int estado;
+  private boolean disponible; //1: Para disponible, 0: Para no disponible
 
-  public Vuelo(int id, String codigo, Aeropuerto aeropuertoPartido, Aeropuerto aeropuertoDestino, Date fechaPartida, Date fechaDestino, int capacidad, PlanDeVuelo planDeVuelo, int estado) {
+  public Vuelo(int id, String codigo, Aeropuerto aeropuertoPartido, Aeropuerto aeropuertoDestino, Date fechaPartida, Date fechaDestino, int capacidad, PlanDeVuelo planDeVuelo, int estado, boolean disponible) {
     this.id = id;
     this.codigo = codigo;
     this.aeropuertoPartido = aeropuertoPartido;
@@ -25,16 +26,19 @@ public class Vuelo {
     this.capacidad = capacidad;
     this.planDeVuelo = planDeVuelo;
     this.estado = estado;
+    this.disponible = disponible;
   }
 
-  public Vuelo(String codigo, Aeropuerto aeropuertoPartido, Aeropuerto aeropuertoDestino, Date fechaPartida, int capacidad, int estado) {
+  public Vuelo(String codigo, Aeropuerto aeropuertoPartido, Aeropuerto aeropuertoDestino, Date fechaPartida, Date fechaDestino, int capacidad, int estado, boolean disponible) {
     id = count.incrementAndGet();
     this.codigo = codigo;
     this.aeropuertoPartido = aeropuertoPartido;
     this.aeropuertoDestino = aeropuertoDestino;
     this.fechaPartida = fechaPartida;
+    this.fechaDestino = fechaDestino;
     this.capacidad = capacidad;
     this.estado = estado;
+    this.disponible = disponible;
   }
 
   public int getId() {
@@ -109,5 +113,12 @@ public class Vuelo {
     this.estado = estado;
   }
   
+  public boolean getDisponible() {
+    return this.disponible;
+  }
+
+  public void setDisponible() {
+    this.disponible = !this.disponible;
+  }
 
 }
