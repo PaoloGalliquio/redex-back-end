@@ -2,7 +2,6 @@ package com.redexbackend.models;
 
 import lombok.*;
 
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
