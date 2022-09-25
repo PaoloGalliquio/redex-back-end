@@ -6,11 +6,7 @@ import java.io.FileReader;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.HashMap;
-
-import javax.xml.crypto.Data;
 
 public class LeerArchivos {
 
@@ -169,8 +165,6 @@ public class LeerArchivos {
 	}
 
 	public HashMap<String, Vuelo> leerVuelos(HashMap<String, Node> aeropuertos, HashMap<String, Integer> timeZones){
-		ZoneId defaultZoneId = ZoneId.systemDefault();
-		LocalDate localDate = LocalDate.now();
 		HashMap<String, Vuelo> vuelos = new HashMap<>();
 		String[] informacion;
 		String line;

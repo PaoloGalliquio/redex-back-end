@@ -13,38 +13,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.redexbackend.models.Aeropuerto;
-import com.redexbackend.service.AeropuertoService;
+import com.redexbackend.models.Vuelo;
+import com.redexbackend.service.VueloService;
 
 @RestController
-@RequestMapping("/aeropuerto")
+@RequestMapping("/vuelo")
 @CrossOrigin
-public class AeropuertoController {
+public class VueloController {
   @Autowired
-  private AeropuertoService aeropuertoService;
+  private VueloService vueloService;
 
   @GetMapping(value = "/list")
-  List<Aeropuerto> getAll(){
-    return aeropuertoService.getAll();
+  List<Vuelo> getAll(){
+    return vueloService.getAll();
   }
 
   @GetMapping(value = "/get/{id}")
-  Aeropuerto get(@PathVariable int id){
-    return aeropuertoService.get(id);
+  Vuelo get(@PathVariable int id){
+    return vueloService.get(id);
   }
 
   @PostMapping(value = "/insert")
-  Aeropuerto insert(@RequestBody Aeropuerto aeropuerto){
-    return aeropuertoService.insert(aeropuerto);
+  Vuelo insert(@RequestBody Vuelo vuelo){
+    return vueloService.insert(vuelo);
   }
 
   @PutMapping(value = "/update")
-  Aeropuerto update(@RequestBody Aeropuerto aeropuerto){
-    return aeropuertoService.update(aeropuerto);
+  Vuelo update(@RequestBody Vuelo vuelo){
+    return vueloService.update(vuelo);
   }
 
   @DeleteMapping(value = "/delete/{id}")
   boolean delete(@PathVariable int id){
-    return aeropuertoService.delete(id);
+    return vueloService.delete(id);
   }
 }
