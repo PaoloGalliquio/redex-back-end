@@ -35,9 +35,9 @@ public class BaseEntity {
   @Column(columnDefinition = "DATETIME", nullable = false)
   protected Date fechaModificacion = new Date();
 
-  @Column(name = "activo")
+  @Column(name = "estado")
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-  private boolean activo = true;
+  private boolean estado = true;
 
   @PreUpdate
   private void onUpdate(){
