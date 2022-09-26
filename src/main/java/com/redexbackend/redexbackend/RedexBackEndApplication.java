@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.redexbackend.models.AStar;
+import com.redexbackend.models.Aeropuerto;
 import com.redexbackend.models.Ciudad;
 import com.redexbackend.models.Continente;
 import com.redexbackend.models.Dijkstra;
@@ -55,9 +56,9 @@ public class RedexBackEndApplication {
 	}
 
 	private static void imprimirAstar(HashMap<String, Node> aeropuertos, String origen, String destino){
-		aeropuertos.get(origen).g = 0;
+		aeropuertos.get(origen).getAeropuerto().g = 0;
 
-		Node answer = AStar.aStar(aeropuertos.get(origen), aeropuertos.get(destino));
+		Aeropuerto answer = AStar.aStar(aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto());
 		AStar.printPath(answer);
 	}
 

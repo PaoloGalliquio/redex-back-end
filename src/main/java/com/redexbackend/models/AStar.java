@@ -1,67 +1,66 @@
 package com.redexbackend.models;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
 
 public class AStar{
-    public static Node aStar(Node start, Node target){
-        PriorityQueue<Node> closedList = new PriorityQueue<>();
-        PriorityQueue<Node> openList = new PriorityQueue<>();
+    public static Aeropuerto aStar(Aeropuerto start, Aeropuerto target){
+
+        //Tiempo de prueba
+
+        Date fechaPrueba = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), 
+		Calendar.getInstance().get(Calendar.MONTH), 
+		Calendar.getInstance().get(Calendar.DAY_OF_MONTH), 15 , 0).getTime();
+
+        PriorityQueue<Aeropuerto> closedList = new PriorityQueue<>();
+        PriorityQueue<Aeropuerto> openList = new PriorityQueue<>();
     
         start.f = start.g + start.calculateHeuristic(start, target);
         openList.add(start);
     
         System.out.println("Solucion A*");
         System.out.println("==============================================");
-        System.out.println("Origen: " + start.getAeropuerto().getCiudad().getNombre());
-        System.out.println("Destino: " + target.getAeropuerto().getCiudad().getNombre());
+        System.out.println("Origen: " + start.getCiudad().getNombre());
+        System.out.println("Destino: " + target.getCiudad().getNombre());
         System.out.print("Duracion: ");
 
         while(!openList.isEmpty()){
-            Node n = openList.peek();
+            Aeropuerto n = openList.peek();
             if(n == target){
                 return n;
             }
     
-            for(Vuelo vuelo : n.getAeropuerto().getVuelos()){
+            for(Vuelo vuelo : n.getVuelos()){
 
-                System.out.print(vuelo.getAeropuertoDestino().getCodigo() + " - ");
-                System.out.println(vuelo.getCapacidad());
+                int resultadoComp = vuelo.getFechaPartida().compareTo(fechaPrueba);
 
-                //Agregar la hora actual
+                if (resultadoComp < 0) continue;
 
-                //Transformar las horas de destino y de llegada a minutos
-
-                //Date fecha = vuelo.getFechaDestino() - vuelo.getFechaPartida();
-
-                //System.out.println("Hora llegada: " + vuelo.getFechaDestino());
-                //System.out.println("Hora salida: " + vuelo.getFechaPartida());
-
-                /* 
-                int totalWeight = n.g;
+                int totalWeight = n.g + (int)(Math.abs(vuelo.getFechaDestino().getTime() - vuelo.getFechaPartida().getTime())/60000);
     
-                if(!openList.contains(m) && !closedList.contains(m)){
-                    m.parent = n;
-                    m.g = totalWeight;
-                    m.f = m.g + m.calculateHeuristic(m, target);
-                    openList.add(m);
+                if(!openList.contains(vuelo.getAeropuertoDestino()) && !closedList.contains(vuelo.getAeropuertoDestino())){
+                    vuelo.getAeropuertoDestino().parent = n;
+                    vuelo.getAeropuertoDestino().g = totalWeight;
+                    vuelo.getAeropuertoDestino().f = vuelo.getAeropuertoDestino().g + vuelo.getAeropuertoDestino().calculateHeuristic(vuelo.getAeropuertoDestino(), target);
+                    openList.add(vuelo.getAeropuertoDestino());
                 } else {
-                    if(totalWeight < m.g){
-                        m.parent = n;
-                        m.g = totalWeight;
-                        m.f = m.g + m.calculateHeuristic(m, target);
+                    if(totalWeight < vuelo.getAeropuertoDestino().g){
+                        vuelo.getAeropuertoDestino().parent = n;
+                        vuelo.getAeropuertoDestino().g = totalWeight;
+                        vuelo.getAeropuertoDestino().f = vuelo.getAeropuertoDestino().g + vuelo.getAeropuertoDestino().calculateHeuristic(vuelo.getAeropuertoDestino(), target);
     
-                        if(closedList.contains(m)){
-                            closedList.remove(m);
-                            openList.add(m);
+                        if(closedList.contains(vuelo.getAeropuertoDestino())){
+                            closedList.remove(vuelo.getAeropuertoDestino());
+                            openList.add(vuelo.getAeropuertoDestino());
                         }
                     }
                 }
-
-                */
             }
     
             openList.remove(n);
@@ -69,9 +68,8 @@ public class AStar{
         }
         return null;
     }
-
-    public static void printPath(Node target){
-        Node n = target, aux;
+    public static void printPath(Aeropuerto target){
+        Aeropuerto n = target;
         int minutos = 0;
         if(n==null)
             return;
@@ -79,14 +77,14 @@ public class AStar{
         List<String> ids = new ArrayList<>();
     
         while(n.parent != null){
-            ids.add(n.getAeropuerto().getCiudad().getCodigo());
-            if(n.parent != null)minutos += n.parent.getAdjacentNodes().get(n);
+            ids.add(n.getCiudad().getCodigo());
+            //if(n.parent != null)minutos += n.parent.getAdjacentNodes().get(n);
             n = n.parent;
         }
-        ids.add(n.getAeropuerto().getCiudad().getCodigo());
+        ids.add(n.getCiudad().getCodigo());
         Collections.reverse(ids);
 
-        minAHora(minutos);
+        minAHora(target.g);
         System.out.println("==============================================");
         System.out.println("Ruta:");
 
@@ -98,6 +96,16 @@ public class AStar{
     public static void minAHora(int min){
         int horas = min / 60;
         int minutos = min % 60;
-        System.out.println(horas + ":" + minutos);
+
+        String minutosString;
+
+		if(minutos < 10){
+			minutosString = "0" + String.valueOf(minutos); 
+		}else{
+			minutosString = "" + minutos;
+		}
+
+
+        System.out.println(horas + ":" + minutosString);
     }
 }
