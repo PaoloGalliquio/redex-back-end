@@ -42,6 +42,27 @@ public class AStar{
 		return duracion;
 	}
 
+    public static boolean seCruzan(HashMap<String, Integer> timeZones, Vuelo vueloEnLista, Vuelo nuevoVuelo){
+		Calendar hSalida = Calendar.getInstance();
+        Calendar hLlegada = Calendar.getInstance();
+        int UTCSalida = timeZones.get(vueloEnLista.getAeropuertoDestino().getCodigo());
+		int UTCLlegada = timeZones.get(nuevoVuelo.getAeropuertoPartido().getCodigo());
+
+        hSalida.setTime(vueloEnLista.getFechaDestino());
+        hSalida.add(Calendar.HOUR_OF_DAY, 1); //agregar el tiempo de espera de 1 hora entre escalas
+        hSalida.add(Calendar.HOUR_OF_DAY, UTCSalida); //mover a un mismo formato de fecha
+
+        hLlegada.setTime(vueloEnLista.getFechaPartida());
+        hLlegada.add(Calendar.HOUR_OF_DAY, UTCLlegada); //mover a un mismo formato de fecha
+        //System.out.println(hSalida.getTime() + " ---- " + hLlegada.getTime() + " --->>> " + hSalida.getTime().compareTo(hLlegada.getTime()));
+
+        if(hSalida.getTime().compareTo(hLlegada.getTime()) <= 0){
+            return false;
+        }else{
+            return true;
+        }
+	}
+
     public static Aeropuerto aStar(Aeropuerto start, Aeropuerto target, HashMap<String, Integer> timeZones){
 
         //Tiempo de prueba
@@ -74,6 +95,17 @@ public class AStar{
 
                 if (resultadoComp < 0) continue;
 
+                boolean seCruzan = false;
+                for(Aeropuerto aero: openList){
+                    if(aero.comoLlegar == null) continue;
+                    //comollegar.aerodestino es el hace referencia al aeropuerto actual
+                    if(aero.comoLlegar.getAeropuertoDestino().getCodigo() == vuelo.getAeropuertoPartido().getCodigo()){
+                        seCruzan = seCruzan(timeZones, aero.comoLlegar, vuelo);
+                        break;
+                    }
+                }
+                if (seCruzan) continue;
+
                 //int totalWeight = n.g + (int)(Math.abs(vuelo.getFechaDestino().getTime() - vuelo.getFechaPartida().getTime())/60000);
     
                 int totalWeight = n.g + obtenerTiempo(timeZones, vuelo);
@@ -83,7 +115,6 @@ public class AStar{
                     vuelo.getAeropuertoDestino().comoLlegar = vuelo;
                     //Prueba
                     vuelo.getAeropuertoDestino().parent = n;
-                    vuelo.getAeropuertoDestino().fechaLlegada = vuelo.getFechaDestino();
                     vuelo.getAeropuertoDestino().g = totalWeight;
                     vuelo.getAeropuertoDestino().f = vuelo.getAeropuertoDestino().g + vuelo.getAeropuertoDestino().calculateHeuristic(vuelo.getAeropuertoDestino(), target);
                     openList.add(vuelo.getAeropuertoDestino());
@@ -107,7 +138,7 @@ public class AStar{
             openList.remove(n);
             closedList.add(n);
 
-            System.out.println();
+            /*System.out.println();
                 System.out.print("openlist FINAL:  ");
                 for(Aeropuerto aero: openList){
                     System.out.print(aero.getCodigo() + " ");
@@ -116,7 +147,7 @@ public class AStar{
                 System.out.print("closedList FINAL:  ");
                 for(Aeropuerto aero: closedList){
                     System.out.print(aero.getCodigo() + " ");
-                }
+                }*/
         }
         return null;
     }
