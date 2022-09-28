@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Iterator;
 
 public class AStar{
     public static Aeropuerto aStar(Aeropuerto start, Aeropuerto target){
@@ -26,8 +27,8 @@ public class AStar{
     
         System.out.println("Solucion A*");
         System.out.println("==============================================");
-        System.out.println("Origen: " + start.getCiudad().getNombre());
-        System.out.println("Destino: " + target.getCiudad().getNombre());
+        System.out.println("Origen: " + start.getCiudad().getNombre() + " " + start.getCodigo());
+        System.out.println("Destino: " + target.getCiudad().getNombre() + " " + target.getCodigo());
         System.out.print("Duracion: ");
 
         while(!openList.isEmpty()){
@@ -43,9 +44,33 @@ public class AStar{
                 if (resultadoComp < 0) continue;
 
                 int totalWeight = n.g + (int)(Math.abs(vuelo.getFechaDestino().getTime() - vuelo.getFechaPartida().getTime())/60000);
-    
+                //System.out.println(openList.forEach(arg0););
+                //openList.peek().getCodigo();
+
+                System.out.println();
+                Iterator<Aeropuerto> it = openList.iterator();
+                int cont=0;
+                while(cont<openList.size()-1) {
+                    it.next();
+                    cont++;
+                }
+                Aeropuerto ultAeropuerto = it.next();
+                if(!(ultAeropuerto==start)){
+                    //ultAeropuerto.fechaSalidaAqui
+                    //System.out.print(ultAeropuerto.getCodigo() + " " + ultAeropuerto.fechaLlegada);
+                }
+
+                System.out.println();
+                System.out.print("closedList aux:  ");
+                for(Aeropuerto aero: closedList){
+                    System.out.print(aero.getCodigo() + " ");
+                }
+
+                
+
                 if(!openList.contains(vuelo.getAeropuertoDestino()) && !closedList.contains(vuelo.getAeropuertoDestino())){
                     vuelo.getAeropuertoDestino().parent = n;
+                    vuelo.getAeropuertoDestino().fechaLlegada = vuelo.getFechaDestino();
                     vuelo.getAeropuertoDestino().g = totalWeight;
                     vuelo.getAeropuertoDestino().f = vuelo.getAeropuertoDestino().g + vuelo.getAeropuertoDestino().calculateHeuristic(vuelo.getAeropuertoDestino(), target);
                     openList.add(vuelo.getAeropuertoDestino());
@@ -65,6 +90,17 @@ public class AStar{
     
             openList.remove(n);
             closedList.add(n);
+
+            System.out.println();
+                System.out.print("openlist FINAL:  ");
+                for(Aeropuerto aero: openList){
+                    System.out.print(aero.getCodigo() + " ");
+                }
+                System.out.println();
+                System.out.print("closedList FINAL:  ");
+                for(Aeropuerto aero: closedList){
+                    System.out.print(aero.getCodigo() + " ");
+                }
         }
         return null;
     }

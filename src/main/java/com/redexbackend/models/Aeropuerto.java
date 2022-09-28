@@ -2,6 +2,7 @@ package com.redexbackend.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -51,6 +52,8 @@ public class Aeropuerto extends BaseEntity implements Comparable<Aeropuerto> {
 
     public int f = Integer.MAX_VALUE;
     public int g = Integer.MAX_VALUE;
+    public Date fechaSalida;
+    public Date fechaLlegada;
   
     //public int h = Integer.MAX_VALUE;
   
