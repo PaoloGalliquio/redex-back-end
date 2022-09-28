@@ -60,6 +60,7 @@ public class Aeropuerto extends BaseEntity implements Comparable<Aeropuerto> {
     public int h = 0;
   
     public Aeropuerto parent = null;
+    public Vuelo comoLlegar = null;
   
     @Override
     public int compareTo(Aeropuerto n) {
