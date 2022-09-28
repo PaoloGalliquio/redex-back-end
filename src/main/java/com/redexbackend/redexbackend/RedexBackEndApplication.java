@@ -35,18 +35,18 @@ public class RedexBackEndApplication {
 		String origen = "LZIB";
 		String destino = "BIKF";
 		
-		resultado(mapa, aeropuertos, origen, destino);
+		resultado(mapa, aeropuertos, origen, destino, timeZones);
 
 		//SpringApplication.run(RedexBackEndApplication.class, args);
 	}
 	
-	private static void resultado(Graph mapa, HashMap<String, Node> aeropuertos, String origen, String destino){
+	private static void resultado(Graph mapa, HashMap<String, Node> aeropuertos, String origen, String destino, HashMap<String, Integer> timeZones){
 		Scanner lectura = new Scanner (System.in);
 		System.out.println("Escoja el algoritmo: D para Dijkstra - A para A*");
 		String algoritmo = lectura.next();
 
 		if(algoritmo.equalsIgnoreCase("A"))
-			imprimirAstar(aeropuertos, origen, destino);
+			imprimirAstar(aeropuertos, origen, destino, timeZones);
 		else if(algoritmo.equalsIgnoreCase("D"))
 			imprimirDijkstra(mapa, aeropuertos, origen, destino);
 		else
@@ -55,10 +55,10 @@ public class RedexBackEndApplication {
 		lectura.close();
 	}
 
-	private static void imprimirAstar(HashMap<String, Node> aeropuertos, String origen, String destino){
+	private static void imprimirAstar(HashMap<String, Node> aeropuertos, String origen, String destino, HashMap<String, Integer> timeZones){
 		aeropuertos.get(origen).getAeropuerto().g = 0;
 
-		Aeropuerto answer = AStar.aStar(aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto());
+		Aeropuerto answer = AStar.aStar(aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto(), timeZones);
 		AStar.printPath(answer);
 	}
 

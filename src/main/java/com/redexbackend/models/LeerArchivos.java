@@ -174,8 +174,8 @@ public class LeerArchivos {
 			BufferedReader br = new BufferedReader(new FileReader(timezonesFile));
 			while((line = br.readLine()) != null){
 				informacion = line.split("-");
-				Date horaLlegada = obtenerFecha(informacion[2]);
-				Date horaSalida = obtenerFecha(informacion[3]);
+				Date horaLlegada = obtenerFecha(informacion[3]);
+				Date horaSalida = obtenerFecha(informacion[2]);
 				int capacidad = obtenerCapacidad(aeropuertos, informacion[0], informacion[1]);
 				Vuelo vuelo = new Vuelo(informacion[0] + informacion[1], aeropuertos.get(informacion[0]).getAeropuerto(), aeropuertos.get(informacion[1]).getAeropuerto(), horaSalida, horaLlegada, capacidad /*Por mientras ga */, 1, true);
 				aeropuertos.get(informacion[0]).getAeropuerto().addVuelo(vuelo);
