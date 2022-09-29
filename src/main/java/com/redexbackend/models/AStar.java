@@ -52,7 +52,7 @@ public class AStar{
         hSalida.add(Calendar.HOUR_OF_DAY, 1); //agregar el tiempo de espera de 1 hora entre escalas
         hSalida.add(Calendar.HOUR_OF_DAY, UTCSalida); //mover a un mismo formato de fecha
 
-        hLlegada.setTime(vueloEnLista.getFechaPartida());
+        hLlegada.setTime(nuevoVuelo.getFechaPartida());
         hLlegada.add(Calendar.HOUR_OF_DAY, UTCLlegada); //mover a un mismo formato de fecha
         //System.out.println(hSalida.getTime() + " ---- " + hLlegada.getTime() + " --->>> " + hSalida.getTime().compareTo(hLlegada.getTime()));
 
