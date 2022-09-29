@@ -8,7 +8,6 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.util.Iterator;
 
 public class AStar{
 
@@ -42,11 +41,12 @@ public class AStar{
 		return duracion;
 	}
 
-    public static boolean seCruzan(HashMap<String, Integer> timeZones, Vuelo vueloEnLista, Vuelo nuevoVuelo){
+    public static int seCruzan(HashMap<String, Integer> timeZones, Vuelo vueloEnLista, Vuelo nuevoVuelo){
 		Calendar hSalida = Calendar.getInstance();
         Calendar hLlegada = Calendar.getInstance();
         int UTCSalida = timeZones.get(vueloEnLista.getAeropuertoDestino().getCodigo());
 		int UTCLlegada = timeZones.get(nuevoVuelo.getAeropuertoPartido().getCodigo());
+        long difFechas, difHoras, difMin, difDias;
 
         hSalida.setTime(vueloEnLista.getFechaDestino());
         hSalida.add(Calendar.HOUR_OF_DAY, 1); //agregar el tiempo de espera de 1 hora entre escalas
@@ -57,9 +57,19 @@ public class AStar{
         //System.out.println(hSalida.getTime() + " ---- " + hLlegada.getTime() + " --->>> " + hSalida.getTime().compareTo(hLlegada.getTime()));
 
         if(hSalida.getTime().compareTo(hLlegada.getTime()) <= 0){
-            return false;
+            //No hay cruce entre los vuelos
+            hSalida.add(Calendar.HOUR_OF_DAY, -1); //quitar la hora extra entre escalas, eso forma parte del tiempo intermedio
+            difFechas = hLlegada.getTime().getTime() - hSalida.getTime().getTime();
+            difMin = (difFechas / (1000*60)) % 60;
+            difHoras = (difFechas / (1000*60*60)) % 24;
+            difDias = (difFechas / (1000*60*60*24)) % 365; //el alcance máximo entre diferencia de vuelos llega hasta días
+            //System.out.println(hSalida.getTime() + " ---- " + hLlegada.getTime());
+
+            return (int)difDias*24*60 + (int)difHoras*60 + (int)difMin;
         }else{
-            return true;
+            //Si hay cruce entre vuelos
+
+            return -1;
         }
 	}
 
@@ -95,20 +105,21 @@ public class AStar{
 
                 if (resultadoComp < 0) continue;
 
-                boolean seCruzan = false;
+                int tiempoIntermedio = 0;
                 for(Aeropuerto aero: openList){
                     if(aero.comoLlegar == null) continue;
                     //comollegar.aerodestino es el hace referencia al aeropuerto actual
                     if(aero.comoLlegar.getAeropuertoDestino().getCodigo() == vuelo.getAeropuertoPartido().getCodigo()){
-                        seCruzan = seCruzan(timeZones, aero.comoLlegar, vuelo);
+                        tiempoIntermedio = seCruzan(timeZones, aero.comoLlegar, vuelo);
                         break;
                     }
                 }
-                if (seCruzan) continue;
-
+                if (tiempoIntermedio < 0) continue; //el vuelo actual se cruza con los vuelos ya enlistados
+                
+                //System.out.println("tiempoIntermedio: " + tiempoIntermedio);
                 //int totalWeight = n.g + (int)(Math.abs(vuelo.getFechaDestino().getTime() - vuelo.getFechaPartida().getTime())/60000);
     
-                int totalWeight = n.g + obtenerTiempo(timeZones, vuelo);
+                int totalWeight = n.g + tiempoIntermedio + obtenerTiempo(timeZones, vuelo);
 
                 if(!openList.contains(vuelo.getAeropuertoDestino()) && !closedList.contains(vuelo.getAeropuertoDestino())){
                     //Prueba
