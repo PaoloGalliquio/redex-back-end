@@ -48,12 +48,14 @@ public class AStar{
 		int UTCLlegada = timeZones.get(nuevoVuelo.getAeropuertoPartido().getCodigo());
         long difFechas, difHoras, difMin, difDias;
 
+//System.out.println(vueloEnLista.getAeropuertoDestino().getCodigo() + " ---- " + vueloEnLista.getAeropuertoDestino().getCiudad().getHusoHorario());
         hSalida.setTime(vueloEnLista.getFechaDestino());
         hSalida.add(Calendar.HOUR_OF_DAY, 1); //agregar el tiempo de espera de 1 hora entre escalas
-        hSalida.add(Calendar.HOUR_OF_DAY, UTCSalida); //mover a un mismo formato de fecha
+        hSalida.add(Calendar.HOUR_OF_DAY, -(UTCSalida)); //mover a un mismo formato de fecha
 
         hLlegada.setTime(nuevoVuelo.getFechaPartida());
-        hLlegada.add(Calendar.HOUR_OF_DAY, UTCLlegada); //mover a un mismo formato de fecha
+        hLlegada.add(Calendar.HOUR_OF_DAY, -(UTCLlegada)); //mover a un mismo formato de fecha
+        System.out.println(UTCSalida+"_"+UTCLlegada);
         //System.out.println(hSalida.getTime() + " ---- " + hLlegada.getTime() + " --->>> " + hSalida.getTime().compareTo(hLlegada.getTime()));
 
         if(hSalida.getTime().compareTo(hLlegada.getTime()) <= 0){
@@ -109,13 +111,16 @@ public class AStar{
                 for(Aeropuerto aero: openList){
                     if(aero.comoLlegar == null) continue;
                     //comollegar.aerodestino es el hace referencia al aeropuerto actual
-                    if(aero.comoLlegar.getAeropuertoDestino().getCodigo() == vuelo.getAeropuertoPartido().getCodigo()){
+                    if(aero.comoLlegar.getAeropuertoDestino().getCodigo().equals(vuelo.getAeropuertoPartido().getCodigo())){
+                        System.out.println("entra");
                         tiempoIntermedio = seCruzan(timeZones, aero.comoLlegar, vuelo);
                         break;
                     }
                 }
-                if (tiempoIntermedio < 0) continue; //el vuelo actual se cruza con los vuelos ya enlistados
-                
+                if (tiempoIntermedio < 0) {
+                    System.out.println("no lo considera");
+                    continue; //el vuelo actual se cruza con los vuelos ya enlistados
+                }
                 //System.out.println("tiempoIntermedio: " + tiempoIntermedio);
                 //int totalWeight = n.g + (int)(Math.abs(vuelo.getFechaDestino().getTime() - vuelo.getFechaPartida().getTime())/60000);
     
