@@ -113,7 +113,8 @@ public class AStar {
 
                 int resultadoComp = vuelo.getFechaPartida().compareTo(fechaPrueba);
 
-                // if (resultadoComp < 0) continue;
+                if (resultadoComp < 0)
+                    continue;
 
                 int tiempoIntermedio = 0;
                 for (Aeropuerto aero : openList) {
@@ -166,26 +167,12 @@ public class AStar {
 
             openList.remove(n);
             closedList.add(n);
-
-            /*
-             * System.out.println();
-             * System.out.print("openlist FINAL:  ");
-             * for(Aeropuerto aero: openList){
-             * System.out.print(aero.getCodigo() + " ");
-             * }
-             * System.out.println();
-             * System.out.print("closedList FINAL:  ");
-             * for(Aeropuerto aero: closedList){
-             * System.out.print(aero.getCodigo() + " ");
-             * }
-             */
         }
         return null;
     }
 
     public static void printPath(Aeropuerto target) {
         Aeropuerto n = target;
-        int minutos = 0;
         if (n == null)
             return;
 

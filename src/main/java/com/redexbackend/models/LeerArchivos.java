@@ -179,23 +179,24 @@ public class LeerArchivos {
     String[] informacion;
     String line;
     int tiempo;
-    Calendar horaSalida = Calendar.getInstance(), hSalidaUTC0 = Calendar.getInstance();
-    Calendar horaLlegada = Calendar.getInstance(), hLlegadaUTC0 = Calendar.getInstance();
+    Calendar horaSalida = Calendar.getInstance();
+    Calendar horaLlegada = Calendar.getInstance();
     File timezonesFile = new File(
         System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
     try {
       BufferedReader br = new BufferedReader(new FileReader(timezonesFile));
       while ((line = br.readLine()) != null) {
         informacion = line.split("-");
-        horaSalida.setTime(obtenerFecha(informacion[3]));
-        horaLlegada.setTime(obtenerFecha(informacion[2]));
-        hSalidaUTC0 = horaSalida;
-        hLlegadaUTC0 = horaLlegada;
-        hSalidaUTC0.add(Calendar.HOUR, -aeropuertos.get(informacion[0]).getAeropuerto().getHusoHorario());
-        hLlegadaUTC0.add(Calendar.HOUR, -aeropuertos.get(informacion[1]).getAeropuerto().getHusoHorario());
+        horaSalida.setTime(obtenerFecha(informacion[2]));
+        horaLlegada.setTime(obtenerFecha(informacion[3]));
+        horaSalida.add(Calendar.HOUR, -aeropuertos.get(informacion[0]).getAeropuerto().getHusoHorario());
+        horaLlegada.add(Calendar.HOUR, -aeropuertos.get(informacion[1]).getAeropuerto().getHusoHorario());
 
-        if (hSalidaUTC0.getTime().compareTo(hLlegadaUTC0.getTime()) > 0)
+        if (horaSalida.getTime().compareTo(horaLlegada.getTime()) > 0)
           horaLlegada.add(Calendar.DAY_OF_MONTH, 1);
+
+        horaSalida.add(Calendar.HOUR, aeropuertos.get(informacion[0]).getAeropuerto().getHusoHorario());
+        horaLlegada.add(Calendar.HOUR, aeropuertos.get(informacion[1]).getAeropuerto().getHusoHorario());
 
         int capacidad = obtenerCapacidad(aeropuertos, informacion[0], informacion[1]);
         Vuelo vuelo = new Vuelo(informacion[0] + informacion[1], aeropuertos.get(informacion[0]).getAeropuerto(),
@@ -205,6 +206,7 @@ public class LeerArchivos {
         vuelos.put(informacion[0] + informacion[1], vuelo);
         tiempo = obtenerTiempo(aeropuertos.get(informacion[0]), informacion[2],
             aeropuertos.get(informacion[1]), informacion[3]);
+        vuelo.setDuracion(tiempo);
         aeropuertos.get(informacion[0]).addDestination(aeropuertos.get(informacion[1]), tiempo);
       }
       br.close();

@@ -84,16 +84,38 @@ public class RedexBackEndApplication {
 			minutos = "" + mapa.getNodes().get(destino).getDistance() % 60;
 		}
 
+		System.out.println("Solucion A*");
+		System.out.println("==============================================");
 		System.out.println(
-				aeropuertos.get(origen).getAeropuerto().getCiudad().getNombre() +
-						" -> " +
-						mapa.getNodes().get(destino).getAeropuerto().getCiudad().getNombre() +
-						" : " +
-						mapa.getNodes().get(destino).getDistance() / 60 +
-						":" +
-						minutos);
-		for (Node node : mapa.getNodes().get(destino).getShortestPath()) {
-			System.out.println(" - " + node.getAeropuerto().getCiudad().getNombre());
+				"Origen: " + aeropuertos.get(origen).getAeropuerto().getCiudad().getNombre() + " "
+						+ aeropuertos.get(origen).getAeropuerto().getCodigo() + " (UTC: "
+						+ aeropuertos.get(origen).getAeropuerto().getUTC()
+						+ ")");
+		System.out.println(
+				"Destino: " + aeropuertos.get(destino).getAeropuerto().getCiudad().getNombre() + " "
+						+ aeropuertos.get(destino).getAeropuerto().getCiudad().getCodigo() + " (UTC: "
+						+ aeropuertos.get(destino).getAeropuerto().getUTC()
+						+ ")");
+		System.out.println("Duracion: " + minutos);
+
+		// System.out.println(
+		// aeropuertos.get(origen).getAeropuerto().getCiudad().getNombre() +
+		// " -> " +
+		// mapa.getNodes().get(destino).getAeropuerto().getCiudad().getNombre() +
+		// " : " +
+		// mapa.getNodes().get(destino).getDistance() / 60 +
+		// ":" +
+		// minutos);
+		System.out.println("==============================================");
+		System.out.println("Ruta:");
+		for (Vuelo vuelo : mapa.getNodes().get(destino).getShortestPath()) {
+			System.out.println("    " + vuelo.getAeropuertoPartido().getCiudad().getNombre());
+		}
+
+		System.out.println("==============================================");
+		System.out.println("Ruta vuelos:");
+		for (Vuelo vuelo : mapa.getNodes().get(destino).getShortestPath()) {
+			System.out.println("    " + vuelo.getCodigo() + ": " + vuelo.getFechaPartida());
 		}
 	}
 }

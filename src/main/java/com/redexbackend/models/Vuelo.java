@@ -25,7 +25,7 @@ import javax.persistence.Table;
 public class Vuelo extends BaseEntity {
   @Column(name = "codigo")
   private String codigo;
-  
+
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "idAeropuertoPartido")
   private Aeropuerto aeropuertoPartido;
@@ -46,11 +46,15 @@ public class Vuelo extends BaseEntity {
 
   @Column(name = "capacidad")
   private int capacidad;
-  
-  @Column(name = "disponible")
-  private boolean disponible; //1: Para disponible, 0: Para no disponible
 
-  public Vuelo(int id, String codigo, Aeropuerto aeropuertoPartido, Aeropuerto aeropuertoDestino, Date fechaPartida, Date fechaDestino, int capacidad, PlanDeVuelo planDeVuelo, int estado, boolean disponible) {
+  @Column(name = "duracion")
+  private int duracion;
+
+  @Column(name = "disponible")
+  private boolean disponible; // 1: Para disponible, 0: Para no disponible
+
+  public Vuelo(int id, String codigo, Aeropuerto aeropuertoPartido, Aeropuerto aeropuertoDestino, Date fechaPartida,
+      Date fechaDestino, int capacidad, PlanDeVuelo planDeVuelo, int estado, boolean disponible) {
     this.codigo = codigo;
     this.aeropuertoPartido = aeropuertoPartido;
     this.aeropuertoDestino = aeropuertoDestino;
@@ -61,7 +65,8 @@ public class Vuelo extends BaseEntity {
     this.disponible = disponible;
   }
 
-  public Vuelo(String codigo, Aeropuerto aeropuertoPartido, Aeropuerto aeropuertoDestino, Date fechaPartida, Date fechaDestino, int capacidad, int estado, boolean disponible) {
+  public Vuelo(String codigo, Aeropuerto aeropuertoPartido, Aeropuerto aeropuertoDestino, Date fechaPartida,
+      Date fechaDestino, int capacidad, int estado, boolean disponible) {
     this.codigo = codigo;
     this.aeropuertoPartido = aeropuertoPartido;
     this.aeropuertoDestino = aeropuertoDestino;
@@ -69,5 +74,17 @@ public class Vuelo extends BaseEntity {
     this.fechaDestino = fechaDestino;
     this.capacidad = capacidad;
     this.disponible = disponible;
+  }
+
+  public Vuelo(Vuelo vuelo) {
+    this.codigo = vuelo.codigo;
+    this.aeropuertoPartido = vuelo.aeropuertoPartido;
+    this.aeropuertoDestino = vuelo.aeropuertoDestino;
+    this.fechaPartida = vuelo.fechaPartida;
+    this.fechaDestino = vuelo.fechaDestino;
+    this.planDeVuelo = vuelo.planDeVuelo;
+    this.capacidad = vuelo.capacidad;
+    this.duracion = vuelo.duracion;
+    this.disponible = vuelo.disponible;
   }
 }

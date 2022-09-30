@@ -20,10 +20,8 @@ public class Dijkstra {
       unsettledNodes.remove(currentNode);
       for (HashMap.Entry<Node, Integer> adjacencyPair : currentNode.getAdjacentNodes().entrySet()) {
         Node adjacentNode = adjacencyPair.getKey();
-        // Aqui
-        Integer edgeWeight = adjacencyPair.getValue();
         if (!settledNodes.contains(adjacentNode)) {
-          calculateMinimumDistance(adjacentNode, edgeWeight, currentNode);
+          calculateMinimumDistance(adjacentNode, currentNode);
           unsettledNodes.add(adjacentNode);
         }
       }
@@ -45,12 +43,17 @@ public class Dijkstra {
     return lowestDistanceNode;
   }
 
-  private static void calculateMinimumDistance(Node evaluationNode, Integer edgeWeigh, Node sourceNode) {
+  private static void calculateMinimumDistance(Node evaluationNode, Node sourceNode) {
     Integer sourceDistance = sourceNode.getDistance();
-    if (sourceDistance + edgeWeigh < evaluationNode.getDistance()) {
-      evaluationNode.setDistance(sourceDistance + edgeWeigh);
-      LinkedList<Node> shortestPath = new LinkedList<>(sourceNode.getShortestPath());
-      shortestPath.add(sourceNode);
+    Vuelo vueloMasCorto = new Vuelo();
+    vueloMasCorto.setDuracion(Integer.MAX_VALUE);
+    for (Vuelo v : evaluationNode.getAeropuerto().getVuelos())
+      if (v.getDuracion() < vueloMasCorto.getDuracion())
+        vueloMasCorto = new Vuelo(v);
+    if (sourceDistance + vueloMasCorto.getDuracion() < evaluationNode.getDistance()) {
+      evaluationNode.setDistance(sourceDistance + vueloMasCorto.getDuracion());
+      LinkedList<Vuelo> shortestPath = new LinkedList<>(sourceNode.getShortestPath());
+      shortestPath.add(vueloMasCorto);
       evaluationNode.setShortestPath(shortestPath);
     }
   }
