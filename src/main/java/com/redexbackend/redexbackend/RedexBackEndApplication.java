@@ -26,11 +26,11 @@ public class RedexBackEndApplication {
 
 	public static void main(String[] args) {
 		LeerArchivos lector = new LeerArchivos();
+		HashMap<String, Integer> timeZones = lector.leerTimeZones();
 		HashMap<String, Continente> continentes = lector.leerContinentes();
 		HashMap<String, Pais> paises = lector.leerPaises(continentes);
-		HashMap<String, Ciudad> ciudades = lector.leerCiudades(paises);
+		HashMap<String, Ciudad> ciudades = lector.leerCiudades(paises, timeZones);
 		HashMap<String, Node> aeropuertos = lector.leerAeropuertos(ciudades);
-		HashMap<String, Integer> timeZones = lector.leerTimeZones();
 		HashMap<String, Vuelo> vuelos = lector.leerVuelos(aeropuertos, timeZones);
 		HashMap<String, Envio> envios = lector.leerEnvios(aeropuertos);
 

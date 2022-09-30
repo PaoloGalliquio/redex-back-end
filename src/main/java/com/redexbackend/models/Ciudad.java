@@ -67,4 +67,14 @@ public class Ciudad extends BaseEntity {
     this.longitud = Double.parseDouble(longitud);
     this.pais = pais;
   }
+
+  public Ciudad(String id, String codigo, String nombre, String latitud, String longitud, Pais pais, int estado, int UTC) {
+    this.codigo = codigo;
+    this.nombre = nombre;
+    this.latitud = Double.parseDouble(latitud);
+    this.longitud = Double.parseDouble(longitud);
+    this.pais = pais;
+    this.husoHorario = UTC;
+    this.UTC = Integer.toString(UTC);
+  }
 }
