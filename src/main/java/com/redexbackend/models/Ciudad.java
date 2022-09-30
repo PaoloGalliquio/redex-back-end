@@ -30,12 +30,6 @@ public class Ciudad extends BaseEntity {
   @Column(name = "nombre")
   private String nombre;
 
-  @Column(name = "UTC")
-  private String UTC;
-
-  @Column(name = "husoHorario")
-  private int husoHorario;
-
   @Column(name = "latitud")
   private double latitud;
 
@@ -50,11 +44,10 @@ public class Ciudad extends BaseEntity {
   @JoinColumn(name = "idPais")
   private Pais pais;
 
-  public Ciudad(int id, String codigo, String nombre, String UTC, int husoHorario, double latitud, double longitud, Pais pais, int estado) {
+  public Ciudad(int id, String codigo, String nombre, String UTC, int husoHorario, double latitud, double longitud,
+      Pais pais, int estado) {
     this.codigo = codigo;
     this.nombre = nombre;
-    this.UTC = UTC;
-    this.husoHorario = husoHorario;
     this.latitud = latitud;
     this.longitud = longitud;
     this.pais = pais;
@@ -68,13 +61,12 @@ public class Ciudad extends BaseEntity {
     this.pais = pais;
   }
 
-  public Ciudad(String id, String codigo, String nombre, String latitud, String longitud, Pais pais, int estado, int UTC) {
+  public Ciudad(String id, String codigo, String nombre, String latitud, String longitud, Pais pais, int estado,
+      int UTC) {
     this.codigo = codigo;
     this.nombre = nombre;
     this.latitud = Double.parseDouble(latitud);
     this.longitud = Double.parseDouble(longitud);
     this.pais = pais;
-    this.husoHorario = UTC;
-    this.UTC = Integer.toString(UTC);
   }
 }
