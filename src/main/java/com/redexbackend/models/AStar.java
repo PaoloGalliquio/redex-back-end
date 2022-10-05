@@ -50,17 +50,12 @@ public class AStar {
         int UTCLlegada = timeZones.get(nuevoVuelo.getAeropuertoPartido().getCodigo());
         long difFechas, difHoras, difMin, difDias;
 
-        // System.out.println(vueloEnLista.getAeropuertoDestino().getCodigo() + " ---- "
-        // + vueloEnLista.getAeropuertoDestino().getCiudad().getHusoHorario());
         hSalida.setTime(vueloEnLista.getFechaDestino());
         hSalida.add(Calendar.HOUR_OF_DAY, 1); // agregar el tiempo de espera de 1 hora entre escalas
         hSalida.add(Calendar.HOUR_OF_DAY, -(UTCSalida)); // mover a un mismo formato de fecha
 
         hLlegada.setTime(nuevoVuelo.getFechaPartida());
         hLlegada.add(Calendar.HOUR_OF_DAY, -(UTCLlegada)); // mover a un mismo formato de fecha
-        // System.out.println(UTCSalida + "_" + UTCLlegada);
-        // System.out.println(hSalida.getTime() + " ---- " + hLlegada.getTime() + "
-        // --->>> " + hSalida.getTime().compareTo(hLlegada.getTime()));
 
         if (hSalida.getTime().compareTo(hLlegada.getTime()) <= 0) {
             // No hay cruce entre los vuelos
@@ -81,7 +76,16 @@ public class AStar {
         }
     }
 
-    public static Aeropuerto aStar(Aeropuerto start, Aeropuerto target, HashMap<String, Integer> timeZones) {
+    public static boolean sobrepasaCapacidad(Vuelo nuevoVuelo, Integer nroPaquetes) {
+        if(nuevoVuelo.getCapacidad() < nroPaquetes || 
+        nuevoVuelo.getAeropuertoDestino().getCapacidad() < nroPaquetes){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static Aeropuerto aStar(Aeropuerto start, Aeropuerto target, HashMap<String, Integer> timeZones, Integer nroPaquetes) {
 
         // Tiempo de prueba
 
@@ -103,7 +107,10 @@ public class AStar {
         System.out.println(
                 "Destino: " + target.getCiudad().getNombre() + " " + target.getCodigo() + " (UTC: " + target.getUTC()
                         + ")");
-        System.out.print("Duracion: ");
+        System.out.println("Cantidad de paquetes a enviar: " + nroPaquetes);
+        System.out.print("Duración: ");
+
+        if(start.getCapacidad() < nroPaquetes) return null;
 
         while (!openList.isEmpty()) {
             Aeropuerto n = openList.peek();
@@ -129,13 +136,9 @@ public class AStar {
                         break;
                     }
                 }
-                if (tiempoIntermedio < 0) {
-                    // System.out.println("no lo considera");
-                    continue; // el vuelo actual se cruza con los vuelos ya enlistados
+                if (tiempoIntermedio < 0 || sobrepasaCapacidad(vuelo, nroPaquetes)) {
+                    continue; // el vuelo actual se cruza con los vuelos ya enlistados o no puede trasladar los paquetes
                 }
-                // System.out.println("tiempoIntermedio: " + tiempoIntermedio);
-                // int totalWeight = n.g + (int)(Math.abs(vuelo.getFechaDestino().getTime() -
-                // vuelo.getFechaPartida().getTime())/60000);
 
                 int totalWeight = n.g + tiempoIntermedio + obtenerTiempo(timeZones, vuelo);
 
@@ -173,7 +176,7 @@ public class AStar {
         return null;
     }
 
-    public static void printPath(Aeropuerto target, Aeropuerto origen, Aeropuerto destino) {
+    public static void printPath(Aeropuerto target, Aeropuerto origen, Aeropuerto destino, HashMap<String, Integer> timeZones) {
         Aeropuerto n = target;
         if (n == null)
             return;
@@ -183,16 +186,21 @@ public class AStar {
 
         Date primeraSalida = new Date(), ultimaLlegada = new Date();
         boolean primeraVez = true;
+        Calendar hPSalida = Calendar.getInstance(), hULlegada = Calendar.getInstance();
+        int UTCPSalida=0, UTCULlegada=0;
 
         while (n.parent != null) {
             if(primeraVez){
                 ultimaLlegada = n.comoLlegar.getFechaDestino();
+                UTCULlegada = timeZones.get(n.comoLlegar.getAeropuertoDestino().getCodigo());
                 primeraVez = false;
             }
             caminoAeropuertos.add(n.getCiudad().getCodigo());
             caminoVuelos.add(n.comoLlegar.getCodigo() +
                     ": " + n.comoLlegar.getFechaPartida() + " - " + n.comoLlegar.getFechaDestino());
             primeraSalida = n.comoLlegar.getFechaPartida();
+            UTCPSalida = timeZones.get(n.comoLlegar.getAeropuertoPartido().getCodigo());
+            
             // if(n.parent != null)minutos += n.parent.getAdjacentNodes().get(n);
             n = n.parent;
         }
@@ -200,12 +208,19 @@ public class AStar {
         Collections.reverse(caminoAeropuertos);
         Collections.reverse(caminoVuelos);
 
-        if(esMayor(primeraSalida, ultimaLlegada, origen, destino)){
+        hPSalida.setTime(primeraSalida);
+        hPSalida.add(Calendar.HOUR_OF_DAY, -(UTCPSalida));
+        hULlegada.setTime(ultimaLlegada);
+        hULlegada.add(Calendar.HOUR_OF_DAY, -(UTCULlegada));
+
+        if(esMayor(hPSalida.getTime(), hULlegada.getTime(), origen, destino)){
             System.out.println("Supera la ventana de tiempo");
         }
 
         //minAHora(target.g);
-        minAHora(primeraSalida, ultimaLlegada);
+        minAHora(hPSalida.getTime(), hULlegada.getTime());
+        System.out.println("Inicio del Plan de Vuelo: "+primeraSalida);
+        System.out.println("Fin del Plan de Vuelo:    "+ultimaLlegada);
         System.out.println("==============================================");
         System.out.println("Ruta:");
 
@@ -234,9 +249,6 @@ public class AStar {
     }
 
     public static void minAHora(Date primeraSalida, Date ultimaLlegada) {
-        
-        System.out.println(ultimaLlegada);
-        System.out.println(primeraSalida);
 
         long min = (Math.abs(ultimaLlegada.getTime() - primeraSalida.getTime()))/60000;
 
@@ -251,6 +263,6 @@ public class AStar {
             minutosString = "" + String.valueOf(minutos);
         }
 
-        System.out.println(horas + ":" + minutosString);
+        System.out.println(horas + ":" + minutosString + " hrs.");
     }
 }

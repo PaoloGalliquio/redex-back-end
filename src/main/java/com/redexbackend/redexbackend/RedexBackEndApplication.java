@@ -51,7 +51,7 @@ public class RedexBackEndApplication {
 		String algoritmo = lectura.next();
 
 		if (algoritmo.equalsIgnoreCase("A"))
-			imprimirAstar(aeropuertos, origen, destino, timeZones);
+			imprimirAstar(aeropuertos, origen, destino, timeZones, 250);
 		else if (algoritmo.equalsIgnoreCase("D"))
 			imprimirDijkstra(mapa, aeropuertos, origen, destino);
 		else
@@ -61,12 +61,12 @@ public class RedexBackEndApplication {
 	}
 
 	private static void imprimirAstar(HashMap<String, Node> aeropuertos, String origen, String destino,
-			HashMap<String, Integer> timeZones) {
+			HashMap<String, Integer> timeZones, Integer nroPaquetes) {
 		aeropuertos.get(origen).getAeropuerto().g = 0;
 
 		Aeropuerto answer = AStar.aStar(aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto(),
-				timeZones);
-		AStar.printPath(answer, aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto());
+				timeZones, nroPaquetes);
+		AStar.printPath(answer, aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto(), timeZones);
 	}
 
 	private static void imprimirDijkstra(Graph mapa, HashMap<String, Node> aeropuertos, String origen, String destino) {
