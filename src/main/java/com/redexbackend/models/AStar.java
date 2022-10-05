@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import com.amazonaws.services.opensearch.model.TimeUnit;
+
 public class AStar {
 
     public static int obtenerTiempo(HashMap<String, Integer> timeZones, Vuelo vuelo) {
@@ -111,10 +113,10 @@ public class AStar {
 
             for (Vuelo vuelo : n.getVuelos()) {
 
-                int resultadoComp = vuelo.getFechaPartida().compareTo(fechaPrueba);
+                //int resultadoComp = vuelo.getFechaPartida().compareTo(fechaPrueba);
 
-                if (resultadoComp < 0)
-                    continue;
+                //if (resultadoComp < 0)
+                    //continue;
 
                 int tiempoIntermedio = 0;
                 for (Aeropuerto aero : openList) {
@@ -171,7 +173,7 @@ public class AStar {
         return null;
     }
 
-    public static void printPath(Aeropuerto target) {
+    public static void printPath(Aeropuerto target, Aeropuerto origen, Aeropuerto destino) {
         Aeropuerto n = target;
         if (n == null)
             return;
@@ -179,10 +181,18 @@ public class AStar {
         List<String> caminoAeropuertos = new ArrayList<>();
         List<String> caminoVuelos = new ArrayList<>();
 
+        Date primeraSalida = new Date(), ultimaLlegada = new Date();
+        boolean primeraVez = true;
+
         while (n.parent != null) {
+            if(primeraVez){
+                ultimaLlegada = n.comoLlegar.getFechaDestino();
+                primeraVez = false;
+            }
             caminoAeropuertos.add(n.getCiudad().getCodigo());
             caminoVuelos.add(n.comoLlegar.getCodigo() +
                     ": " + n.comoLlegar.getFechaPartida() + " - " + n.comoLlegar.getFechaDestino());
+            primeraSalida = n.comoLlegar.getFechaPartida();
             // if(n.parent != null)minutos += n.parent.getAdjacentNodes().get(n);
             n = n.parent;
         }
@@ -190,7 +200,12 @@ public class AStar {
         Collections.reverse(caminoAeropuertos);
         Collections.reverse(caminoVuelos);
 
-        minAHora(target.g);
+        if(esMayor(primeraSalida, ultimaLlegada, origen, destino)){
+            System.out.println("Supera la ventana de tiempo");
+        }
+
+        //minAHora(target.g);
+        minAHora(primeraSalida, ultimaLlegada);
         System.out.println("==============================================");
         System.out.println("Ruta:");
 
@@ -206,16 +221,34 @@ public class AStar {
 
     }
 
-    public static void minAHora(int min) {
-        int horas = min / 60;
-        int minutos = min % 60;
+    public static boolean esMayor(Date primeraSalida, Date ultimaLlegada, Aeropuerto origen, Aeropuerto destino){
+        long min = (Math.abs(ultimaLlegada.getTime() - primeraSalida.getTime()))/60000;
+        if(origen.getCiudad().getPais().getContinente().getCodigo().equals(destino.getCiudad().getPais().getContinente().getCodigo())){
+            if(min > 24*60)return true;
+            else return false;
+        }else{
+            if(min > 48*60)return true;
+            else return false;
+        }
+        
+    }
+
+    public static void minAHora(Date primeraSalida, Date ultimaLlegada) {
+        
+        System.out.println(ultimaLlegada);
+        System.out.println(primeraSalida);
+
+        long min = (Math.abs(ultimaLlegada.getTime() - primeraSalida.getTime()))/60000;
+
+        int horas = (int)min / 60;
+        int minutos = (int)min % 60;
 
         String minutosString;
 
         if (minutos < 10) {
-            minutosString = "0" + String.valueOf(minutos);
+            minutosString = "0" + String.valueOf(horas);
         } else {
-            minutosString = "" + minutos;
+            minutosString = "" + String.valueOf(minutos);
         }
 
         System.out.println(horas + ":" + minutosString);
