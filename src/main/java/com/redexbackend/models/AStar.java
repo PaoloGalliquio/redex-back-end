@@ -111,10 +111,10 @@ public class AStar {
 
             for (Vuelo vuelo : n.getVuelos()) {
 
-                int resultadoComp = vuelo.getFechaPartida().compareTo(fechaPrueba);
+                /*int resultadoComp = vuelo.getFechaPartida().compareTo(fechaPrueba);
 
                 if (resultadoComp < 0)
-                    continue;
+                    continue;*/
 
                 int tiempoIntermedio = 0;
                 for (Aeropuerto aero : openList) {

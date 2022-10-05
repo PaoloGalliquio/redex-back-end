@@ -15,7 +15,7 @@ public class LeerArchivos {
     String[] informacion;
     String line;
     File aeropuertosFile = new File(
-        System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\continentes.txt");
+        System.getProperty("user.dir") + "\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\continentes.txt");
     try {
       BufferedReader br = new BufferedReader(new FileReader(aeropuertosFile));
       while ((line = br.readLine()) != null) {
@@ -36,7 +36,7 @@ public class LeerArchivos {
     String[] informacion;
     String line;
     File aeropuertosFile = new File(
-        System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\aeropuertos.txt");
+        System.getProperty("user.dir") + "\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\aeropuertos.txt");
     try {
       BufferedReader br = new BufferedReader(new FileReader(aeropuertosFile));
       while ((line = br.readLine()) != null) {
@@ -57,7 +57,7 @@ public class LeerArchivos {
     String[] informacion;
     String line;
     File aeropuertosFile = new File(
-        System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\aeropuertos.txt");
+        System.getProperty("user.dir") + "\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\aeropuertos.txt");
     try {
       BufferedReader br = new BufferedReader(new FileReader(aeropuertosFile));
       while ((line = br.readLine()) != null) {
@@ -79,7 +79,7 @@ public class LeerArchivos {
     String line, codigoContinente;
     int capacidad;
     File aeropuertosFile = new File(
-        System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\aeropuertos.txt");
+        System.getProperty("user.dir") + "\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\aeropuertos.txt");
     try {
       BufferedReader br = new BufferedReader(new FileReader(aeropuertosFile));
       while ((line = br.readLine()) != null) {
@@ -107,7 +107,7 @@ public class LeerArchivos {
     String[] informacion;
     String line;
     File timezonesFile = new File(
-        System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\timezones.txt");
+        System.getProperty("user.dir") + "\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\timezones.txt");
     try {
       BufferedReader br = new BufferedReader(new FileReader(timezonesFile));
       while ((line = br.readLine()) != null) {
@@ -129,7 +129,7 @@ public class LeerArchivos {
     String[] informacion, destinoNumPaquetes;
     String line;
     File enviosFile = new File(System.getProperty("user.dir")
-        + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\envios_historicos.v01\\pack_enviado_BIKF.txt");
+        + "\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\envios_historicos.v01\\pack_enviado_BIKF.txt");
     try {
       BufferedReader br = new BufferedReader(new FileReader(enviosFile));
       while ((line = br.readLine()) != null) {
@@ -182,7 +182,7 @@ public class LeerArchivos {
     Calendar horaSalida = Calendar.getInstance();
     Calendar horaLlegada = Calendar.getInstance();
     File timezonesFile = new File(
-        System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
+        System.getProperty("user.dir") + "\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
     try {
       BufferedReader br = new BufferedReader(new FileReader(timezonesFile));
       while ((line = br.readLine()) != null) {
@@ -221,7 +221,7 @@ public class LeerArchivos {
     int tiempo;
     String line;
     File vuelosFile = new File(
-        System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
+        System.getProperty("user.dir") + "\\redex-back-end\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
     try {
       BufferedReader br = new BufferedReader(new FileReader(vuelosFile));
       while ((line = br.readLine()) != null) {
