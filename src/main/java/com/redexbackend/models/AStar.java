@@ -211,10 +211,11 @@ public class AStar {
         hPSalida.setTime(primeraSalida);
         hPSalida.add(Calendar.HOUR_OF_DAY, -(UTCPSalida));
         hULlegada.setTime(ultimaLlegada);
-        hULlegada.add(Calendar.HOUR_OF_DAY, -(UTCULlegada));
+        hULlegada.add(Calendar.HOUR_OF_DAY, -(UTCULlegada)+1); //agregar la hora extra del destino final
 
         if(esMayor(hPSalida.getTime(), hULlegada.getTime(), origen, destino)){
             System.out.println("Supera la ventana de tiempo");
+            return;
         }
 
         //minAHora(target.g);
