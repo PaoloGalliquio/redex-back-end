@@ -26,21 +26,32 @@ public class RedexBackEndApplication {
 
 	public static void main(String[] args) {
 		LeerArchivos lector = new LeerArchivos();
+
 		HashMap<String, Integer> timeZones = lector.leerTimeZones();
 		HashMap<String, Continente> continentes = lector.leerContinentes();
 		HashMap<String, Pais> paises = lector.leerPaises(continentes);
 		HashMap<String, Ciudad> ciudades = lector.leerCiudades(paises);
 		HashMap<String, Node> aeropuertos = lector.leerAeropuertos(ciudades, timeZones);
 		HashMap<String, Vuelo> vuelos = lector.leerVuelos(aeropuertos);
-		HashMap<String, Envio> envios = lector.leerEnvios(aeropuertos);
+		HashMap<String, Envio> envios = lector.leerEnvios(aeropuertos, "BIKF");
+		
+		System.out.println("Inicio de medición");
+		long startTime = System.nanoTime();
+		String origen, destino;
+		int numPaquetes, hh = 0, mm = 0;
 
-		Graph mapa = new Graph();
-
-		String origen = "LZIB";
-		String destino = "BIKF";
-
-		resultado(mapa, aeropuertos, origen, destino, timeZones);
-
+		for (HashMap.Entry<String, Envio> envio : envios.entrySet()) {
+			origen = envio.getValue().getAeropuertoPartida().getCodigo();
+			destino = envio.getValue().getAeropuertoDestino().getCodigo();
+			numPaquetes = envio.getValue().getNumeroPaquetes();
+			imprimirAstar(aeropuertos, origen, destino, timeZones, numPaquetes);
+		}
+		
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime)/1000000/1000;
+		System.out.println("Tiempo de ejecución: " + duration + " segundos.");
+		// resultado(mapa, aeropuertos, origen, destino, timeZones);
+		// Graph mapa = new Graph();
 		// SpringApplication.run(RedexBackEndApplication.class, args);
 	}
 
@@ -60,13 +71,13 @@ public class RedexBackEndApplication {
 		lectura.close();
 	}
 
-	private static void imprimirAstar(HashMap<String, Node> aeropuertos, String origen, String destino,
-			HashMap<String, Integer> timeZones, Integer nroPaquetes) {
+	private static void imprimirAstar(HashMap<String, Node> aeropuertos, String origen, String destino, HashMap<String, Integer> timeZones, Integer nroPaquetes) {
+
 		aeropuertos.get(origen).getAeropuerto().g = 0;
 
-		Aeropuerto answer = AStar.aStar(aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto(),
-				timeZones, nroPaquetes);
-		AStar.printPath(answer, aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto(), timeZones);
+		Aeropuerto answer = AStar.aStar(aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto(),timeZones, nroPaquetes);
+
+		AStar.printPath(answer, aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto(),timeZones);
 	}
 
 	private static void imprimirDijkstra(Graph mapa, HashMap<String, Node> aeropuertos, String origen, String destino) {

@@ -47,6 +47,9 @@ public class Vuelo extends BaseEntity {
   @Column(name = "capacidad")
   private int capacidad;
 
+  @Column(name = "capacidadActual")
+  private int capacidadActual;
+
   @Column(name = "duracion")
   private int duracion;
 
@@ -61,6 +64,7 @@ public class Vuelo extends BaseEntity {
     this.fechaPartida = fechaPartida;
     this.fechaDestino = fechaDestino;
     this.capacidad = capacidad;
+    this.capacidadActual = capacidad;
     this.planDeVuelo = planDeVuelo;
     this.disponible = disponible;
   }
@@ -73,6 +77,7 @@ public class Vuelo extends BaseEntity {
     this.fechaPartida = fechaPartida;
     this.fechaDestino = fechaDestino;
     this.capacidad = capacidad;
+    this.capacidadActual = capacidad;
     this.disponible = disponible;
   }
 
@@ -84,6 +89,7 @@ public class Vuelo extends BaseEntity {
     this.fechaDestino = vuelo.fechaDestino;
     this.planDeVuelo = vuelo.planDeVuelo;
     this.capacidad = vuelo.capacidad;
+    this.capacidadActual = capacidad;
     this.duracion = vuelo.duracion;
     this.disponible = vuelo.disponible;
   }

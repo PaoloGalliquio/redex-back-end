@@ -121,30 +121,29 @@ public class LeerArchivos {
     return timezones;
   }
 
-  public HashMap<String, Envio> leerEnvios(HashMap<String, Node> aeropuertos) {
+  public HashMap<String, Envio> leerEnvios(HashMap<String, Node> aeropuertos, String aeropuerto) {
     HashMap<String, Envio> envios = new HashMap<>();
-    Continente continente = new Continente(0, "ASur", "América del Sur", 0, 0, 1);
-    Pais pais = new Pais(0, "PER", "Perú", continente, 1);
-    Ciudad ciudad = new Ciudad(0, "LIM", "Lima", "UTC-5", -5, -12.024105, -77.112165, pais, 1);
     String[] informacion, destinoNumPaquetes;
     String line;
     File enviosFile = new File(System.getProperty("user.dir")
-        + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\envios_historicos.v01\\pack_enviado_BIKF.txt");
+        + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\envios_historicos.v01\\pack_enviado_" + aeropuerto
+        + ".txt");
+
     try {
       BufferedReader br = new BufferedReader(new FileReader(enviosFile));
       while ((line = br.readLine()) != null) {
         informacion = line.split("-");
         destinoNumPaquetes = informacion[3].split(":");
-        Aeropuerto salidaF = aeropuertos.get("BIKF").getAeropuerto();
-        Aeropuerto destinoF = aeropuertos.get(destinoNumPaquetes[0]).getAeropuerto();
-        Aeropuerto salida = new Aeropuerto(0, salidaF.getCodigo(), salidaF.getCodigo(), 300, 300, salidaF.getLatitud(),
-            salidaF.getLongitud(), ciudad, 1);
-        Aeropuerto destino = new Aeropuerto(1, destinoF.getCodigo(), destinoF.getCodigo(), 300, 300,
-            destinoF.getLatitud(), destinoF.getLongitud(), ciudad, 1);
-        Envio envio = new Envio(informacion[0], informacion[1], informacion[2], salida, destino, destinoNumPaquetes[1]);
+
+        Envio envio = new Envio(informacion[0], informacion[1], informacion[2],
+            aeropuertos.get(aeropuerto).getAeropuerto(), aeropuertos.get(destinoNumPaquetes[0]).getAeropuerto(),
+            destinoNumPaquetes[1]);
+
         envios.put(envio.getCodigo(), envio);
       }
+
       br.close();
+
     } catch (Exception ex) {
       System.out.println("Se ha producido un error: " + ex.getMessage());
     }

@@ -66,7 +66,7 @@ public class AStar {
             difHoras = (difFechas / (1000 * 60 * 60)) % 24;
             difDias = (difFechas / (1000 * 60 * 60 * 24)) % 365; // el alcance máximo entre diferencia de vuelos llega
                                                                  // hasta días
-            // System.out.println(hSalida.getTime() + " ---- " + hLlegada.getTime());
+            // //System.out.println(hSalida.getTime() + " ---- " + hLlegada.getTime());
 
             return (int) difDias * 24 * 60 + (int) difHoras * 60 + (int) difMin;
         } else {
@@ -77,8 +77,7 @@ public class AStar {
     }
 
     public static boolean sobrepasaCapacidad(Vuelo nuevoVuelo, Integer nroPaquetes) {
-        if(nuevoVuelo.getCapacidad() < nroPaquetes || 
-        nuevoVuelo.getAeropuertoDestino().getCapacidad() < nroPaquetes){
+        if(nuevoVuelo.getCapacidadActual() < nroPaquetes || nuevoVuelo.getAeropuertoDestino().getCapacidad() < nroPaquetes){
             return true;
         }else{
             return false;
@@ -99,16 +98,12 @@ public class AStar {
         start.f = start.g + start.calculateHeuristic(start, target);
         openList.add(start);
 
-        System.out.println("Solucion A*");
-        System.out.println("==============================================");
-        System.out.println(
-                "Origen: " + start.getCiudad().getNombre() + " " + start.getCodigo() + " (UTC: " + start.getUTC()
-                        + ")");
-        System.out.println(
-                "Destino: " + target.getCiudad().getNombre() + " " + target.getCodigo() + " (UTC: " + target.getUTC()
-                        + ")");
-        System.out.println("Cantidad de paquetes a enviar: " + nroPaquetes);
-        System.out.print("Duración: ");
+        //System.out.println("Solucion A*");
+        //System.out.println("==============================================");
+        //System.out.println("Origen: " + start.getCiudad().getNombre() + " " + start.getCodigo() + " (UTC: " + start.getUTC()+ ")");
+        //System.out.println("Destino: " + target.getCiudad().getNombre() + " " + target.getCodigo() + " (UTC: " + target.getUTC()+ ")");
+        //System.out.println("Cantidad de paquetes a enviar: " + nroPaquetes);
+        //System.out.print("Duración: ");
 
         if(start.getCapacidad() < nroPaquetes) return null;
 
@@ -159,8 +154,10 @@ public class AStar {
                         // Prueba
                         vuelo.getAeropuertoDestino().parent = n;
                         vuelo.getAeropuertoDestino().g = totalWeight;
-                        vuelo.getAeropuertoDestino().f = vuelo.getAeropuertoDestino().g
-                                + vuelo.getAeropuertoDestino().calculateHeuristic(vuelo.getAeropuertoDestino(), target);
+                        vuelo.getAeropuertoDestino().f = 
+                            vuelo.getAeropuertoDestino().g + 
+                            vuelo.getAeropuertoDestino().calculateHeuristic(vuelo.getAeropuertoDestino(), target);
+                        vuelo.setCapacidadActual(vuelo.getCapacidadActual() - nroPaquetes);
 
                         if (closedList.contains(vuelo.getAeropuertoDestino())) {
                             closedList.remove(vuelo.getAeropuertoDestino());
@@ -220,19 +217,19 @@ public class AStar {
 
         //minAHora(target.g);
         minAHora(hPSalida.getTime(), hULlegada.getTime());
-        System.out.println("Inicio del Plan de Vuelo: "+primeraSalida);
-        System.out.println("Fin del Plan de Vuelo:    "+ultimaLlegada);
-        System.out.println("==============================================");
-        System.out.println("Ruta:");
+        //System.out.println("Inicio del Plan de Vuelo: "+primeraSalida);
+        //System.out.println("Fin del Plan de Vuelo:    "+ultimaLlegada);
+        //System.out.println("==============================================");
+        //System.out.println("Ruta:");
 
         for (String id : caminoAeropuertos) {
-            System.out.println("    " + id);
+            //System.out.println("    " + id);
         }
 
-        System.out.println("==============================================");
-        System.out.println("Ruta vuelos:");
+        //System.out.println("==============================================");
+        //System.out.println("Ruta vuelos:");
         for (String id : caminoVuelos) {
-            System.out.println("    " + id);
+            //System.out.println("    " + id);
         }
 
     }
@@ -264,6 +261,6 @@ public class AStar {
             minutosString = "" + String.valueOf(minutos);
         }
 
-        System.out.println(horas + ":" + minutosString + " hrs.");
+        //System.out.println(horas + ":" + minutosString + " hrs.");
     }
 }
