@@ -31,10 +31,10 @@ public class Ciudad extends BaseEntity {
   private String nombre;
 
   @Column(name = "latitud")
-  private double latitud;
+  private Double latitud;
 
   @Column(name = "longitud")
-  private double longitud;
+  private Double longitud;
 
   @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinColumn(name = "idAeropuerto")

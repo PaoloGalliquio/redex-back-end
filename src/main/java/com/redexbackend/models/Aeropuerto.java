@@ -32,16 +32,16 @@ public class Aeropuerto extends BaseEntity implements Comparable<Aeropuerto> {
   private String nombre;
 
   @Column(name = "capacidad")
-  private int capacidad;
+  private Integer capacidad;
 
   @Column(name = "cantidadReservada")
-  private int cantidadReservada;
+  private Integer cantidadReservada;
 
   @Column(name = "latitud")
-  private double latitud;
+  private Double latitud;
 
   @Column(name = "longitud")
-  private double longitud;
+  private Double longitud;
 
   @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinColumn(name = "idCiudad")
@@ -51,7 +51,7 @@ public class Aeropuerto extends BaseEntity implements Comparable<Aeropuerto> {
   private String UTC;
 
   @Column(name = "husoHorario")
-  private int husoHorario;
+  private Integer husoHorario;
 
   // AStar
 

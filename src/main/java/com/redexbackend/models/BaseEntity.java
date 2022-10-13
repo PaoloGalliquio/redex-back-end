@@ -25,7 +25,7 @@ public class BaseEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", updatable = false, nullable = false)
-  private int id;
+  private Integer id;
 
   @Temporal(TemporalType.TIMESTAMP)
   @Column(columnDefinition = "DATETIME", nullable = false)
@@ -37,7 +37,7 @@ public class BaseEntity {
 
   @Column(name = "estado")
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-  private boolean estado = true;
+  private Boolean estado = true;
 
   @PreUpdate
   private void onUpdate(){

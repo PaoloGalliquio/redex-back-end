@@ -47,17 +47,17 @@ public class Envio extends BaseEntity {
   private Date fechaLimite;
   
   @Column(name = "duracionTotal")
-  private double duracionTotal;
+  private Integer duracionTotal;
   
   @Column(name = "numeroPaquetes")
-  private int numeroPaquetes;
+  private Integer numeroPaquetes;
   
   @Column(name = "correoCliente")
   private String correoCliente;
   
   private List<PlanDeVuelo> planesDeVuelo;
 
-  public Envio(int id, String codigo, Aeropuerto aeropuertoPartida, Aeropuerto aeropuertoDestino, Date fechaEnvio, Date fechaFinalizado, Date fechaLimite, double duracionTotal, int numeroPaquetes, String correoCliente, int estado) {
+  public Envio(int id, String codigo, Aeropuerto aeropuertoPartida, Aeropuerto aeropuertoDestino, Date fechaEnvio, Date fechaFinalizado, Date fechaLimite, int duracionTotal, int numeroPaquetes, String correoCliente, int estado) {
     this.codigo = codigo;
     this.aeropuertoPartida = aeropuertoPartida;
     this.aeropuertoDestino = aeropuertoDestino;

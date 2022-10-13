@@ -1,5 +1,7 @@
 package com.redexbackend.redexbackend;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -25,31 +27,54 @@ public class RedexBackEndApplication {
 	public static String aws_session_token;
 
 	public static void main(String[] args) {
-		LeerArchivos lector = new LeerArchivos();
-
-		HashMap<String, Integer> timeZones = lector.leerTimeZones();
-		HashMap<String, Continente> continentes = lector.leerContinentes();
-		HashMap<String, Pais> paises = lector.leerPaises(continentes);
-		HashMap<String, Ciudad> ciudades = lector.leerCiudades(paises);
-		HashMap<String, Node> aeropuertos = lector.leerAeropuertos(ciudades, timeZones);
-		HashMap<String, Vuelo> vuelos = lector.leerVuelos(aeropuertos);
+		HashMap<String, Integer> timeZones = new HashMap<>();
+		HashMap<String, Continente> continentes = new HashMap<>();
+		HashMap<String, Pais> paises = new HashMap<>();
+		HashMap<String, Ciudad> ciudades = new HashMap<>();
+		HashMap<String, Node> aeropuertos = new HashMap<>();
+		HashMap<String, Vuelo> vuelos = new HashMap<>();
+		LeerArchivos lector = new LeerArchivos(timeZones, continentes, paises, ciudades, aeropuertos, vuelos);
 		HashMap<String, Envio> envios = lector.leerEnvios(aeropuertos, "BIKF");
-		
-		System.out.println("Inicio de medición");
-		long startTime = System.nanoTime();
-		String origen, destino;
-		int numPaquetes, hh = 0, mm = 0;
 
+		// HashMap<String, Integer> timeZonesA = lector.leerTimeZones();
+		// HashMap<String, Continente> continentesA = lector.leerContinentes();
+		// HashMap<String, Pais> paisesA = lector.leerPaises(continentes);
+		// HashMap<String, Ciudad> ciudadesA = lector.leerCiudades(paises);
+		// HashMap<String, Node> aeropuertosA = lector.leerAeropuertos(ciudades, timeZones);
+		// HashMap<String, Vuelo> vuelosA = lector.leerVuelos(aeropuertos);
+		
+		int numPaquetes, minActual = 0;
+		String origen, destino;
+		Date momento;
+		HashMap<Date, HashMap<String, Integer>> cambios = new HashMap<>();
+		HashMap<String, Integer> cambioOrigen, cambioDestino;
+				
 		for (HashMap.Entry<String, Envio> envio : envios.entrySet()) {
 			origen = envio.getValue().getAeropuertoPartida().getCodigo();
 			destino = envio.getValue().getAeropuertoDestino().getCodigo();
 			numPaquetes = envio.getValue().getNumeroPaquetes();
+
+			momento = envio.getValue().getFechaEnvio();
+
+			if(!cambios.containsKey(momento))
+				cambios.put(momento, new HashMap<>());
+			
+			cambioOrigen = cambios.get(momento);
+			cambioDestino = cambios.get(momento);
+			//cambioDestino = cambios.get(momento + envio.getValue().getDuracionTotal());
+
+			if(cambioOrigen.containsKey(origen))
+				cambioOrigen.put(origen, cambioOrigen.get(origen) - numPaquetes);
+			else
+				cambioOrigen.put(origen, -numPaquetes);
+
+			if(cambioDestino.containsKey(destino)) 
+				cambioDestino.put(origen, cambioDestino.get(destino) + numPaquetes);
+			else
+				cambioDestino.put(origen, numPaquetes);
+
 			imprimirAstar(aeropuertos, origen, destino, timeZones, numPaquetes);
 		}
-		
-		long endTime = System.nanoTime();
-		long duration = (endTime - startTime)/1000000/1000;
-		System.out.println("Tiempo de ejecución: " + duration + " segundos.");
 		// resultado(mapa, aeropuertos, origen, destino, timeZones);
 		// Graph mapa = new Graph();
 		// SpringApplication.run(RedexBackEndApplication.class, args);

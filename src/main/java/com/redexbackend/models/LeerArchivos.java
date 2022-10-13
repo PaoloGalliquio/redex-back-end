@@ -10,6 +10,116 @@ import java.util.HashMap;
 
 public class LeerArchivos {
 
+  public LeerArchivos(HashMap<String, Integer> timeZones, HashMap<String, Continente> continentes,
+      HashMap<String, Pais> paises, HashMap<String, Ciudad> ciudades, HashMap<String, Node> aeropuertos,
+      HashMap<String, Vuelo> vuelos) {
+    leerTimeZonesTXT(timeZones);
+    leerContinentesTXT(continentes);
+    leerAeropuertosTXT(continentes, paises, ciudades, aeropuertos, timeZones);
+    leerVuelosTXT(aeropuertos, vuelos);
+  }
+
+  private void leerTimeZonesTXT(HashMap<String, Integer> timeZones){
+    String[] informacion;
+    String line;
+    File timezonesFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\timezones.txt");
+    try {
+      BufferedReader br = new BufferedReader(new FileReader(timezonesFile));
+      while ((line = br.readLine()) != null) {
+        informacion = line.split(";");
+        timeZones.put(informacion[0], Integer.parseInt(informacion[1]));
+      }
+      br.close();
+    } catch (Exception ex) {
+      System.out.println("Se ha producido un error: " + ex.getMessage());
+    }
+  }
+
+  private void leerContinentesTXT(HashMap<String, Continente> continentes) {
+    String[] informacion;
+    String line;
+    File aeropuertosFile = new File(
+        System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\continentes.txt");
+    try {
+      BufferedReader br = new BufferedReader(new FileReader(aeropuertosFile));
+      while ((line = br.readLine()) != null) {
+        informacion = line.split(";");
+        Continente continente = new Continente(informacion[0], informacion[1], informacion[4], informacion[2],
+            informacion[3], 1);
+        continentes.put(informacion[4], continente);
+      }
+      br.close();
+    } catch (Exception ex) {
+      System.out.println("Se ha producido un error: " + ex.getMessage());
+    }
+  }
+  
+  private void leerAeropuertosTXT(HashMap<String, Continente> continentes, HashMap<String, Pais> paises, HashMap<String, Ciudad> ciudades, HashMap<String, Node> aeropuertos, HashMap<String, Integer> timeZones){
+    String[] informacion;
+    String line, codigoContinente;
+    int capacidad;
+    File aeropuertosFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\aeropuertos.txt");
+    try {
+      BufferedReader br = new BufferedReader(new FileReader(aeropuertosFile));
+      while ((line = br.readLine()) != null) {
+        informacion = line.split(";");
+        Pais pais = new Pais(informacion[0], informacion[3], informacion[3], continentes.get(informacion[5]), 1);
+        continentes.get(informacion[5]).addPais(pais);
+        paises.put(informacion[3], pais);
+        Ciudad ciudad = new Ciudad(informacion[0], informacion[2], informacion[2], informacion[6], informacion[7], pais, 1);
+        ciudades.put(informacion[4], ciudad);
+        codigoContinente = continentes.get(informacion[5]).getCodigo();
+        if (codigoContinente == "AMN" || codigoContinente == "AMS" || codigoContinente == "AMC")
+          capacidad = 850;
+        else
+          capacidad = 900;
+        Aeropuerto aeropuerto = new Aeropuerto(informacion[0], informacion[1], informacion[1], capacidad, 1000, informacion[6], informacion[7], ciudad, timeZones.get(informacion[1]), 1);
+        ciudad.setAeropuerto(aeropuerto);
+        Node node = new Node(aeropuerto);
+        aeropuertos.put(informacion[1], node);
+      }
+      br.close();
+    } catch (Exception ex) {
+      System.out.println("Se ha producido un error: " + ex.getMessage());
+    }
+  }
+
+  private void leerVuelosTXT(HashMap<String, Node> aeropuertos, HashMap<String, Vuelo> vuelos){
+    String[] informacion;
+    String line;
+    int tiempo;
+    Calendar horaSalida = Calendar.getInstance();
+    Calendar horaLlegada = Calendar.getInstance();
+    File timezonesFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
+    try {
+      BufferedReader br = new BufferedReader(new FileReader(timezonesFile));
+      while ((line = br.readLine()) != null) {
+        informacion = line.split("-");
+        horaSalida.setTime(obtenerFecha(informacion[2]));
+        horaLlegada.setTime(obtenerFecha(informacion[3]));
+        horaSalida.add(Calendar.HOUR, -aeropuertos.get(informacion[0]).getAeropuerto().getHusoHorario());
+        horaLlegada.add(Calendar.HOUR, -aeropuertos.get(informacion[1]).getAeropuerto().getHusoHorario());
+
+        if (horaSalida.getTime().compareTo(horaLlegada.getTime()) > 0)
+          horaLlegada.add(Calendar.DAY_OF_MONTH, 1);
+
+        horaSalida.add(Calendar.HOUR, aeropuertos.get(informacion[0]).getAeropuerto().getHusoHorario());
+        horaLlegada.add(Calendar.HOUR, aeropuertos.get(informacion[1]).getAeropuerto().getHusoHorario());
+
+        int capacidad = obtenerCapacidad(aeropuertos, informacion[0], informacion[1]);
+        Vuelo vuelo = new Vuelo(informacion[0] + informacion[1], aeropuertos.get(informacion[0]).getAeropuerto(), aeropuertos.get(informacion[1]).getAeropuerto(), horaSalida.getTime(), horaLlegada.getTime(), capacidad, 1, true);
+        aeropuertos.get(informacion[0]).getAeropuerto().addVuelo(vuelo);
+        vuelos.put(informacion[0] + informacion[1], vuelo);
+        tiempo = obtenerTiempo(aeropuertos.get(informacion[0]), informacion[2], aeropuertos.get(informacion[1]), informacion[3]);
+        vuelo.setDuracion(tiempo);
+        aeropuertos.get(informacion[0]).addDestination(aeropuertos.get(informacion[1]), tiempo);
+      }
+      br.close();
+    } catch (Exception ex) {
+      System.out.println("Se ha producido un error: " + ex.getMessage());
+    }
+  }
+
   public HashMap<String, Continente> leerContinentes() {
     HashMap<String, Continente> continentes = new HashMap<>();
     String[] informacion;

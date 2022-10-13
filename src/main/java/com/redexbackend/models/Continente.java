@@ -28,10 +28,10 @@ public class Continente extends BaseEntity {
   private String nombre;
   
   @Column(name = "politicaLocal")
-  private double politicaLocal;
+  private Double politicaLocal;
   
   @Column(name = "politicaIntercontinental")
-  private double politicaIntercontinental;
+  private Double politicaIntercontinental;
   
   private List<Pais> paises;
 

@@ -45,16 +45,16 @@ public class Vuelo extends BaseEntity {
   private PlanDeVuelo planDeVuelo;
 
   @Column(name = "capacidad")
-  private int capacidad;
+  private Integer capacidad;
 
   @Column(name = "capacidadActual")
-  private int capacidadActual;
+  private Integer capacidadActual;
 
   @Column(name = "duracion")
-  private int duracion;
+  private Integer duracion;
 
   @Column(name = "disponible")
-  private boolean disponible; // 1: Para disponible, 0: Para no disponible
+  private Boolean disponible; // 1: Para disponible, 0: Para no disponible
 
   public Vuelo(int id, String codigo, Aeropuerto aeropuertoPartido, Aeropuerto aeropuertoDestino, Date fechaPartida,
       Date fechaDestino, int capacidad, PlanDeVuelo planDeVuelo, int estado, boolean disponible) {

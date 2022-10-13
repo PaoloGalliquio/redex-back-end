@@ -35,7 +35,7 @@ public class PlanDeVuelo extends BaseEntity {
   private Date fechaCompletado;
   
   @Column(name = "duracionTotal")
-  private int duracionTotal;
+  private Integer duracionTotal;
   
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "idEnvio")
