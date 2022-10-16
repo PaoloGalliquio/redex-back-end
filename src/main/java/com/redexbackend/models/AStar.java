@@ -16,7 +16,7 @@ public class AStar {
     public static int obtenerTiempo(HashMap<String, Integer> timeZones, Vuelo vuelo) {
         int duracion = 0;
 
-        int UTCSalida = timeZones.get(vuelo.getAeropuertoPartido().getCodigo());
+        int UTCSalida = timeZones.get(vuelo.getAeropuertoPartida().getCodigo());
         int UTCLlegada = timeZones.get(vuelo.getAeropuertoDestino().getCodigo());
 
         // Odio las fechas
@@ -47,7 +47,7 @@ public class AStar {
         Calendar hSalida = Calendar.getInstance();
         Calendar hLlegada = Calendar.getInstance();
         int UTCSalida = timeZones.get(vueloEnLista.getAeropuertoDestino().getCodigo());
-        int UTCLlegada = timeZones.get(nuevoVuelo.getAeropuertoPartido().getCodigo());
+        int UTCLlegada = timeZones.get(nuevoVuelo.getAeropuertoPartida().getCodigo());
         long difFechas, difHoras, difMin, difDias;
 
         hSalida.setTime(vueloEnLista.getFechaDestino());
@@ -126,7 +126,7 @@ public class AStar {
                         continue;
                     // comollegar.aerodestino es el hace referencia al aeropuerto actual
                     if (aero.comoLlegar.getAeropuertoDestino().getCodigo()
-                            .equals(vuelo.getAeropuertoPartido().getCodigo())) {
+                            .equals(vuelo.getAeropuertoPartida().getCodigo())) {
                         tiempoIntermedio = seCruzan(timeZones, aero.comoLlegar, vuelo);
                         break;
                     }
@@ -196,7 +196,7 @@ public class AStar {
             caminoVuelos.add(n.comoLlegar.getCodigo() +
                     ": " + n.comoLlegar.getFechaPartida() + " - " + n.comoLlegar.getFechaDestino());
             primeraSalida = n.comoLlegar.getFechaPartida();
-            UTCPSalida = timeZones.get(n.comoLlegar.getAeropuertoPartido().getCodigo());
+            UTCPSalida = timeZones.get(n.comoLlegar.getAeropuertoPartida().getCodigo());
             
             // if(n.parent != null)minutos += n.parent.getAdjacentNodes().get(n);
             n = n.parent;

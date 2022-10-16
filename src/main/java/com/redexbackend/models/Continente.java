@@ -10,6 +10,7 @@ import org.hibernate.annotations.Where;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Continente")
@@ -33,6 +34,7 @@ public class Continente extends BaseEntity {
   @Column(name = "politicaIntercontinental")
   private Double politicaIntercontinental;
   
+  @Transient
   private List<Pais> paises;
 
   public Continente(int id, String codigo, String nombre, double politicaLocal, double politicaIntercontinental, int estado) {

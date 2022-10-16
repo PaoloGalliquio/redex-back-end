@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Aeropuerto")
@@ -53,18 +54,26 @@ public class Aeropuerto extends BaseEntity implements Comparable<Aeropuerto> {
   @Column(name = "husoHorario")
   private Integer husoHorario;
 
+  @Transient
+  private List<Vuelo> vuelos;
+
   // AStar
 
   // f = g + h
+  @Transient
   public int f = Integer.MAX_VALUE;
   // tiempo recorrido de inicio a aeropuerto
+  @Transient
   public int g = Integer.MAX_VALUE;
 
   // public int h = Integer.MAX_VALUE;
   // tiempo desde aeropuerto actual al destino
+  @Transient
   public int h = 0;
 
+  @Transient
   public Aeropuerto parent = null;
+  @Transient
   public Vuelo comoLlegar = null;
 
   @Override
@@ -99,8 +108,6 @@ public class Aeropuerto extends BaseEntity implements Comparable<Aeropuerto> {
 
     return this.h;
   }
-
-  private List<Vuelo> vuelos;
 
   public Aeropuerto(int id, String codigo, String nombre, int capacidad, int cantidadReservada, double latitud,
       double longitud, Ciudad ciudad, int estado) {

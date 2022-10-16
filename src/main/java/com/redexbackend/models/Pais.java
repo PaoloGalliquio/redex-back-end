@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Pais")
@@ -34,6 +35,7 @@ public class Pais extends BaseEntity {
   @JoinColumn(name = "idContinente")
   private Continente continente;
 
+  @Transient
   private List<Ciudad> ciudades;
 
   public Pais(int id, String codigo, String nombre, Continente continente, int estado) {

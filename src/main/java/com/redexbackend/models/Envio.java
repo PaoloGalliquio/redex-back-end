@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Envio")
@@ -55,6 +56,7 @@ public class Envio extends BaseEntity {
   @Column(name = "correoCliente")
   private String correoCliente;
   
+  @Transient
   private List<PlanDeVuelo> planesDeVuelo;
 
   public Envio(int id, String codigo, Aeropuerto aeropuertoPartida, Aeropuerto aeropuertoDestino, Date fechaEnvio, Date fechaFinalizado, Date fechaLimite, int duracionTotal, int numeroPaquetes, String correoCliente, int estado) {

@@ -1,4 +1,4 @@
-package com.redexbackend.redexbackend;
+package com.redexbackend;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.redexbackend.models.AStar;
 import com.redexbackend.models.Aeropuerto;
@@ -22,9 +25,9 @@ import com.redexbackend.models.Vuelo;
 
 @SpringBootApplication
 public class RedexBackEndApplication {
-	public static String aws_access_key;
-	public static String aws_secret_key;
-	public static String aws_session_token;
+	public static String aws_access_key = "";
+	public static String aws_secret_key = "";
+	public static String aws_session_token = "";
 
 	public static void main(String[] args) {
 		HashMap<String, Integer> timeZones = new HashMap<>();
@@ -49,35 +52,45 @@ public class RedexBackEndApplication {
 		HashMap<Date, HashMap<String, Integer>> cambios = new HashMap<>();
 		HashMap<String, Integer> cambioOrigen, cambioDestino;
 				
-		for (HashMap.Entry<String, Envio> envio : envios.entrySet()) {
-			origen = envio.getValue().getAeropuertoPartida().getCodigo();
-			destino = envio.getValue().getAeropuertoDestino().getCodigo();
-			numPaquetes = envio.getValue().getNumeroPaquetes();
+		// for (HashMap.Entry<String, Envio> envio : envios.entrySet()) {
+		// 	origen = envio.getValue().getAeropuertoPartida().getCodigo();
+		// 	destino = envio.getValue().getAeropuertoDestino().getCodigo();
+		// 	numPaquetes = envio.getValue().getNumeroPaquetes();
 
-			momento = envio.getValue().getFechaEnvio();
+		// 	momento = envio.getValue().getFechaEnvio();
 
-			if(!cambios.containsKey(momento))
-				cambios.put(momento, new HashMap<>());
+		// 	if(!cambios.containsKey(momento))
+		// 		cambios.put(momento, new HashMap<>());
 			
-			cambioOrigen = cambios.get(momento);
-			cambioDestino = cambios.get(momento);
-			//cambioDestino = cambios.get(momento + envio.getValue().getDuracionTotal());
+		// 	cambioOrigen = cambios.get(momento);
+		// 	cambioDestino = cambios.get(momento);
+		// 	//cambioDestino = cambios.get(momento + envio.getValue().getDuracionTotal());
 
-			if(cambioOrigen.containsKey(origen))
-				cambioOrigen.put(origen, cambioOrigen.get(origen) - numPaquetes);
-			else
-				cambioOrigen.put(origen, -numPaquetes);
+		// 	if(cambioOrigen.containsKey(origen))
+		// 		cambioOrigen.put(origen, cambioOrigen.get(origen) - numPaquetes);
+		// 	else
+		// 		cambioOrigen.put(origen, -numPaquetes);
 
-			if(cambioDestino.containsKey(destino)) 
-				cambioDestino.put(origen, cambioDestino.get(destino) + numPaquetes);
-			else
-				cambioDestino.put(origen, numPaquetes);
+		// 	if(cambioDestino.containsKey(destino)) 
+		// 		cambioDestino.put(origen, cambioDestino.get(destino) + numPaquetes);
+		// 	else
+		// 		cambioDestino.put(origen, numPaquetes);
 
-			imprimirAstar(aeropuertos, origen, destino, timeZones, numPaquetes);
-		}
+		// 	imprimirAstar(aeropuertos, origen, destino, timeZones, numPaquetes);
+		// }
 		// resultado(mapa, aeropuertos, origen, destino, timeZones);
 		// Graph mapa = new Graph();
-		// SpringApplication.run(RedexBackEndApplication.class, args);
+		SpringApplication.run(RedexBackEndApplication.class, args);
+	}
+
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST", "PUT", "DELETE");
+			}
+		};
 	}
 
 	private static void resultado(Graph mapa, HashMap<String, Node> aeropuertos, String origen, String destino,
@@ -145,7 +158,7 @@ public class RedexBackEndApplication {
 		System.out.println("==============================================");
 		System.out.println("Ruta:");
 		for (Vuelo vuelo : mapa.getNodes().get(destino).getShortestPath()) {
-			System.out.println("    " + vuelo.getAeropuertoPartido().getCiudad().getNombre());
+			System.out.println("    " + vuelo.getAeropuertoPartida().getCiudad().getNombre());
 		}
 
 		System.out.println("==============================================");

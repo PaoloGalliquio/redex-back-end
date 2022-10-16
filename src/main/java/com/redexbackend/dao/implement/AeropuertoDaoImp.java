@@ -60,7 +60,15 @@ public class AeropuertoDaoImp implements AeropuertoDao{
     Aeropuerto result = null;
     try {
       var nuevo = this.get(aeropuerto.getId());
-      //if(aeropuerto.getPeriod() != null) nuevo.setPeriod(aeropuerto.getPeriod());
+      if(aeropuerto.getCodigo() != null) nuevo.setCodigo(aeropuerto.getCodigo());
+      if(aeropuerto.getNombre() != null) nuevo.setNombre(aeropuerto.getNombre());
+      if(aeropuerto.getCapacidad() != null) nuevo.setCapacidad(aeropuerto.getCapacidad());
+      if(aeropuerto.getCantidadReservada() != null) nuevo.setCantidadReservada(aeropuerto.getCantidadReservada());
+      if(aeropuerto.getLatitud() != null) nuevo.setLatitud(aeropuerto.getLatitud());
+      if(aeropuerto.getLongitud() != null) nuevo.setLongitud(aeropuerto.getLongitud());
+      if(aeropuerto.getCiudad() != null) nuevo.setCiudad(aeropuerto.getCiudad());
+      if(aeropuerto.getUTC() != null) nuevo.setUTC(aeropuerto.getUTC());
+      if(aeropuerto.getHusoHorario() != null) nuevo.setHusoHorario(aeropuerto.getHusoHorario());
       result = entityManager.merge(nuevo);
     }
     catch (Exception exception){
