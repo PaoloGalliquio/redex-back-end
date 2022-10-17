@@ -36,8 +36,8 @@ public class RedexBackEndApplication {
 		HashMap<String, Ciudad> ciudades = new HashMap<>();
 		HashMap<String, Node> aeropuertos = new HashMap<>();
 		HashMap<String, Vuelo> vuelos = new HashMap<>();
-		LeerArchivos lector = new LeerArchivos(timeZones, continentes, paises, ciudades, aeropuertos, vuelos);
-		HashMap<String, Envio> envios = lector.leerEnvios(aeropuertos, "BIKF");
+		//LeerArchivos lector = new LeerArchivos(timeZones, continentes, paises, ciudades, aeropuertos, vuelos);
+		//HashMap<String, Envio> envios = lector.leerEnvios(aeropuertos, "BIKF");
 
 		// HashMap<String, Integer> timeZonesA = lector.leerTimeZones();
 		// HashMap<String, Continente> continentesA = lector.leerContinentes();

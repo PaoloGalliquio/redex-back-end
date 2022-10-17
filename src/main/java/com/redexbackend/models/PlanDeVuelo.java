@@ -8,6 +8,8 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -43,6 +45,7 @@ public class PlanDeVuelo extends BaseEntity {
   private Envio envio;
   
   @Transient
+  @JsonIgnore
   private List<Vuelo> vuelos;
 
   public PlanDeVuelo(int id, String codigo, Date fechaPlan, Date fechaCompletado, int duracionTotal, Envio envio, int estado) {

@@ -7,6 +7,8 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -35,6 +37,7 @@ public class Continente extends BaseEntity {
   private Double politicaIntercontinental;
   
   @Transient
+  @JsonIgnore
   private List<Pais> paises;
 
   public Continente(int id, String codigo, String nombre, double politicaLocal, double politicaIntercontinental, int estado) {

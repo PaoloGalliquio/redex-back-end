@@ -9,6 +9,8 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -57,6 +59,7 @@ public class Envio extends BaseEntity {
   private String correoCliente;
   
   @Transient
+  @JsonIgnore
   private List<PlanDeVuelo> planesDeVuelo;
 
   public Envio(int id, String codigo, Aeropuerto aeropuertoPartida, Aeropuerto aeropuertoDestino, Date fechaEnvio, Date fechaFinalizado, Date fechaLimite, int duracionTotal, int numeroPaquetes, String correoCliente, int estado) {

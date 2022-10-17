@@ -22,11 +22,6 @@ import com.redexbackend.service.AeropuertoService;
 public class AeropuertoController {
   @Autowired
   private AeropuertoService aeropuertoService;
-
-  @GetMapping(value = "/test")
-  String test(){
-      return "Test";
-  }
   
   @GetMapping(value = "/list")
   List<Aeropuerto> getAll(){

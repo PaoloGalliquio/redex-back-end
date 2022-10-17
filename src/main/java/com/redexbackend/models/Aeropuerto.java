@@ -7,6 +7,8 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -46,6 +48,7 @@ public class Aeropuerto extends BaseEntity implements Comparable<Aeropuerto> {
 
   @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinColumn(name = "idCiudad")
+  @JsonIgnore
   private Ciudad ciudad;
 
   @Column(name = "UTC")
@@ -55,25 +58,31 @@ public class Aeropuerto extends BaseEntity implements Comparable<Aeropuerto> {
   private Integer husoHorario;
 
   @Transient
+  @JsonIgnore
   private List<Vuelo> vuelos;
 
   // AStar
 
   // f = g + h
   @Transient
+  @JsonIgnore
   public int f = Integer.MAX_VALUE;
   // tiempo recorrido de inicio a aeropuerto
   @Transient
+  @JsonIgnore
   public int g = Integer.MAX_VALUE;
 
   // public int h = Integer.MAX_VALUE;
   // tiempo desde aeropuerto actual al destino
   @Transient
+  @JsonIgnore
   public int h = 0;
 
   @Transient
+  @JsonIgnore
   public Aeropuerto parent = null;
   @Transient
+  @JsonIgnore
   public Vuelo comoLlegar = null;
 
   @Override
