@@ -36,15 +36,15 @@ public class RedexBackEndApplication {
 		HashMap<String, Ciudad> ciudades = new HashMap<>();
 		HashMap<String, Node> aeropuertos = new HashMap<>();
 		HashMap<String, Vuelo> vuelos = new HashMap<>();
-		//LeerArchivos lector = new LeerArchivos(timeZones, continentes, paises, ciudades, aeropuertos, vuelos);
-		//HashMap<String, Envio> envios = lector.leerEnvios(aeropuertos, "BIKF");
+		LeerArchivos lector = new LeerArchivos(timeZones, continentes, paises, ciudades, aeropuertos, vuelos);
+		HashMap<String, Envio> envios = lector.leerEnvios(aeropuertos, "BIKF");
 
-		// HashMap<String, Integer> timeZonesA = lector.leerTimeZones();
-		// HashMap<String, Continente> continentesA = lector.leerContinentes();
-		// HashMap<String, Pais> paisesA = lector.leerPaises(continentes);
-		// HashMap<String, Ciudad> ciudadesA = lector.leerCiudades(paises);
-		// HashMap<String, Node> aeropuertosA = lector.leerAeropuertos(ciudades, timeZones);
-		// HashMap<String, Vuelo> vuelosA = lector.leerVuelos(aeropuertos);
+		HashMap<String, Integer> timeZonesA = lector.leerTimeZones();
+		HashMap<String, Continente> continentesA = lector.leerContinentes();
+		HashMap<String, Pais> paisesA = lector.leerPaises(continentes);
+		HashMap<String, Ciudad> ciudadesA = lector.leerCiudades(paises);
+		HashMap<String, Node> aeropuertosA = lector.leerAeropuertos(ciudades, timeZones);
+		HashMap<String, Vuelo> vuelosA = lector.leerVuelos(aeropuertos);
 		
 		int numPaquetes, minActual = 0;
 		String origen, destino;
@@ -52,35 +52,35 @@ public class RedexBackEndApplication {
 		HashMap<Date, HashMap<String, Integer>> cambios = new HashMap<>();
 		HashMap<String, Integer> cambioOrigen, cambioDestino;
 				
-		// for (HashMap.Entry<String, Envio> envio : envios.entrySet()) {
-		// 	origen = envio.getValue().getAeropuertoPartida().getCodigo();
-		// 	destino = envio.getValue().getAeropuertoDestino().getCodigo();
-		// 	numPaquetes = envio.getValue().getNumeroPaquetes();
+		 for (HashMap.Entry<String, Envio> envio : envios.entrySet()) {
+		 	origen = envio.getValue().getAeropuertoPartida().getCodigo();
+		 	destino = envio.getValue().getAeropuertoDestino().getCodigo();
+		 	numPaquetes = envio.getValue().getNumeroPaquetes();
 
-		// 	momento = envio.getValue().getFechaEnvio();
+		 	momento = envio.getValue().getFechaEnvio();
 
-		// 	if(!cambios.containsKey(momento))
-		// 		cambios.put(momento, new HashMap<>());
+		 	if(!cambios.containsKey(momento))
+		 		cambios.put(momento, new HashMap<>());
 			
-		// 	cambioOrigen = cambios.get(momento);
-		// 	cambioDestino = cambios.get(momento);
-		// 	//cambioDestino = cambios.get(momento + envio.getValue().getDuracionTotal());
+		 	cambioOrigen = cambios.get(momento);
+		 	cambioDestino = cambios.get(momento);
+		 	//cambioDestino = cambios.get(momento + envio.getValue().getDuracionTotal());
 
-		// 	if(cambioOrigen.containsKey(origen))
-		// 		cambioOrigen.put(origen, cambioOrigen.get(origen) - numPaquetes);
-		// 	else
-		// 		cambioOrigen.put(origen, -numPaquetes);
+		 	if(cambioOrigen.containsKey(origen))
+		 		cambioOrigen.put(origen, cambioOrigen.get(origen) - numPaquetes);
+		 	else
+		 		cambioOrigen.put(origen, -numPaquetes);
 
-		// 	if(cambioDestino.containsKey(destino)) 
-		// 		cambioDestino.put(origen, cambioDestino.get(destino) + numPaquetes);
-		// 	else
-		// 		cambioDestino.put(origen, numPaquetes);
+		 	if(cambioDestino.containsKey(destino)) 
+		 		cambioDestino.put(origen, cambioDestino.get(destino) + numPaquetes);
+		 	else
+		 		cambioDestino.put(origen, numPaquetes);
 
-		// 	imprimirAstar(aeropuertos, origen, destino, timeZones, numPaquetes);
-		// }
-		// resultado(mapa, aeropuertos, origen, destino, timeZones);
-		// Graph mapa = new Graph();
-		SpringApplication.run(RedexBackEndApplication.class, args);
+		 	imprimirAstar(aeropuertos, origen, destino, timeZones, numPaquetes);
+		 }
+		//resultado(mapa, aeropuertos, origen, destino, timeZones);
+		//Graph mapa = new Graph();
+		//SpringApplication.run(RedexBackEndApplication.class, args);
 	}
 
 	@Bean
@@ -115,7 +115,7 @@ public class RedexBackEndApplication {
 
 		Aeropuerto answer = AStar.aStar(aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto(),timeZones, nroPaquetes);
 
-		AStar.printPath(answer, aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto(),timeZones);
+		AStar.printPath(answer, aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto(),timeZones, nroPaquetes);
 	}
 
 	private static void imprimirDijkstra(Graph mapa, HashMap<String, Node> aeropuertos, String origen, String destino) {

@@ -173,7 +173,7 @@ public class AStar {
         return null;
     }
 
-    public static void printPath(Aeropuerto target, Aeropuerto origen, Aeropuerto destino, HashMap<String, Integer> timeZones) {
+    public static void printPath(Aeropuerto target, Aeropuerto origen, Aeropuerto destino, HashMap<String, Integer> timeZones, int nroPaquetes) {
         Aeropuerto n = target;
         if (n == null)
             return;
@@ -187,11 +187,15 @@ public class AStar {
         int UTCPSalida=0, UTCULlegada=0;
 
         while (n.parent != null) {
+            //Quitamos los paquetes de todas las ciudades recorridas
+            n.setCapacidad(n.getCapacidad() - nroPaquetes);
             if(primeraVez){
                 ultimaLlegada = n.comoLlegar.getFechaDestino();
                 UTCULlegada = timeZones.get(n.comoLlegar.getAeropuertoDestino().getCodigo());
                 primeraVez = false;
             }
+            //Reiniciamos las capacidades de los vuelos luego de terminar la ruta
+            n.comoLlegar.setCapacidadActual(n.comoLlegar.getCapacidad());
             caminoAeropuertos.add(n.getCiudad().getCodigo());
             caminoVuelos.add(n.comoLlegar.getCodigo() +
                     ": " + n.comoLlegar.getFechaPartida() + " - " + n.comoLlegar.getFechaDestino());
@@ -256,7 +260,7 @@ public class AStar {
         String minutosString;
 
         if (minutos < 10) {
-            minutosString = "0" + String.valueOf(horas);
+            minutosString = "0" + String.valueOf(minutos);
         } else {
             minutosString = String.valueOf(minutos);
         }
