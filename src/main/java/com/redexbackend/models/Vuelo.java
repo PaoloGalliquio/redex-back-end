@@ -93,4 +93,8 @@ public class Vuelo extends BaseEntity {
     this.duracion = vuelo.duracion;
     this.disponible = vuelo.disponible;
   }
+
+  public void setDisponible(boolean cambio){
+    this.disponible = cambio;
+  }
 }

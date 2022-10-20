@@ -248,6 +248,7 @@ public class LeerArchivos {
     HashMap<String, Envio> envios = new HashMap<>();
     String[] informacion, destinoNumPaquetes;
     String line;
+    int count = 0;
     File enviosFile = new File(System.getProperty("user.dir")
         + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\envios_historicos.v01\\pack_enviado_" + aeropuerto
         + ".txt");
@@ -255,6 +256,7 @@ public class LeerArchivos {
     try {
       BufferedReader br = new BufferedReader(new FileReader(enviosFile));
       while ((line = br.readLine()) != null) {
+        if(count > 1)break;
         informacion = line.split("-");
         destinoNumPaquetes = informacion[3].split(":");
 
@@ -263,6 +265,7 @@ public class LeerArchivos {
             destinoNumPaquetes[1]);
 
         envios.put(envio.getCodigo(), envio);
+        count++;
       }
 
       br.close();

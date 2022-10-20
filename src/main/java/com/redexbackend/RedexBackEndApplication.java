@@ -1,10 +1,13 @@
 package com.redexbackend;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.TreeMap;
 
+import org.hibernate.mapping.Set;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +26,8 @@ import com.redexbackend.models.Node;
 import com.redexbackend.models.Pais;
 import com.redexbackend.models.Vuelo;
 
+import antlr.collections.List;
+
 @SpringBootApplication
 public class RedexBackEndApplication {
 	public static String aws_access_key = "";
@@ -37,7 +42,7 @@ public class RedexBackEndApplication {
 		HashMap<String, Node> aeropuertos = new HashMap<>();
 		HashMap<String, Vuelo> vuelos = new HashMap<>();
 		LeerArchivos lector = new LeerArchivos(timeZones, continentes, paises, ciudades, aeropuertos, vuelos);
-		HashMap<String, Envio> envios = lector.leerEnvios(aeropuertos, "BIKF");
+		HashMap<String, Envio> envios = lector.leerEnvios(aeropuertos, "EBCI");
 
 		HashMap<String, Integer> timeZonesA = lector.leerTimeZones();
 		HashMap<String, Continente> continentesA = lector.leerContinentes();
@@ -46,38 +51,76 @@ public class RedexBackEndApplication {
 		HashMap<String, Node> aeropuertosA = lector.leerAeropuertos(ciudades, timeZones);
 		HashMap<String, Vuelo> vuelosA = lector.leerVuelos(aeropuertos);
 		
+		//Prueba de ordenamiento de envíos
+
+		TreeMap<String, Envio> enviosOrd = new TreeMap<>(envios);
+
 		int numPaquetes, minActual = 0;
 		String origen, destino;
 		Date momento;
-		HashMap<Date, HashMap<String, Integer>> cambios = new HashMap<>();
-		HashMap<String, Integer> cambioOrigen, cambioDestino;
+		HashMap<Date, HashMap<String, Envio>> cambios = new HashMap<>();
+		HashMap<String, Envio> cambioOrigen, cambioDestino, cambioAct;
+
+		/*for(String env : enviosOrd.keySet()){
+			origen = envios.get(env).getAeropuertoPartida().getCodigo();
+			destino = envios.get(env).getAeropuertoDestino().getCodigo();
+			numPaquetes = envios.get(env).getNumeroPaquetes();
+
+			imprimirAstar(aeropuertos, origen, destino, timeZonesA, numPaquetes);
+		}*/
 				
-		 for (HashMap.Entry<String, Envio> envio : envios.entrySet()) {
-		 	origen = envio.getValue().getAeropuertoPartida().getCodigo();
-		 	destino = envio.getValue().getAeropuertoDestino().getCodigo();
-		 	numPaquetes = envio.getValue().getNumeroPaquetes();
+		//Deberíamos tener un hashmap con todos los envíos con su fecha correspondiente
+
+		for (HashMap.Entry<String, Envio> envio : envios.entrySet()) {
 
 		 	momento = envio.getValue().getFechaEnvio();
 
-		 	if(!cambios.containsKey(momento))
+		 	if(!cambios.containsKey(momento)){
 		 		cambios.put(momento, new HashMap<>());
+				cambioAct = cambios.get(momento);
+			}	
+			else{
+				cambioAct = cambios.get(momento);
+			}
+
+			cambioAct.put(envio.getKey(), envio.getValue());
+			cambios.put(momento, cambioAct);
 			
-		 	cambioOrigen = cambios.get(momento);
+		 	/*cambioOrigen = cambios.get(momento);
 		 	cambioDestino = cambios.get(momento);
 		 	//cambioDestino = cambios.get(momento + envio.getValue().getDuracionTotal());
 
+			//Paquetes que salen de un aeropuerto de origen
 		 	if(cambioOrigen.containsKey(origen))
 		 		cambioOrigen.put(origen, cambioOrigen.get(origen) - numPaquetes);
 		 	else
 		 		cambioOrigen.put(origen, -numPaquetes);
 
+			//Paquetes que llegan a un aeropuerto
 		 	if(cambioDestino.containsKey(destino)) 
 		 		cambioDestino.put(origen, cambioDestino.get(destino) + numPaquetes);
 		 	else
 		 		cambioDestino.put(origen, numPaquetes);
+			*/
+		 	
+			//imprimirAstar(aeropuertos, origen, destino, timeZones, numPaquetes);
+		} 
 
-		 	imprimirAstar(aeropuertos, origen, destino, timeZones, numPaquetes);
-		 }
+		//Ordenamos el hashmap cambios
+
+		TreeMap<Date, HashMap<String, Envio>> cambiosOrd = new TreeMap<>(cambios);
+		
+		for(Date fecha : cambiosOrd.keySet()){
+			for(HashMap.Entry<String, Envio> envio : cambiosOrd.get(fecha).entrySet()){
+
+				origen = envio.getValue().getAeropuertoPartida().getCodigo();
+		 		destino = envio.getValue().getAeropuertoDestino().getCodigo();
+		 		numPaquetes = envio.getValue().getNumeroPaquetes();
+
+				imprimirAstar(aeropuertos, origen, destino, timeZones, fecha, numPaquetes);
+			}
+		}
+
 		//resultado(mapa, aeropuertos, origen, destino, timeZones);
 		//Graph mapa = new Graph();
 		//SpringApplication.run(RedexBackEndApplication.class, args);
@@ -93,7 +136,7 @@ public class RedexBackEndApplication {
 		};
 	}
 
-	private static void resultado(Graph mapa, HashMap<String, Node> aeropuertos, String origen, String destino,
+	/*private static void resultado(Graph mapa, HashMap<String, Node> aeropuertos, String origen, String destino,
 			HashMap<String, Integer> timeZones) {
 		Scanner lectura = new Scanner(System.in);
 		System.out.println("Escoja el algoritmo: D para Dijkstra - A para A*");
@@ -107,15 +150,15 @@ public class RedexBackEndApplication {
 			System.out.println("No es una opción correcta");
 
 		lectura.close();
-	}
+	}*/
 
-	private static void imprimirAstar(HashMap<String, Node> aeropuertos, String origen, String destino, HashMap<String, Integer> timeZones, Integer nroPaquetes) {
+	private static void imprimirAstar(HashMap<String, Node> aeropuertos, String origen, String destino, HashMap<String, Integer> timeZones, Date fechaEnvio, Integer nroPaquetes) {
 
 		aeropuertos.get(origen).getAeropuerto().g = 0;
 
-		Aeropuerto answer = AStar.aStar(aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto(),timeZones, nroPaquetes);
+		Aeropuerto answer = AStar.aStar(aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto(),timeZones, fechaEnvio, nroPaquetes);
 
-		AStar.printPath(answer, aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto(),timeZones, nroPaquetes);
+		AStar.printPath(answer, aeropuertos.get(origen).getAeropuerto(), aeropuertos.get(destino).getAeropuerto(),timeZones, fechaEnvio, nroPaquetes);
 	}
 
 	private static void imprimirDijkstra(Graph mapa, HashMap<String, Node> aeropuertos, String origen, String destino) {

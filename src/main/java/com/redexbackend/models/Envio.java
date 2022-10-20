@@ -80,9 +80,9 @@ public class Envio extends BaseEntity {
     this.aeropuertoPartida = aeropuertoPartida;
     this.aeropuertoDestino = aeropuertoDestino;
     this.numeroPaquetes = Integer.parseInt(numeroPaquetes);
-    String yy = fechaEnvio.substring(0,3);
-    String mm = fechaEnvio.substring(4,5);
-    String dd = fechaEnvio.substring(6,7);
+    String yy = fechaEnvio.substring(0,4);
+    String mm = fechaEnvio.substring(4,6);
+    String dd = fechaEnvio.substring(6,8);
     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     try{
       this.fechaEnvio = formato.parse(yy + "-" + mm + "-" + dd + " " + horaEnvio + ":00");
