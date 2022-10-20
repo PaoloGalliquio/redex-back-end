@@ -84,13 +84,56 @@ public class AStar {
         }
     }
 
-    public static Aeropuerto aStar(Aeropuerto start, Aeropuerto target, HashMap<String, Integer> timeZones, Integer nroPaquetes) {
+    public static int compararFechas(HashMap<String, Integer> timeZones, Vuelo vuelo, Date fechaEnvio, Aeropuerto origen){
+        
+        Calendar hVuelo = Calendar.getInstance();
+        Calendar hIngresoEnvio = Calendar.getInstance();
+
+        //Obtenemos las zonas horarias
+
+        int UTCSalida = timeZones.get(vuelo.getAeropuertoDestino().getCodigo());
+        int UTCEnvio = timeZones.get(origen.getCodigo());
+        
+        //Igualamos las fechas para volver la comparación más prática
+
+        hVuelo.setTime(vuelo.getFechaPartida());
+        hVuelo.set(2016, 6, 3);
+        hVuelo.add(Calendar.HOUR_OF_DAY, -(UTCSalida)); // mover a un mismo formato de fecha
+
+        hIngresoEnvio.setTime(fechaEnvio);
+        hIngresoEnvio.set(2016, 6, 3);
+        hIngresoEnvio.add(Calendar.HOUR_OF_DAY, -(UTCEnvio));
+
+        int resultado = hVuelo.compareTo(hIngresoEnvio);
+
+        return resultado;
+    }
+
+    public static boolean local (Aeropuerto start, Aeropuerto target){
+        String continenteStart, continenteTarget;
+
+        continenteStart = start.getCiudad().getPais().getContinente().getCodigo();
+        continenteTarget = target.getCiudad().getPais().getContinente().getCodigo();
+
+        if(continenteStart == continenteTarget){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    public static Aeropuerto aStar(Aeropuerto start, Aeropuerto target, HashMap<String, Integer> timeZones, Date fechaEnvio, Integer nroPaquetes) {
+
+        //Averiguar si el vuelo es local
+
+        boolean local = local(start, target);
 
         // Tiempo de prueba
 
-        Date fechaPrueba = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR),
+        /*Date fechaPrueba = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR),
                 Calendar.getInstance().get(Calendar.MONTH),
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH), 15, 0).getTime();
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH), 15, 0).getTime();*/
 
         PriorityQueue<Aeropuerto> closedList = new PriorityQueue<>();
         PriorityQueue<Aeropuerto> openList = new PriorityQueue<>();
@@ -105,6 +148,7 @@ public class AStar {
         System.out.println("Cantidad de paquetes a enviar: " + nroPaquetes);
         System.out.print("Duración: ");
 
+        //Colapso logístico
         if(start.getCapacidad() < nroPaquetes) return null;
 
         while (!openList.isEmpty()) {
@@ -115,10 +159,22 @@ public class AStar {
 
             for (Vuelo vuelo : n.getVuelos()) {
 
-                /*int resultadoComp = vuelo.getFechaPartida().compareTo(fechaPrueba);
+                //Bloqueamos vuelos que no son locales si el origen y el destino están en el mismo continente
+                if(local){
+                    if(start.getCiudad().getPais().getContinente().getCodigo() != 
+                    vuelo.getAeropuertoDestino().getCiudad().getPais().getContinente().getCodigo())continue; 
+                }
 
-                if (resultadoComp < 0)
-                    continue;*/
+                //Bloqueamos vuelos que ya no tengan capacidad
+                if(!vuelo.getDisponible())continue;
+                //Bloquemos vuelos que estén al límite de su capacidad
+                if(vuelo.getCapacidad() - nroPaquetes < 0)continue;
+
+                //Ignoramos los vuelos que ya hayan salido
+                /*int resultadoComp = compararFechas(timeZones, vuelo, fechaEnvio, start);
+                if (resultadoComp < 0){
+                    continue;
+                }*/
 
                 int tiempoIntermedio = 0;
                 for (Aeropuerto aero : openList) {
@@ -173,13 +229,31 @@ public class AStar {
         return null;
     }
 
-    public static void printPath(Aeropuerto target, Aeropuerto origen, Aeropuerto destino, HashMap<String, Integer> timeZones, int nroPaquetes) {
+    public static void cambiarCapacidades(List<Vuelo> vuelos, List<Integer>capacidades){
+        for(int i = 0; i <vuelos.size(); i++){
+            vuelos.get(i).setCapacidad(vuelos.get(i).getCapacidadActual() - capacidades.get(i));
+        }
+    }
+
+    public static void printPath(Aeropuerto target, Aeropuerto origen, Aeropuerto destino, HashMap<String, Integer> timeZones, Date fechaEnvio, int nroPaquetes) {
+
+        Calendar hEnvio = Calendar.getInstance();
+        hEnvio.setTime(fechaEnvio);
+        Calendar primerVuelo = Calendar.getInstance();
+
+        hEnvio.setTime(fechaEnvio);
+
         Aeropuerto n = target;
         if (n == null)
             return;
 
         List<String> caminoAeropuertos = new ArrayList<>();
+        List<Integer> capacidadAeropuertos = new ArrayList<>();
         List<String> caminoVuelos = new ArrayList<>();
+        List<Integer> capacidadVuelos = new ArrayList<>();
+
+        //Lista de vuelos
+        List<Vuelo> listaVuelos = new ArrayList<>();
 
         Date primeraSalida = new Date(), ultimaLlegada = new Date();
         boolean primeraVez = true;
@@ -187,15 +261,25 @@ public class AStar {
         int UTCPSalida=0, UTCULlegada=0;
 
         while (n.parent != null) {
-            //Quitamos los paquetes de todas las ciudades recorridas
-            n.setCapacidad(n.getCapacidad() - nroPaquetes);
             if(primeraVez){
                 ultimaLlegada = n.comoLlegar.getFechaDestino();
                 UTCULlegada = timeZones.get(n.comoLlegar.getAeropuertoDestino().getCodigo());
                 primeraVez = false;
+                //Se agregan los vuelos a una lista
+                listaVuelos.add(n.comoLlegar);
+                //Prueba
+                capacidadVuelos.add(n.comoLlegar.getCapacidadActual());
             }
-            //Reiniciamos las capacidades de los vuelos luego de terminar la ruta
-            n.comoLlegar.setCapacidadActual(n.comoLlegar.getCapacidad());
+
+            //Se agregan los vuelos a una lista
+            listaVuelos.add(n.comoLlegar);
+
+            //Si se llena el vuelo, lo bloqueamos
+            if((n.comoLlegar.getCapacidadActual() - nroPaquetes )== 0)n.comoLlegar.setDisponible(false);
+
+            //Prueba
+            capacidadVuelos.add(n.comoLlegar.getCapacidadActual());
+
             caminoAeropuertos.add(n.getCiudad().getCodigo());
             caminoVuelos.add(n.comoLlegar.getCodigo() +
                     ": " + n.comoLlegar.getFechaPartida() + " - " + n.comoLlegar.getFechaDestino());
@@ -209,6 +293,10 @@ public class AStar {
         Collections.reverse(caminoAeropuertos);
         Collections.reverse(caminoVuelos);
 
+        //Prueba
+        Collections.reverse(capacidadVuelos);
+        Collections.reverse(listaVuelos);
+
         hPSalida.setTime(primeraSalida);
         hPSalida.add(Calendar.HOUR_OF_DAY, -(UTCPSalida));
         hULlegada.setTime(ultimaLlegada);
@@ -217,11 +305,12 @@ public class AStar {
         if(esMayor(hPSalida.getTime(), hULlegada.getTime(), origen, destino)){
             System.out.println("Supera la ventana de tiempo");
             return;
+        }else{//Cambiar las capacidades de los vuelos
+            cambiarCapacidades(listaVuelos, capacidadVuelos);
         }
 
-        //minAHora(target.g);
-        minAHora(hPSalida.getTime(), hULlegada.getTime());
-        System.out.println("Inicio del Plan de Vuelo: "+primeraSalida);
+        minAHora(fechaEnvio, hULlegada.getTime());
+        System.out.println("Inicio del Plan de Vuelo: "+fechaEnvio);
         System.out.println("Fin del Plan de Vuelo:    "+ultimaLlegada);
         System.out.println("==============================================");
         System.out.println("Ruta:");
@@ -232,10 +321,12 @@ public class AStar {
 
         System.out.println("==============================================");
         System.out.println("Ruta vuelos:");
-        for (String id : caminoVuelos) {
-            System.out.println("    " + id);
+        for (int i = 0; i < caminoVuelos.size(); i++){
+            System.out.print("    " + caminoVuelos.get(i));
+            System.out.println(" - " + capacidadVuelos.get(i));
         }
-
+        System.out.println("Capacidad aeropuerto final: " + (n.getCapacidad() - nroPaquetes));
+        System.out.println("==============================================");
     }
 
     public static boolean esMayor(Date primeraSalida, Date ultimaLlegada, Aeropuerto origen, Aeropuerto destino){
@@ -250,9 +341,9 @@ public class AStar {
         
     }
 
-    public static void minAHora(Date primeraSalida, Date ultimaLlegada) {
+    public static void minAHora(Date fechaEnvio, Date ultimaLlegada) {
 
-        long min = (Math.abs(ultimaLlegada.getTime() - primeraSalida.getTime()))/60000;
+        long min = (Math.abs(ultimaLlegada.getTime() - fechaEnvio.getTime()))/60000;
 
         int horas = (int)min / 60;
         int minutos = (int)min % 60;
