@@ -12,6 +12,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class LeerArchivos {
   public LeerArchivos(){}
@@ -131,6 +135,35 @@ public class LeerArchivos {
     } catch (Exception ex) {
       System.out.println("Se ha producido un error: " + ex.getMessage());
     }
+  }
+
+  public void leerEnviosTXT(HashMap<String, Node> aeropuertos, HashMap<String, Envio> envios, List<Envio> enviosList, MultipartFile file){
+    var convertedFile = toFile(file);
+    String[] informacion, destinoNumPaquetes;
+    String line;
+    try{
+      BufferedReader br = new BufferedReader(new FileReader(convertedFile));
+      while ((line = br.readLine()) != null) {
+        informacion = line.split("-");
+        destinoNumPaquetes = informacion[3].split(":");
+        Envio envio = new Envio(informacion[0], informacion[1], informacion[2], aeropuertos.get(informacion[0].substring(0, 4)).getAeropuerto(), aeropuertos.get(destinoNumPaquetes[0]).getAeropuerto(), destinoNumPaquetes[1]);
+        envios.put(informacion[0], envio);
+        enviosList.add(envio);
+      }
+    } catch (Exception ex) {
+      System.out.println("Se ha producido un error: " + ex.getMessage());
+    }
+  }
+
+  private File toFile(MultipartFile multipartFile){
+      var file = new File(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+      try(var fout = new FileOutputStream(file)){
+        fout.write(multipartFile.getBytes());
+      }
+      catch (Exception exception){
+        System.out.println(exception.getMessage());
+      }
+      return file;
   }
 
   public HashMap<String, Continente> leerContinentes() {

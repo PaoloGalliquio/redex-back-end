@@ -3,17 +3,20 @@ package com.redexbackend.controllers;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.redexbackend.models.Aeropuerto;
 import com.redexbackend.models.Ciudad;
 import com.redexbackend.models.Continente;
+import com.redexbackend.models.Envio;
 import com.redexbackend.models.LeerArchivos;
 import com.redexbackend.models.Node;
 import com.redexbackend.models.Pais;
@@ -39,6 +42,8 @@ public class RedexController {
   @Autowired
   private VueloService vueloService = new VueloService();
 
+  LeerArchivos lector = new LeerArchivos();
+
   HashMap<String, Integer> timeZones = new HashMap<>();
 
   HashMap<String, Continente> continentes = new HashMap<>();
@@ -55,6 +60,9 @@ public class RedexController {
   
   HashMap<String, Vuelo> vuelos = new HashMap<>();
   List<Vuelo> vuelosList;
+  
+  HashMap<String, Envio> envios = new HashMap<>();
+  List<Envio> enviosList = new ArrayList<>();
 
   @GetMapping(value = "/test")
   String test() {
@@ -88,16 +96,20 @@ public class RedexController {
     return "Data inicializada";
   }
 
-  @GetMapping(value = "/aeropuertos/list")
-  List<Aeropuerto> getAeropuerto() {
+  @PostMapping(value = "/envio/sendFile")
+  List<Envio> fileEnvios(@RequestParam(value = "file",required = false) MultipartFile archivo) {
+    lector.leerEnviosTXT(aeropuertos, envios, enviosList, archivo);
+    return enviosList;
+  }
+
+  @GetMapping(value = "/aeropuerto/list")
+  List<Aeropuerto> listAeropuertos() {
     return aeropuertosList;
   }
 
   //Utilizar solo para llenar BD
   @GetMapping(value = "/load")
   String get() {
-    LeerArchivos lector = new LeerArchivos();
-
     timeZones = lector.leerTimeZones();
     continentes = lector.leerContinentes();
     try {
