@@ -88,7 +88,7 @@ public class RedexController {
     return "Data inicializada";
   }
 
-  @GetMapping(value = "/getAeropuertos")
+  @GetMapping(value = "/aeropuertos/list")
   List<Aeropuerto> getAeropuerto() {
     return aeropuertosList;
   }

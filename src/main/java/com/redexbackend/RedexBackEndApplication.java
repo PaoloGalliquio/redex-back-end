@@ -35,88 +35,88 @@ public class RedexBackEndApplication {
 	public static String aws_session_token = "";
 
 	public static void main(String[] args) {
-		HashMap<String, Integer> timeZones = new HashMap<>();
-		HashMap<String, Continente> continentes = new HashMap<>();
-		HashMap<String, Pais> paises = new HashMap<>();
-		HashMap<String, Ciudad> ciudades = new HashMap<>();
-		HashMap<String, Node> aeropuertos = new HashMap<>();
-		HashMap<String, Vuelo> vuelos = new HashMap<>();
-		LeerArchivos lector = new LeerArchivos(timeZones, continentes, paises, ciudades, aeropuertos, vuelos);
-		HashMap<String, Envio> envios = lector.leerEnvios(aeropuertos, "EBCI");
+		// HashMap<String, Integer> timeZones = new HashMap<>();
+		// HashMap<String, Continente> continentes = new HashMap<>();
+		// HashMap<String, Pais> paises = new HashMap<>();
+		// HashMap<String, Ciudad> ciudades = new HashMap<>();
+		// HashMap<String, Node> aeropuertos = new HashMap<>();
+		// HashMap<String, Vuelo> vuelos = new HashMap<>();
+		// LeerArchivos lector = new LeerArchivos(timeZones, continentes, paises, ciudades, aeropuertos, vuelos);
+		// HashMap<String, Envio> envios = lector.leerEnvios(aeropuertos, "EBCI");
 		
-		//Prueba de ordenamiento de envíos
+		// //Prueba de ordenamiento de envíos
 
-		TreeMap<String, Envio> enviosOrd = new TreeMap<>(envios);
+		// TreeMap<String, Envio> enviosOrd = new TreeMap<>(envios);
 
-		int numPaquetes, minActual = 0;
-		String origen, destino;
-		Date momento;
-		HashMap<Date, HashMap<String, Envio>> cambios = new HashMap<>();
-		HashMap<String, Envio> cambioOrigen, cambioDestino, cambioAct;
+		// int numPaquetes, minActual = 0;
+		// String origen, destino;
+		// Date momento;
+		// HashMap<Date, HashMap<String, Envio>> cambios = new HashMap<>();
+		// HashMap<String, Envio> cambioOrigen, cambioDestino, cambioAct;
 
-		/*for(String env : enviosOrd.keySet()){
-			origen = envios.get(env).getAeropuertoPartida().getCodigo();
-			destino = envios.get(env).getAeropuertoDestino().getCodigo();
-			numPaquetes = envios.get(env).getNumeroPaquetes();
+		// /*for(String env : enviosOrd.keySet()){
+		// 	origen = envios.get(env).getAeropuertoPartida().getCodigo();
+		// 	destino = envios.get(env).getAeropuertoDestino().getCodigo();
+		// 	numPaquetes = envios.get(env).getNumeroPaquetes();
 
-			imprimirAstar(aeropuertos, origen, destino, timeZonesA, numPaquetes);
-		}*/
+		// 	imprimirAstar(aeropuertos, origen, destino, timeZonesA, numPaquetes);
+		// }*/
 				
-		//Deberíamos tener un hashmap con todos los envíos con su fecha correspondiente
+		// //Deberíamos tener un hashmap con todos los envíos con su fecha correspondiente
 
-		for (HashMap.Entry<String, Envio> envio : envios.entrySet()) {
+		// for (HashMap.Entry<String, Envio> envio : envios.entrySet()) {
 
-		 	momento = envio.getValue().getFechaEnvio();
+		//  	momento = envio.getValue().getFechaEnvio();
 
-		 	if(!cambios.containsKey(momento)){
-		 		cambios.put(momento, new HashMap<>());
-				cambioAct = cambios.get(momento);
-			}	
-			else{
-				cambioAct = cambios.get(momento);
-			}
+		//  	if(!cambios.containsKey(momento)){
+		//  		cambios.put(momento, new HashMap<>());
+		// 		cambioAct = cambios.get(momento);
+		// 	}	
+		// 	else{
+		// 		cambioAct = cambios.get(momento);
+		// 	}
 
-			cambioAct.put(envio.getKey(), envio.getValue());
-			cambios.put(momento, cambioAct);
+		// 	cambioAct.put(envio.getKey(), envio.getValue());
+		// 	cambios.put(momento, cambioAct);
 			
-		 	/*cambioOrigen = cambios.get(momento);
-		 	cambioDestino = cambios.get(momento);
-		 	//cambioDestino = cambios.get(momento + envio.getValue().getDuracionTotal());
+		//  	/*cambioOrigen = cambios.get(momento);
+		//  	cambioDestino = cambios.get(momento);
+		//  	//cambioDestino = cambios.get(momento + envio.getValue().getDuracionTotal());
 
-			//Paquetes que salen de un aeropuerto de origen
-		 	if(cambioOrigen.containsKey(origen))
-		 		cambioOrigen.put(origen, cambioOrigen.get(origen) - numPaquetes);
-		 	else
-		 		cambioOrigen.put(origen, -numPaquetes);
+		// 	//Paquetes que salen de un aeropuerto de origen
+		//  	if(cambioOrigen.containsKey(origen))
+		//  		cambioOrigen.put(origen, cambioOrigen.get(origen) - numPaquetes);
+		//  	else
+		//  		cambioOrigen.put(origen, -numPaquetes);
 
-			//Paquetes que llegan a un aeropuerto
-		 	if(cambioDestino.containsKey(destino)) 
-		 		cambioDestino.put(origen, cambioDestino.get(destino) + numPaquetes);
-		 	else
-		 		cambioDestino.put(origen, numPaquetes);
-			*/
+		// 	//Paquetes que llegan a un aeropuerto
+		//  	if(cambioDestino.containsKey(destino)) 
+		//  		cambioDestino.put(origen, cambioDestino.get(destino) + numPaquetes);
+		//  	else
+		//  		cambioDestino.put(origen, numPaquetes);
+		// 	*/
 		 	
-			//imprimirAstar(aeropuertos, origen, destino, timeZones, numPaquetes);
-		} 
+		// 	//imprimirAstar(aeropuertos, origen, destino, timeZones, numPaquetes);
+		// } 
 
-		//Ordenamos el hashmap cambios
+		// //Ordenamos el hashmap cambios
 
-		TreeMap<Date, HashMap<String, Envio>> cambiosOrd = new TreeMap<>(cambios);
+		// TreeMap<Date, HashMap<String, Envio>> cambiosOrd = new TreeMap<>(cambios);
 		
-		for(Date fecha : cambiosOrd.keySet()){
-			for(HashMap.Entry<String, Envio> envio : cambiosOrd.get(fecha).entrySet()){
+		// for(Date fecha : cambiosOrd.keySet()){
+		// 	for(HashMap.Entry<String, Envio> envio : cambiosOrd.get(fecha).entrySet()){
 
-				origen = envio.getValue().getAeropuertoPartida().getCodigo();
-		 		destino = envio.getValue().getAeropuertoDestino().getCodigo();
-		 		numPaquetes = envio.getValue().getNumeroPaquetes();
+		// 		origen = envio.getValue().getAeropuertoPartida().getCodigo();
+		//  		destino = envio.getValue().getAeropuertoDestino().getCodigo();
+		//  		numPaquetes = envio.getValue().getNumeroPaquetes();
 
-				imprimirAstar(aeropuertos, origen, destino, timeZones, fecha, numPaquetes);
-			}
-		}
+		// 		imprimirAstar(aeropuertos, origen, destino, timeZones, fecha, numPaquetes);
+		// 	}
+		// }
 
 		//resultado(mapa, aeropuertos, origen, destino, timeZones);
 		//Graph mapa = new Graph();
-		//SpringApplication.run(RedexBackEndApplication.class, args);
+		SpringApplication.run(RedexBackEndApplication.class, args);
 	}
 
 	@Bean
