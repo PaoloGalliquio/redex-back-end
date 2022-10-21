@@ -1,6 +1,8 @@
 package com.redexbackend.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.redexbackend.models.Aeropuerto;
 import com.redexbackend.models.Ciudad;
 import com.redexbackend.models.Continente;
 import com.redexbackend.models.LeerArchivos;
@@ -22,9 +25,9 @@ import com.redexbackend.service.PaisService;
 import com.redexbackend.service.VueloService;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/Redex")
 @CrossOrigin
-public class TestController {
+public class RedexController {
   @Autowired
   private ContinenteService continenteService = new ContinenteService();
   @Autowired
@@ -36,19 +39,63 @@ public class TestController {
   @Autowired
   private VueloService vueloService = new VueloService();
 
+  HashMap<String, Integer> timeZones = new HashMap<>();
+
+  HashMap<String, Continente> continentes = new HashMap<>();
+  List<Continente> continentesList;
+
+  HashMap<String, Pais> paises = new HashMap<>();
+  List<Pais> paisesList;
+  
+  HashMap<String, Ciudad> ciudades = new HashMap<>();
+  List<Ciudad> ciudadesList;
+  
+  HashMap<String, Node> aeropuertos = new HashMap<>();
+  List<Aeropuerto> aeropuertosList;
+  
+  HashMap<String, Vuelo> vuelos = new HashMap<>();
+  List<Vuelo> vuelosList;
+
   @GetMapping(value = "/test")
   String test() {
     return "Test";
   }
 
+  @GetMapping(value = "/init")
+  String init(){
+    Aeropuerto aeropuertoTemp;
+    continentesList = continenteService.getAll();
+    for (Continente continente : continentesList) 
+      continentes.put(continente.getCodigo(), continente);
+
+    paisesList = paisService.getAll();
+    for (Pais pais : paisesList) 
+      paises.put(pais.getCodigo(), pais);
+
+    ciudadesList = ciudadService.getAll();
+    for (Ciudad ciudad : ciudadesList) 
+      ciudades.put(ciudad.getCodigo(), ciudad);
+
+    aeropuertosList = aeropuertoService.getAll();
+    for (Aeropuerto aeropuerto : aeropuertosList) 
+      aeropuertos.put(aeropuerto.getCodigo(), new Node(aeropuerto));
+
+    // for (HashMap.Entry<String, Node> aeropuerto : aeropuertos.entrySet()){
+    //   aeropuertoTemp = aeropuerto.getValue().getAeropuerto();
+    //   aeropuertoTemp.setVuelos(vueloService.getVuelos(aeropuertoTemp.getId()));
+    // }
+
+    return "Data inicializada";
+  }
+
+  @GetMapping(value = "/getAeropuertos")
+  List<Aeropuerto> getAeropuerto() {
+    return aeropuertosList;
+  }
+
+  //Utilizar solo para llenar BD
   @GetMapping(value = "/load")
   String get() {
-    HashMap<String, Integer> timeZones;
-    HashMap<String, Continente> continentes;
-    HashMap<String, Pais> paises;
-    HashMap<String, Ciudad> ciudades;
-    HashMap<String, Node> aeropuertos;
-    HashMap<String, Vuelo> vuelos = new HashMap<>();
     LeerArchivos lector = new LeerArchivos();
 
     timeZones = lector.leerTimeZones();
@@ -86,9 +133,6 @@ public class TestController {
 
     lector.leerVuelosTXT(aeropuertos, vuelos);
     lector.escribirSQL(vuelos);
-    // for (HashMap.Entry<String, Vuelo> vuelo : vuelos.entrySet()){
-    //   System.out.println(vuelo.getKey());
-    // }
     // try {
     //   for (HashMap.Entry<String, Vuelo> vuelo : vuelos.entrySet())
     //     vuelo.getValue().setId(vueloService.insert(vuelo.getValue()).getId());

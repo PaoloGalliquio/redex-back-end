@@ -47,4 +47,9 @@ public class VueloController {
   boolean delete(@PathVariable int id){
     return vueloService.delete(id);
   }
+
+  @GetMapping(value = "/getVuelos/{id}")
+  List<Vuelo> getVuelos(@PathVariable int id){
+    return vueloService.getVuelos(id);
+  }
 }

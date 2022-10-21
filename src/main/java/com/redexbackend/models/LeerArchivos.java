@@ -438,4 +438,30 @@ public class LeerArchivos {
       System.out.println(ex.getMessage());
     }
   }
+
+  public void crearArchivoEnvios(){
+    String[] aeropuertos = new String[]{"BIKF","EBCI","EDDI","EETN","EFHK","EGLL","EHAM","EIDW","EKCH","ELLX","ENGM","EPMO","ESKN","EVRA","LATI","LBSF","LDZA","LEMD","LFPG","LGAV","LHBP","LIRA","LJLJ","LKPR","LMML","LOWW","LPPT","LSZB","LZIB","SABE","SBBR","SCEL","SEQM","SGAS","SKBO","SLLP","SPIM","SUAA","SVMI","UMMS"};
+    String line;
+    BufferedReader br;
+    File archivoLeido, envios = new File("envios.txt");
+    try{
+      FileOutputStream fos = new FileOutputStream(envios);
+      BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+      for (String aeropuerto : aeropuertos) {
+        archivoLeido = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\envios_historicos.v01\\pack_enviado_" + aeropuerto + ".txt");
+        br = new BufferedReader(new FileReader(archivoLeido));
+        for(int i = 0; i < 200; i++){
+          line = br.readLine();
+          if(i % 2 == 0){
+            bw.write(line);
+            bw.newLine();
+          }
+        }
+      }
+      bw.close();
+    } catch (Exception ex){
+      System.out.println(ex.getMessage());
+    }
+
+  }
 }

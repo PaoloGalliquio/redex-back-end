@@ -10,4 +10,5 @@ public interface VueloDao {
   public Vuelo insert(Vuelo vuelo);
   public Vuelo update(Vuelo vuelo);
   public boolean delete(int id);
+  public List<Vuelo> getVuelos(int id);
 }

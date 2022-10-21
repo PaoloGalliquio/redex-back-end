@@ -30,4 +30,7 @@ public class VueloService {
     return daoVuelo.delete(id);
   }
   
+  public List<Vuelo> getVuelos(int id){
+    return daoVuelo.getVuelos(id);
+  }
 }

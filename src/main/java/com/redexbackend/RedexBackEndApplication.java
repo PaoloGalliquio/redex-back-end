@@ -43,13 +43,6 @@ public class RedexBackEndApplication {
 		HashMap<String, Vuelo> vuelos = new HashMap<>();
 		LeerArchivos lector = new LeerArchivos(timeZones, continentes, paises, ciudades, aeropuertos, vuelos);
 		HashMap<String, Envio> envios = lector.leerEnvios(aeropuertos, "EBCI");
-
-		HashMap<String, Integer> timeZonesA = lector.leerTimeZones();
-		HashMap<String, Continente> continentesA = lector.leerContinentes();
-		HashMap<String, Pais> paisesA = lector.leerPaises(continentes);
-		HashMap<String, Ciudad> ciudadesA = lector.leerCiudades(paises);
-		HashMap<String, Node> aeropuertosA = lector.leerAeropuertos(ciudades, timeZones);
-		HashMap<String, Vuelo> vuelosA = lector.leerVuelos(aeropuertos);
 		
 		//Prueba de ordenamiento de envíos
 
