@@ -40,20 +40,15 @@ public class PlanDeVuelo extends BaseEntity {
   @Column(name = "duracionTotal")
   private Integer duracionTotal;
   
+  @Column(name = "numeroPaquetes")
+  private Integer numeroPaquetes;
+  
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "idEnvio")
+  @JsonIgnore
   private Envio envio;
   
   @Transient
   @JsonIgnore
   private List<Vuelo> vuelos;
-
-  public PlanDeVuelo(int id, String codigo, Date fechaPlan, Date fechaCompletado, int duracionTotal, Envio envio, int estado) {
-    this.codigo = codigo;
-    this.fechaPlan = fechaPlan;
-    this.fechaCompletado = fechaCompletado;
-    this.duracionTotal = duracionTotal;
-    this.vuelos = new ArrayList<Vuelo>();
-    this.envio = envio;
-  }
 }

@@ -107,6 +107,11 @@ public class RedexController {
     return aeropuertosList;
   }
 
+  @GetMapping(value = "/continente/list")
+  List<Continente> listContinentes() {
+    return continentesList;
+  }
+
   //Utilizar solo para llenar BD
   @GetMapping(value = "/load")
   String get() {

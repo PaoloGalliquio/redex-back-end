@@ -40,10 +40,6 @@ public class Vuelo extends BaseEntity {
   @Column(name = "fechaDestino")
   private Date fechaDestino;
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "idPlanDeVuelo")
-  private PlanDeVuelo planDeVuelo;
-
   @Column(name = "capacidad")
   private Integer capacidad;
 
@@ -55,19 +51,6 @@ public class Vuelo extends BaseEntity {
 
   @Column(name = "disponible")
   private Boolean disponible; // 1: Para disponible, 0: Para no disponible
-
-  public Vuelo(int id, String codigo, Aeropuerto aeropuertoPartida, Aeropuerto aeropuertoDestino, Date fechaPartida,
-      Date fechaDestino, int capacidad, PlanDeVuelo planDeVuelo, int estado, boolean disponible) {
-    this.codigo = codigo;
-    this.aeropuertoPartida = aeropuertoPartida;
-    this.aeropuertoDestino = aeropuertoDestino;
-    this.fechaPartida = fechaPartida;
-    this.fechaDestino = fechaDestino;
-    this.capacidad = capacidad;
-    this.capacidadActual = capacidad;
-    this.planDeVuelo = planDeVuelo;
-    this.disponible = disponible;
-  }
 
   public Vuelo(String codigo, Aeropuerto aeropuertoPartida, Aeropuerto aeropuertoDestino, Date fechaPartida,
       Date fechaDestino, int capacidad, int estado, boolean disponible) {
@@ -87,7 +70,6 @@ public class Vuelo extends BaseEntity {
     this.aeropuertoDestino = vuelo.aeropuertoDestino;
     this.fechaPartida = vuelo.fechaPartida;
     this.fechaDestino = vuelo.fechaDestino;
-    this.planDeVuelo = vuelo.planDeVuelo;
     this.capacidad = vuelo.capacidad;
     this.capacidadActual = capacidad;
     this.duracion = vuelo.duracion;

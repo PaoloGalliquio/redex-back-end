@@ -65,7 +65,6 @@ public class VueloDaoImp implements VueloDao{
       if(vuelo.getAeropuertoDestino() != null) nuevo.setAeropuertoDestino(vuelo.getAeropuertoDestino());
       if(vuelo.getFechaPartida() != null) nuevo.setFechaPartida(vuelo.getFechaPartida());
       if(vuelo.getFechaDestino() != null) nuevo.setFechaDestino(vuelo.getFechaDestino());
-      if(vuelo.getPlanDeVuelo() != null) nuevo.setPlanDeVuelo(vuelo.getPlanDeVuelo());
       if(vuelo.getCapacidad() != null) nuevo.setCapacidad(vuelo.getCapacidad());
       if(vuelo.getCapacidadActual() != null) nuevo.setCapacidadActual(vuelo.getCapacidadActual());
       if(vuelo.getDuracion() != null) nuevo.setDuracion(vuelo.getDuracion());

@@ -116,17 +116,18 @@ public class LeerArchivos {
         horaSalida.add(Calendar.HOUR, aeropuertos.get(informacion[0]).getAeropuerto().getHusoHorario());
         horaLlegada.add(Calendar.HOUR, aeropuertos.get(informacion[1]).getAeropuerto().getHusoHorario());
 
-        int capacidad = obtenerCapacidad(aeropuertos, informacion[0], informacion[1]);
-        Vuelo vuelo = new Vuelo(informacion[0] + informacion[1], aeropuertos.get(informacion[0]).getAeropuerto(), aeropuertos.get(informacion[1]).getAeropuerto(), horaSalida.getTime(), horaLlegada.getTime(), capacidad, 1, true);
-        aeropuertos.get(informacion[0]).getAeropuerto().addVuelo(vuelo);
         while(true){
           key = informacion[0] + informacion[1] + Integer.toString(i);
           if(vuelos.containsKey(key) == false){
-            vuelos.put(key, vuelo);
             i = 0;
             break;
           }else i++;
         }
+        
+        int capacidad = obtenerCapacidad(aeropuertos, informacion[0], informacion[1]);
+        Vuelo vuelo = new Vuelo(key, aeropuertos.get(informacion[0]).getAeropuerto(), aeropuertos.get(informacion[1]).getAeropuerto(), horaSalida.getTime(), horaLlegada.getTime(), capacidad, 1, true);
+        vuelos.put(key, vuelo);
+        aeropuertos.get(informacion[0]).getAeropuerto().addVuelo(vuelo);
         tiempo = obtenerTiempo(aeropuertos.get(informacion[0]), informacion[2], aeropuertos.get(informacion[1]), informacion[3]);
         vuelo.setDuracion(tiempo);
         aeropuertos.get(informacion[0]).addDestination(aeropuertos.get(informacion[1]), tiempo);
