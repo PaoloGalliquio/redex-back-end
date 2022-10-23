@@ -88,10 +88,10 @@ public class RedexController {
     for (Aeropuerto aeropuerto : aeropuertosList) 
       aeropuertos.put(aeropuerto.getCodigo(), new Node(aeropuerto));
 
-    // for (HashMap.Entry<String, Node> aeropuerto : aeropuertos.entrySet()){
-    //   aeropuertoTemp = aeropuerto.getValue().getAeropuerto();
-    //   aeropuertoTemp.setVuelos(vueloService.getVuelos(aeropuertoTemp.getId()));
-    // }
+    for (HashMap.Entry<String, Node> aeropuerto : aeropuertos.entrySet()){
+      aeropuertoTemp = aeropuerto.getValue().getAeropuerto();
+      aeropuertoTemp.setVuelos(vueloService.getVuelos(aeropuertoTemp.getId()));
+    }
 
     return "Data inicializada";
   }

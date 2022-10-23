@@ -93,7 +93,7 @@ public class VueloDaoImp implements VueloDao{
   public List<Vuelo> getVuelos(int id) {
     List<Vuelo> list = null;
     try{
-      var hql = "from Vuelo as v, Aeropuerto as a where a.id = " + id;
+      var hql = "from Vuelo as v where v.aeropuertoPartida = " + id;
       list = entityManager.createQuery(hql).getResultList();
     }
     catch (Exception exception){
