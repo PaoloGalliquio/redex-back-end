@@ -1,18 +1,22 @@
 package com.redexbackend.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.EmbeddedValueResolutionSupport;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.redexbackend.models.AStar;
 import com.redexbackend.models.Aeropuerto;
 import com.redexbackend.models.Ciudad;
 import com.redexbackend.models.Continente;
@@ -70,8 +74,7 @@ public class RedexController {
   }
 
   @GetMapping(value = "/init")
-  String init(){
-    Aeropuerto aeropuertoTemp;
+  List<Aeropuerto> init(){
     continentesList = continenteService.getAll();
     for (Continente continente : continentesList) 
       continentes.put(continente.getCodigo(), continente);
@@ -88,12 +91,7 @@ public class RedexController {
     for (Aeropuerto aeropuerto : aeropuertosList) 
       aeropuertos.put(aeropuerto.getCodigo(), new Node(aeropuerto));
 
-    for (HashMap.Entry<String, Node> aeropuerto : aeropuertos.entrySet()){
-      aeropuertoTemp = aeropuerto.getValue().getAeropuerto();
-      aeropuertoTemp.setVuelos(vueloService.getVuelos(aeropuertoTemp.getId()));
-    }
-
-    return "Data inicializada";
+    return aeropuertosList;
   }
 
   @PostMapping(value = "/envio/sendFile")
@@ -102,9 +100,29 @@ public class RedexController {
     return enviosList;
   }
 
+  @PostMapping(value = "/simulador")
+  List<Envio> simulador(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
+    lector.leerEnviosTXT(aeropuertos, envios, enviosList, archivo, fecha);
+
+    for (Envio envio : enviosList) {
+      envio.getAeropuertoPartida().g = 0;
+      if(envio.getAeropuertoPartida().getVuelos() == null)
+        envio.getAeropuertoPartida().setVuelos(vueloService.getVuelos(envio.getAeropuertoPartida().getId()));
+      Aeropuerto answer = AStar.aStar(envio.getAeropuertoPartida(), envio.getAeropuertoDestino(), envio.getFechaEnvio(), envio.getNumeroPaquetes());
+      AStar.obtenerPlanesDeVuelo(answer, envio);
+    }
+    return enviosList;
+  }
+
   @GetMapping(value = "/aeropuerto/list")
   List<Aeropuerto> listAeropuertos() {
     return aeropuertosList;
+  }
+
+  @PostMapping(value = "/aeropuerto/getVuelos")
+  List<Vuelo> listVuelosDeAeropuerto(@RequestBody Aeropuerto aeropuerto) {
+    System.out.println(aeropuerto.getCodigo());
+    return vueloService.getVuelos(aeropuertos.get(aeropuerto.getCodigo()).getAeropuerto().getId());
   }
 
   @GetMapping(value = "/continente/list")
@@ -113,8 +131,8 @@ public class RedexController {
   }
 
   //Utilizar solo para llenar BD
-  @GetMapping(value = "/load")
-  String get() {
+  @GetMapping(value = "/fillDataBase")
+  String fillDataBase() {
     timeZones = lector.leerTimeZones();
     continentes = lector.leerContinentes();
     try {

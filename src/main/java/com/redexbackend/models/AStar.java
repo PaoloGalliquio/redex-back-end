@@ -13,11 +13,11 @@ import com.amazonaws.services.opensearch.model.TimeUnit;
 
 public class AStar {
 
-    public static int obtenerTiempo(HashMap<String, Integer> timeZones, Vuelo vuelo) {
+    public static int obtenerTiempo(Vuelo vuelo) {
         int duracion = 0;
 
-        int UTCSalida = timeZones.get(vuelo.getAeropuertoPartida().getCodigo());
-        int UTCLlegada = timeZones.get(vuelo.getAeropuertoDestino().getCodigo());
+        int UTCSalida = vuelo.getAeropuertoPartida().getHusoHorario();
+        int UTCLlegada = vuelo.getAeropuertoDestino().getHusoHorario();
 
         // Odio las fechas
 
@@ -43,11 +43,11 @@ public class AStar {
         return duracion;
     }
 
-    public static int seCruzan(HashMap<String, Integer> timeZones, Vuelo vueloEnLista, Vuelo nuevoVuelo) {
+    public static int seCruzan(Vuelo vueloEnLista, Vuelo nuevoVuelo) {
         Calendar hSalida = Calendar.getInstance();
         Calendar hLlegada = Calendar.getInstance();
-        int UTCSalida = timeZones.get(vueloEnLista.getAeropuertoDestino().getCodigo());
-        int UTCLlegada = timeZones.get(nuevoVuelo.getAeropuertoPartida().getCodigo());
+        int UTCSalida = vueloEnLista.getAeropuertoDestino().getHusoHorario();
+        int UTCLlegada = nuevoVuelo.getAeropuertoPartida().getHusoHorario();
         long difFechas, difHoras, difMin, difDias;
 
         hSalida.setTime(vueloEnLista.getFechaDestino());
@@ -110,17 +110,15 @@ public class AStar {
     }
 
     public static boolean local (Aeropuerto start, Aeropuerto target){
-        String continenteStart, continenteTarget;
+        char continenteStart, continenteTarget;
 
-        continenteStart = start.getCiudad().getPais().getContinente().getCodigo();
-        continenteTarget = target.getCiudad().getPais().getContinente().getCodigo();
+        continenteStart = start.getCiudad().getPais().getContinente().getCodigo().charAt(0);
+        continenteTarget = target.getCiudad().getPais().getContinente().getCodigo().charAt(0);
 
-        if(continenteStart == continenteTarget){
+        if(continenteStart == continenteTarget)
             return true;
-        }else{
-            return false;
-        }
-
+        
+        return false;
     }
 
     public static Aeropuerto aStar(Aeropuerto start, Aeropuerto target, HashMap<String, Integer> timeZones, Date fechaEnvio, Integer nroPaquetes) {
@@ -183,7 +181,7 @@ public class AStar {
                     // comollegar.aerodestino es el hace referencia al aeropuerto actual
                     if (aero.comoLlegar.getAeropuertoDestino().getCodigo()
                             .equals(vuelo.getAeropuertoPartida().getCodigo())) {
-                        tiempoIntermedio = seCruzan(timeZones, aero.comoLlegar, vuelo);
+                        tiempoIntermedio = seCruzan(aero.comoLlegar, vuelo);
                         break;
                     }
                 }
@@ -191,7 +189,7 @@ public class AStar {
                     continue; // el vuelo actual se cruza con los vuelos ya enlistados o no puede trasladar los paquetes
                 }
 
-                int totalWeight = n.g + tiempoIntermedio + obtenerTiempo(timeZones, vuelo);
+                int totalWeight = n.g + tiempoIntermedio + obtenerTiempo(vuelo);
 
                 if (!openList.contains(vuelo.getAeropuertoDestino())
                         && !closedList.contains(vuelo.getAeropuertoDestino())) {
@@ -327,6 +325,154 @@ public class AStar {
         }
         System.out.println("Capacidad aeropuerto final: " + (n.getCapacidad() - nroPaquetes));
         System.out.println("==============================================");
+    }
+
+    public static Aeropuerto aStar(Aeropuerto start, Aeropuerto target, Date fechaEnvio, Integer nroPaquetes) {
+        PriorityQueue<Aeropuerto> closedList = new PriorityQueue<>();
+        PriorityQueue<Aeropuerto> openList = new PriorityQueue<>();
+
+        start.f = start.g + start.calculateHeuristic(start, target);
+        openList.add(start);
+        
+        if(start.getCapacidad() < nroPaquetes) return null;
+
+        while (!openList.isEmpty()) {
+            Aeropuerto n = openList.peek();
+            if (n == target) 
+                return n;
+
+            for (Vuelo vuelo : n.getVuelos()) {
+                if(local(start, target))
+                    continue;
+                if(!vuelo.getDisponible())
+                    continue;
+                if(vuelo.getCapacidad() < nroPaquetes)
+                    continue;
+                int tiempoIntermedio = 0;
+                for (Aeropuerto aero : openList) {
+                    if (aero.comoLlegar == null)
+                        continue;
+                    if (aero.comoLlegar.getAeropuertoDestino().getCodigo().equals(vuelo.getAeropuertoPartida().getCodigo())) {
+                        tiempoIntermedio = seCruzan(aero.comoLlegar, vuelo);
+                        break;
+                    }
+                }
+                if (tiempoIntermedio < 0 || sobrepasaCapacidad(vuelo, nroPaquetes))
+                    continue;
+
+                int totalWeight = n.g + tiempoIntermedio + obtenerTiempo(vuelo);
+
+                if (!openList.contains(vuelo.getAeropuertoDestino())
+                        && !closedList.contains(vuelo.getAeropuertoDestino())) {
+                    vuelo.getAeropuertoDestino().comoLlegar = vuelo;
+                    vuelo.getAeropuertoDestino().parent = n;
+                    vuelo.getAeropuertoDestino().g = totalWeight;
+                    vuelo.getAeropuertoDestino().f = 
+                        vuelo.getAeropuertoDestino().g + vuelo.getAeropuertoDestino().calculateHeuristic(vuelo.getAeropuertoDestino(), target);
+                    openList.add(vuelo.getAeropuertoDestino());
+                } else {
+                    if (totalWeight < vuelo.getAeropuertoDestino().g) {
+                        vuelo.getAeropuertoDestino().comoLlegar = vuelo;
+                        vuelo.getAeropuertoDestino().parent = n;
+                        vuelo.getAeropuertoDestino().g = totalWeight;
+                        vuelo.getAeropuertoDestino().f = 
+                            vuelo.getAeropuertoDestino().g + 
+                            vuelo.getAeropuertoDestino().calculateHeuristic(vuelo.getAeropuertoDestino(), target);
+                        vuelo.setCapacidadActual(vuelo.getCapacidadActual() - nroPaquetes);
+
+                        if (closedList.contains(vuelo.getAeropuertoDestino())) {
+                            closedList.remove(vuelo.getAeropuertoDestino());
+                            openList.add(vuelo.getAeropuertoDestino());
+                        }
+                    }
+                }
+            }
+
+            openList.remove(n);
+            closedList.add(n);
+        }
+        return null;
+    }
+
+    public static void obtenerPlanesDeVuelo(Aeropuerto target, Envio envio) {
+        var origen = envio.getAeropuertoPartida();
+        var destino = envio.getAeropuertoDestino();
+        var fechaEnvio = envio.getFechaEnvio();
+        var nroPaquetes = envio.getNumeroPaquetes();
+
+        Calendar hEnvio = Calendar.getInstance();
+        hEnvio.setTime(fechaEnvio);
+
+        hEnvio.setTime(fechaEnvio);
+
+        Aeropuerto n = target;
+        if (n == null)
+            return;
+
+        List<Integer> capacidadVuelos = new ArrayList<>();
+
+        List<Vuelo> listaVuelos = new ArrayList<>();
+
+        Date primeraSalida = new Date(), ultimaLlegada = new Date();
+        boolean primeraVez = true;
+        Calendar hPSalida = Calendar.getInstance(), hULlegada = Calendar.getInstance();
+        int UTCPSalida=0, UTCULlegada=0;
+
+        while (n.parent != null) {
+            if(primeraVez){
+                ultimaLlegada = n.comoLlegar.getFechaDestino();
+                UTCULlegada = n.comoLlegar.getAeropuertoDestino().getHusoHorario();
+                primeraVez = false;
+                listaVuelos.add(n.comoLlegar);
+                capacidadVuelos.add(n.comoLlegar.getCapacidadActual());
+            }
+            listaVuelos.add(n.comoLlegar);
+            
+            if((n.comoLlegar.getCapacidadActual() - nroPaquetes )== 0)
+                n.comoLlegar.setDisponible(false);
+
+            capacidadVuelos.add(n.comoLlegar.getCapacidadActual());
+
+            primeraSalida = n.comoLlegar.getFechaPartida();
+            UTCPSalida = n.comoLlegar.getAeropuertoPartida().getHusoHorario();
+            n = n.parent;
+        }
+        Collections.reverse(capacidadVuelos);
+        Collections.reverse(listaVuelos);
+
+        hPSalida.setTime(primeraSalida);
+        hPSalida.add(Calendar.HOUR_OF_DAY, -(UTCPSalida));
+        hULlegada.setTime(ultimaLlegada);
+        hULlegada.add(Calendar.HOUR_OF_DAY, -(UTCULlegada)+1);
+
+        if(esMayor(hPSalida.getTime(), hULlegada.getTime(), origen, destino))
+            return;
+        else
+            cambiarCapacidades(listaVuelos, capacidadVuelos);
+
+        List<PlanDeVuelo> planDeVuelos = new ArrayList<>();
+        List<VueloPorPlanDeVuelo> vueloPorPlanDeVuelos = new ArrayList<>();
+        PlanDeVuelo planDeVuelo = new PlanDeVuelo();
+        String codigo = "";
+        int duracion = 0;
+        planDeVuelo.setFechaPlan(new Date());
+        planDeVuelo.setNumeroPaquetes(nroPaquetes);
+        planDeVuelo.setEnvio(envio);
+
+        for (Vuelo v : listaVuelos){
+            VueloPorPlanDeVuelo vueloPorPlanDeVuelo = new VueloPorPlanDeVuelo();
+            codigo += v.getCodigo();
+            duracion += v.getDuracion();
+            vueloPorPlanDeVuelo.setPlanDeVuelo(planDeVuelo);
+            vueloPorPlanDeVuelo.setVuelo(v);
+            vueloPorPlanDeVuelo.setFechaVuelo(v.getFechaPartida());
+            vueloPorPlanDeVuelos.add(vueloPorPlanDeVuelo);
+        }
+        System.out.println(codigo);
+        planDeVuelo.setCodigo(codigo);
+        planDeVuelo.setDuracionTotal(duracion);
+        planDeVuelos.add(planDeVuelo);
+        envio.setPlanesDeVuelo(planDeVuelos);
     }
 
     public static boolean esMayor(Date primeraSalida, Date ultimaLlegada, Aeropuerto origen, Aeropuerto destino){

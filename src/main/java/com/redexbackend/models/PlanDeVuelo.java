@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -48,7 +49,6 @@ public class PlanDeVuelo extends BaseEntity {
   @JsonIgnore
   private Envio envio;
   
-  @Transient
-  @JsonIgnore
-  private List<Vuelo> vuelos;
+  @OneToMany(targetEntity = VueloPorPlanDeVuelo.class, mappedBy = "planDeVuelo", fetch = FetchType.EAGER)
+  private List<VueloPorPlanDeVuelo> vuelosPorPlanDeVuelo;
 }

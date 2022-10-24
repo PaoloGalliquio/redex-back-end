@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -16,6 +17,8 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import com.redexbackend.util.SortEnvios;
 
 public class LeerArchivos {
   public LeerArchivos(){}
@@ -151,20 +154,77 @@ public class LeerArchivos {
         envios.put(informacion[0], envio);
         enviosList.add(envio);
       }
+      br.close();
     } catch (Exception ex) {
       System.out.println("Se ha producido un error: " + ex.getMessage());
     }
   }
 
+  public void leerEnviosTXT(HashMap<String, Node> aeropuertos, HashMap<String, Envio> envios, List<Envio> enviosList, MultipartFile file, Date fechaInicio){
+    var convertedFile = toFile(file);
+    String[] informacion, destinoNumPaquetes;
+    String line, yy, mm, dd;
+    Calendar fechaLimite = Calendar.getInstance();
+    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    try{
+      BufferedReader br = new BufferedReader(new FileReader(convertedFile));
+      while ((line = br.readLine()) != null) {
+        informacion = line.split("-");
+        destinoNumPaquetes = informacion[3].split(":");
+        yy = informacion[1].substring(0,4);
+        mm = informacion[1].substring(4,6);
+        dd = informacion[1].substring(6,8);
+        var fechaEnvio = formato.parse(yy + "-" + mm + "-" + dd + " " + informacion[2] + ":00");
+        if(enRangoSimulacro(fechaEnvio, fechaInicio)){
+          Envio envio = new Envio();
+          envio.setCodigo(informacion[0]);
+          envio.setFechaEnvio(fechaEnvio);
+          envio.setAeropuertoPartida(aeropuertos.get(informacion[0].substring(0, 4)).getAeropuerto());
+          envio.setAeropuertoDestino(aeropuertos.get(destinoNumPaquetes[0]).getAeropuerto());
+          envio.setNumeroPaquetes(Integer.parseInt(destinoNumPaquetes[1]));
+          fechaLimite.setTime(fechaEnvio);
+          if(esIntercontinental(envio))
+            fechaLimite.add(Calendar.DATE, 1);
+          else
+            fechaLimite.add(Calendar.DATE, 2);
+          envio.setFechaLimite(fechaLimite.getTime());
+          envios.put(informacion[0], envio);
+          enviosList.add(envio);
+        }
+      }
+      br.close();
+    } catch (Exception ex) {
+      System.out.println("Se ha producido un error: " + ex.getMessage());
+    }
+    Collections.sort(enviosList, new SortEnvios());
+  }
+
   private File toFile(MultipartFile multipartFile){
-      var file = new File(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-      try(var fout = new FileOutputStream(file)){
-        fout.write(multipartFile.getBytes());
-      }
-      catch (Exception exception){
-        System.out.println(exception.getMessage());
-      }
-      return file;
+    var file = new File(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+    try(var fout = new FileOutputStream(file)){
+      fout.write(multipartFile.getBytes());
+    }
+    catch (Exception exception){
+      System.out.println(exception.getMessage());
+    }
+    return file;
+  }
+
+  private boolean esIntercontinental(Envio envio){
+    if(envio.getAeropuertoPartida().getCiudad().getPais().getContinente().getCodigo().charAt(0) == 
+       envio.getAeropuertoDestino().getCiudad().getPais().getContinente().getCodigo().charAt(0))
+      return true;
+    return false;
+  }
+
+  private boolean enRangoSimulacro(Date fechaEnvio, Date fechaInicio){
+    Calendar fechaFinCal = Calendar.getInstance();
+    fechaFinCal.setTime(fechaInicio);
+    fechaFinCal.add(Calendar.DATE, 5);
+    Date fechaFin = fechaFinCal.getTime();
+    if(fechaEnvio.compareTo(fechaInicio) >= 0 && fechaEnvio.compareTo(fechaFin) <= 0)
+      return true;
+    return false;
   }
 
   public HashMap<String, Continente> leerContinentes() {

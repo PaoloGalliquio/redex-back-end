@@ -6,6 +6,8 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -74,9 +76,5 @@ public class Vuelo extends BaseEntity {
     this.capacidadActual = capacidad;
     this.duracion = vuelo.duracion;
     this.disponible = vuelo.disponible;
-  }
-
-  public void setDisponible(boolean cambio){
-    this.disponible = cambio;
   }
 }
