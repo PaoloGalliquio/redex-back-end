@@ -423,7 +423,7 @@ public class AStar {
                 ultimaLlegada = n.comoLlegar.getFechaDestino();
                 UTCULlegada = n.comoLlegar.getAeropuertoDestino().getHusoHorario();
                 primeraVez = false;
-                listaVuelos.add(n.comoLlegar);
+                //listaVuelos.add(n.comoLlegar);
                 capacidadVuelos.add(n.comoLlegar.getCapacidadActual());
             }
             listaVuelos.add(n.comoLlegar);
@@ -469,6 +469,7 @@ public class AStar {
             vueloPorPlanDeVuelos.add(vueloPorPlanDeVuelo);
         }
         System.out.println(codigo);
+        planDeVuelo.setVuelosPorPlanDeVuelo(vueloPorPlanDeVuelos);
         planDeVuelo.setCodigo(codigo);
         planDeVuelo.setDuracionTotal(duracion);
         planDeVuelos.add(planDeVuelo);

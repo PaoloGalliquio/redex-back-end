@@ -350,7 +350,7 @@ public class LeerArchivos {
     try {
       BufferedReader br = new BufferedReader(new FileReader(enviosFile));
       while ((line = br.readLine()) != null) {
-        if(count > 1)break;
+        if(count > 15)break;
         informacion = line.split("-");
         destinoNumPaquetes = informacion[3].split(":");
 
