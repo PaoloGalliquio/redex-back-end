@@ -99,17 +99,21 @@ public class LeerArchivos {
 
   public void leerVuelosTXT(HashMap<String, Node> aeropuertos, HashMap<String, Vuelo> vuelos){
     String[] informacion;
-    String line, key;
+    String line, key, yy, mm, dd;
     int tiempo, i = 0;
     Calendar horaSalida = Calendar.getInstance();
     Calendar horaLlegada = Calendar.getInstance();
-    File timezonesFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
+    File vuelostxt = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    yy = "2022";
+    mm = "10";
+    dd = "24";
     try {
-      BufferedReader br = new BufferedReader(new FileReader(timezonesFile));
+      BufferedReader br = new BufferedReader(new FileReader(vuelostxt));
       while ((line = br.readLine()) != null) {
         informacion = line.split("-");
-        horaSalida.setTime(obtenerFecha(informacion[2]));
-        horaLlegada.setTime(obtenerFecha(informacion[3]));
+        horaSalida.setTime(dateFormat.parse(yy + "-" + mm + "-" + dd + " " + informacion[2] + ":00"));
+        horaLlegada.setTime(dateFormat.parse(yy + "-" + mm + "-" + dd + " " + informacion[3] + ":00"));
         horaSalida.add(Calendar.HOUR, -aeropuertos.get(informacion[0]).getAeropuerto().getHusoHorario());
         horaLlegada.add(Calendar.HOUR, -aeropuertos.get(informacion[1]).getAeropuerto().getHusoHorario());
 
@@ -184,10 +188,11 @@ public class LeerArchivos {
           envio.setNumeroPaquetes(Integer.parseInt(destinoNumPaquetes[1]));
           fechaLimite.setTime(fechaEnvio);
           if(esIntercontinental(envio))
-            fechaLimite.add(Calendar.DATE, 1);
+          fechaLimite.add(Calendar.DATE, 1);
           else
-            fechaLimite.add(Calendar.DATE, 2);
+          fechaLimite.add(Calendar.DATE, 2);
           envio.setFechaLimite(fechaLimite.getTime());
+          System.out.println(fechaEnvio.toString());
           envios.put(informacion[0], envio);
           enviosList.add(envio);
         }
@@ -498,7 +503,7 @@ public class LeerArchivos {
   }
 
   public void escribirSQL(HashMap<String, Vuelo> vuelos){
-    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     try{
       File file = new File("filename.sql");
       FileOutputStream fos = new FileOutputStream(file);

@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.EmbeddedValueResolutionSupport;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -88,8 +87,10 @@ public class RedexController {
       ciudades.put(ciudad.getCodigo(), ciudad);
 
     aeropuertosList = aeropuertoService.getAll();
-    for (Aeropuerto aeropuerto : aeropuertosList) 
+    for (Aeropuerto aeropuerto : aeropuertosList){
       aeropuertos.put(aeropuerto.getCodigo(), new Node(aeropuerto));
+      aeropuerto.setVuelos(vueloService.getVuelos(aeropuerto.getId()));
+    }
 
     return aeropuertosList;
   }
@@ -105,12 +106,10 @@ public class RedexController {
     lector.leerEnviosTXT(aeropuertos, envios, enviosList, archivo, fecha);
 
     for (Envio envio : enviosList) {
-      envio.getAeropuertoPartida().g = 0;
-      if(envio.getAeropuertoPartida().getVuelos() == null)
-        envio.getAeropuertoPartida().setVuelos(vueloService.getVuelos(envio.getAeropuertoPartida().getId()));
-      Aeropuerto answer = AStar.aStar(envio.getAeropuertoPartida(), envio.getAeropuertoDestino(), envio.getFechaEnvio(), envio.getNumeroPaquetes());
+      Aeropuerto answer = AStar.aStar(envio);
       AStar.obtenerPlanesDeVuelo(answer, envio);
     }
+    
     return enviosList;
   }
 
@@ -121,8 +120,7 @@ public class RedexController {
 
   @PostMapping(value = "/aeropuerto/getVuelos")
   List<Vuelo> listVuelosDeAeropuerto(@RequestBody Aeropuerto aeropuerto) {
-    System.out.println(aeropuerto.getCodigo());
-    return vueloService.getVuelos(aeropuertos.get(aeropuerto.getCodigo()).getAeropuerto().getId());
+    return aeropuertos.get(aeropuerto.getCodigo()).getAeropuerto().getVuelos();
   }
 
   @GetMapping(value = "/continente/list")

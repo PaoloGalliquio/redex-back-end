@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import com.amazonaws.services.opensearch.model.TimeUnit;
-
 public class AStar {
 
     public static int obtenerTiempo(Vuelo vuelo) {
@@ -109,7 +107,7 @@ public class AStar {
         return resultado;
     }
 
-    public static boolean local (Aeropuerto start, Aeropuerto target){
+    public static boolean mismoContinente (Aeropuerto start, Aeropuerto target){
         char continenteStart, continenteTarget;
 
         continenteStart = start.getCiudad().getPais().getContinente().getCodigo().charAt(0);
@@ -125,7 +123,7 @@ public class AStar {
 
         //Averiguar si el vuelo es local
 
-        boolean local = local(start, target);
+        boolean local = mismoContinente(start, target);
 
         // Tiempo de prueba
 
@@ -326,24 +324,33 @@ public class AStar {
         System.out.println("Capacidad aeropuerto final: " + (n.getCapacidad() - nroPaquetes));
         System.out.println("==============================================");
     }
-
-    public static Aeropuerto aStar(Aeropuerto start, Aeropuerto target, Date fechaEnvio, Integer nroPaquetes) {
+    
+    public static Aeropuerto aStar(Envio envio) {
+        envio.getAeropuertoPartida().g = 0;
+        Aeropuerto start = envio.getAeropuertoPartida();
+        Aeropuerto target = envio.getAeropuertoDestino();
+        int nroPaquetes = envio.getNumeroPaquetes();
         PriorityQueue<Aeropuerto> closedList = new PriorityQueue<>();
         PriorityQueue<Aeropuerto> openList = new PriorityQueue<>();
 
         start.f = start.g + start.calculateHeuristic(start, target);
         openList.add(start);
         
-        if(start.getCapacidad() < nroPaquetes) return null;
-
+        if(start.getCapacidad() < nroPaquetes){
+            return null;
+        }
+        
         while (!openList.isEmpty()) {
             Aeropuerto n = openList.peek();
-            if (n == target) 
+            if(n.getVuelos() == null){
+                continue;
+            }
+
+            if (n.getCodigo() == target.getCodigo()) {
                 return n;
+            }
 
             for (Vuelo vuelo : n.getVuelos()) {
-                if(local(start, target))
-                    continue;
                 if(!vuelo.getDisponible())
                     continue;
                 if(vuelo.getCapacidad() < nroPaquetes)
@@ -362,13 +369,11 @@ public class AStar {
 
                 int totalWeight = n.g + tiempoIntermedio + obtenerTiempo(vuelo);
 
-                if (!openList.contains(vuelo.getAeropuertoDestino())
-                        && !closedList.contains(vuelo.getAeropuertoDestino())) {
+                if (!openList.contains(vuelo.getAeropuertoDestino()) && !closedList.contains(vuelo.getAeropuertoDestino())) {
                     vuelo.getAeropuertoDestino().comoLlegar = vuelo;
                     vuelo.getAeropuertoDestino().parent = n;
                     vuelo.getAeropuertoDestino().g = totalWeight;
-                    vuelo.getAeropuertoDestino().f = 
-                        vuelo.getAeropuertoDestino().g + vuelo.getAeropuertoDestino().calculateHeuristic(vuelo.getAeropuertoDestino(), target);
+                    vuelo.getAeropuertoDestino().f = vuelo.getAeropuertoDestino().g + vuelo.getAeropuertoDestino().calculateHeuristic(vuelo.getAeropuertoDestino(), target);
                     openList.add(vuelo.getAeropuertoDestino());
                 } else {
                     if (totalWeight < vuelo.getAeropuertoDestino().g) {
@@ -387,7 +392,6 @@ public class AStar {
                     }
                 }
             }
-
             openList.remove(n);
             closedList.add(n);
         }
@@ -406,8 +410,9 @@ public class AStar {
         hEnvio.setTime(fechaEnvio);
 
         Aeropuerto n = target;
-        if (n == null)
+        if (n == null){
             return;
+        }
 
         List<Integer> capacidadVuelos = new ArrayList<>();
 
@@ -423,7 +428,6 @@ public class AStar {
                 ultimaLlegada = n.comoLlegar.getFechaDestino();
                 UTCULlegada = n.comoLlegar.getAeropuertoDestino().getHusoHorario();
                 primeraVez = false;
-                //listaVuelos.add(n.comoLlegar);
                 capacidadVuelos.add(n.comoLlegar.getCapacidadActual());
             }
             listaVuelos.add(n.comoLlegar);
@@ -445,8 +449,10 @@ public class AStar {
         hULlegada.setTime(ultimaLlegada);
         hULlegada.add(Calendar.HOUR_OF_DAY, -(UTCULlegada)+1);
 
-        if(esMayor(hPSalida.getTime(), hULlegada.getTime(), origen, destino))
+        if(esMayor(hPSalida.getTime(), hULlegada.getTime(), origen, destino)){
+            System.out.println(envio.getCodigo() + " se cae");
             return;
+        }
         else
             cambiarCapacidades(listaVuelos, capacidadVuelos);
 
@@ -468,7 +474,6 @@ public class AStar {
             vueloPorPlanDeVuelo.setFechaVuelo(v.getFechaPartida());
             vueloPorPlanDeVuelos.add(vueloPorPlanDeVuelo);
         }
-        System.out.println(codigo);
         planDeVuelo.setVuelosPorPlanDeVuelo(vueloPorPlanDeVuelos);
         planDeVuelo.setCodigo(codigo);
         planDeVuelo.setDuracionTotal(duracion);
@@ -478,14 +483,18 @@ public class AStar {
 
     public static boolean esMayor(Date primeraSalida, Date ultimaLlegada, Aeropuerto origen, Aeropuerto destino){
         long min = (Math.abs(ultimaLlegada.getTime() - primeraSalida.getTime()))/60000;
-        if(origen.getCiudad().getPais().getContinente().getCodigo().equals(destino.getCiudad().getPais().getContinente().getCodigo())){
-            if(min > 24*60)return true;
-            else return false;
+        System.out.println(min);
+        if(origen.getCiudad().getPais().getContinente().getCodigo().charAt(0) == destino.getCiudad().getPais().getContinente().getCodigo().charAt(0)){
+            if(min > 24*60)
+                return true;
+            else 
+                return false;
         }else{
-            if(min > 48*60)return true;
-            else return false;
+            if(min > 48*60)
+                return true;
+            else 
+                return false;
         }
-        
     }
 
     public static void minAHora(Date fechaEnvio, Date ultimaLlegada) {

@@ -32,7 +32,6 @@ public class VueloPorPlanDeVuelo extends BaseEntity {
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "idVuelo")
-  @JsonIgnore
   private Vuelo vuelo;
 
   @Column(name = "fechaVuelo")
