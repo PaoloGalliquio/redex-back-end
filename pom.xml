@@ -16,6 +16,7 @@
 	<description>Back end de proyecto RedEx</description>
 	<properties>
 		<java.version>11</java.version>
+		<spring-boot.run.jvmArguments>-Duser.timezone=UTC</spring-boot.run.jvmArguments>
 	</properties>
 	<dependencies>
 		<dependency>

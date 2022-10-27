@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import com.amazonaws.services.opensearch.model.TimeUnit;
-
 public class AStar {
 
     public static int obtenerTiempo(Vuelo vuelo) {
@@ -109,8 +107,7 @@ public class AStar {
         return resultado;
     }
 
-    /*
-    public static boolean local (Aeropuerto start, Aeropuerto target){
+    public static boolean mismoContinente (Aeropuerto start, Aeropuerto target){
         char continenteStart, continenteTarget;
 
         continenteStart = start.getCiudad().getPais().getContinente().getCodigo().charAt(0);
@@ -120,13 +117,13 @@ public class AStar {
             return true;
         
         return false;
-    }*/
+    }
 
     public static Aeropuerto aStar(Aeropuerto start, Aeropuerto target, HashMap<String, Integer> timeZones, Date fechaEnvio, Integer nroPaquetes) {
 
         //Averiguar si el vuelo es local
 
-        //boolean local = local(start, target);
+        boolean local = mismoContinente(start, target);
 
         // Tiempo de prueba
 
@@ -329,25 +326,33 @@ public class AStar {
     }
 
     //Versión que se usa en el Service
-
-    public static Aeropuerto aStar(Aeropuerto start, Aeropuerto target, Date fechaEnvio, Integer nroPaquetes) {
+    
+    public static Aeropuerto aStar(Envio envio) {
+        envio.getAeropuertoPartida().g = 0;
+        Aeropuerto start = envio.getAeropuertoPartida();
+        Aeropuerto target = envio.getAeropuertoDestino();
+        int nroPaquetes = envio.getNumeroPaquetes();
         PriorityQueue<Aeropuerto> closedList = new PriorityQueue<>();
         PriorityQueue<Aeropuerto> openList = new PriorityQueue<>();
 
         start.f = start.g + start.calculateHeuristic(start, target);
         openList.add(start);
         
-        if(start.getCapacidad() < nroPaquetes) return null;
-
+        if(start.getCapacidad() < nroPaquetes){
+            return null;
+        }
+        
         while (!openList.isEmpty()) {
             Aeropuerto n = openList.peek();
-            if (n == target) 
+            if(n.getVuelos() == null){
+                continue;
+            }
+
+            if (n.getCodigo() == target.getCodigo()) {
                 return n;
+            }
 
             for (Vuelo vuelo : n.getVuelos()) {
-                /*if (!compararFechas(vuelo, fechaEnvio, start)){
-                    continue;
-                }*/
                 if(!vuelo.getDisponible())
                     continue;
                 if(vuelo.getCapacidad() < nroPaquetes)
@@ -366,13 +371,11 @@ public class AStar {
 
                 int totalWeight = n.g + tiempoIntermedio + obtenerTiempo(vuelo);
 
-                if (!openList.contains(vuelo.getAeropuertoDestino())
-                        && !closedList.contains(vuelo.getAeropuertoDestino())) {
+                if (!openList.contains(vuelo.getAeropuertoDestino()) && !closedList.contains(vuelo.getAeropuertoDestino())) {
                     vuelo.getAeropuertoDestino().comoLlegar = vuelo;
                     vuelo.getAeropuertoDestino().parent = n;
                     vuelo.getAeropuertoDestino().g = totalWeight;
-                    vuelo.getAeropuertoDestino().f = 
-                        vuelo.getAeropuertoDestino().g + vuelo.getAeropuertoDestino().calculateHeuristic(vuelo.getAeropuertoDestino(), target);
+                    vuelo.getAeropuertoDestino().f = vuelo.getAeropuertoDestino().g + vuelo.getAeropuertoDestino().calculateHeuristic(vuelo.getAeropuertoDestino(), target);
                     openList.add(vuelo.getAeropuertoDestino());
                 } else {
                     if (totalWeight < vuelo.getAeropuertoDestino().g) {
@@ -391,7 +394,6 @@ public class AStar {
                     }
                 }
             }
-
             openList.remove(n);
             closedList.add(n);
         }
@@ -406,7 +408,6 @@ public class AStar {
 
         Aeropuerto n = target;
         if (n == null){
-            System.out.println("No hay respuesta");
             return;
         }
 
@@ -424,7 +425,6 @@ public class AStar {
                 ultimaLlegada = n.comoLlegar.getFechaDestino();
                 UTCULlegada = n.comoLlegar.getAeropuertoDestino().getHusoHorario();
                 primeraVez = false;
-                //listaVuelos.add(n.comoLlegar);
                 capacidadVuelos.add(n.comoLlegar.getCapacidadActual());
             }
             listaVuelos.add(n.comoLlegar);
@@ -446,19 +446,8 @@ public class AStar {
         hULlegada.setTime(ultimaLlegada);
         hULlegada.add(Calendar.HOUR_OF_DAY, -(UTCULlegada)+1);
 
-        Calendar hEnvio = Calendar.getInstance();
-        hEnvio.setTime(fechaEnvio);
-        hEnvio.add(Calendar.HOUR_OF_DAY, -(UTCPSalida));
-        hEnvio.set(Calendar.DAY_OF_MONTH, hPSalida.get(Calendar.DAY_OF_MONTH));
-        hEnvio.set(Calendar.MONTH, hPSalida.get(Calendar.MONTH));
-        hEnvio.set(Calendar.YEAR, hPSalida.get(Calendar.YEAR));
-
-        if(!esMayor(hEnvio.getTime(), hPSalida.getTime())){
-            hEnvio.set(Calendar.DAY_OF_MONTH, hPSalida.get(Calendar.DAY_OF_MONTH) - 1);
-        }
-
-        if(esMayor(hEnvio.getTime(), hULlegada.getTime(), origen, destino)){
-            System.out.println("Es mayor");
+        if(esMayor(hPSalida.getTime(), hULlegada.getTime(), origen, destino)){
+            System.out.println(envio.getCodigo() + " se cae");
             return;
         }
         else
@@ -482,15 +471,7 @@ public class AStar {
             vueloPorPlanDeVuelo.setFechaVuelo(v.getFechaPartida());
             vueloPorPlanDeVuelos.add(vueloPorPlanDeVuelo);
 
-            System.out.println("=======================================");
-            System.out.println("Fecha envío: " + hEnvio.getTime());
-            System.out.println(v.getAeropuertoPartida().getCodigo() + ": " + v.getFechaPartida());
-            System.out.println(v.getAeropuertoDestino().getCodigo() + ": " + v.getFechaDestino());
-            System.out.println((Math.abs(ultimaLlegada.getTime() - hEnvio.getTime().getTime()))/60000);
-            System.out.println("=======================================");
-
         }
-        //System.out.println(codigo + " - " + duracion);
         planDeVuelo.setVuelosPorPlanDeVuelo(vueloPorPlanDeVuelos);
         planDeVuelo.setCodigo(codigo);
         planDeVuelo.setDuracionTotal(duracion);
@@ -500,14 +481,18 @@ public class AStar {
 
     public static boolean esMayor(Date primeraSalida, Date ultimaLlegada, Aeropuerto origen, Aeropuerto destino){
         long min = (Math.abs(ultimaLlegada.getTime() - primeraSalida.getTime()))/60000;
-        if(origen.getCiudad().getPais().getContinente().getCodigo().equals(destino.getCiudad().getPais().getContinente().getCodigo())){
-            if(min > 24*60)return true;
-            else return false;
+        System.out.println(min);
+        if(origen.getCiudad().getPais().getContinente().getCodigo().charAt(0) == destino.getCiudad().getPais().getContinente().getCodigo().charAt(0)){
+            if(min > 24*60)
+                return true;
+            else 
+                return false;
         }else{
-            if(min > 48*60)return true;
-            else return false;
+            if(min > 48*60)
+                return true;
+            else 
+                return false;
         }
-        
     }
 
     public static boolean esMayor(Date horaEnvio, Date primeraSalida){
