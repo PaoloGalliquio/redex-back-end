@@ -84,17 +84,17 @@ public class AStar {
         }
     }
 
-    public static int compararFechas(HashMap<String, Integer> timeZones, Vuelo vuelo, Date fechaEnvio, Aeropuerto origen){
+    public static boolean compararFechas(Vuelo vuelo, Date fechaEnvio, Aeropuerto origen){
         
         Calendar hVuelo = Calendar.getInstance();
         Calendar hIngresoEnvio = Calendar.getInstance();
 
         //Obtenemos las zonas horarias
 
-        int UTCSalida = timeZones.get(vuelo.getAeropuertoDestino().getCodigo());
-        int UTCEnvio = timeZones.get(origen.getCodigo());
+        int UTCSalida = vuelo.getAeropuertoDestino().getHusoHorario();
+        int UTCEnvio = origen.getHusoHorario();
         
-        //Igualamos las fechas para volver la comparación más prática
+        //Igualamos las fechas para volver la comparación más práctica
 
         hVuelo.setTime(vuelo.getFechaPartida());
         hVuelo.set(2016, 6, 3);
@@ -104,11 +104,12 @@ public class AStar {
         hIngresoEnvio.set(2016, 6, 3);
         hIngresoEnvio.add(Calendar.HOUR_OF_DAY, -(UTCEnvio));
 
-        int resultado = hVuelo.compareTo(hIngresoEnvio);
+        boolean resultado = hVuelo.getTime().before(hIngresoEnvio.getTime());
 
         return resultado;
     }
 
+    /*
     public static boolean local (Aeropuerto start, Aeropuerto target){
         char continenteStart, continenteTarget;
 
@@ -119,13 +120,13 @@ public class AStar {
             return true;
         
         return false;
-    }
+    }*/
 
     public static Aeropuerto aStar(Aeropuerto start, Aeropuerto target, HashMap<String, Integer> timeZones, Date fechaEnvio, Integer nroPaquetes) {
 
         //Averiguar si el vuelo es local
 
-        boolean local = local(start, target);
+        //boolean local = local(start, target);
 
         // Tiempo de prueba
 
@@ -158,10 +159,10 @@ public class AStar {
             for (Vuelo vuelo : n.getVuelos()) {
 
                 //Bloqueamos vuelos que no son locales si el origen y el destino están en el mismo continente
-                if(local){
+                /*if(local){
                     if(start.getCiudad().getPais().getContinente().getCodigo() != 
                     vuelo.getAeropuertoDestino().getCiudad().getPais().getContinente().getCodigo())continue; 
-                }
+                }*/
 
                 //Bloqueamos vuelos que ya no tengan capacidad
                 if(!vuelo.getDisponible())continue;
@@ -327,6 +328,8 @@ public class AStar {
         System.out.println("==============================================");
     }
 
+    //Versión que se usa en el Service
+
     public static Aeropuerto aStar(Aeropuerto start, Aeropuerto target, Date fechaEnvio, Integer nroPaquetes) {
         PriorityQueue<Aeropuerto> closedList = new PriorityQueue<>();
         PriorityQueue<Aeropuerto> openList = new PriorityQueue<>();
@@ -342,8 +345,9 @@ public class AStar {
                 return n;
 
             for (Vuelo vuelo : n.getVuelos()) {
-                if(local(start, target))
+                /*if (!compararFechas(vuelo, fechaEnvio, start)){
                     continue;
+                }*/
                 if(!vuelo.getDisponible())
                     continue;
                 if(vuelo.getCapacidad() < nroPaquetes)
@@ -400,14 +404,11 @@ public class AStar {
         var fechaEnvio = envio.getFechaEnvio();
         var nroPaquetes = envio.getNumeroPaquetes();
 
-        Calendar hEnvio = Calendar.getInstance();
-        hEnvio.setTime(fechaEnvio);
-
-        hEnvio.setTime(fechaEnvio);
-
         Aeropuerto n = target;
-        if (n == null)
+        if (n == null){
+            System.out.println("No hay respuesta");
             return;
+        }
 
         List<Integer> capacidadVuelos = new ArrayList<>();
 
@@ -445,8 +446,21 @@ public class AStar {
         hULlegada.setTime(ultimaLlegada);
         hULlegada.add(Calendar.HOUR_OF_DAY, -(UTCULlegada)+1);
 
-        if(esMayor(hPSalida.getTime(), hULlegada.getTime(), origen, destino))
+        Calendar hEnvio = Calendar.getInstance();
+        hEnvio.setTime(fechaEnvio);
+        hEnvio.add(Calendar.HOUR_OF_DAY, -(UTCPSalida));
+        hEnvio.set(Calendar.DAY_OF_MONTH, hPSalida.get(Calendar.DAY_OF_MONTH));
+        hEnvio.set(Calendar.MONTH, hPSalida.get(Calendar.MONTH));
+        hEnvio.set(Calendar.YEAR, hPSalida.get(Calendar.YEAR));
+
+        if(!esMayor(hEnvio.getTime(), hPSalida.getTime())){
+            hEnvio.set(Calendar.DAY_OF_MONTH, hPSalida.get(Calendar.DAY_OF_MONTH) - 1);
+        }
+
+        if(esMayor(hEnvio.getTime(), hULlegada.getTime(), origen, destino)){
+            System.out.println("Es mayor");
             return;
+        }
         else
             cambiarCapacidades(listaVuelos, capacidadVuelos);
 
@@ -467,8 +481,16 @@ public class AStar {
             vueloPorPlanDeVuelo.setVuelo(v);
             vueloPorPlanDeVuelo.setFechaVuelo(v.getFechaPartida());
             vueloPorPlanDeVuelos.add(vueloPorPlanDeVuelo);
+
+            System.out.println("=======================================");
+            System.out.println("Fecha envío: " + hEnvio.getTime());
+            System.out.println(v.getAeropuertoPartida().getCodigo() + ": " + v.getFechaPartida());
+            System.out.println(v.getAeropuertoDestino().getCodigo() + ": " + v.getFechaDestino());
+            System.out.println((Math.abs(ultimaLlegada.getTime() - hEnvio.getTime().getTime()))/60000);
+            System.out.println("=======================================");
+
         }
-        System.out.println(codigo);
+        //System.out.println(codigo + " - " + duracion);
         planDeVuelo.setVuelosPorPlanDeVuelo(vueloPorPlanDeVuelos);
         planDeVuelo.setCodigo(codigo);
         planDeVuelo.setDuracionTotal(duracion);
@@ -484,6 +506,15 @@ public class AStar {
         }else{
             if(min > 48*60)return true;
             else return false;
+        }
+        
+    }
+
+    public static boolean esMayor(Date horaEnvio, Date primeraSalida){
+        if(horaEnvio.before(primeraSalida)){
+            return true;
+        }else{
+            return false;
         }
         
     }
@@ -505,4 +536,5 @@ public class AStar {
 
         System.out.println(horas + ":" + minutosString + " hrs.");
     }
+
 }
