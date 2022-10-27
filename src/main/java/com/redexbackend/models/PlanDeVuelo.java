@@ -1,7 +1,6 @@
 package com.redexbackend.models;
 
 import java.util.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import lombok.*;
@@ -17,7 +16,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "PlanDeVuelo")

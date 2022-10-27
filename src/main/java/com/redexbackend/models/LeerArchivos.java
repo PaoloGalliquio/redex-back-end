@@ -8,6 +8,9 @@ import java.io.FileReader;
 import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -101,8 +104,7 @@ public class LeerArchivos {
     String[] informacion;
     String line, key, yy, mm, dd;
     int tiempo, i = 0;
-    Calendar horaSalida = Calendar.getInstance();
-    Calendar horaLlegada = Calendar.getInstance();
+    Calendar horaSalida = Calendar.getInstance(), horaLlegada = Calendar.getInstance(), horaSalidaUTC0 = Calendar.getInstance(), horaLlegadaUTC0 = Calendar.getInstance();
     File vuelostxt = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     yy = "2022";
@@ -112,16 +114,18 @@ public class LeerArchivos {
       BufferedReader br = new BufferedReader(new FileReader(vuelostxt));
       while ((line = br.readLine()) != null) {
         informacion = line.split("-");
+
         horaSalida.setTime(dateFormat.parse(yy + "-" + mm + "-" + dd + " " + informacion[2] + ":00"));
+        horaSalidaUTC0.setTime(horaSalida.getTime());
+
         horaLlegada.setTime(dateFormat.parse(yy + "-" + mm + "-" + dd + " " + informacion[3] + ":00"));
-        horaSalida.add(Calendar.HOUR, -aeropuertos.get(informacion[0]).getAeropuerto().getHusoHorario());
-        horaLlegada.add(Calendar.HOUR, -aeropuertos.get(informacion[1]).getAeropuerto().getHusoHorario());
+        horaLlegadaUTC0.setTime(horaLlegada.getTime());
 
-        if (horaSalida.getTime().compareTo(horaLlegada.getTime()) > 0)
-          horaLlegada.add(Calendar.DAY_OF_MONTH, 1);
+        horaSalidaUTC0.add(Calendar.HOUR, -aeropuertos.get(informacion[0]).getAeropuerto().getHusoHorario());
+        horaLlegadaUTC0.add(Calendar.HOUR, -aeropuertos.get(informacion[1]).getAeropuerto().getHusoHorario());
 
-        horaSalida.add(Calendar.HOUR, aeropuertos.get(informacion[0]).getAeropuerto().getHusoHorario());
-        horaLlegada.add(Calendar.HOUR, aeropuertos.get(informacion[1]).getAeropuerto().getHusoHorario());
+        if (horaSalidaUTC0.getTime().compareTo(horaLlegadaUTC0.getTime()) > 0)
+          horaLlegadaUTC0.add(Calendar.DAY_OF_MONTH, 1);
 
         while(true){
           key = informacion[0] + informacion[1] + Integer.toString(i);
@@ -132,10 +136,10 @@ public class LeerArchivos {
         }
         
         int capacidad = obtenerCapacidad(aeropuertos, informacion[0], informacion[1]);
-        Vuelo vuelo = new Vuelo(key, aeropuertos.get(informacion[0]).getAeropuerto(), aeropuertos.get(informacion[1]).getAeropuerto(), horaSalida.getTime(), horaLlegada.getTime(), capacidad, 1, true);
+        Vuelo vuelo = new Vuelo(key, aeropuertos.get(informacion[0]).getAeropuerto(), aeropuertos.get(informacion[1]).getAeropuerto(), horaSalida.getTime(), horaLlegada.getTime(), horaSalidaUTC0.getTime(), horaLlegada.getTime(), capacidad, 1, true);
         vuelos.put(key, vuelo);
         aeropuertos.get(informacion[0]).getAeropuerto().addVuelo(vuelo);
-        tiempo = obtenerTiempo(aeropuertos.get(informacion[0]), informacion[2], aeropuertos.get(informacion[1]), informacion[3]);
+        tiempo = tiempoEntreFechas(vuelo.getFechaPartidaUTC0(), vuelo.getFechaDestinoUTC0());
         vuelo.setDuracion(tiempo);
         aeropuertos.get(informacion[0]).addDestination(aeropuertos.get(informacion[1]), tiempo);
       }
@@ -235,8 +239,7 @@ public class LeerArchivos {
     HashMap<String, Continente> continentes = new HashMap<>();
     String[] informacion;
     String line;
-    File aeropuertosFile = new File(
-        System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\continentes.txt");
+    File aeropuertosFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\continentes.txt");
     try {
       BufferedReader br = new BufferedReader(new FileReader(aeropuertosFile));
       while ((line = br.readLine()) != null) {
@@ -384,8 +387,7 @@ public class LeerArchivos {
 
   public int obtenerCapacidad(HashMap<String, Node> aeropuertos, String origen, String destino) {
     String continenteOrigen = aeropuertos.get(origen).getAeropuerto().getCiudad().getPais().getContinente().getCodigo();
-    String continenteDestino = aeropuertos.get(destino).getAeropuerto().getCiudad().getPais().getContinente()
-        .getCodigo();
+    String continenteDestino = aeropuertos.get(destino).getAeropuerto().getCiudad().getPais().getContinente().getCodigo();
 
     if (continenteOrigen == continenteDestino) {
       if (continenteOrigen == "EUR")
@@ -397,114 +399,18 @@ public class LeerArchivos {
     }
   }
 
-  public HashMap<String, Vuelo> leerVuelos(HashMap<String, Node> aeropuertos) {
-    HashMap<String, Vuelo> vuelos = new HashMap<>();
-    String[] informacion;
-    String line, key;
-    int tiempo, i = 0;
-    Calendar horaSalida = Calendar.getInstance();
-    Calendar horaLlegada = Calendar.getInstance();
-    File timezonesFile = new File(
-        System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
-    try {
-      BufferedReader br = new BufferedReader(new FileReader(timezonesFile));
-      while ((line = br.readLine()) != null) {
-        informacion = line.split("-");
-        horaSalida.setTime(obtenerFecha(informacion[2]));
-        horaLlegada.setTime(obtenerFecha(informacion[3]));
-        horaSalida.add(Calendar.HOUR, -aeropuertos.get(informacion[0]).getAeropuerto().getHusoHorario());
-        horaLlegada.add(Calendar.HOUR, -aeropuertos.get(informacion[1]).getAeropuerto().getHusoHorario());
+  public int tiempoEntreFechas(Date partida, Date destino) {
+    long diff = ((destino.getTime() - partida.getTime()) / 60000);
 
-        if (horaSalida.getTime().compareTo(horaLlegada.getTime()) > 0)
-          horaLlegada.add(Calendar.DAY_OF_MONTH, 1);
+    if (diff < 0) diff += 24 * 60;
 
-        horaSalida.add(Calendar.HOUR, aeropuertos.get(informacion[0]).getAeropuerto().getHusoHorario());
-        horaLlegada.add(Calendar.HOUR, aeropuertos.get(informacion[1]).getAeropuerto().getHusoHorario());
-
-        int capacidad = obtenerCapacidad(aeropuertos, informacion[0], informacion[1]);
-        Vuelo vuelo = new Vuelo(informacion[0] + informacion[1], aeropuertos.get(informacion[0]).getAeropuerto(),
-            aeropuertos.get(informacion[1]).getAeropuerto(), horaSalida.getTime(), horaLlegada.getTime(),
-            capacidad /* Por mientras ga */, 1, true);
-        aeropuertos.get(informacion[0]).getAeropuerto().addVuelo(vuelo);
-        while(true){
-          key = informacion[0] + informacion[1] + Integer.toString(i);
-          if(vuelos.containsKey(key) == false){
-            vuelos.put(key, vuelo);
-            i = 0;
-            break;
-          }else i++;
-        }
-        tiempo = obtenerTiempo(aeropuertos.get(informacion[0]), informacion[2],
-            aeropuertos.get(informacion[1]), informacion[3]);
-        vuelo.setDuracion(tiempo);
-        aeropuertos.get(informacion[0]).addDestination(aeropuertos.get(informacion[1]), tiempo);
-      }
-      br.close();
-    } catch (Exception ex) {
-      System.out.println("Se ha producido un error: " + ex.getMessage());
-    }
-    return vuelos;
-  }
-
-  public void agregarDestinos(HashMap<String, Node> aeropuertos, HashMap<String, Integer> timeZones) {
-    String[] informacion;
-    int tiempo;
-    String line;
-    File vuelosFile = new File(
-        System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
-    try {
-      BufferedReader br = new BufferedReader(new FileReader(vuelosFile));
-      while ((line = br.readLine()) != null) {
-        informacion = line.split("-");
-        tiempo = obtenerTiempo(aeropuertos.get(informacion[0]), informacion[2],
-            aeropuertos.get(informacion[1]), informacion[3]);
-        aeropuertos.get(informacion[0]).addDestination(aeropuertos.get(informacion[1]), tiempo);
-      }
-      br.close();
-    } catch (Exception ex) {
-      System.out.println("Se ha producido un error: " + ex.getMessage());
-    }
-  }
-
-  public int obtenerTiempo(Node aeropuertoSalida, String salida,
-      Node aeropuertoLlegada, String llegada) {
-    int duracion;
-    String[] salidaSplit = salida.split(":");
-    String[] llegadaSplit = llegada.split(":");
-
-    int hSalida = Integer.parseInt(salidaSplit[0]) - aeropuertoSalida.getAeropuerto().getHusoHorario();
-    int mSalida = Integer.parseInt(salidaSplit[1]);
-
-    int hLlegada = Integer.parseInt(llegadaSplit[0]) - aeropuertoLlegada.getAeropuerto().getHusoHorario();
-    int mLlegada = Integer.parseInt(llegadaSplit[1]);
-
-    if (aeropuertoLlegada.getAeropuerto().getHusoHorario() < aeropuertoSalida.getAeropuerto().getHusoHorario())
-      duracion = (24 + hLlegada - hSalida) * 60 + (mLlegada - mSalida);
-    else
-      duracion = (hLlegada - hSalida) * 60 + (mLlegada - mSalida);
-
-    if (duracion < 0)
-      duracion += 24 * 60;
-
-    // if(aeropuertoSalida.getAeropuerto().getContinente().equals(aeropuertoLlegada.getAeropuerto().getContinente())){
-    // if(duracion < 20 || duracion <= 0){
-    // System.out.println("------------------");
-    // System.out.println(aeropuertoSalida.getAeropuerto().getCiudad() + " (" +
-    // salida + ")(UTC" +
-    // timeZones.get(aeropuertoSalida.getAeropuerto().getCodigo()) + ")");
-    // System.out.println(aeropuertoLlegada.getAeropuerto().getCiudad() + " (" +
-    // llegada + ")(UTC" +
-    // timeZones.get(aeropuertoLlegada.getAeropuerto().getCodigo()) + ")");
-    // System.out.println("Duración: " + duracion/60 + ":" + duracion%60);
-    // }
-
-    return duracion + 60;
+    return (int)diff;
   }
 
   public void escribirSQL(HashMap<String, Vuelo> vuelos){
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     try{
-      File file = new File("filename.sql");
+      File file = new File("vuelos.sql");
       FileOutputStream fos = new FileOutputStream(file);
       BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
       bw.write("use `redex-db`;");
@@ -513,7 +419,7 @@ public class LeerArchivos {
       for (HashMap.Entry<String, Vuelo> vuelo : vuelos.entrySet()){
         bw.write(
           "INSERT INTO vuelo " + 
-          "(estado,fecha_creacion,fecha_modificacion,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,id_aeropuerto_destino,id_aeropuerto_partida)"
+          "(estado,fecha_creacion,fecha_modificacion,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)"
         );
         bw.newLine();
         bw.write(
@@ -525,7 +431,9 @@ public class LeerArchivos {
           vuelo.getValue().getCodigo() + "',1," + 
           vuelo.getValue().getDuracion() + ",'" + 
           dateFormat.format(vuelo.getValue().getFechaDestino()) + "','" + 
-          dateFormat.format(vuelo.getValue().getFechaPartida()) + "'," + 
+          dateFormat.format(vuelo.getValue().getFechaPartida()) + "','" + 
+          dateFormat.format(vuelo.getValue().getFechaDestinoUTC0()) + "','" + 
+          dateFormat.format(vuelo.getValue().getFechaPartidaUTC0()) + "'," + 
           vuelo.getValue().getAeropuertoDestino().getId() + "," + 
           vuelo.getValue().getAeropuertoPartida().getId() + ");");
         bw.newLine();

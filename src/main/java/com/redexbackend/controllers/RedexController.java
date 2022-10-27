@@ -1,6 +1,7 @@
 package com.redexbackend.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,7 @@ import com.redexbackend.service.CiudadService;
 import com.redexbackend.service.ContinenteService;
 import com.redexbackend.service.PaisService;
 import com.redexbackend.service.VueloService;
+import com.redexbackend.util.SortVuelos;
 
 @RestController
 @RequestMapping("/Redex")
@@ -96,6 +98,8 @@ public class RedexController {
       aeropuerto.setVuelos(listaDeVuelos);
     }
 
+    Collections.sort(vuelosList, new SortVuelos());
+
     return aeropuertosList;
   }
 
@@ -137,7 +141,6 @@ public class RedexController {
     return continentesList;
   }
 
-  //Utilizar solo para llenar BD
   @GetMapping(value = "/fillDataBase")
   String fillDataBase() {
     timeZones = lector.leerTimeZones();
@@ -175,12 +178,6 @@ public class RedexController {
 
     lector.leerVuelosTXT(aeropuertos, vuelos);
     lector.escribirSQL(vuelos);
-    // try {
-    //   for (HashMap.Entry<String, Vuelo> vuelo : vuelos.entrySet())
-    //     vuelo.getValue().setId(vueloService.insert(vuelo.getValue()).getId());
-    // } catch (Exception ex) {
-    //   return ex.getMessage();
-    // }
 
     return "Data inicializada";
   }

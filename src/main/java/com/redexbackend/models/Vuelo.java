@@ -6,8 +6,6 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -39,8 +37,14 @@ public class Vuelo extends BaseEntity {
   @Column(name = "fechaPartida")
   private Date fechaPartida;
 
+  @Column(name = "fechaPartidaUTC0")
+  private Date fechaPartidaUTC0;
+
   @Column(name = "fechaDestino")
   private Date fechaDestino;
+
+  @Column(name = "fechaDestinoUTC0")
+  private Date fechaDestinoUTC0;
 
   @Column(name = "capacidad")
   private Integer capacidad;
@@ -55,12 +59,14 @@ public class Vuelo extends BaseEntity {
   private Boolean disponible; // 1: Para disponible, 0: Para no disponible
 
   public Vuelo(String codigo, Aeropuerto aeropuertoPartida, Aeropuerto aeropuertoDestino, Date fechaPartida,
-      Date fechaDestino, int capacidad, int estado, boolean disponible) {
+      Date fechaDestino, Date fechaPartidaUTC0, Date fechaDestinoUTC0, int capacidad, int estado, boolean disponible) {
     this.codigo = codigo;
     this.aeropuertoPartida = aeropuertoPartida;
     this.aeropuertoDestino = aeropuertoDestino;
     this.fechaPartida = fechaPartida;
+    this.fechaPartidaUTC0 = fechaPartidaUTC0;
     this.fechaDestino = fechaDestino;
+    this.fechaDestinoUTC0 = fechaDestinoUTC0;
     this.capacidad = capacidad;
     this.capacidadActual = capacidad;
     this.disponible = disponible;
