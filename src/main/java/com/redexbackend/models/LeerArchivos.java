@@ -192,7 +192,6 @@ public class LeerArchivos {
           else
           fechaLimite.add(Calendar.DATE, 2);
           envio.setFechaLimite(fechaLimite.getTime());
-          System.out.println(fechaEnvio.toString());
           envios.put(informacion[0], envio);
           enviosList.add(envio);
         }
@@ -210,7 +209,7 @@ public class LeerArchivos {
       fout.write(multipartFile.getBytes());
     }
     catch (Exception exception){
-      System.out.println(exception.getMessage());
+      System.out.println("Se ha producido un error: " + exception.getMessage());
     }
     return file;
   }

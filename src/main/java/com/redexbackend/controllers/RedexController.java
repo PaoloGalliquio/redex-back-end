@@ -62,7 +62,7 @@ public class RedexController {
   List<Aeropuerto> aeropuertosList;
   
   HashMap<String, Vuelo> vuelos = new HashMap<>();
-  List<Vuelo> vuelosList;
+  List<Vuelo> vuelosList = new ArrayList<>();
   
   HashMap<String, Envio> envios = new HashMap<>();
   List<Envio> enviosList = new ArrayList<>();
@@ -89,7 +89,11 @@ public class RedexController {
     aeropuertosList = aeropuertoService.getAll();
     for (Aeropuerto aeropuerto : aeropuertosList){
       aeropuertos.put(aeropuerto.getCodigo(), new Node(aeropuerto));
-      aeropuerto.setVuelos(vueloService.getVuelos(aeropuerto.getId()));
+
+      List<Vuelo> listaDeVuelos = vueloService.getVuelos(aeropuerto.getId());
+      vuelosList.addAll(listaDeVuelos);
+
+      aeropuerto.setVuelos(listaDeVuelos);
     }
 
     return aeropuertosList;
@@ -116,6 +120,11 @@ public class RedexController {
   @GetMapping(value = "/aeropuerto/list")
   List<Aeropuerto> listAeropuertos() {
     return aeropuertosList;
+  }
+
+  @GetMapping(value = "/vuelo/list")
+  List<Vuelo> listVuelos() {
+    return vuelosList;
   }
 
   @PostMapping(value = "/aeropuerto/getVuelos")
