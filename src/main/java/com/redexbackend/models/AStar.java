@@ -417,7 +417,7 @@ public class AStar {
 
         Date primeraSalida = new Date(), ultimaLlegada = new Date();
         boolean primeraVez = true;
-        Calendar hPSalida = Calendar.getInstance(), hULlegada = Calendar.getInstance();
+        Calendar hPSalida = Calendar.getInstance(), hULlegada = Calendar.getInstance(), hEnvio = Calendar.getInstance();
         int UTCPSalida=0, UTCULlegada=0;
 
         while (n.parent != null) {
@@ -445,8 +445,16 @@ public class AStar {
         hPSalida.add(Calendar.HOUR_OF_DAY, -(UTCPSalida));
         hULlegada.setTime(ultimaLlegada);
         hULlegada.add(Calendar.HOUR_OF_DAY, -(UTCULlegada)+1);
+        hEnvio.setTime(fechaEnvio);
+        hEnvio.add(Calendar.HOUR_OF_DAY, -(UTCPSalida));
+        hEnvio.set(Calendar.DAY_OF_MONTH, hPSalida.get(Calendar.DAY_OF_MONTH));
+        hEnvio.set(Calendar.MONTH, hPSalida.get(Calendar.MONTH));
 
-        if(esMayor(hPSalida.getTime(), hULlegada.getTime(), origen, destino)){
+        if(!esMayor(hEnvio.getTime(), hPSalida.getTime())){
+            hEnvio.add(Calendar.HOUR_OF_DAY, 1);
+        }
+
+        if(esMayor(hEnvio.getTime(), hULlegada.getTime(), origen, destino)){
             System.out.println(envio.getCodigo() + " se cae");
             return;
         }
