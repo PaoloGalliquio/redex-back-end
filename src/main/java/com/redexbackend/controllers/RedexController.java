@@ -60,7 +60,7 @@ public class RedexController {
   HashMap<String, Ciudad> ciudades = new HashMap<>();
   List<Ciudad> ciudadesList;
   
-  HashMap<String, Node> aeropuertos = new HashMap<>();
+  HashMap<String, Aeropuerto> aeropuertos = new HashMap<>();
   List<Aeropuerto> aeropuertosList;
   
   HashMap<String, Vuelo> vuelos = new HashMap<>();
@@ -90,7 +90,7 @@ public class RedexController {
 
     aeropuertosList = aeropuertoService.getAll();
     for (Aeropuerto aeropuerto : aeropuertosList){
-      aeropuertos.put(aeropuerto.getCodigo(), new Node(aeropuerto));
+      aeropuertos.put(aeropuerto.getCodigo(), aeropuerto);
 
       List<Vuelo> listaDeVuelos = vueloService.getVuelos(aeropuerto.getId());
       vuelosList.addAll(listaDeVuelos);
@@ -133,7 +133,7 @@ public class RedexController {
 
   @PostMapping(value = "/aeropuerto/getVuelos")
   List<Vuelo> listVuelosDeAeropuerto(@RequestBody Aeropuerto aeropuerto) {
-    return aeropuertos.get(aeropuerto.getCodigo()).getAeropuerto().getVuelos();
+    return aeropuertos.get(aeropuerto.getCodigo()).getVuelos();
   }
 
   @GetMapping(value = "/continente/list")
@@ -170,8 +170,8 @@ public class RedexController {
 
     aeropuertos = lector.leerAeropuertos(ciudades, timeZones);
     try {
-      for (HashMap.Entry<String, Node> aeropuerto : aeropuertos.entrySet())
-        aeropuerto.getValue().getAeropuerto().setId(aeropuertoService.insert(aeropuerto.getValue().getAeropuerto()).getId());
+      for (HashMap.Entry<String, Aeropuerto> aeropuerto : aeropuertos.entrySet())
+        aeropuerto.getValue().setId(aeropuertoService.insert(aeropuerto.getValue()).getId());
     } catch (Exception ex) {
       return ex.getMessage();
     }

@@ -24,7 +24,7 @@ public class LeerArchivos {
   public LeerArchivos(){}
 
   public LeerArchivos(HashMap<String, Integer> timeZones, HashMap<String, Continente> continentes,
-      HashMap<String, Pais> paises, HashMap<String, Ciudad> ciudades, HashMap<String, Node> aeropuertos,
+      HashMap<String, Pais> paises, HashMap<String, Ciudad> ciudades, HashMap<String, Aeropuerto> aeropuertos,
       HashMap<String, Vuelo> vuelos) {
     leerTimeZonesTXT(timeZones);
     leerContinentesTXT(continentes);
@@ -67,7 +67,7 @@ public class LeerArchivos {
     }
   }
   
-  public void leerAeropuertosTXT(HashMap<String, Continente> continentes, HashMap<String, Pais> paises, HashMap<String, Ciudad> ciudades, HashMap<String, Node> aeropuertos, HashMap<String, Integer> timeZones){
+  public void leerAeropuertosTXT(HashMap<String, Continente> continentes, HashMap<String, Pais> paises, HashMap<String, Ciudad> ciudades, HashMap<String, Aeropuerto> aeropuertos, HashMap<String, Integer> timeZones){
     String[] informacion;
     String line, codigoContinente;
     int capacidad;
@@ -88,8 +88,7 @@ public class LeerArchivos {
           capacidad = 900;
         Aeropuerto aeropuerto = new Aeropuerto(informacion[0], informacion[1], informacion[1], capacidad, 1000, informacion[6], informacion[7], ciudad, timeZones.get(informacion[1]), 1);
         ciudad.setAeropuerto(aeropuerto);
-        Node node = new Node(aeropuerto);
-        aeropuertos.put(informacion[1], node);
+        aeropuertos.put(informacion[1], aeropuerto);
       }
       br.close();
     } catch (Exception ex) {
@@ -97,7 +96,7 @@ public class LeerArchivos {
     }
   }
 
-  public void leerVuelosTXT(HashMap<String, Node> aeropuertos, HashMap<String, Vuelo> vuelos){
+  public void leerVuelosTXT(HashMap<String, Aeropuerto> aeropuertos, HashMap<String, Vuelo> vuelos){
     String[] informacion;
     String line, key, yy, mm, dd;
     int tiempo, i = 0;
@@ -113,16 +112,18 @@ public class LeerArchivos {
         informacion = line.split("-");
 
         horaSalida.setTime(dateFormat.parse(yy + "-" + mm + "-" + dd + " " + informacion[2] + ":00"));
-        horaSalidaUTC0.setTime(horaSalida.getTime());
-
         horaLlegada.setTime(dateFormat.parse(yy + "-" + mm + "-" + dd + " " + informacion[3] + ":00"));
+
+        horaSalidaUTC0.setTime(horaSalida.getTime());
         horaLlegadaUTC0.setTime(horaLlegada.getTime());
 
-        horaSalidaUTC0.add(Calendar.HOUR, -aeropuertos.get(informacion[0]).getAeropuerto().getHusoHorario());
-        horaLlegadaUTC0.add(Calendar.HOUR, -aeropuertos.get(informacion[1]).getAeropuerto().getHusoHorario());
+        horaSalidaUTC0.add(Calendar.HOUR, -aeropuertos.get(informacion[0]).getHusoHorario());
+        horaLlegadaUTC0.add(Calendar.HOUR, -aeropuertos.get(informacion[1]).getHusoHorario());
 
-        if (horaSalidaUTC0.getTime().compareTo(horaLlegadaUTC0.getTime()) > 0)
+        if (horaSalidaUTC0.getTime().before(horaLlegadaUTC0.getTime())){
+          horaLlegada.add(Calendar.DAY_OF_MONTH, 1);
           horaLlegadaUTC0.add(Calendar.DAY_OF_MONTH, 1);
+        }
 
         while(true){
           key = informacion[0] + informacion[1] + Integer.toString(i);
@@ -133,12 +134,12 @@ public class LeerArchivos {
         }
         
         int capacidad = obtenerCapacidad(aeropuertos, informacion[0], informacion[1]);
-        Vuelo vuelo = new Vuelo(key, aeropuertos.get(informacion[0]).getAeropuerto(), aeropuertos.get(informacion[1]).getAeropuerto(), horaSalida.getTime(), horaLlegada.getTime(), horaSalidaUTC0.getTime(), horaLlegada.getTime(), capacidad, 1, true);
-        vuelos.put(key, vuelo);
-        aeropuertos.get(informacion[0]).getAeropuerto().addVuelo(vuelo);
+        Vuelo vuelo = new Vuelo(key, aeropuertos.get(informacion[0]), aeropuertos.get(informacion[1]), horaSalida.getTime(), horaLlegada.getTime(), horaSalidaUTC0.getTime(), horaLlegadaUTC0.getTime(), capacidad, 1, true);
+        
         tiempo = tiempoEntreFechas(vuelo.getFechaPartidaUTC0(), vuelo.getFechaDestinoUTC0());
         vuelo.setDuracion(tiempo);
-        aeropuertos.get(informacion[0]).addDestination(aeropuertos.get(informacion[1]), tiempo);
+        vuelos.put(key, vuelo);
+        aeropuertos.get(informacion[0]).addVuelo(vuelo);
       }
       br.close();
     } catch (Exception ex) {
@@ -146,7 +147,7 @@ public class LeerArchivos {
     }
   }
 
-  public void leerEnviosTXT(HashMap<String, Node> aeropuertos, HashMap<String, Envio> envios, List<Envio> enviosList, MultipartFile file){
+  public void leerEnviosTXT(HashMap<String, Aeropuerto> aeropuertos, HashMap<String, Envio> envios, List<Envio> enviosList, MultipartFile file){
     var convertedFile = toFile(file);
     String[] informacion, destinoNumPaquetes;
     String line;
@@ -155,7 +156,7 @@ public class LeerArchivos {
       while ((line = br.readLine()) != null) {
         informacion = line.split("-");
         destinoNumPaquetes = informacion[3].split(":");
-        Envio envio = new Envio(informacion[0], informacion[1], informacion[2], aeropuertos.get(informacion[0].substring(0, 4)).getAeropuerto(), aeropuertos.get(destinoNumPaquetes[0]).getAeropuerto(), destinoNumPaquetes[1]);
+        Envio envio = new Envio(informacion[0], informacion[1], informacion[2], aeropuertos.get(informacion[0].substring(0, 4)), aeropuertos.get(destinoNumPaquetes[0]), destinoNumPaquetes[1]);
         envios.put(informacion[0], envio);
         enviosList.add(envio);
       }
@@ -165,7 +166,7 @@ public class LeerArchivos {
     }
   }
 
-  public void leerEnviosTXT(HashMap<String, Node> aeropuertos, HashMap<String, Envio> envios, List<Envio> enviosList, MultipartFile file, Date fechaInicio){
+  public void leerEnviosTXT(HashMap<String, Aeropuerto> aeropuertos, HashMap<String, Envio> envios, List<Envio> enviosList, MultipartFile file, Date fechaInicio){
     var convertedFile = toFile(file);
     String[] informacion, destinoNumPaquetes;
     String line, yy, mm, dd;
@@ -184,8 +185,8 @@ public class LeerArchivos {
           Envio envio = new Envio();
           envio.setCodigo(informacion[0]);
           envio.setFechaEnvio(fechaEnvio);
-          envio.setAeropuertoPartida(aeropuertos.get(informacion[0].substring(0, 4)).getAeropuerto());
-          envio.setAeropuertoDestino(aeropuertos.get(destinoNumPaquetes[0]).getAeropuerto());
+          envio.setAeropuertoPartida(aeropuertos.get(informacion[0].substring(0, 4)));
+          envio.setAeropuertoDestino(aeropuertos.get(destinoNumPaquetes[0]));
           envio.setNumeroPaquetes(Integer.parseInt(destinoNumPaquetes[1]));
           fechaLimite.setTime(fechaEnvio);
           if(esIntercontinental(envio))
@@ -294,8 +295,8 @@ public class LeerArchivos {
     return ciudades;
   }
 
-  public HashMap<String, Node> leerAeropuertos(HashMap<String, Ciudad> ciudades, HashMap<String, Integer> timeZones) {
-    HashMap<String, Node> aeropuertos = new HashMap<>();
+  public HashMap<String, Aeropuerto> leerAeropuertos(HashMap<String, Ciudad> ciudades, HashMap<String, Integer> timeZones) {
+    HashMap<String, Aeropuerto> aeropuertos = new HashMap<>();
     String[] informacion;
     String line, codigoContinente;
     int capacidad;
@@ -313,8 +314,7 @@ public class LeerArchivos {
         Aeropuerto aeropuerto = new Aeropuerto(informacion[0], informacion[1], informacion[1], capacidad, 1000,
             informacion[6], informacion[7], ciudades.get(informacion[4]), timeZones.get(informacion[1]), 1);
         ciudades.get(informacion[4]).setAeropuerto(aeropuerto);
-        Node node = new Node(aeropuerto);
-        aeropuertos.put(informacion[1], node);
+        aeropuertos.put(informacion[1], aeropuerto);
       }
       br.close();
     } catch (Exception ex) {
@@ -382,9 +382,9 @@ public class LeerArchivos {
     return horaTransformada;
   }
 
-  public int obtenerCapacidad(HashMap<String, Node> aeropuertos, String origen, String destino) {
-    String continenteOrigen = aeropuertos.get(origen).getAeropuerto().getCiudad().getPais().getContinente().getCodigo();
-    String continenteDestino = aeropuertos.get(destino).getAeropuerto().getCiudad().getPais().getContinente().getCodigo();
+  public int obtenerCapacidad(HashMap<String, Aeropuerto> aeropuertos, String origen, String destino) {
+    String continenteOrigen = aeropuertos.get(origen).getCiudad().getPais().getContinente().getCodigo();
+    String continenteDestino = aeropuertos.get(destino).getCiudad().getPais().getContinente().getCodigo();
 
     if (continenteOrigen == continenteDestino) {
       if (continenteOrigen == "EUR")
@@ -399,7 +399,7 @@ public class LeerArchivos {
   public int tiempoEntreFechas(Date partida, Date destino) {
     long diff = ((destino.getTime() - partida.getTime()) / 60000);
 
-    if (diff < 0) diff += 24 * 60;
+    if (diff <= 0) diff += 24 * 60;
 
     return (int)diff;
   }
