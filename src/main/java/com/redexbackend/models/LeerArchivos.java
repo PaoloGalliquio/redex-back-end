@@ -399,7 +399,7 @@ public class LeerArchivos {
   public int tiempoEntreFechas(Date partida, Date destino) {
     long diff = ((destino.getTime() - partida.getTime()) / 60000);
 
-    if (diff <= 0) diff += 24 * 60;
+    if (diff <= 0) diff += 1440;
 
     return (int)diff;
   }
