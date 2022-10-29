@@ -29,7 +29,7 @@ public class LeerArchivos {
     leerTimeZonesTXT(timeZones);
     leerContinentesTXT(continentes);
     leerAeropuertosTXT(continentes, paises, ciudades, aeropuertos, timeZones);
-    leerVuelosTXT(aeropuertos, vuelos);
+    //leerVuelosTXT(aeropuertos, vuelos);
   }
 
   public void leerTimeZonesTXT(HashMap<String, Integer> timeZones){
@@ -96,10 +96,10 @@ public class LeerArchivos {
     }
   }
 
-  public void leerVuelosTXT(HashMap<String, Aeropuerto> aeropuertos, HashMap<String, Vuelo> vuelos){
+  public void leerVuelosTXT(HashMap<String, Aeropuerto> aeropuertos, List<Vuelo> vuelos){
     String[] informacion;
-    String line, key, yy, mm, dd;
-    int tiempo, i = 0;
+    String line, yy, mm, dd;
+    int tiempo;
     Calendar horaSalida = Calendar.getInstance(), horaLlegada = Calendar.getInstance(), horaSalidaUTC0 = Calendar.getInstance(), horaLlegadaUTC0 = Calendar.getInstance();
     File vuelostxt = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -114,31 +114,23 @@ public class LeerArchivos {
         horaSalida.setTime(dateFormat.parse(yy + "-" + mm + "-" + dd + " " + informacion[2] + ":00"));
         horaLlegada.setTime(dateFormat.parse(yy + "-" + mm + "-" + dd + " " + informacion[3] + ":00"));
 
-        horaSalidaUTC0.setTime(horaSalida.getTime());
-        horaLlegadaUTC0.setTime(horaLlegada.getTime());
+        horaSalidaUTC0.setTime(dateFormat.parse(yy + "-" + mm + "-" + dd + " " + informacion[2] + ":00"));
+        horaLlegadaUTC0.setTime(dateFormat.parse(yy + "-" + mm + "-" + dd + " " + informacion[3] + ":00"));
 
         horaSalidaUTC0.add(Calendar.HOUR, -aeropuertos.get(informacion[0]).getHusoHorario());
         horaLlegadaUTC0.add(Calendar.HOUR, -aeropuertos.get(informacion[1]).getHusoHorario());
 
         if (horaSalidaUTC0.getTime().before(horaLlegadaUTC0.getTime())){
-          horaLlegada.add(Calendar.DAY_OF_MONTH, 1);
-          horaLlegadaUTC0.add(Calendar.DAY_OF_MONTH, 1);
-        }
-
-        while(true){
-          key = informacion[0] + informacion[1] + Integer.toString(i);
-          if(vuelos.containsKey(key) == false){
-            i = 0;
-            break;
-          }else i++;
+          horaLlegada.add(Calendar.HOUR, 24);
+          horaLlegadaUTC0.add(Calendar.HOUR, 24);
         }
         
         int capacidad = obtenerCapacidad(aeropuertos, informacion[0], informacion[1]);
-        Vuelo vuelo = new Vuelo(key, aeropuertos.get(informacion[0]), aeropuertos.get(informacion[1]), horaSalida.getTime(), horaLlegada.getTime(), horaSalidaUTC0.getTime(), horaLlegadaUTC0.getTime(), capacidad, 1, true);
+        Vuelo vuelo = new Vuelo(informacion[0] + informacion[1], aeropuertos.get(informacion[0]), aeropuertos.get(informacion[1]), horaSalida.getTime(), horaLlegada.getTime(), horaSalidaUTC0.getTime(), horaLlegadaUTC0.getTime(), capacidad, 1, true);
         
         tiempo = tiempoEntreFechas(vuelo.getFechaPartidaUTC0(), vuelo.getFechaDestinoUTC0());
         vuelo.setDuracion(tiempo);
-        vuelos.put(key, vuelo);
+        vuelos.add(vuelo);
         aeropuertos.get(informacion[0]).addVuelo(vuelo);
       }
       br.close();
@@ -166,12 +158,16 @@ public class LeerArchivos {
     }
   }
 
-  public void leerEnviosTXT(HashMap<String, Aeropuerto> aeropuertos, HashMap<String, Envio> envios, List<Envio> enviosList, MultipartFile file, Date fechaInicio){
+  public void leerEnviosTXT(HashMap<String, Aeropuerto> aeropuertos, List<Envio> enviosList, MultipartFile file, Date fechaInicio){
     var convertedFile = toFile(file);
     String[] informacion, destinoNumPaquetes;
     String line, yy, mm, dd;
-    Calendar fechaLimite = Calendar.getInstance();
+    Calendar fechaLimite = Calendar.getInstance(), fechaFin = Calendar.getInstance();
+    fechaFin.setTime(fechaInicio);
+    fechaFin.add(Calendar.DAY_OF_MONTH, 5);
     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    System.out.println("Fecha inicio: " + fechaInicio.toString());
+    System.out.println("Fecha fin: " + fechaFin.getTime().toString());
     try{
       BufferedReader br = new BufferedReader(new FileReader(convertedFile));
       while ((line = br.readLine()) != null) {
@@ -181,7 +177,7 @@ public class LeerArchivos {
         mm = informacion[1].substring(4,6);
         dd = informacion[1].substring(6,8);
         var fechaEnvio = formato.parse(yy + "-" + mm + "-" + dd + " " + informacion[2] + ":00");
-        if(enRangoSimulacro(fechaEnvio, fechaInicio)){
+        if(fechaInicio.before(fechaEnvio) && fechaEnvio.before(fechaFin.getTime())){
           Envio envio = new Envio();
           envio.setCodigo(informacion[0]);
           envio.setFechaEnvio(fechaEnvio);
@@ -194,9 +190,9 @@ public class LeerArchivos {
           else
           fechaLimite.add(Calendar.DATE, 2);
           envio.setFechaLimite(fechaLimite.getTime());
-          envios.put(informacion[0], envio);
           enviosList.add(envio);
-        }
+        }else
+          System.out.println(informacion[0] + " fuera de rango: " + fechaInicio.toString() + " - " + fechaFin.getTime().toString() + " x " + fechaEnvio.toString());
       }
       br.close();
     } catch (Exception ex) {
@@ -404,7 +400,7 @@ public class LeerArchivos {
     return (int)diff;
   }
 
-  public void escribirSQL(HashMap<String, Vuelo> vuelos){
+  public void escribirSQL(List<Vuelo> vuelos){
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     try{
       File file = new File("vuelos.sql");
@@ -413,7 +409,7 @@ public class LeerArchivos {
       bw.write("use `redex-db`;");
       bw.newLine();
       bw.newLine();
-      for (HashMap.Entry<String, Vuelo> vuelo : vuelos.entrySet()){
+      for (Vuelo vuelo : vuelos){
         bw.write(
           "INSERT INTO vuelo " + 
           "(estado,fecha_creacion,fecha_modificacion,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)"
@@ -421,18 +417,18 @@ public class LeerArchivos {
         bw.newLine();
         bw.write(
           "VALUES (1,'" + 
-          dateFormat.format(vuelo.getValue().getFechaCreacion()) + "','" + 
-          dateFormat.format(vuelo.getValue().getFechaCreacion()) + "'," + 
-          vuelo.getValue().getCapacidad() + "," + 
-          vuelo.getValue().getCapacidadActual() + ",'" + 
-          vuelo.getValue().getCodigo() + "',1," + 
-          vuelo.getValue().getDuracion() + ",'" + 
-          dateFormat.format(vuelo.getValue().getFechaDestino()) + "','" + 
-          dateFormat.format(vuelo.getValue().getFechaPartida()) + "','" + 
-          dateFormat.format(vuelo.getValue().getFechaDestinoUTC0()) + "','" + 
-          dateFormat.format(vuelo.getValue().getFechaPartidaUTC0()) + "'," + 
-          vuelo.getValue().getAeropuertoDestino().getId() + "," + 
-          vuelo.getValue().getAeropuertoPartida().getId() + ");");
+          dateFormat.format(vuelo.getFechaCreacion()) + "','" + 
+          dateFormat.format(vuelo.getFechaCreacion()) + "'," + 
+          vuelo.getCapacidad() + "," + 
+          vuelo.getCapacidadActual() + ",'" + 
+          vuelo.getCodigo() + "',1," + 
+          vuelo.getDuracion() + ",'" + 
+          dateFormat.format(vuelo.getFechaDestino()) + "','" + 
+          dateFormat.format(vuelo.getFechaPartida()) + "','" + 
+          dateFormat.format(vuelo.getFechaDestinoUTC0()) + "','" + 
+          dateFormat.format(vuelo.getFechaPartidaUTC0()) + "'," + 
+          vuelo.getAeropuertoDestino().getId() + "," + 
+          vuelo.getAeropuertoPartida().getId() + ");");
         bw.newLine();
         bw.newLine();
       }

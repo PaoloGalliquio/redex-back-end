@@ -48,24 +48,12 @@ public class RedexController {
 
   LeerArchivos lector = new LeerArchivos();
 
-  HashMap<String, Integer> timeZones = new HashMap<>();
-
-  HashMap<String, Continente> continentes = new HashMap<>();
   List<Continente> continentesList;
-
-  HashMap<String, Pais> paises = new HashMap<>();
   List<Pais> paisesList;
-  
-  HashMap<String, Ciudad> ciudades = new HashMap<>();
   List<Ciudad> ciudadesList;
-  
   HashMap<String, Aeropuerto> aeropuertos = new HashMap<>();
   List<Aeropuerto> aeropuertosList;
-  
-  HashMap<String, Vuelo> vuelos = new HashMap<>();
   List<Vuelo> vuelosList = new ArrayList<>();
-  
-  HashMap<String, Envio> envios = new HashMap<>();
   List<Envio> enviosList = new ArrayList<>();
 
   @GetMapping(value = "/test")
@@ -76,16 +64,8 @@ public class RedexController {
   @GetMapping(value = "/init")
   List<Aeropuerto> init(){
     continentesList = continenteService.getAll();
-    for (Continente continente : continentesList) 
-      continentes.put(continente.getCodigo(), continente);
-
     paisesList = paisService.getAll();
-    for (Pais pais : paisesList) 
-      paises.put(pais.getCodigo(), pais);
-
     ciudadesList = ciudadService.getAll();
-    for (Ciudad ciudad : ciudadesList) 
-      ciudades.put(ciudad.getCodigo(), ciudad);
 
     aeropuertosList = aeropuertoService.getAll();
     for (Aeropuerto aeropuerto : aeropuertosList){
@@ -103,14 +83,14 @@ public class RedexController {
   }
 
   @PostMapping(value = "/envio/sendFile")
-  List<Envio> fileEnvios(@RequestParam(value = "file",required = false) MultipartFile archivo) {
-    lector.leerEnviosTXT(aeropuertos, envios, enviosList, archivo);
+  List<Envio> fileEnvios(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
+    lector.leerEnviosTXT(aeropuertos, enviosList, archivo, fecha);
     return enviosList;
   }
 
   @PostMapping(value = "/simulador")
   List<Envio> simulador(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
-    lector.leerEnviosTXT(aeropuertos, envios, enviosList, archivo, fecha);
+    lector.leerEnviosTXT(aeropuertos, enviosList, archivo, fecha);
 
     for (Envio envio : enviosList) {
       Aeropuerto answer = AStar.aStar(envio);
@@ -142,8 +122,9 @@ public class RedexController {
 
   @GetMapping(value = "/fillDataBase")
   String fillDataBase() {
-    timeZones = lector.leerTimeZones();
-    continentes = lector.leerContinentes();
+    HashMap<String, Integer> timeZones = lector.leerTimeZones();
+
+    HashMap<String, Continente> continentes = lector.leerContinentes();
     try {
       for (HashMap.Entry<String, Continente> continente : continentes.entrySet())
         continente.getValue().setId(continenteService.insert(continente.getValue()).getId());
@@ -151,7 +132,7 @@ public class RedexController {
       return ex.getMessage();
     }
 
-    paises = lector.leerPaises(continentes);
+    HashMap<String, Pais> paises = lector.leerPaises(continentes);
     try {
       for (HashMap.Entry<String, Pais> pais : paises.entrySet())
         pais.getValue().setId(paisService.insert(pais.getValue()).getId());
@@ -159,7 +140,7 @@ public class RedexController {
       return ex.getMessage();
     }
 
-    ciudades = lector.leerCiudades(paises);
+    HashMap<String, Ciudad> ciudades = lector.leerCiudades(paises);
     try {
       for (HashMap.Entry<String, Ciudad> ciudad : ciudades.entrySet())
         ciudad.getValue().setId(ciudadService.insert(ciudad.getValue()).getId());
@@ -175,8 +156,8 @@ public class RedexController {
       return ex.getMessage();
     }
 
-    lector.leerVuelosTXT(aeropuertos, vuelos);
-    lector.escribirSQL(vuelos);
+    lector.leerVuelosTXT(aeropuertos, vuelosList);
+    lector.escribirSQL(vuelosList);
 
     return "Data inicializada";
   }
