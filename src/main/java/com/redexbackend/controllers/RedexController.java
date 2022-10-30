@@ -91,6 +91,7 @@ public class RedexController {
   @PostMapping(value = "/simulador")
   List<Envio> simulador(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
     lector.leerEnviosTXT(aeropuertos, enviosList, archivo, fecha);
+    archivo = null;
 
     for (Envio envio : enviosList) {
       Aeropuerto answer = AStar.aStar(envio);
