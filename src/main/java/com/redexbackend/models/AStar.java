@@ -120,11 +120,6 @@ public class AStar {
     }
 
     public static Aeropuerto aStar(Aeropuerto start, Aeropuerto target, HashMap<String, Integer> timeZones, Date fechaEnvio, Integer nroPaquetes) {
-
-        //Averiguar si el vuelo es local
-
-        boolean local = mismoContinente(start, target);
-
         // Tiempo de prueba
 
         /*Date fechaPrueba = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR),
@@ -235,7 +230,6 @@ public class AStar {
 
         Calendar hEnvio = Calendar.getInstance();
         hEnvio.setTime(fechaEnvio);
-        Calendar primerVuelo = Calendar.getInstance();
 
         hEnvio.setTime(fechaEnvio);
 
@@ -244,7 +238,6 @@ public class AStar {
             return;
 
         List<String> caminoAeropuertos = new ArrayList<>();
-        List<Integer> capacidadAeropuertos = new ArrayList<>();
         List<String> caminoVuelos = new ArrayList<>();
         List<Integer> capacidadVuelos = new ArrayList<>();
 

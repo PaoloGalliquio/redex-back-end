@@ -11,7 +11,7 @@
 	<groupId>com.redex-back-end</groupId>
 	<artifactId>redex-back-end</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>redex-back-end</name>
 	<description>Back end de proyecto RedEx</description>
 	<properties>
@@ -142,6 +142,24 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<executions>
+							<execution>
+									<configuration>            
+											<mainClass>com.baeldung.heap.HeapSizeDemoApplication</mainClass>
+									</configuration>
+							</execution>
+					</executions>
+					<configuration>
+							<executable>true</executable>
+							<jvmArguments>
+									-Xms4g
+									-Xmx16g
+							</jvmArguments>
+					</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -115,12 +115,11 @@ public class LeerArchivos {
     var convertedFile = toFile(file);
     String[] informacion, destinoNumPaquetes;
     String line, yy, mm, dd;
-    Calendar fechaLimite = Calendar.getInstance(), fechaFin = Calendar.getInstance();
+    Calendar fechaLimite = Calendar.getInstance(), fechaFin = Calendar.getInstance(), fechaEnvio = Calendar.getInstance();
     fechaFin.setTime(fechaInicio);
     fechaFin.add(Calendar.DAY_OF_MONTH, 5);
     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    System.out.println("Fecha inicio: " + fechaInicio.toString());
-    System.out.println("Fecha fin: " + fechaFin.getTime().toString());
+    Aeropuerto aeropuertoSalida;
     try{
       BufferedReader br = new BufferedReader(new FileReader(convertedFile));
       while ((line = br.readLine()) != null) {
@@ -129,23 +128,26 @@ public class LeerArchivos {
         yy = informacion[1].substring(0,4);
         mm = informacion[1].substring(4,6);
         dd = informacion[1].substring(6,8);
-        var fechaEnvio = formato.parse(yy + "-" + mm + "-" + dd + " " + informacion[2] + ":00");
-        if(fechaInicio.before(fechaEnvio) && fechaEnvio.before(fechaFin.getTime())){
+        var fechaEnvioTemp = formato.parse(yy + "-" + mm + "-" + dd + " " + informacion[2] + ":00");
+        aeropuertoSalida = aeropuertos.get(informacion[0].substring(0, 4));
+        fechaEnvio.setTime(fechaEnvioTemp);
+        fechaEnvio.add(Calendar.HOUR, -aeropuertoSalida.getHusoHorario());
+        if(fechaInicio.before(fechaEnvio.getTime()) && fechaEnvio.before(fechaFin.getTime())){
           Envio envio = new Envio();
           envio.setCodigo(informacion[0]);
-          envio.setFechaEnvio(fechaEnvio);
-          envio.setAeropuertoPartida(aeropuertos.get(informacion[0].substring(0, 4)));
+          envio.setFechaEnvio(fechaEnvio.getTime());
+          envio.setAeropuertoPartida(aeropuertoSalida);
           envio.setAeropuertoDestino(aeropuertos.get(destinoNumPaquetes[0]));
           envio.setNumeroPaquetes(Integer.parseInt(destinoNumPaquetes[1]));
-          fechaLimite.setTime(fechaEnvio);
+          fechaLimite.setTime(fechaEnvio.getTime());
           if(esIntercontinental(envio))
             fechaLimite.add(Calendar.DATE, 1);
           else
             fechaLimite.add(Calendar.DATE, 2);
           envio.setFechaLimite(fechaLimite.getTime());
           enviosList.add(envio);
-        }else
-          System.out.println(informacion[0] + " fuera de rango: " + fechaInicio.toString() + " - " + fechaFin.getTime().toString() + " x " + fechaEnvio.toString());
+        }
+        else break;
       }
       br.close();
     } catch (Exception ex) {

@@ -92,6 +92,11 @@ public class RedexController {
   List<Envio> simulador(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
     lector.leerEnviosTXT(aeropuertos, enviosList, archivo, fecha);
     archivo = null;
+    
+    /* 
+     * Sumarle 24 horas si el vuelo es anterior a la fecha de inicio
+     * Restarle 24 horas si el inicio y fin es el día siguiente
+    */
 
     for (Envio envio : enviosList) {
       Aeropuerto answer = AStar.aStar(envio);
