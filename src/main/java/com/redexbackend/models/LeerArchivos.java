@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -132,15 +133,17 @@ public class LeerArchivos {
     }
   }
 
-  public void leerEnviosTXT(HashMap<String, Aeropuerto> aeropuertos, List<Envio> enviosList, MultipartFile file, Date fechaInicio){
+  public void leerEnviosTXT(HashMap<String, Aeropuerto> aeropuertos, List<List<Envio>> enviosList, MultipartFile file, Date fechaInicio){
     var convertedFile = toFile(file);
     String[] informacion, destinoNumPaquetes;
-    String line, yy, mm, dd;
+    String line, yy, mm, dd, ddtemp = "";
     Calendar fechaLimite = Calendar.getInstance(), fechaFin = Calendar.getInstance(), fechaEnvio = Calendar.getInstance();
+    boolean first = true;
     fechaFin.setTime(fechaInicio);
     fechaFin.add(Calendar.DAY_OF_MONTH, 5);
     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Aeropuerto aeropuertoSalida;
+    List<Envio> envios = new ArrayList<>();
     try{
       BufferedReader br = new BufferedReader(new FileReader(convertedFile));
       while ((line = br.readLine()) != null) {
@@ -149,6 +152,12 @@ public class LeerArchivos {
         yy = informacion[1].substring(0,4);
         mm = informacion[1].substring(4,6);
         dd = informacion[1].substring(6,8);
+        if(!first){
+          if(!dd.equals(ddtemp)){
+            enviosList.add(envios);
+            envios.clear();
+          }
+        }
         var fechaEnvioTemp = formato.parse(yy + "-" + mm + "-" + dd + " " + informacion[2] + ":00");
         aeropuertoSalida = aeropuertos.get(informacion[0].substring(0, 4));
         fechaEnvio.setTime(fechaEnvioTemp);
@@ -166,15 +175,19 @@ public class LeerArchivos {
           else
             fechaLimite.add(Calendar.DATE, 2);
           envio.setFechaLimite(fechaLimite.getTime());
-          enviosList.add(envio);
+          envios.add(envio);
         }
         else break;
+        ddtemp = dd;
+        first = false;
       }
       br.close();
     } catch (Exception ex) {
       System.out.println("Se ha producido un error: " + ex.getMessage());
     }
-    Collections.sort(enviosList, new SortEnvios());
+    for(int i = 0; i < enviosList.size(); i++){
+      Collections.sort(enviosList.get(i), new SortEnvios());
+    }
   }
 
   private File toFile(MultipartFile multipartFile){

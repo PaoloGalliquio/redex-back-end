@@ -54,7 +54,7 @@ public class RedexController {
   HashMap<String, Aeropuerto> aeropuertos = new HashMap<>();
   List<Aeropuerto> aeropuertosList;
   List<Vuelo> vuelosList = new ArrayList<>();
-  List<Envio> enviosList = new ArrayList<>();
+  List<List<Envio>> enviosList = new ArrayList<>();
 
   @GetMapping(value = "/test")
   String test() {
@@ -83,13 +83,14 @@ public class RedexController {
   }
 
   @PostMapping(value = "/envio/sendFile")
-  List<Envio> fileEnvios(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
+  List<List<Envio>> fileEnvios(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
     lector.leerEnviosTXT(aeropuertos, enviosList, archivo, fecha);
     return enviosList;
   }
 
   @PostMapping(value = "/simulador")
-  List<Envio> simulador(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
+  List<List<Envio>> simulador(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
+    
     lector.leerEnviosTXT(aeropuertos, enviosList, archivo, fecha);
     archivo = null;
     
@@ -98,10 +99,13 @@ public class RedexController {
      * Restarle 24 horas si el inicio y fin es el día siguiente
     */
 
-    for (Envio envio : enviosList) {
-      Aeropuerto answer = AStar.aStar(envio);
-      AStar.obtenerPlanesDeVuelo(answer, envio);
+    for (List<Envio> listEnvio: enviosList){
+      for (Envio envio : listEnvio) {
+        Aeropuerto answer = AStar.aStar(envio);
+        AStar.obtenerPlanesDeVuelo(answer, envio);
+      }
     }
+    
     
     return enviosList;
   }
