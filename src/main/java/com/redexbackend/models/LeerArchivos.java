@@ -71,10 +71,17 @@ public class LeerArchivos {
     String line, yy = "2022", mm = "10", dd = "24";
     int duracion, capacidad;
     Aeropuerto salida, llegada;
-    Calendar horaSalida = Calendar.getInstance(), horaLlegada = Calendar.getInstance(), horaSalidaUTC0 = Calendar.getInstance(), horaLlegadaUTC0 = Calendar.getInstance();
+    Calendar horaSalida = Calendar.getInstance(), 
+      horaLlegada = Calendar.getInstance(), 
+      horaSalidaUTC0 = Calendar.getInstance(), 
+      horaLlegadaUTC0 = Calendar.getInstance(),
+      diaActual = Calendar.getInstance(),
+      diaSiguie = Calendar.getInstance();
     File vuelostxt = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     try {
+      diaActual.setTime(dateFormat.parse("2022-10-24 00:00:00"));
+      diaSiguie.setTime(dateFormat.parse("2022-10-25 00:00:00"));
       BufferedReader br = new BufferedReader(new FileReader(vuelostxt));
       while ((line = br.readLine()) != null) {
         informacion = line.split("-");
@@ -91,6 +98,20 @@ public class LeerArchivos {
         if(horaLlegadaUTC0.getTime().before(horaSalidaUTC0.getTime())){
           horaLlegadaUTC0.add(Calendar.HOUR, 24);
           horaLlegada.add(Calendar.HOUR, 24);
+        }
+        
+        if(horaSalidaUTC0.getTime().before(diaActual.getTime())){
+          horaSalidaUTC0.add(Calendar.HOUR, 24);
+          horaLlegadaUTC0.add(Calendar.HOUR, 24);
+          horaSalida.add(Calendar.HOUR, 24);
+          horaLlegada.add(Calendar.HOUR, 24);
+        }
+
+        if(horaSalidaUTC0.getTime().after(diaSiguie.getTime())){
+          horaSalidaUTC0.add(Calendar.HOUR, -24);
+          horaLlegadaUTC0.add(Calendar.HOUR, -24);
+          horaSalida.add(Calendar.HOUR, -24);
+          horaLlegada.add(Calendar.HOUR, -24);
         }
         
         salida = aeropuertos.get(informacion[0]);
