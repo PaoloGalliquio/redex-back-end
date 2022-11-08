@@ -410,8 +410,11 @@ public class AStar {
 
         Date primeraSalida = new Date(), ultimaLlegada = new Date();
         boolean primeraVez = true;
-        Calendar hPSalida = Calendar.getInstance(), hULlegada = Calendar.getInstance(), hEnvio = Calendar.getInstance();
+        Calendar hPSalida = Calendar.getInstance(), hULlegada = Calendar.getInstance(), hEnvio = Calendar.getInstance(), hVuelo = Calendar.getInstance(), 
+        hCurrentVuelo = Calendar.getInstance();
         int UTCPSalida=0, UTCULlegada=0;
+
+        int diaEnvio = hEnvio.get(Calendar.DAY_OF_MONTH), mesEnvio = hEnvio.get(Calendar.MONTH), aaEnvio = hEnvio.get(Calendar.YEAR);
 
         while (n.parent != null) {
             if(primeraVez){
@@ -459,19 +462,31 @@ public class AStar {
         PlanDeVuelo planDeVuelo = new PlanDeVuelo();
         String codigo = "";
         int duracion = 0;
+        int diaVuelo = 0;
+        boolean primerVuelo = true;
         planDeVuelo.setFechaPlan(new Date());
         planDeVuelo.setNumeroPaquetes(nroPaquetes);
         planDeVuelo.setEnvio(envio);
 
         for (Vuelo v : listaVuelos){
+            hVuelo.setTime(v.getFechaPartida());
+            hVuelo.set(aaEnvio, mesEnvio, diaEnvio);
+            if(primerVuelo){
+                diaVuelo = hVuelo.get(Calendar.DAY_OF_MONTH);
+            }else{
+                hCurrentVuelo.setTime(v.getFechaPartida());
+                if(hCurrentVuelo.get(Calendar.DAY_OF_MONTH) != diaVuelo){
+                    hVuelo.add(Calendar.DAY_OF_MONTH, 1);
+                }
+            }
             VueloPorPlanDeVuelo vueloPorPlanDeVuelo = new VueloPorPlanDeVuelo();
             codigo += v.getCodigo();
             duracion += v.getDuracion();
             vueloPorPlanDeVuelo.setPlanDeVuelo(planDeVuelo);
             vueloPorPlanDeVuelo.setVuelo(v);
-            vueloPorPlanDeVuelo.setFechaVuelo(v.getFechaPartida());
+            vueloPorPlanDeVuelo.setFechaVuelo(hVuelo.getTime());
             vueloPorPlanDeVuelos.add(vueloPorPlanDeVuelo);
-
+            primerVuelo = false;
         }
         planDeVuelo.setVuelosPorPlanDeVuelo(vueloPorPlanDeVuelos);
         planDeVuelo.setCodigo(codigo);
