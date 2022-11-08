@@ -27,6 +27,7 @@ import com.redexbackend.models.Vuelo;
 import com.redexbackend.service.AeropuertoService;
 import com.redexbackend.service.CiudadService;
 import com.redexbackend.service.ContinenteService;
+import com.redexbackend.service.EnvioService;
 import com.redexbackend.service.PaisService;
 import com.redexbackend.service.VueloService;
 import com.redexbackend.util.SortVuelos;
@@ -45,6 +46,8 @@ public class RedexController {
   private AeropuertoService aeropuertoService = new AeropuertoService();
   @Autowired
   private VueloService vueloService = new VueloService();
+  @Autowired
+  private EnvioService envioService = new EnvioService();
 
   LeerArchivos lector = new LeerArchivos();
 
@@ -88,26 +91,33 @@ public class RedexController {
     return enviosList;
   }
 
-  @PostMapping(value = "/simulador")
-  List<List<Envio>> simulador(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
-    
+  @PostMapping(value = "/simulator/initialDay")
+  List<Envio> simulador(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
     lector.leerEnviosTXT(aeropuertos, enviosList, archivo, fecha);
     archivo = null;
-    
-    /* 
-     * Sumarle 24 horas si el vuelo es anterior a la fecha de inicio
-     * Restarle 24 horas si el inicio y fin es el día siguiente
-    */
 
-    for (List<Envio> listEnvio: enviosList){
-      for (Envio envio : listEnvio) {
-        Aeropuerto answer = AStar.aStar(envio);
-        AStar.obtenerPlanesDeVuelo(answer, envio);
-      }
+    for (Envio envio : enviosList.get(0)) {
+      Aeropuerto answer = AStar.aStar(envio);
+      AStar.obtenerPlanesDeVuelo(answer, envio);
     }
+
+    for (List<Envio> envioL : enviosList)
+      for (Envio envio : envioL) 
+        envioService.insert(envio);
     
-    
-    return enviosList;
+    return enviosList.get(0);
+  }
+
+  @PostMapping(value = "/simulator/perDay")
+  List<Envio> simulatorPerDay(@RequestParam(value = "index",required = true) int index){
+    if(enviosList == null) return null;
+
+    for (Envio envio : enviosList.get(index)) {
+      Aeropuerto answer = AStar.aStar(envio);
+      AStar.obtenerPlanesDeVuelo(answer, envio);
+    }
+
+    return enviosList.get(1);
   }
 
   @GetMapping(value = "/aeropuerto/list")
