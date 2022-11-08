@@ -470,7 +470,6 @@ public class AStar {
 
         for (Vuelo v : listaVuelos){
             hVuelo.setTime(v.getFechaPartida());
-            hVuelo.set(aaEnvio, mesEnvio, diaEnvio);
             if(primerVuelo){
                 diaVuelo = hVuelo.get(Calendar.DAY_OF_MONTH);
             }else{
@@ -479,6 +478,7 @@ public class AStar {
                     hVuelo.add(Calendar.DAY_OF_MONTH, 1);
                 }
             }
+            hVuelo.set(aaEnvio, mesEnvio, diaEnvio);
             VueloPorPlanDeVuelo vueloPorPlanDeVuelo = new VueloPorPlanDeVuelo();
             codigo += v.getCodigo();
             duracion += v.getDuracion();
