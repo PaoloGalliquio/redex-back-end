@@ -187,10 +187,13 @@ public class LeerArchivos {
         yy = informacion[1].substring(0,4);
         mm = informacion[1].substring(4,6);
         dd = informacion[1].substring(6,8);
-        if(!first){
+        if(first){
+          ddtemp = dd;
+        }
+        else{
           if(!dd.equals(ddtemp)){
             enviosList.add(envios);
-            envios.clear();
+            envios = new ArrayList<>();
           }
         }
         var fechaEnvioTemp = formato.parse(yy + "-" + mm + "-" + dd + " " + informacion[2] + ":00");
@@ -215,6 +218,9 @@ public class LeerArchivos {
         else break;
         ddtemp = dd;
         first = false;
+      }
+      if(enviosList.size() == 0){
+        enviosList.add(envios);
       }
       br.close();
     } catch (Exception ex) {
