@@ -95,15 +95,21 @@ public class RedexController {
   List<Envio> simulador(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
     lector.leerEnviosTXT(aeropuertos, enviosList, archivo, fecha);
     archivo = null;
+    System.out.println("Leido bien\n");
 
     for (Envio envio : enviosList.get(0)) {
+      System.out.println("A\n");
       Aeropuerto answer = AStar.aStar(envio);
+      System.out.println("B\n");
       AStar.obtenerPlanesDeVuelo(answer, envio);
+      System.out.println("C\n");
     }
 
-    for (List<Envio> envioL : enviosList)
-      for (Envio envio : envioL) 
-        envioService.insert(envio);
+    System.out.println("A* bien");
+
+    // for (List<Envio> envioL : enviosList)
+    //   for (Envio envio : envioL) 
+    //     envioService.insert(envio);
     
     return enviosList.get(0);
   }

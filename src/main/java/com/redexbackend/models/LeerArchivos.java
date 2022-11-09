@@ -197,7 +197,7 @@ public class LeerArchivos {
         aeropuertoSalida = aeropuertos.get(informacion[0].substring(0, 4));
         fechaEnvio.setTime(fechaEnvioTemp);
         fechaEnvio.add(Calendar.HOUR, -aeropuertoSalida.getHusoHorario());
-        if(fechaInicio.before(fechaEnvio.getTime()) && fechaEnvio.before(fechaFin.getTime())){
+        if(fechaInicio.before(fechaEnvio.getTime()) && fechaEnvio.getTime().before(fechaFin.getTime())){
           Envio envio = new Envio();
           envio.setCodigo(informacion[0]);
           envio.setFechaEnvio(fechaEnvio.getTime());
