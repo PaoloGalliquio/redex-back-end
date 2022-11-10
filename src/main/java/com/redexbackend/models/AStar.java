@@ -220,9 +220,9 @@ public class AStar {
         return null;
     }
 
-    public static void cambiarCapacidades(List<Vuelo> vuelos, List<Integer>capacidades){
+    public static void cambiarCapacidades(List<Vuelo> vuelos, Integer nroPaquetes){
         for(int i = 0; i <vuelos.size(); i++){
-            vuelos.get(i).setCapacidad(vuelos.get(i).getCapacidadActual() - capacidades.get(i));
+            vuelos.get(i).setCapacidadActual(vuelos.get(i).getCapacidadActual() - nroPaquetes);
         }
     }
 
@@ -295,7 +295,7 @@ public class AStar {
             System.out.println("Supera la ventana de tiempo");
             return;
         }else{//Cambiar las capacidades de los vuelos
-            cambiarCapacidades(listaVuelos, capacidadVuelos);
+            cambiarCapacidades(listaVuelos, nroPaquetes);
         }
 
         minAHora(fechaEnvio, hULlegada.getTime());
@@ -378,7 +378,7 @@ public class AStar {
                         vuelo.getAeropuertoDestino().f = 
                             vuelo.getAeropuertoDestino().g + 
                             vuelo.getAeropuertoDestino().calculateHeuristic(vuelo.getAeropuertoDestino(), target);
-                        vuelo.setCapacidadActual(vuelo.getCapacidadActual() - nroPaquetes);
+                        //vuelo.setCapacidadActual(vuelo.getCapacidadActual() - nroPaquetes);
 
                         if (closedList.contains(vuelo.getAeropuertoDestino())) {
                             closedList.remove(vuelo.getAeropuertoDestino());
@@ -454,7 +454,7 @@ public class AStar {
             return;
         }
         else
-            cambiarCapacidades(listaVuelos, capacidadVuelos);
+            cambiarCapacidades(listaVuelos, envio.getNumeroPaquetes());
 
         List<PlanDeVuelo> planDeVuelos = new ArrayList<>();
         List<VueloPorPlanDeVuelo> vueloPorPlanDeVuelos = new ArrayList<>();
