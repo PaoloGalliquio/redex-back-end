@@ -54,7 +54,7 @@ public class RedexController {
 
   LeerArchivos lector = new LeerArchivos();
 
-  Calendar fechaSimulación = Calendar.getInstance();
+  Calendar fechaSimulacion = Calendar.getInstance();
 
   List<Continente> continentesList;
   List<Pais> paisesList;
@@ -98,7 +98,7 @@ public class RedexController {
 
   @PostMapping(value = "/simulator/initialDay")
   Map<String, Object> simulador(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
-    fechaSimulación.setTime(fecha);
+    fechaSimulacion.setTime(fecha);
     Calendar sigFecha = Calendar.getInstance();
     sigFecha.setTime(fecha);
     sigFecha.add(Calendar.DAY_OF_MONTH, 1);
@@ -107,7 +107,7 @@ public class RedexController {
 
     for (Envio envio : enviosList.get(0)) {
       Aeropuerto answer = AStar.aStar(envio);
-      AStar.obtenerPlanesDeVuelo(answer, envio);
+      AStar.obtenerPlanesDeVuelo(answer, envio, fechaSimulacion);
     }
 
     List<Vuelo> vuelosInDate = vuelosList.stream()
@@ -127,11 +127,13 @@ public class RedexController {
 
   @PostMapping(value = "/simulator/perDay")
   List<Envio> simulatorPerDay(@RequestParam(value = "index",required = true) int index){
+    Calendar fechaSimulacionActual = Calendar.getInstance();
+    fechaSimulacionActual.add(Calendar.DAY_OF_MONTH, index);
     if(enviosList == null) return null;
 
     for (Envio envio : enviosList.get(index)) {
       Aeropuerto answer = AStar.aStar(envio);
-      AStar.obtenerPlanesDeVuelo(answer, envio);
+      AStar.obtenerPlanesDeVuelo(answer, envio, fechaSimulacionActual);
     }
 
     return enviosList.get(1);

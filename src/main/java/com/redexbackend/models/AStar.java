@@ -393,7 +393,7 @@ public class AStar {
         return null;
     }
 
-    public static void obtenerPlanesDeVuelo(Aeropuerto target, Envio envio) {
+    public static void obtenerPlanesDeVuelo(Aeropuerto target, Envio envio, Calendar fechaSimu) {
         var origen = envio.getAeropuertoPartida();
         var destino = envio.getAeropuertoDestino();
         var fechaEnvio = envio.getFechaEnvio();
@@ -410,11 +410,10 @@ public class AStar {
 
         Date primeraSalida = new Date(), ultimaLlegada = new Date();
         boolean primeraVez = true;
-        Calendar hPSalida = Calendar.getInstance(), hULlegada = Calendar.getInstance(), hEnvio = Calendar.getInstance(), hVuelo = Calendar.getInstance(), 
-        hCurrentVuelo = Calendar.getInstance();
+        Calendar hPSalida = Calendar.getInstance(), hULlegada = Calendar.getInstance(), hEnvio = Calendar.getInstance(), hVuelo = Calendar.getInstance();
         int UTCPSalida=0, UTCULlegada=0;
 
-        int diaEnvio = hEnvio.get(Calendar.DAY_OF_MONTH), mesEnvio = hEnvio.get(Calendar.MONTH), aaEnvio = hEnvio.get(Calendar.YEAR);
+        int diaSimu = fechaSimu.get(Calendar.DAY_OF_MONTH), mesSimu = fechaSimu.get(Calendar.MONTH), aaSimu = fechaSimu.get(Calendar.YEAR);
 
         while (n.parent != null) {
             if(primeraVez){
@@ -462,31 +461,34 @@ public class AStar {
         PlanDeVuelo planDeVuelo = new PlanDeVuelo();
         String codigo = "";
         int duracion = 0;
-        int diaVuelo = 0;
-        boolean primerVuelo = true;
         planDeVuelo.setFechaPlan(new Date());
         planDeVuelo.setNumeroPaquetes(nroPaquetes);
         planDeVuelo.setEnvio(envio);
 
         for (Vuelo v : listaVuelos){
+            //Fecha partida
             hVuelo.setTime(v.getFechaPartida());
-            if(primerVuelo){
-                diaVuelo = hVuelo.get(Calendar.DAY_OF_MONTH);
-            }else{
-                hCurrentVuelo.setTime(v.getFechaPartida());
-                if(hCurrentVuelo.get(Calendar.DAY_OF_MONTH) != diaVuelo){
-                    hVuelo.add(Calendar.DAY_OF_MONTH, 1);
-                }
-            }
-            hVuelo.set(aaEnvio, mesEnvio, diaEnvio);
+            hVuelo.set(aaSimu, mesSimu, diaSimu);
+            v.setFechaPartida(hVuelo.getTime());
+            //Fecha destino
+            hVuelo.add(Calendar.MINUTE, v.getDuracion());
+            v.setFechaDestino(hVuelo.getTime());
+            //Fecha partida UTC0
+            hVuelo.setTime(v.getFechaPartida());
+            hVuelo.add(Calendar.HOUR, -(v.getAeropuertoPartida().getHusoHorario()));
+            v.setFechaPartidaUTC0(hVuelo.getTime());
+            //Fecha destino UTC0
+            hVuelo.setTime(v.getFechaDestino());
+            hVuelo.add(Calendar.HOUR, -(v.getAeropuertoDestino().getHusoHorario()));
+            v.setFechaDestinoUTC0(hVuelo.getTime());
+            
             VueloPorPlanDeVuelo vueloPorPlanDeVuelo = new VueloPorPlanDeVuelo();
             codigo += v.getCodigo();
             duracion += v.getDuracion();
             vueloPorPlanDeVuelo.setPlanDeVuelo(planDeVuelo);
             vueloPorPlanDeVuelo.setVuelo(v);
-            vueloPorPlanDeVuelo.setFechaVuelo(hVuelo.getTime());
+            vueloPorPlanDeVuelo.setFechaVuelo(v.getFechaPartida());
             vueloPorPlanDeVuelos.add(vueloPorPlanDeVuelo);
-            primerVuelo = false;
         }
         planDeVuelo.setVuelosPorPlanDeVuelo(vueloPorPlanDeVuelos);
         planDeVuelo.setCodigo(codigo);
