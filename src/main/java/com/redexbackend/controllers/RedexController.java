@@ -128,6 +128,7 @@ public class RedexController {
   @PostMapping(value = "/simulator/perDay")
   List<Envio> simulatorPerDay(@RequestParam(value = "index",required = true) int index){
     Calendar fechaSimulacionActual = Calendar.getInstance();
+    fechaSimulacionActual.setTime(fechaSimulacion.getTime());
     fechaSimulacionActual.add(Calendar.DAY_OF_MONTH, index);
     if(enviosList == null) return null;
 
