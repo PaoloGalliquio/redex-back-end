@@ -466,18 +466,14 @@ public class AStar {
         planDeVuelo.setEnvio(envio);
 
         for (Vuelo v : listaVuelos){
-            //Fecha partida
             hVuelo.setTime(v.getFechaPartida());
             hVuelo.set(aaSimu, mesSimu, diaSimu);
             v.setFechaPartida(hVuelo.getTime());
-            //Fecha destino
             hVuelo.add(Calendar.MINUTE, v.getDuracion());
             v.setFechaDestino(hVuelo.getTime());
-            //Fecha partida UTC0
             hVuelo.setTime(v.getFechaPartida());
             hVuelo.add(Calendar.HOUR, -(v.getAeropuertoPartida().getHusoHorario()));
             v.setFechaPartidaUTC0(hVuelo.getTime());
-            //Fecha destino UTC0
             hVuelo.setTime(v.getFechaDestino());
             hVuelo.add(Calendar.HOUR, -(v.getAeropuertoDestino().getHusoHorario()));
             v.setFechaDestinoUTC0(hVuelo.getTime());
