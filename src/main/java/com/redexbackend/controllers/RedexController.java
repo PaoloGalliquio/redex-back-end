@@ -62,7 +62,6 @@ public class RedexController {
   HashMap<String, Aeropuerto> aeropuertos = new HashMap<>();
   List<Aeropuerto> aeropuertosList;
   List<Vuelo> vuelosList = new ArrayList<>();
-  List<List<Envio>> enviosList = new ArrayList<>();
 
   @GetMapping(value = "/test")
   String test() {
@@ -99,6 +98,8 @@ public class RedexController {
     lector.leerEnviosTXT(aeropuertos, archivo, fecha, envioService);
     archivo = null;
 
+    System.out.println("Bloque analizado: " + inicioSimulacion.getTime().toString() + " - " + siguienteBloque.getTime().toString());
+
     List<Envio> enviosInDate = envioService.getInRange(inicioSimulacion.getTime(), siguienteBloque.getTime());
 
     for (Envio envio : enviosInDate) {
@@ -122,18 +123,20 @@ public class RedexController {
   }
 
   @PostMapping(value = "/simulator/perBlock")
-  Map<String, Object> simulatorPerDay(@RequestParam(value = "index",required = true) int index){
+  Map<String, Object> simulatorPerDay(@RequestParam(value = "block",required = true) int block){
     Calendar bloqueActual = Calendar.getInstance(), siguienteBloque = Calendar.getInstance();
     
     bloqueActual.setTime(inicioSimulacion.getTime());
-    bloqueActual.add(Calendar.HOUR, 6*index);
+    bloqueActual.add(Calendar.HOUR, 6*block);
 
     siguienteBloque.setTime(bloqueActual.getTime());
     siguienteBloque.add(Calendar.HOUR, 6);
 
-    List<Envio> enviosInDate = envioService.getInRange(inicioSimulacion.getTime(), siguienteBloque.getTime());
+    System.out.println("Bloque analizado: " + bloqueActual.getTime().toString() + " - " + siguienteBloque.getTime().toString());
 
-    for (Envio envio : enviosList.get(index)) {
+    List<Envio> enviosInDate = envioService.getInRange(bloqueActual.getTime(), siguienteBloque.getTime());
+
+    for (Envio envio : enviosInDate) {
       envio.setAeropuertoPartida(aeropuertos.get(envio.getAeropuertoPartida().getCodigo()));
       envio.setAeropuertoDestino(aeropuertos.get(envio.getAeropuertoDestino().getCodigo()));
       Aeropuerto answer = AStar.aStar(envio);
