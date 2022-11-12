@@ -1,9 +1,11 @@
 package com.redexbackend.dao.implement;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TemporalType;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -64,6 +66,7 @@ public class EnvioDaoImp implements EnvioDao{
       if(envio.getAeropuertoPartida() != null) nuevo.setAeropuertoPartida(envio.getAeropuertoPartida());
       if(envio.getAeropuertoDestino() != null) nuevo.setAeropuertoDestino(envio.getAeropuertoDestino());
       if(envio.getFechaEnvio() != null) nuevo.setFechaEnvio(envio.getFechaEnvio());
+      if(envio.getFechaEnvioUTC() != null) nuevo.setFechaEnvioUTC(envio.getFechaEnvioUTC());
       if(envio.getFechaFinalizado() != null) nuevo.setFechaFinalizado(envio.getFechaFinalizado());
       if(envio.getFechaLimite() != null) nuevo.setFechaLimite(envio.getFechaLimite());
       if(envio.getDuracionTotal() != null) nuevo.setDuracionTotal(envio.getDuracionTotal());
@@ -87,6 +90,22 @@ public class EnvioDaoImp implements EnvioDao{
       System.out.println(exception.getMessage());
     }
     return result;
+  }
+
+  @Override
+  public List<Envio> getInRange(Date fechaInicio, Date fechaFinal) {
+    List<Envio> list = null;
+    try{
+      var hql = "from Envio as e where (fechaEnvio between :start and :end)";
+      list = entityManager.createQuery(hql)
+        .setParameter("start", fechaInicio, TemporalType.DATE)
+        .setParameter("end", fechaFinal, TemporalType.DATE)
+        .getResultList();
+    }
+    catch (Exception exception){
+      System.out.println(exception.getMessage());
+    }
+    return list;
   }
   
 }

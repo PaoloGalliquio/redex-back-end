@@ -18,6 +18,7 @@ import java.util.Objects;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.redexbackend.service.EnvioService;
 import com.redexbackend.util.SortEnvios;
 import com.redexbackend.util.SortVuelosByDuration;
 
@@ -231,6 +232,70 @@ public class LeerArchivos {
     }
   }
 
+  public void leerEnviosTXT(HashMap<String, Aeropuerto> aeropuertos, MultipartFile file, Date fechaInicio, EnvioService envioService){
+    var convertedFile = toFile(file);
+    String[] informacion, destinoNumPaquetes;
+    String line;
+    Calendar fechaFin = Calendar.getInstance(), 
+      fechaLimite = Calendar.getInstance(), fechaEnvio = Calendar.getInstance(), 
+      fechaLimiteUTC = Calendar.getInstance(), fechaEnvioUTC = Calendar.getInstance();
+    fechaFin.setTime(fechaInicio);
+    fechaFin.add(Calendar.DAY_OF_MONTH, 5);
+    Aeropuerto aeropuertoSalida;
+    try{
+      BufferedReader br = new BufferedReader(new FileReader(convertedFile));
+      while ((line = br.readLine()) != null) {
+        informacion = line.split("-");
+        destinoNumPaquetes = informacion[3].split(":");
+        aeropuertoSalida = aeropuertos.get(informacion[0].substring(0, 4));
+        obtenerTiemposDeEnvio(fechaEnvio, fechaEnvioUTC, fechaLimite, fechaLimiteUTC, informacion, aeropuertoSalida.getHusoHorario());
+        if(fechaInicio.before(fechaEnvio.getTime()) && fechaEnvio.getTime().before(fechaFin.getTime())){
+          Envio envio = new Envio();
+          envio.setCodigo(informacion[0]);
+          envio.setFechaEnvio(fechaEnvio.getTime());
+          envio.setFechaEnvioUTC(fechaEnvioUTC.getTime());
+          envio.setAeropuertoPartida(aeropuertoSalida);
+          envio.setAeropuertoDestino(aeropuertos.get(destinoNumPaquetes[0]));
+          envio.setNumeroPaquetes(Integer.parseInt(destinoNumPaquetes[1]));
+          if(esIntercontinental(envio)){
+            fechaLimite.add(Calendar.DATE, 1);
+            fechaLimiteUTC.add(Calendar.DATE, 1);
+          }
+          else{
+            fechaLimite.add(Calendar.DATE, 2);
+            fechaLimiteUTC.add(Calendar.DATE, 2);
+          }
+          envio.setFechaLimite(fechaLimite.getTime());
+          envio.setFechaLimiteUTC(fechaLimiteUTC.getTime());
+          envioService.insert(envio);
+        }
+        else break;
+      }
+      br.close();
+    } catch (Exception ex) {
+      System.out.println("Se ha producido un error: " + ex.getMessage());
+    }
+  }
+
+  void obtenerTiemposDeEnvio(Calendar fechaEnvio, Calendar fechaEnvioUTC, Calendar fechaLimite, Calendar fechaLimiteUTC, String[] informacion, Integer husoHorario){
+    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    String yy, mm, dd;
+    Date fecha = new Date();
+    yy = informacion[1].substring(0,4);
+    mm = informacion[1].substring(4,6);
+    dd = informacion[1].substring(6,8);
+    try{
+      fecha = formato.parse(yy + "-" + mm + "-" + dd + " " + informacion[2] + ":00");
+    } catch (Exception ex) {
+      System.out.println("Se ha producido un error: " + ex.getMessage());
+    }
+    fechaEnvio.setTime(fecha);
+    fechaEnvioUTC.setTime(fecha);
+    fechaEnvioUTC.add(Calendar.HOUR, -husoHorario);
+    fechaLimite.setTime(fechaEnvio.getTime());
+    fechaEnvioUTC.setTime(fechaEnvioUTC.getTime());
+  }
+
   private File toFile(MultipartFile multipartFile){
     var file = new File(Objects.requireNonNull(multipartFile.getOriginalFilename()));
     try(var fout = new FileOutputStream(file)){
@@ -364,13 +429,11 @@ public class LeerArchivos {
       for (Vuelo vuelo : vuelos){
         bw.write(
           "INSERT INTO vuelo " + 
-          "(estado,fecha_creacion,fecha_modificacion,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)"
+          "(estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)"
         );
         bw.newLine();
         bw.write(
           "VALUES (1,'" + 
-          dateFormat.format(vuelo.getFechaCreacion()) + "','" + 
-          dateFormat.format(vuelo.getFechaCreacion()) + "'," + 
           vuelo.getCapacidad() + "," + 
           vuelo.getCapacidadActual() + ",'" + 
           vuelo.getCodigo() + "',1," + 

@@ -41,11 +41,20 @@ public class Envio extends BaseEntity {
   @Column(name = "fechaEnvio")
   private Date fechaEnvio;
   
+  @Column(name = "fechaEnvioUTC")
+  private Date fechaEnvioUTC;
+  
   @Column(name = "fechaFinalizado")
   private Date fechaFinalizado;
   
+  @Column(name = "fechaFinalizadoUTC")
+  private Date fechaFinalizadoUTC;
+  
   @Column(name = "fechaLimite")
   private Date fechaLimite;
+  
+  @Column(name = "fechaLimiteUTC")
+  private Date fechaLimiteUTC;
   
   @Column(name = "duracionTotal")
   private Integer duracionTotal;

@@ -1,5 +1,6 @@
 package com.redexbackend.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,7 @@ public class EnvioService {
   public boolean delete(int id){
     return daoEnvio.delete(id);
   }
-  
+  public List<Envio> getInRange(Date fechaInicio, Date fechaFinal){
+    return daoEnvio.getInRange(fechaInicio, fechaFinal);
+  }
 }

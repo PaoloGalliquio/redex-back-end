@@ -54,7 +54,7 @@ public class RedexController {
 
   LeerArchivos lector = new LeerArchivos();
 
-  Calendar fechaSimulacion = Calendar.getInstance();
+  Calendar inicioSimulacion = Calendar.getInstance();
 
   List<Continente> continentesList;
   List<Pais> paisesList;
@@ -98,37 +98,36 @@ public class RedexController {
 
   @PostMapping(value = "/simulator/initialDay")
   Map<String, Object> simulador(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
-    fechaSimulacion.setTime(fecha);
-    Calendar sigFecha = Calendar.getInstance();
-    sigFecha.setTime(fecha);
-    sigFecha.add(Calendar.DAY_OF_MONTH, 1);
-    lector.leerEnviosTXT(aeropuertos, enviosList, archivo, fecha);
+    inicioSimulacion.setTime(fecha);
+    Calendar siguienteBloque = Calendar.getInstance();
+    siguienteBloque.setTime(fecha);
+    siguienteBloque.add(Calendar.HOUR_OF_DAY, 6);
+    //lector.leerEnviosTXT(aeropuertos, enviosList, archivo, fecha);
+    lector.leerEnviosTXT(aeropuertos, archivo, fecha, envioService);
     archivo = null;
 
-    for (Envio envio : enviosList.get(0)) {
-      Aeropuerto answer = AStar.aStar(envio);
-      AStar.obtenerPlanesDeVuelo(answer, envio, fechaSimulacion);
-    }
+    List<Envio> enviosInDate = envioService.getInRange(inicioSimulacion.getTime(), siguienteBloque.getTime());
+
+    // for (Envio envio : enviosList.get(0)) {
+    //   Aeropuerto answer = AStar.aStar(envio);
+    //   AStar.obtenerPlanesDeVuelo(answer, envio, inicioSimulacion);
+    // }
 
     List<Vuelo> vuelosInDate = vuelosList.stream()
-      .filter(v -> (v.getFechaPartidaUTC0().after(fecha) && v.getFechaPartidaUTC0().before(sigFecha.getTime()))).collect(Collectors.toList());
-    List<Envio> enviosInDate = enviosList.get(0);
+      .filter(v -> (v.getFechaPartidaUTC0().after(fecha) && v.getFechaPartidaUTC0().before(siguienteBloque.getTime()))).collect(Collectors.toList());
+    //List<Envio> enviosInDate = enviosList.get(0);
 
     Map<String, Object> result = new HashMap<>();
     result.put("envios", enviosInDate);
     result.put("vuelos", vuelosInDate);
-    
-    // for (List<Envio> envioL : enviosList)
-    //   for (Envio envio : envioL) 
-    //     envioService.insert(envio);
-    
+
     return result;
   }
 
   @PostMapping(value = "/simulator/perDay")
   List<Envio> simulatorPerDay(@RequestParam(value = "index",required = true) int index){
     Calendar fechaSimulacionActual = Calendar.getInstance();
-    fechaSimulacionActual.setTime(fechaSimulacion.getTime());
+    fechaSimulacionActual.setTime(inicioSimulacion.getTime());
     fechaSimulacionActual.add(Calendar.DAY_OF_MONTH, index);
     if(enviosList == null) return null;
 
