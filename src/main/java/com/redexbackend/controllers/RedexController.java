@@ -90,7 +90,7 @@ public class RedexController {
     return aeropuertosList;
   }
 
-  @PostMapping(value = "/simulator/initialDay")
+  @PostMapping(value = "/simulator/initial")
   Map<String, Object> simulador(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
     inicioSimulacion.setTime(fecha);
     Calendar siguienteBloque = Calendar.getInstance();
@@ -121,7 +121,7 @@ public class RedexController {
     return result;
   }
 
-  @PostMapping(value = "/simulator/perDay")
+  @PostMapping(value = "/simulator/perBlock")
   Map<String, Object> simulatorPerDay(@RequestParam(value = "index",required = true) int index){
     Calendar bloqueActual = Calendar.getInstance(), siguienteBloque = Calendar.getInstance();
     
