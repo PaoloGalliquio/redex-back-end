@@ -122,46 +122,17 @@ public class LeerArchivos {
         capacidad = obtenerCapacidad(aeropuertos, informacion[0], informacion[1]);
         duracion = obtenerDuracion(horaSalidaUTC0, horaLlegadaUTC0, salida, llegada);
 
-        Vuelo vuelo1 = new Vuelo(informacion[0] + informacion[1], salida, llegada, horaSalida.getTime(), horaLlegada.getTime(), horaSalidaUTC0.getTime(), horaLlegadaUTC0.getTime(), capacidad, duracion, 1, true);
+        Vuelo vuelo = new Vuelo(informacion[0] + informacion[1], salida, llegada, horaSalida.getTime(), horaLlegada.getTime(), horaSalidaUTC0.getTime(), horaLlegadaUTC0.getTime(), capacidad, duracion, 1, true);
         horaSalidaUTC0.add(Calendar.HOUR, 24);
         horaLlegadaUTC0.add(Calendar.HOUR, 24);
         horaSalida.add(Calendar.HOUR, 24);
         horaLlegada.add(Calendar.HOUR, 24);
-        Vuelo vuelo2 = new Vuelo(informacion[0] + informacion[1], salida, llegada, horaSalida.getTime(), horaLlegada.getTime(), horaSalidaUTC0.getTime(), horaLlegadaUTC0.getTime(), capacidad, duracion, 1, true);
-        horaSalidaUTC0.add(Calendar.HOUR, 24);
-        horaLlegadaUTC0.add(Calendar.HOUR, 24);
-        horaSalida.add(Calendar.HOUR, 24);
-        horaLlegada.add(Calendar.HOUR, 24);
-        Vuelo vuelo3 = new Vuelo(informacion[0] + informacion[1], salida, llegada, horaSalida.getTime(), horaLlegada.getTime(), horaSalidaUTC0.getTime(), horaLlegadaUTC0.getTime(), capacidad, duracion, 1, true);
-        horaSalidaUTC0.add(Calendar.HOUR, 24);
-        horaLlegadaUTC0.add(Calendar.HOUR, 24);
-        horaSalida.add(Calendar.HOUR, 24);
-        horaLlegada.add(Calendar.HOUR, 24);
-        Vuelo vuelo4 = new Vuelo(informacion[0] + informacion[1], salida, llegada, horaSalida.getTime(), horaLlegada.getTime(), horaSalidaUTC0.getTime(), horaLlegadaUTC0.getTime(), capacidad, duracion, 1, true);
-        horaSalidaUTC0.add(Calendar.HOUR, 24);
-        horaLlegadaUTC0.add(Calendar.HOUR, 24);
-        horaSalida.add(Calendar.HOUR, 24);
-        horaLlegada.add(Calendar.HOUR, 24);
-        Vuelo vuelo5 = new Vuelo(informacion[0] + informacion[1], salida, llegada, horaSalida.getTime(), horaLlegada.getTime(), horaSalidaUTC0.getTime(), horaLlegadaUTC0.getTime(), capacidad, duracion, 1, true);
-
         
-        vuelo1.setDuracion(duracion);
-        vuelo2.setDuracion(duracion);
-        vuelo3.setDuracion(duracion);
-        vuelo4.setDuracion(duracion);
-        vuelo5.setDuracion(duracion);
+        vuelo.setDuracion(duracion);
 
-        vuelos.add(vuelo1);
-        vuelos.add(vuelo2);
-        vuelos.add(vuelo3);
-        vuelos.add(vuelo4);
-        vuelos.add(vuelo5);
+        vuelos.add(vuelo);
 
-        aeropuertos.get(informacion[0]).addVuelo(vuelo1);
-        aeropuertos.get(informacion[0]).addVuelo(vuelo2);
-        aeropuertos.get(informacion[0]).addVuelo(vuelo3);
-        aeropuertos.get(informacion[0]).addVuelo(vuelo4);
-        aeropuertos.get(informacion[0]).addVuelo(vuelo5);
+        aeropuertos.get(informacion[0]).addVuelo(vuelo);
       }
       br.close();
     } catch (Exception ex) {
@@ -435,7 +406,7 @@ public class LeerArchivos {
         bw.write(
           "VALUES (1,'" + 
           vuelo.getCapacidad() + "," + 
-          vuelo.getCapacidadActual() + ",'" + 
+          vuelo.getCapacidadActual() + "," + 
           vuelo.getCodigo() + "',1," + 
           vuelo.getDuracion() + ",'" + 
           dateFormat.format(vuelo.getFechaDestino()) + "','" + 

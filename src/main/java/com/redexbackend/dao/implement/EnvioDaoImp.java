@@ -96,7 +96,7 @@ public class EnvioDaoImp implements EnvioDao{
   public List<Envio> getInRange(Date fechaInicio, Date fechaFinal) {
     List<Envio> list = null;
     try{
-      var hql = "from Envio as e where (fechaEnvio between :start and :end)";
+      var hql = "from Envio as e where (e.fechaEnvioUTC between :start and :end)";
       list = entityManager.createQuery(hql)
         .setParameter("start", fechaInicio, TemporalType.DATE)
         .setParameter("end", fechaFinal, TemporalType.DATE)
