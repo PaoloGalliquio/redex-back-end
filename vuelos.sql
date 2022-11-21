@@ -1,687 +1,6 @@
 use `redex-db`;
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSKBO',1,1691,'2022-10-24 13:49:00','2022-10-24 17:38:00','2022-10-25 18:49:00','2022-10-24 14:38:00',4,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSEQM',1,1684,'2022-10-24 14:04:00','2022-10-24 18:00:00','2022-10-25 19:04:00','2022-10-24 15:00:00',9,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSPIM',1,1680,'2022-10-24 04:03:00','2022-10-24 08:03:00','2022-10-25 09:03:00','2022-10-24 05:03:00',25,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSKBO',1,1649,'2022-10-24 07:07:00','2022-10-24 11:38:00','2022-10-25 12:07:00','2022-10-24 08:38:00',4,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EFHKSPIM',1,1648,'2022-10-24 14:33:00','2022-10-24 18:05:00','2022-10-25 19:33:00','2022-10-24 16:05:00',25,8);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSEQM',1,1647,'2022-10-24 08:36:00','2022-10-24 12:09:00','2022-10-25 13:36:00','2022-10-24 10:09:00',9,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EETNSKBO',1,1645,'2022-10-24 23:30:00','2022-10-24 03:05:00','2022-10-25 04:30:00','2022-10-24 01:05:00',4,37);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EETNSKBO',1,1644,'2022-10-24 07:29:00','2022-10-24 11:05:00','2022-10-25 12:29:00','2022-10-24 09:05:00',4,37);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSPIM',1,1644,'2022-10-24 11:27:00','2022-10-24 16:03:00','2022-10-25 16:27:00','2022-10-24 13:03:00',25,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EFHKSKBO',1,1643,'2022-10-25 21:41:00','2022-10-25 01:18:00','2022-10-26 02:41:00','2022-10-24 23:18:00',4,8);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSKBO',1,1641,'2022-10-24 18:59:00','2022-10-24 23:38:00','2022-10-25 23:59:00','2022-10-24 20:38:00',4,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EFHKSKBO',1,1632,'2022-10-24 05:30:00','2022-10-24 09:18:00','2022-10-25 10:30:00','2022-10-24 07:18:00',4,8);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSPIM',1,1632,'2022-10-24 22:23:00','2022-10-24 02:11:00','2022-10-25 03:23:00','2022-10-24 00:11:00',25,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSPIM',1,1631,'2022-10-24 23:19:00','2022-10-24 03:08:00','2022-10-25 04:19:00','2022-10-24 01:08:00',25,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASKBO',1,1627,'2022-10-24 17:43:00','2022-10-24 21:36:00','2022-10-25 22:43:00','2022-10-24 19:36:00',4,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSKBO',1,1625,'2022-10-24 03:53:00','2022-10-24 07:48:00','2022-10-25 08:53:00','2022-10-24 05:48:00',4,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSEQM',1,1623,'2022-10-24 02:43:00','2022-10-24 06:40:00','2022-10-25 07:43:00','2022-10-24 04:40:00',9,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSPIM',1,1623,'2022-10-24 16:14:00','2022-10-24 20:11:00','2022-10-25 21:14:00','2022-10-24 18:11:00',25,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASPIM',1,1622,'2022-10-24 07:27:00','2022-10-24 11:25:00','2022-10-25 12:27:00','2022-10-24 09:25:00',25,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSKBO',1,1621,'2022-10-24 22:51:00','2022-10-24 02:50:00','2022-10-25 03:51:00','2022-10-24 00:50:00',4,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASEQM',1,1589,'2022-10-24 11:17:00','2022-10-24 15:48:00','2022-10-25 16:17:00','2022-10-24 13:48:00',9,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EFHKSEQM',1,1588,'2022-10-24 23:24:00','2022-10-24 03:56:00','2022-10-25 04:24:00','2022-10-24 01:56:00',9,8);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSLLP',1,1586,'2022-10-24 17:32:00','2022-10-24 22:06:00','2022-10-25 21:32:00','2022-10-24 19:06:00',38,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSKBO',1,1585,'2022-10-24 04:15:00','2022-10-24 08:50:00','2022-10-25 09:15:00','2022-10-24 06:50:00',4,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSKBO',1,1585,'2022-10-24 10:15:00','2022-10-24 14:50:00','2022-10-25 15:15:00','2022-10-24 12:50:00',4,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSLLP',1,1585,'2022-10-24 09:31:00','2022-10-24 14:06:00','2022-10-25 13:31:00','2022-10-24 11:06:00',38,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSPIM',1,1583,'2022-10-24 09:34:00','2022-10-24 14:11:00','2022-10-25 14:34:00','2022-10-24 12:11:00',25,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EETNSPIM',1,1582,'2022-10-24 17:39:00','2022-10-24 22:17:00','2022-10-25 22:39:00','2022-10-24 20:17:00',25,37);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EETNSEQM',1,1578,'2022-10-24 23:38:00','2022-10-24 04:20:00','2022-10-25 04:38:00','2022-10-24 02:20:00',9,37);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EETNSPIM',1,1576,'2022-10-24 05:33:00','2022-10-24 10:17:00','2022-10-25 10:33:00','2022-10-24 08:17:00',25,37);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSEQM',1,1575,'2022-10-25 20:15:00','2022-10-25 02:00:00','2022-10-26 01:15:00','2022-10-24 23:00:00',9,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EETNSEQM',1,1575,'2022-10-24 07:35:00','2022-10-24 12:20:00','2022-10-25 12:35:00','2022-10-24 10:20:00',9,37);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSKBO',1,1572,'2022-10-24 23:50:00','2022-10-24 05:38:00','2022-10-25 04:50:00','2022-10-24 02:38:00',4,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSPIM',1,1571,'2022-10-24 03:22:00','2022-10-24 08:11:00','2022-10-25 08:22:00','2022-10-24 06:11:00',25,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EFHKSEQM',1,1570,'2022-10-24 07:06:00','2022-10-24 11:56:00','2022-10-25 12:06:00','2022-10-24 09:56:00',9,8);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSPIM',1,1570,'2022-10-24 10:18:00','2022-10-24 15:08:00','2022-10-25 15:18:00','2022-10-24 13:08:00',25,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSEQM',1,1569,'2022-10-24 04:09:00','2022-10-24 10:00:00','2022-10-25 09:09:00','2022-10-24 07:00:00',9,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EETNSPIM',1,1569,'2022-10-24 11:26:00','2022-10-24 16:17:00','2022-10-25 16:26:00','2022-10-24 14:17:00',25,37);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EETNSEQM',1,1567,'2022-10-24 15:27:00','2022-10-24 20:20:00','2022-10-25 20:27:00','2022-10-24 18:20:00',9,37);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASEQM',1,1566,'2022-10-24 16:54:00','2022-10-24 21:48:00','2022-10-25 21:54:00','2022-10-24 19:48:00',9,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSVMI',1,1566,'2022-10-24 14:51:00','2022-10-24 19:45:00','2022-10-25 18:51:00','2022-10-24 16:45:00',18,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EFHKSEQM',1,1565,'2022-10-24 15:01:00','2022-10-24 19:56:00','2022-10-25 20:01:00','2022-10-24 17:56:00',9,8);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EFHKSPIM',1,1563,'2022-10-24 21:08:00','2022-10-24 02:05:00','2022-10-25 02:08:00','2022-10-24 00:05:00',25,8);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EFHKSKBO',1,1562,'2022-10-24 12:20:00','2022-10-24 17:18:00','2022-10-25 17:20:00','2022-10-24 15:18:00',4,8);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSGAS',1,1561,'2022-10-25 20:08:00','2022-10-25 01:07:00','2022-10-26 00:08:00','2022-10-24 22:07:00',21,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSPIM',1,1560,'2022-10-25 18:03:00','2022-10-25 00:03:00','2022-10-25 23:03:00','2022-10-24 21:03:00',25,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LDZASKBO',1,1529,'2022-10-24 04:31:00','2022-10-24 09:02:00','2022-10-25 09:31:00','2022-10-24 08:02:00',4,39);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EETNSKBO',1,1529,'2022-10-24 13:34:00','2022-10-24 19:05:00','2022-10-25 18:34:00','2022-10-24 17:05:00',4,37);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LOWWSKBO',1,1528,'2022-10-24 18:49:00','2022-10-24 23:21:00','2022-10-25 23:49:00','2022-10-24 22:21:00',4,1);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ESKNSEQM',1,1528,'2022-10-24 04:38:00','2022-10-24 09:10:00','2022-10-25 09:38:00','2022-10-24 08:10:00',9,33);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LZIBSKBO',1,1527,'2022-10-24 20:33:00','2022-10-24 01:06:00','2022-10-25 01:33:00','2022-10-24 00:06:00',4,7);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LOWWSPIM',1,1527,'2022-10-24 03:42:00','2022-10-24 08:15:00','2022-10-25 08:42:00','2022-10-24 07:15:00',25,1);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LDZASKBO',1,1526,'2022-10-24 12:28:00','2022-10-24 17:02:00','2022-10-25 17:28:00','2022-10-24 16:02:00',4,39);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSKBO',1,1526,'2022-10-24 15:16:00','2022-10-24 20:50:00','2022-10-25 20:16:00','2022-10-24 18:50:00',4,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSEQM',1,1525,'2022-10-25 19:05:00','2022-10-25 00:40:00','2022-10-26 00:05:00','2022-10-24 22:40:00',9,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSVMI',1,1525,'2022-10-24 14:48:00','2022-10-24 19:23:00','2022-10-25 18:48:00','2022-10-24 17:23:00',18,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LMMLSKBO',1,1524,'2022-10-24 12:56:00','2022-10-24 17:32:00','2022-10-25 17:56:00','2022-10-24 16:32:00',4,5);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LZIBSEQM',1,1524,'2022-10-24 22:45:00','2022-10-24 03:21:00','2022-10-25 03:45:00','2022-10-24 02:21:00',9,7);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EHAMSPIM',1,1524,'2022-10-24 01:36:00','2022-10-24 06:12:00','2022-10-25 06:36:00','2022-10-24 05:12:00',25,31);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSPIM',1,1523,'2022-10-24 03:31:00','2022-10-24 09:08:00','2022-10-25 08:31:00','2022-10-24 07:08:00',25,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSGAS',1,1523,'2022-10-24 06:44:00','2022-10-24 11:21:00','2022-10-25 10:44:00','2022-10-24 09:21:00',21,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASGAS',1,1523,'2022-10-25 20:41:00','2022-10-25 01:18:00','2022-10-26 00:41:00','2022-10-24 23:18:00',21,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LFPGSKBO',1,1522,'2022-10-24 08:26:00','2022-10-24 13:04:00','2022-10-25 13:26:00','2022-10-24 12:04:00',4,14);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EHAMSKBO',1,1522,'2022-10-24 02:48:00','2022-10-24 07:26:00','2022-10-25 07:48:00','2022-10-24 06:26:00',4,31);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASLLP',1,1522,'2022-10-24 00:29:00','2022-10-24 05:07:00','2022-10-25 04:29:00','2022-10-24 03:07:00',38,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LOWWSKBO',1,1521,'2022-10-24 06:42:00','2022-10-24 11:21:00','2022-10-25 11:42:00','2022-10-24 10:21:00',4,1);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LFPGSKBO',1,1521,'2022-10-24 20:25:00','2022-10-24 01:04:00','2022-10-25 01:25:00','2022-10-24 00:04:00',4,14);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ESKNSKBO',1,1521,'2022-10-24 00:57:00','2022-10-24 05:36:00','2022-10-25 05:57:00','2022-10-24 04:36:00',4,33);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LZIBSPIM',1,1521,'2022-10-24 00:52:00','2022-10-24 05:31:00','2022-10-25 05:52:00','2022-10-24 04:31:00',25,7);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LATISKBO',1,1520,'2022-10-24 15:31:00','2022-10-24 20:11:00','2022-10-25 20:31:00','2022-10-24 19:11:00',4,10);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASVMI',1,1520,'2022-10-24 01:56:00','2022-10-24 06:36:00','2022-10-25 05:56:00','2022-10-24 04:36:00',18,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EETNSPIM',1,1520,'2022-10-24 22:37:00','2022-10-24 04:17:00','2022-10-25 03:37:00','2022-10-24 02:17:00',25,37);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASKBO',1,1519,'2022-10-24 07:55:00','2022-10-24 13:36:00','2022-10-25 12:55:00','2022-10-24 11:36:00',4,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LMMLSPIM',1,1519,'2022-10-24 21:50:00','2022-10-24 02:31:00','2022-10-25 02:50:00','2022-10-24 01:31:00',25,5);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LFPGSPIM',1,1518,'2022-10-24 13:53:00','2022-10-24 18:35:00','2022-10-25 18:53:00','2022-10-24 17:35:00',25,14);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSEQM',1,1516,'2022-10-24 06:56:00','2022-10-24 12:40:00','2022-10-25 11:56:00','2022-10-24 10:40:00',9,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LSZBSPIM',1,1516,'2022-10-24 01:59:00','2022-10-24 06:43:00','2022-10-25 06:59:00','2022-10-24 05:43:00',25,11);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LHBPSKBO',1,1515,'2022-10-24 01:39:00','2022-10-24 06:24:00','2022-10-25 06:39:00','2022-10-24 05:24:00',4,26);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LEMDSKBO',1,1514,'2022-10-24 20:29:00','2022-10-24 01:15:00','2022-10-25 01:29:00','2022-10-24 00:15:00',4,34);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EHAMSEQM',1,1514,'2022-10-24 02:43:00','2022-10-24 07:29:00','2022-10-25 07:43:00','2022-10-24 06:29:00',9,31);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LSZBSEQM',1,1514,'2022-10-24 15:24:00','2022-10-24 20:10:00','2022-10-25 20:24:00','2022-10-24 19:10:00',9,11);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LIRASPIM',1,1514,'2022-10-24 12:35:00','2022-10-24 17:21:00','2022-10-25 17:35:00','2022-10-24 16:21:00',25,12);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSGAS',1,1514,'2022-10-24 05:28:00','2022-10-24 10:14:00','2022-10-25 09:28:00','2022-10-24 08:14:00',21,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LHBPSKBO',1,1513,'2022-10-24 07:37:00','2022-10-24 12:24:00','2022-10-25 12:37:00','2022-10-24 11:24:00',4,26);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LATISEQM',1,1513,'2022-10-24 17:47:00','2022-10-24 22:34:00','2022-10-25 22:47:00','2022-10-24 21:34:00',9,10);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LSZBSEQM',1,1513,'2022-10-24 21:23:00','2022-10-24 02:10:00','2022-10-25 02:23:00','2022-10-24 01:10:00',9,11);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASPIM',1,1513,'2022-10-24 23:38:00','2022-10-24 05:25:00','2022-10-25 04:38:00','2022-10-24 03:25:00',25,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LATISEQM',1,1512,'2022-10-24 23:46:00','2022-10-24 04:34:00','2022-10-25 04:46:00','2022-10-24 03:34:00',9,10);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LATISPIM',1,1512,'2022-10-24 18:23:00','2022-10-24 23:11:00','2022-10-25 23:23:00','2022-10-24 22:11:00',25,10);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASPIM',1,1512,'2022-10-24 11:37:00','2022-10-24 17:25:00','2022-10-25 16:37:00','2022-10-24 15:25:00',25,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LMMLSKBO',1,1511,'2022-10-24 20:43:00','2022-10-24 01:32:00','2022-10-25 01:43:00','2022-10-24 00:32:00',4,5);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EPMOSKBO',1,1511,'2022-10-24 12:47:00','2022-10-24 17:36:00','2022-10-25 17:47:00','2022-10-24 16:36:00',4,30);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EDDISEQM',1,1511,'2022-10-25 19:29:00','2022-10-25 00:18:00','2022-10-26 00:29:00','2022-10-24 23:18:00',9,6);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSEQM',1,1511,'2022-10-24 12:51:00','2022-10-24 18:40:00','2022-10-25 17:51:00','2022-10-24 16:40:00',9,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LFPGSKBO',1,1510,'2022-10-24 14:14:00','2022-10-24 19:04:00','2022-10-25 19:14:00','2022-10-24 18:04:00',4,14);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EHAMSEQM',1,1510,'2022-10-24 10:39:00','2022-10-24 15:29:00','2022-10-25 15:39:00','2022-10-24 14:29:00',9,31);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASPIM',1,1510,'2022-10-24 17:35:00','2022-10-24 23:25:00','2022-10-25 22:35:00','2022-10-24 21:25:00',25,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LFPGSEQM',1,1509,'2022-10-25 19:55:00','2022-10-25 00:46:00','2022-10-26 00:55:00','2022-10-24 23:46:00',9,14);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASVMI',1,1509,'2022-10-24 17:45:00','2022-10-24 22:36:00','2022-10-25 21:45:00','2022-10-24 20:36:00',18,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LIRASPIM',1,1509,'2022-10-24 04:30:00','2022-10-24 09:21:00','2022-10-25 09:30:00','2022-10-24 08:21:00',25,12);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ENGMSPIM',1,1509,'2022-10-24 01:38:00','2022-10-24 06:29:00','2022-10-25 06:38:00','2022-10-24 05:29:00',25,32);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EDDISKBO',1,1508,'2022-10-24 17:44:00','2022-10-24 22:36:00','2022-10-25 22:44:00','2022-10-24 21:36:00',4,6);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EBCISKBO',1,1508,'2022-10-24 09:23:00','2022-10-24 14:15:00','2022-10-25 14:23:00','2022-10-24 13:15:00',4,23);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LJLJSEQM',1,1508,'2022-10-24 22:40:00','2022-10-24 03:32:00','2022-10-25 03:40:00','2022-10-24 02:32:00',9,20);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LEMDSEQM',1,1508,'2022-10-24 21:54:00','2022-10-24 02:46:00','2022-10-25 02:54:00','2022-10-24 01:46:00',9,34);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EETNSVMI',1,1508,'2022-10-24 16:33:00','2022-10-24 21:25:00','2022-10-25 20:33:00','2022-10-24 19:25:00',18,37);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LKPRSEQM',1,1507,'2022-10-24 05:51:00','2022-10-24 10:44:00','2022-10-25 10:51:00','2022-10-24 09:44:00',9,22);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LKPRSPIM',1,1507,'2022-10-24 00:52:00','2022-10-24 05:45:00','2022-10-25 05:52:00','2022-10-24 04:45:00',25,22);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASLLP',1,1507,'2022-10-24 08:14:00','2022-10-24 13:07:00','2022-10-25 12:14:00','2022-10-24 11:07:00',38,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASKBO',1,1506,'2022-10-24 23:42:00','2022-10-24 05:36:00','2022-10-25 04:42:00','2022-10-24 03:36:00',4,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LATISEQM',1,1506,'2022-10-24 11:40:00','2022-10-24 16:34:00','2022-10-25 16:40:00','2022-10-24 15:34:00',9,10);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LDZASEQM',1,1506,'2022-10-24 03:42:00','2022-10-24 08:36:00','2022-10-25 08:42:00','2022-10-24 07:36:00',9,39);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LJLJSKBO',1,1505,'2022-10-24 20:18:00','2022-10-24 01:13:00','2022-10-25 01:18:00','2022-10-24 00:13:00',4,20);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LEMDSKBO',1,1505,'2022-10-24 08:20:00','2022-10-24 13:15:00','2022-10-25 13:20:00','2022-10-24 12:15:00',4,34);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LKPRSEQM',1,1505,'2022-10-24 11:49:00','2022-10-24 16:44:00','2022-10-25 16:49:00','2022-10-24 15:44:00',9,22);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ESKNSEQM',1,1505,'2022-10-24 12:15:00','2022-10-24 17:10:00','2022-10-25 17:15:00','2022-10-24 16:10:00',9,33);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSVMI',1,1505,'2022-10-24 17:05:00','2022-10-24 22:00:00','2022-10-25 21:05:00','2022-10-24 20:00:00',18,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ELLXSKBO',1,1504,'2022-10-24 12:45:00','2022-10-24 17:41:00','2022-10-25 17:45:00','2022-10-24 16:41:00',4,16);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LIRASEQM',1,1504,'2022-10-24 15:58:00','2022-10-24 20:54:00','2022-10-25 20:58:00','2022-10-24 19:54:00',9,12);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EPMOSEQM',1,1504,'2022-10-24 08:36:00','2022-10-24 13:32:00','2022-10-25 13:36:00','2022-10-24 12:32:00',9,30);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LDZASPIM',1,1504,'2022-10-25 19:54:00','2022-10-25 00:50:00','2022-10-26 00:54:00','2022-10-24 23:50:00',25,39);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSCEL',1,1504,'2022-10-24 13:44:00','2022-10-24 19:40:00','2022-10-25 17:44:00','2022-10-24 16:40:00',13,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LATISKBO',1,1503,'2022-10-24 07:14:00','2022-10-24 12:11:00','2022-10-25 12:14:00','2022-10-24 11:11:00',4,10);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSEQM',1,1503,'2022-10-24 14:12:00','2022-10-24 20:09:00','2022-10-25 19:12:00','2022-10-24 18:09:00',9,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LHBPSPIM',1,1503,'2022-10-24 06:47:00','2022-10-24 11:44:00','2022-10-25 11:47:00','2022-10-24 10:44:00',25,26);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EPMOSPIM',1,1503,'2022-10-24 10:07:00','2022-10-24 15:04:00','2022-10-25 15:07:00','2022-10-24 14:04:00',25,30);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSGAS',1,1503,'2022-10-24 07:10:00','2022-10-24 13:07:00','2022-10-25 11:10:00','2022-10-24 10:07:00',21,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSKBO',1,1502,'2022-10-24 17:50:00','2022-10-24 23:48:00','2022-10-25 22:50:00','2022-10-24 21:48:00',4,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LKPRSKBO',1,1502,'2022-10-24 00:38:00','2022-10-24 05:36:00','2022-10-25 05:38:00','2022-10-24 04:36:00',4,22);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LJLJSEQM',1,1502,'2022-10-24 06:34:00','2022-10-24 11:32:00','2022-10-25 11:34:00','2022-10-24 10:32:00',9,20);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ENGMSEQM',1,1502,'2022-10-24 23:49:00','2022-10-24 04:47:00','2022-10-25 04:49:00','2022-10-24 03:47:00',9,32);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EFHKSPIM',1,1502,'2022-10-24 04:07:00','2022-10-24 10:05:00','2022-10-25 09:07:00','2022-10-24 08:05:00',25,8);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASGAS',1,1502,'2022-10-24 12:20:00','2022-10-24 17:18:00','2022-10-25 16:20:00','2022-10-24 15:18:00',21,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSVMI',1,1501,'2022-10-24 21:46:00','2022-10-24 03:45:00','2022-10-25 01:46:00','2022-10-24 00:45:00',18,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ELLXSPIM',1,1501,'2022-10-24 18:49:00','2022-10-24 23:48:00','2022-10-25 23:49:00','2022-10-24 22:48:00',25,16);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSGAS',1,1501,'2022-10-24 11:15:00','2022-10-24 16:14:00','2022-10-25 15:15:00','2022-10-24 14:14:00',21,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EDDISKBO',1,1500,'2022-10-24 11:36:00','2022-10-24 16:36:00','2022-10-25 16:36:00','2022-10-24 15:36:00',4,6);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSEQM',1,1500,'2022-10-24 22:09:00','2022-10-24 04:09:00','2022-10-25 03:09:00','2022-10-24 02:09:00',9,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSPIM',1,1500,'2022-10-24 15:08:00','2022-10-24 21:08:00','2022-10-25 20:08:00','2022-10-24 19:08:00',25,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LZIBSPIM',1,1500,'2022-10-24 16:31:00','2022-10-24 21:31:00','2022-10-25 21:31:00','2022-10-24 20:31:00',25,7);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EFHKSLLP',1,1500,'2022-10-24 08:17:00','2022-10-24 13:17:00','2022-10-25 12:17:00','2022-10-24 11:17:00',38,8);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LATISKBO',1,1469,'2022-10-24 22:40:00','2022-10-24 04:11:00','2022-10-25 03:40:00','2022-10-24 03:11:00',4,10);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASEQM',1,1469,'2022-10-24 03:17:00','2022-10-24 09:48:00','2022-10-25 08:17:00','2022-10-24 07:48:00',9,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EKCHSPIM',1,1469,'2022-10-24 10:05:00','2022-10-24 15:36:00','2022-10-25 15:05:00','2022-10-24 14:36:00',25,28);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LJLJSKBO',1,1468,'2022-10-24 03:41:00','2022-10-24 09:13:00','2022-10-25 08:41:00','2022-10-24 08:13:00',4,20);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EKCHSPIM',1,1468,'2022-10-24 02:04:00','2022-10-24 07:36:00','2022-10-25 07:04:00','2022-10-24 06:36:00',25,28);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EHAMSPIM',1,1468,'2022-10-24 08:40:00','2022-10-24 14:12:00','2022-10-25 13:40:00','2022-10-24 13:12:00',25,31);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LDZASKBO',1,1467,'2022-10-24 19:29:00','2022-10-24 01:02:00','2022-10-25 00:29:00','2022-10-24 00:02:00',4,39);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EFHKSLLP',1,1467,'2022-10-25 19:44:00','2022-10-25 01:17:00','2022-10-25 23:44:00','2022-10-24 23:17:00',38,8);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LOWWSKBO',1,1466,'2022-10-24 11:47:00','2022-10-24 17:21:00','2022-10-25 16:47:00','2022-10-24 16:21:00',4,1);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LZIBSKBO',1,1466,'2022-10-24 13:32:00','2022-10-24 19:06:00','2022-10-25 18:32:00','2022-10-24 18:06:00',4,7);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSABE',1,1466,'2022-10-24 11:33:00','2022-10-24 17:07:00','2022-10-25 14:33:00','2022-10-24 14:07:00',35,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ENGMSEQM',1,1465,'2022-10-24 05:12:00','2022-10-24 10:47:00','2022-10-25 10:12:00','2022-10-24 09:47:00',9,32);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LJLJSPIM',1,1465,'2022-10-24 05:03:00','2022-10-24 10:38:00','2022-10-25 10:03:00','2022-10-24 09:38:00',25,20);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSGAS',1,1465,'2022-10-24 12:32:00','2022-10-24 19:07:00','2022-10-25 16:32:00','2022-10-24 16:07:00',21,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSKBO',1,1464,'2022-10-24 09:12:00','2022-10-24 15:48:00','2022-10-25 14:12:00','2022-10-24 13:48:00',4,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EFHKSVMI',1,1464,'2022-10-24 09:25:00','2022-10-24 15:01:00','2022-10-25 13:25:00','2022-10-24 13:01:00',18,8);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EDDISPIM',1,1464,'2022-10-24 14:17:00','2022-10-24 19:53:00','2022-10-25 19:17:00','2022-10-24 18:53:00',25,6);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EBCISPIM',1,1464,'2022-10-24 06:08:00','2022-10-24 11:44:00','2022-10-25 11:08:00','2022-10-24 10:44:00',25,23);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSGAS',1,1464,'2022-10-24 13:45:00','2022-10-24 19:21:00','2022-10-25 17:45:00','2022-10-24 17:21:00',21,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LJLJSEQM',1,1463,'2022-10-24 13:55:00','2022-10-24 19:32:00','2022-10-25 18:55:00','2022-10-24 18:32:00',9,20);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSVMI',1,1463,'2022-10-24 22:23:00','2022-10-24 04:00:00','2022-10-25 02:23:00','2022-10-24 02:00:00',18,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EHAMSPIM',1,1462,'2022-10-24 16:34:00','2022-10-24 22:12:00','2022-10-25 21:34:00','2022-10-24 21:12:00',25,31);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSABE',1,1462,'2022-10-25 19:29:00','2022-10-25 01:07:00','2022-10-25 22:29:00','2022-10-24 22:07:00',35,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EFHKSVMI',1,1461,'2022-10-24 21:22:00','2022-10-24 03:01:00','2022-10-25 01:22:00','2022-10-24 01:01:00',18,8);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LOWWSPIM',1,1461,'2022-10-25 18:36:00','2022-10-25 00:15:00','2022-10-25 23:36:00','2022-10-24 23:15:00',25,1);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSLLP',1,1461,'2022-10-24 23:27:00','2022-10-24 06:06:00','2022-10-25 03:27:00','2022-10-24 03:06:00',38,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASGAS',1,1461,'2022-10-24 03:39:00','2022-10-24 09:18:00','2022-10-25 07:39:00','2022-10-24 07:18:00',21,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSGAS',1,1460,'2022-10-24 21:41:00','2022-10-24 03:21:00','2022-10-25 01:41:00','2022-10-24 01:21:00',21,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASEQM',1,1458,'2022-10-24 21:06:00','2022-10-24 03:48:00','2022-10-25 02:06:00','2022-10-24 01:48:00',9,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LDZASPIM',1,1458,'2022-10-24 03:08:00','2022-10-24 08:50:00','2022-10-25 08:08:00','2022-10-24 07:50:00',25,39);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EBCISEQM',1,1457,'2022-10-24 19:55:00','2022-10-24 01:38:00','2022-10-25 00:55:00','2022-10-24 00:38:00',9,23);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LEMDSEQM',1,1457,'2022-10-24 05:03:00','2022-10-24 10:46:00','2022-10-25 10:03:00','2022-10-24 09:46:00',9,34);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LKPRSPIM',1,1457,'2022-10-24 08:02:00','2022-10-24 13:45:00','2022-10-25 13:02:00','2022-10-24 12:45:00',25,22);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LIRASKBO',1,1456,'2022-10-24 11:23:00','2022-10-24 17:07:00','2022-10-25 16:23:00','2022-10-24 16:07:00',4,12);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSVMI',1,1456,'2022-10-24 05:01:00','2022-10-24 11:45:00','2022-10-25 09:01:00','2022-10-24 08:45:00',18,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSCEL',1,1456,'2022-10-24 20:21:00','2022-10-24 02:05:00','2022-10-25 00:21:00','2022-10-24 00:05:00',13,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LHBPSKBO',1,1455,'2022-10-25 18:39:00','2022-10-25 00:24:00','2022-10-25 23:39:00','2022-10-24 23:24:00',4,26);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EBCISEQM',1,1455,'2022-10-24 11:53:00','2022-10-24 17:38:00','2022-10-25 16:53:00','2022-10-24 16:38:00',9,23);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSVMI',1,1455,'2022-10-24 05:38:00','2022-10-24 11:23:00','2022-10-25 09:38:00','2022-10-24 09:23:00',18,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LMMLSPIM',1,1455,'2022-10-24 04:46:00','2022-10-24 10:31:00','2022-10-25 09:46:00','2022-10-24 09:31:00',25,5);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASLLP',1,1455,'2022-10-24 15:22:00','2022-10-24 21:07:00','2022-10-25 19:22:00','2022-10-24 19:07:00',38,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EFHKSCEL',1,1455,'2022-10-24 15:42:00','2022-10-24 21:27:00','2022-10-25 19:42:00','2022-10-24 19:27:00',13,8);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EFHKSGAS',1,1455,'2022-10-24 20:54:00','2022-10-24 02:39:00','2022-10-25 00:54:00','2022-10-24 00:39:00',21,8);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EHAMSKBO',1,1454,'2022-10-24 19:40:00','2022-10-24 01:26:00','2022-10-25 00:40:00','2022-10-24 00:26:00',4,31);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ENGMSKBO',1,1454,'2022-10-24 13:19:00','2022-10-24 19:05:00','2022-10-25 18:19:00','2022-10-24 18:05:00',4,32);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LFPGSEQM',1,1454,'2022-10-24 13:00:00','2022-10-24 18:46:00','2022-10-25 18:00:00','2022-10-24 17:46:00',9,14);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EDDISPIM',1,1454,'2022-10-24 06:07:00','2022-10-24 11:53:00','2022-10-25 11:07:00','2022-10-24 10:53:00',25,6);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EETNSLLP',1,1454,'2022-10-24 01:47:00','2022-10-24 07:33:00','2022-10-25 05:47:00','2022-10-24 05:33:00',38,37);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ESKNSKBO',1,1453,'2022-10-24 15:49:00','2022-10-24 21:36:00','2022-10-25 20:49:00','2022-10-24 20:36:00',4,33);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ELLXSPIM',1,1453,'2022-10-24 02:01:00','2022-10-24 07:48:00','2022-10-25 07:01:00','2022-10-24 06:48:00',25,16);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LBSFSVMI',1,1451,'2022-10-24 10:11:00','2022-10-24 16:00:00','2022-10-25 14:11:00','2022-10-24 14:00:00',18,27);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EFHKSVMI',1,1451,'2022-10-24 15:12:00','2022-10-24 21:01:00','2022-10-25 19:12:00','2022-10-24 19:01:00',18,8);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LEMDSPIM',1,1451,'2022-10-24 17:29:00','2022-10-24 23:18:00','2022-10-25 22:29:00','2022-10-24 22:18:00',25,34);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSGAS',1,1451,'2022-10-24 00:18:00','2022-10-24 07:07:00','2022-10-25 04:18:00','2022-10-24 04:07:00',21,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LSZBSEQM',1,1450,'2022-10-24 02:20:00','2022-10-24 08:10:00','2022-10-25 07:20:00','2022-10-24 07:10:00',9,11);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSGAS',1,1450,'2022-10-24 22:24:00','2022-10-24 04:14:00','2022-10-25 02:24:00','2022-10-24 02:14:00',21,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LDZASEQM',1,1449,'2022-10-25 18:45:00','2022-10-25 00:36:00','2022-10-25 23:45:00','2022-10-24 23:36:00',9,39);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LZIBSKBO',1,1448,'2022-10-24 01:14:00','2022-10-24 07:06:00','2022-10-25 06:14:00','2022-10-24 06:06:00',4,7);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ESKNSPIM',1,1448,'2022-10-24 15:40:00','2022-10-24 21:32:00','2022-10-25 20:40:00','2022-10-24 20:32:00',25,33);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LSZBSPIM',1,1448,'2022-10-24 08:51:00','2022-10-24 14:43:00','2022-10-25 13:51:00','2022-10-24 13:43:00',25,11);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LSZBSKBO',1,1447,'2022-10-24 19:59:00','2022-10-24 01:52:00','2022-10-25 00:59:00','2022-10-24 00:52:00',4,11);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EBCISPIM',1,1447,'2022-10-24 21:51:00','2022-10-24 03:44:00','2022-10-25 02:51:00','2022-10-24 02:44:00',25,23);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSGAS',1,1447,'2022-10-24 16:21:00','2022-10-24 22:14:00','2022-10-25 20:21:00','2022-10-24 20:14:00',21,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EHAMSKBO',1,1446,'2022-10-24 07:32:00','2022-10-24 13:26:00','2022-10-25 12:32:00','2022-10-24 12:26:00',4,31);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EPMOSPIM',1,1446,'2022-10-24 17:10:00','2022-10-24 23:04:00','2022-10-25 22:10:00','2022-10-24 22:04:00',25,30);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EHAMSKBO',1,1445,'2022-10-24 13:31:00','2022-10-24 19:26:00','2022-10-25 18:31:00','2022-10-24 18:26:00',4,31);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ELLXSKBO',1,1445,'2022-10-24 19:46:00','2022-10-24 01:41:00','2022-10-25 00:46:00','2022-10-24 00:41:00',4,16);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ENGMSPIM',1,1445,'2022-10-24 16:34:00','2022-10-24 22:29:00','2022-10-25 21:34:00','2022-10-24 21:29:00',25,32);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LOWWSKBO',1,1444,'2022-10-24 23:25:00','2022-10-24 05:21:00','2022-10-25 04:25:00','2022-10-24 04:21:00',4,1);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LJLJSKBO',1,1444,'2022-10-24 11:17:00','2022-10-24 17:13:00','2022-10-25 16:17:00','2022-10-24 16:13:00',4,20);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LZIBSEQM',1,1444,'2022-10-24 13:25:00','2022-10-24 19:21:00','2022-10-25 18:25:00','2022-10-24 18:21:00',9,7);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EETNSLLP',1,1444,'2022-10-25 19:37:00','2022-10-25 01:33:00','2022-10-25 23:37:00','2022-10-24 23:33:00',38,37);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EKCHSKBO',1,1443,'2022-10-24 03:58:00','2022-10-24 09:55:00','2022-10-25 08:58:00','2022-10-24 08:55:00',4,28);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LHBPSKBO',1,1443,'2022-10-24 12:27:00','2022-10-24 18:24:00','2022-10-25 17:27:00','2022-10-24 17:24:00',4,26);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EDDISEQM',1,1443,'2022-10-24 02:21:00','2022-10-24 08:18:00','2022-10-25 07:21:00','2022-10-24 07:18:00',9,6);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ENGMSPIM',1,1443,'2022-10-24 08:32:00','2022-10-24 14:29:00','2022-10-25 13:32:00','2022-10-24 13:29:00',25,32);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ESKNSPIM',1,1443,'2022-10-24 23:35:00','2022-10-24 05:32:00','2022-10-25 04:35:00','2022-10-24 04:32:00',25,33);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASCEL',1,1443,'2022-10-24 21:56:00','2022-10-24 03:53:00','2022-10-25 01:56:00','2022-10-24 01:53:00',13,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EVRASCEL',1,1443,'2022-10-24 13:56:00','2022-10-24 19:53:00','2022-10-25 17:56:00','2022-10-24 17:53:00',13,2);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'EKCHSKBO',1,1442,'2022-10-24 19:57:00','2022-10-24 01:55:00','2022-10-25 00:57:00','2022-10-24 00:55:00',4,28);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LEMDSEQM',1,1442,'2022-10-24 12:48:00','2022-10-24 18:46:00','2022-10-25 17:48:00','2022-10-24 17:46:00',9,34);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LSZBSEQM',1,1442,'2022-10-24 08:12:00','2022-10-24 14:10:00','2022-10-25 13:12:00','2022-10-24 13:10:00',9,11);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'UMMSSBBR',1,1442,'2022-10-24 01:54:00','2022-10-24 07:52:00','2022-10-25 04:54:00','2022-10-24 04:52:00',36,19);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LFPGSPIM',1,1442,'2022-10-24 20:37:00','2022-10-24 02:35:00','2022-10-25 01:37:00','2022-10-24 01:35:00',25,14);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'ESKNSPIM',1,1441,'2022-10-24 07:33:00','2022-10-24 13:32:00','2022-10-25 12:33:00','2022-10-24 12:32:00',25,33);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
-VALUES (1,350,350,'LGAVSCEL',1,1441,'2022-10-24 02:06:00','2022-10-24 08:05:00','2022-10-25 06:06:00','2022-10-24 06:05:00',13,15);
-
-INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,350,350,'LIRASKBO',1,1440,'2022-10-24 03:07:00','2022-10-24 09:07:00','2022-10-25 08:07:00','2022-10-24 08:07:00',4,12);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
@@ -11476,6 +10795,9 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'ENGMLSZB',1,252,'2022-10-24 08:28:00','2022-10-24 04:16:00','2022-10-24 07:28:00','2022-10-24 03:16:00',11,32);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSKBO',1,251,'2022-10-24 13:49:00','2022-10-24 17:38:00','2022-10-24 18:49:00','2022-10-24 14:38:00',4,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SBBRSLLP',1,251,'2022-10-24 15:10:00','2022-10-24 11:59:00','2022-10-24 19:10:00','2022-10-24 14:59:00',38,36);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
@@ -12040,6 +11362,9 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'LSZBESKN',1,245,'2022-10-25 02:30:00','2022-10-24 22:25:00','2022-10-25 01:30:00','2022-10-24 21:25:00',33,11);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSEQM',1,244,'2022-10-24 14:04:00','2022-10-24 18:00:00','2022-10-24 19:04:00','2022-10-24 15:00:00',9,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SLLPSABE',1,244,'2022-10-24 13:46:00','2022-10-24 08:42:00','2022-10-24 16:46:00','2022-10-24 12:42:00',35,38);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
@@ -12355,6 +11680,9 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'SPIMSGAS',1,240,'2022-10-24 23:49:00','2022-10-24 18:49:00','2022-10-25 03:49:00','2022-10-24 23:49:00',21,25);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSPIM',1,240,'2022-10-24 04:03:00','2022-10-24 08:03:00','2022-10-24 09:03:00','2022-10-24 05:03:00',25,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SCELSGAS',1,240,'2022-10-24 22:06:00','2022-10-24 18:06:00','2022-10-25 02:06:00','2022-10-24 22:06:00',21,13);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
@@ -12445,6 +11773,9 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'EGLLLSZB',1,240,'2022-10-24 07:00:00','2022-10-24 02:00:00','2022-10-24 06:00:00','2022-10-24 02:00:00',11,3);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSKBO',1,209,'2022-10-24 07:07:00','2022-10-24 11:38:00','2022-10-24 12:07:00','2022-10-24 08:38:00',4,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SGASSUAA',1,209,'2022-10-24 23:38:00','2022-10-24 19:09:00','2022-10-25 02:38:00','2022-10-24 23:09:00',24,21);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
@@ -12524,6 +11855,9 @@ VALUES (1,300,300,'EGLLESKN',1,209,'2022-10-25 03:10:00','2022-10-24 22:41:00','
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'ESKNLSZB',1,209,'2022-10-24 18:39:00','2022-10-24 15:10:00','2022-10-24 17:39:00','2022-10-24 14:10:00',11,33);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EFHKSPIM',1,208,'2022-10-24 14:33:00','2022-10-24 18:05:00','2022-10-24 19:33:00','2022-10-24 16:05:00',25,8);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LATILJLJ',1,208,'2022-10-24 08:39:00','2022-10-24 05:11:00','2022-10-24 07:39:00','2022-10-24 04:11:00',20,10);
@@ -12614,6 +11948,9 @@ VALUES (1,300,300,'ELLXENGM',1,208,'2022-10-24 05:50:00','2022-10-24 02:22:00','
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SEQMSLLP',1,207,'2022-10-24 19:50:00','2022-10-24 15:23:00','2022-10-24 23:50:00','2022-10-24 20:23:00',38,9);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSEQM',1,207,'2022-10-24 08:36:00','2022-10-24 12:09:00','2022-10-24 13:36:00','2022-10-24 10:09:00',9,15);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LHBPLOWW',1,207,'2022-10-24 20:51:00','2022-10-24 17:24:00','2022-10-24 19:51:00','2022-10-24 16:24:00',1,26);
@@ -12754,6 +12091,9 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'LPPTLSZB',1,206,'2022-10-24 21:24:00','2022-10-24 16:58:00','2022-10-24 20:24:00','2022-10-24 16:58:00',11,29);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EETNSKBO',1,205,'2022-10-24 23:30:00','2022-10-24 03:05:00','2022-10-24 04:30:00','2022-10-24 01:05:00',4,37);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SVMISLLP',1,205,'2022-10-24 04:22:00','2022-10-24 00:57:00','2022-10-24 08:22:00','2022-10-24 04:57:00',38,18);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
@@ -12829,10 +12169,16 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'LPPTESKN',1,205,'2022-10-24 05:09:00','2022-10-24 00:44:00','2022-10-24 04:09:00','2022-10-24 00:44:00',33,29);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EETNSKBO',1,204,'2022-10-24 07:29:00','2022-10-24 11:05:00','2022-10-24 12:29:00','2022-10-24 09:05:00',4,37);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SLLPSBBR',1,204,'2022-10-24 17:45:00','2022-10-24 13:21:00','2022-10-24 20:45:00','2022-10-24 17:21:00',36,38);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SPIMSGAS',1,204,'2022-10-24 11:13:00','2022-10-24 06:49:00','2022-10-24 15:13:00','2022-10-24 11:49:00',21,25);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSPIM',1,204,'2022-10-24 11:27:00','2022-10-24 16:03:00','2022-10-24 16:27:00','2022-10-24 13:03:00',25,19);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SCELSABE',1,204,'2022-10-24 20:54:00','2022-10-24 16:30:00','2022-10-24 23:54:00','2022-10-24 20:30:00',35,13);
@@ -12920,6 +12266,9 @@ VALUES (1,300,300,'LPPTEPMO',1,204,'2022-10-25 03:41:00','2022-10-24 23:17:00','
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SKBOSBBR',1,203,'2022-10-24 22:10:00','2022-10-24 16:47:00','2022-10-25 01:10:00','2022-10-24 21:47:00',36,4);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EFHKSKBO',1,203,'2022-10-25 21:41:00','2022-10-25 01:18:00','2022-10-25 02:41:00','2022-10-24 23:18:00',4,8);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SLLPSGAS',1,203,'2022-10-24 00:57:00','2022-10-23 21:34:00','2022-10-24 04:57:00','2022-10-24 01:34:00',21,38);
@@ -13076,6 +12425,9 @@ VALUES (1,300,300,'LPPTLHBP',1,202,'2022-10-24 11:29:00','2022-10-24 07:07:00','
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LPPTENGM',1,202,'2022-10-24 20:18:00','2022-10-24 15:56:00','2022-10-24 19:18:00','2022-10-24 15:56:00',32,29);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSKBO',1,201,'2022-10-24 18:59:00','2022-10-24 23:38:00','2022-10-24 23:59:00','2022-10-24 20:38:00',4,19);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SGASSBBR',1,201,'2022-10-24 02:09:00','2022-10-23 21:48:00','2022-10-24 05:09:00','2022-10-24 01:48:00',36,21);
@@ -13711,7 +13063,13 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'EPMOESKN',1,193,'2022-10-24 16:31:00','2022-10-24 13:18:00','2022-10-24 15:31:00','2022-10-24 12:18:00',33,30);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EFHKSKBO',1,192,'2022-10-24 05:30:00','2022-10-24 09:18:00','2022-10-24 10:30:00','2022-10-24 07:18:00',4,8);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SPIMSUAA',1,192,'2022-10-24 16:12:00','2022-10-24 11:00:00','2022-10-24 19:12:00','2022-10-24 16:00:00',24,25);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSPIM',1,192,'2022-10-24 22:23:00','2022-10-24 02:11:00','2022-10-24 03:23:00','2022-10-24 00:11:00',25,15);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LATIEHAM',1,192,'2022-10-24 13:31:00','2022-10-24 10:19:00','2022-10-24 12:31:00','2022-10-24 09:19:00',31,10);
@@ -13805,6 +13163,9 @@ VALUES (1,300,300,'SGASSBBR',1,191,'2022-10-24 13:59:00','2022-10-24 09:48:00','
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SPIMSGAS',1,191,'2022-10-24 05:00:00','2022-10-24 00:49:00','2022-10-24 09:00:00','2022-10-24 05:49:00',21,25);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSPIM',1,191,'2022-10-24 23:19:00','2022-10-24 03:08:00','2022-10-24 04:19:00','2022-10-24 01:08:00',25,27);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'EKCHLATI',1,191,'2022-10-24 13:14:00','2022-10-24 10:03:00','2022-10-24 12:14:00','2022-10-24 09:03:00',10,28);
@@ -14098,6 +13459,9 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'LPPTLIRA',1,188,'2022-10-24 17:07:00','2022-10-24 12:59:00','2022-10-24 16:07:00','2022-10-24 12:59:00',12,29);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASKBO',1,187,'2022-10-24 17:43:00','2022-10-24 21:36:00','2022-10-24 22:43:00','2022-10-24 19:36:00',4,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SUAASBBR',1,187,'2022-10-24 21:26:00','2022-10-24 18:19:00','2022-10-25 00:26:00','2022-10-24 21:19:00',36,24);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
@@ -14213,6 +13577,9 @@ VALUES (1,300,300,'EHAMLSZB',1,186,'2022-10-24 05:40:00','2022-10-24 02:34:00','
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SKBOSPIM',1,185,'2022-10-24 18:02:00','2022-10-24 14:57:00','2022-10-24 23:02:00','2022-10-24 19:57:00',25,4);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSKBO',1,185,'2022-10-24 03:53:00','2022-10-24 07:48:00','2022-10-24 08:53:00','2022-10-24 05:48:00',4,27);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SCELSABE',1,185,'2022-10-24 12:35:00','2022-10-24 08:30:00','2022-10-24 15:35:00','2022-10-24 12:30:00',35,13);
@@ -14410,6 +13777,12 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'SKBOSLLP',1,183,'2022-10-24 12:29:00','2022-10-24 08:26:00','2022-10-24 16:29:00','2022-10-24 13:26:00',38,4);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSEQM',1,183,'2022-10-24 02:43:00','2022-10-24 06:40:00','2022-10-24 07:43:00','2022-10-24 04:40:00',9,27);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSPIM',1,183,'2022-10-24 16:14:00','2022-10-24 20:11:00','2022-10-24 21:14:00','2022-10-24 18:11:00',25,15);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LATIEBCI',1,183,'2022-10-24 07:44:00','2022-10-24 04:41:00','2022-10-24 06:44:00','2022-10-24 03:41:00',23,10);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
@@ -14476,6 +13849,9 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'SKBOSUAA',1,182,'2022-10-24 04:09:00','2022-10-23 23:07:00','2022-10-24 07:09:00','2022-10-24 04:07:00',24,4);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASPIM',1,182,'2022-10-24 07:27:00','2022-10-24 11:25:00','2022-10-24 12:27:00','2022-10-24 09:25:00',25,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LMMLLATI',1,182,'2022-10-24 18:58:00','2022-10-24 15:56:00','2022-10-24 17:58:00','2022-10-24 14:56:00',10,5);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
@@ -14537,6 +13913,9 @@ VALUES (1,300,300,'LIRALSZB',1,182,'2022-10-24 10:54:00','2022-10-24 07:52:00','
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SKBOSEQM',1,181,'2022-10-23 22:35:00','2022-10-23 19:34:00','2022-10-24 03:35:00','2022-10-24 00:34:00',9,4);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSKBO',1,181,'2022-10-24 22:51:00','2022-10-24 02:50:00','2022-10-24 03:51:00','2022-10-24 00:50:00',4,15);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SPIMSVMI',1,181,'2022-10-24 04:18:00','2022-10-24 00:17:00','2022-10-24 08:18:00','2022-10-24 05:17:00',18,25);
@@ -14659,6 +14038,9 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'ESKNLSZB',1,180,'2022-10-24 10:10:00','2022-10-24 07:10:00','2022-10-24 09:10:00','2022-10-24 06:10:00',11,33);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASEQM',1,149,'2022-10-24 11:17:00','2022-10-24 15:48:00','2022-10-24 16:17:00','2022-10-24 13:48:00',9,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SABESUAA',1,149,'2022-10-24 15:23:00','2022-10-24 12:54:00','2022-10-24 18:23:00','2022-10-24 15:54:00',24,35);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
@@ -14693,6 +14075,9 @@ VALUES (1,300,300,'LFPGESKN',1,149,'2022-10-24 08:07:00','2022-10-24 05:38:00','
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LHBPLIRA',1,149,'2022-10-24 07:10:00','2022-10-24 04:41:00','2022-10-24 06:10:00','2022-10-24 03:41:00',12,26);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EFHKSEQM',1,148,'2022-10-24 23:24:00','2022-10-24 03:56:00','2022-10-24 04:24:00','2022-10-24 01:56:00',9,8);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SCELSUAA',1,148,'2022-10-24 05:42:00','2022-10-24 02:14:00','2022-10-24 08:42:00','2022-10-24 06:14:00',24,13);
@@ -14785,6 +14170,9 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'SPIMSLLP',1,146,'2022-10-24 09:09:00','2022-10-24 05:43:00','2022-10-24 13:09:00','2022-10-24 10:43:00',38,25);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSLLP',1,146,'2022-10-24 17:32:00','2022-10-24 22:06:00','2022-10-24 21:32:00','2022-10-24 19:06:00',38,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LDZALATI',1,146,'2022-10-25 01:24:00','2022-10-24 22:58:00','2022-10-25 00:24:00','2022-10-24 21:58:00',10,39);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
@@ -14810,6 +14198,15 @@ VALUES (1,300,300,'LEMDELLX',1,146,'2022-10-25 03:25:00','2022-10-25 00:59:00','
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LMMLEPMO',1,146,'2022-10-24 05:20:00','2022-10-24 02:54:00','2022-10-24 04:20:00','2022-10-24 01:54:00',30,5);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSKBO',1,145,'2022-10-24 04:15:00','2022-10-24 08:50:00','2022-10-24 09:15:00','2022-10-24 06:50:00',4,15);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSKBO',1,145,'2022-10-24 10:15:00','2022-10-24 14:50:00','2022-10-24 15:15:00','2022-10-24 12:50:00',4,15);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSLLP',1,145,'2022-10-24 09:31:00','2022-10-24 14:06:00','2022-10-24 13:31:00','2022-10-24 11:06:00',38,19);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LKPRLATI',1,145,'2022-10-24 08:02:00','2022-10-24 05:37:00','2022-10-24 07:02:00','2022-10-24 04:37:00',10,22);
@@ -14893,6 +14290,9 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'SKBOSBBR',1,143,'2022-10-24 05:10:00','2022-10-24 00:47:00','2022-10-24 08:10:00','2022-10-24 05:47:00',36,4);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSPIM',1,143,'2022-10-24 09:34:00','2022-10-24 14:11:00','2022-10-24 14:34:00','2022-10-24 12:11:00',25,15);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LMMLLATI',1,143,'2022-10-24 10:19:00','2022-10-24 07:56:00','2022-10-24 09:19:00','2022-10-24 06:56:00',10,5);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
@@ -14903,6 +14303,9 @@ VALUES (1,300,300,'LKPRLFPG',1,143,'2022-10-24 22:07:00','2022-10-24 19:44:00','
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LFPGEVRA',1,143,'2022-10-24 06:01:00','2022-10-24 02:38:00','2022-10-24 04:01:00','2022-10-24 01:38:00',2,14);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EETNSPIM',1,142,'2022-10-24 17:39:00','2022-10-24 22:17:00','2022-10-24 22:39:00','2022-10-24 20:17:00',25,37);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LIRALOWW',1,142,'2022-10-25 03:20:00','2022-10-25 00:58:00','2022-10-25 02:20:00','2022-10-24 23:58:00',1,12);
@@ -14966,6 +14369,9 @@ VALUES (1,300,300,'EGLLLFPG',1,139,'2022-10-24 18:07:00','2022-10-24 14:48:00','
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LIRALSZB',1,139,'2022-10-24 04:11:00','2022-10-24 01:52:00','2022-10-24 03:11:00','2022-10-24 00:52:00',11,12);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EETNSEQM',1,138,'2022-10-24 23:38:00','2022-10-24 04:20:00','2022-10-24 04:38:00','2022-10-24 02:20:00',9,37);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SGASSVMI',1,138,'2022-10-24 16:00:00','2022-10-24 13:42:00','2022-10-24 20:00:00','2022-10-24 17:42:00',18,21);
@@ -15034,6 +14440,9 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'SPIMSGAS',1,136,'2022-10-24 16:05:00','2022-10-24 12:49:00','2022-10-24 20:05:00','2022-10-24 17:49:00',21,25);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EETNSPIM',1,136,'2022-10-24 05:33:00','2022-10-24 10:17:00','2022-10-24 10:33:00','2022-10-24 08:17:00',25,37);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'EGLLLOWW',1,136,'2022-10-24 15:09:00','2022-10-24 11:53:00','2022-10-24 14:09:00','2022-10-24 11:53:00',1,3);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
@@ -15050,6 +14459,12 @@ VALUES (1,300,300,'LPPTLEMD',1,136,'2022-10-24 17:10:00','2022-10-24 13:54:00','
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'ENGMEVRA',1,136,'2022-10-24 15:00:00','2022-10-24 11:44:00','2022-10-24 13:00:00','2022-10-24 10:44:00',2,32);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSEQM',1,135,'2022-10-25 20:15:00','2022-10-25 02:00:00','2022-10-25 01:15:00','2022-10-24 23:00:00',9,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EETNSEQM',1,135,'2022-10-24 07:35:00','2022-10-24 12:20:00','2022-10-24 12:35:00','2022-10-24 10:20:00',9,37);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'ENGMLOWW',1,135,'2022-10-24 17:00:00','2022-10-24 14:45:00','2022-10-24 16:00:00','2022-10-24 13:45:00',1,32);
@@ -15136,6 +14551,9 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'LPPTEGLL',1,133,'2022-10-24 10:12:00','2022-10-24 07:59:00','2022-10-24 10:12:00','2022-10-24 07:59:00',3,29);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSKBO',1,132,'2022-10-24 23:50:00','2022-10-24 05:38:00','2022-10-24 04:50:00','2022-10-24 02:38:00',4,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SLLPSVMI',1,132,'2022-10-24 04:01:00','2022-10-24 01:49:00','2022-10-24 08:01:00','2022-10-24 05:49:00',18,38);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
@@ -15151,6 +14569,9 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'LPPTELLX',1,132,'2022-10-24 05:08:00','2022-10-24 01:56:00','2022-10-24 04:08:00','2022-10-24 01:56:00',16,29);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSPIM',1,131,'2022-10-24 03:22:00','2022-10-24 08:11:00','2022-10-24 08:22:00','2022-10-24 06:11:00',25,15);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LFPGLOWW',1,131,'2022-10-25 00:05:00','2022-10-24 21:54:00','2022-10-24 23:05:00','2022-10-24 20:54:00',1,14);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
@@ -15161,6 +14582,12 @@ VALUES (1,300,300,'EKCHLEMD',1,131,'2022-10-25 01:05:00','2022-10-24 22:54:00','
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LPPTLEMD',1,131,'2022-10-25 01:05:00','2022-10-24 21:54:00','2022-10-25 00:05:00','2022-10-24 21:54:00',34,29);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EFHKSEQM',1,130,'2022-10-24 07:06:00','2022-10-24 11:56:00','2022-10-24 12:06:00','2022-10-24 09:56:00',9,8);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSPIM',1,130,'2022-10-24 10:18:00','2022-10-24 15:08:00','2022-10-24 15:18:00','2022-10-24 13:08:00',25,27);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'ESKNLATI',1,130,'2022-10-25 00:06:00','2022-10-24 21:56:00','2022-10-24 23:06:00','2022-10-24 20:56:00',10,33);
@@ -15196,6 +14623,12 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'EIDWESKN',1,130,'2022-10-25 00:05:00','2022-10-24 20:55:00','2022-10-24 23:05:00','2022-10-24 20:55:00',33,17);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSEQM',1,129,'2022-10-24 04:09:00','2022-10-24 10:00:00','2022-10-24 09:09:00','2022-10-24 07:00:00',9,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EETNSPIM',1,129,'2022-10-24 11:26:00','2022-10-24 16:17:00','2022-10-24 16:26:00','2022-10-24 14:17:00',25,37);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LEMDLSZB',1,129,'2022-10-25 03:04:00','2022-10-25 00:55:00','2022-10-25 02:04:00','2022-10-24 23:55:00',11,34);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
@@ -15208,10 +14641,19 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'ELLXLZIB',1,128,'2022-10-24 11:06:00','2022-10-24 08:58:00','2022-10-24 10:06:00','2022-10-24 07:58:00',7,16);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EETNSEQM',1,127,'2022-10-24 15:27:00','2022-10-24 20:20:00','2022-10-24 20:27:00','2022-10-24 18:20:00',9,37);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'ELLXLZIB',1,127,'2022-10-24 19:05:00','2022-10-24 16:58:00','2022-10-24 18:05:00','2022-10-24 15:58:00',7,16);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LMMLEPMO',1,127,'2022-10-24 21:01:00','2022-10-24 18:54:00','2022-10-24 20:01:00','2022-10-24 17:54:00',30,5);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASEQM',1,126,'2022-10-24 16:54:00','2022-10-24 21:48:00','2022-10-24 21:54:00','2022-10-24 19:48:00',9,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSVMI',1,126,'2022-10-24 14:51:00','2022-10-24 19:45:00','2022-10-24 18:51:00','2022-10-24 16:45:00',18,19);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LMMLLATI',1,126,'2022-10-25 02:02:00','2022-10-24 23:56:00','2022-10-25 01:02:00','2022-10-24 22:56:00',10,5);
@@ -15227,6 +14669,9 @@ VALUES (1,300,300,'ESKNUMMS',1,126,'2022-10-24 16:25:00','2022-10-24 12:19:00','
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LMMLEKCH',1,126,'2022-10-25 03:03:00','2022-10-25 00:57:00','2022-10-25 02:03:00','2022-10-24 23:57:00',28,5);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EFHKSEQM',1,125,'2022-10-24 15:01:00','2022-10-24 19:56:00','2022-10-24 20:01:00','2022-10-24 17:56:00',9,8);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'ENGMLHBP',1,125,'2022-10-25 03:01:00','2022-10-25 00:56:00','2022-10-25 02:01:00','2022-10-24 23:56:00',26,32);
@@ -15247,16 +14692,28 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'LKPRESKN',1,124,'2022-10-24 10:00:00','2022-10-24 07:56:00','2022-10-24 09:00:00','2022-10-24 06:56:00',33,22);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EFHKSPIM',1,123,'2022-10-24 21:08:00','2022-10-24 02:05:00','2022-10-24 02:08:00','2022-10-24 00:05:00',25,8);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LHBPUMMS',1,123,'2022-10-24 12:03:00','2022-10-24 08:00:00','2022-10-24 09:03:00','2022-10-24 07:00:00',19,26);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LPPTEGLL',1,123,'2022-10-24 18:02:00','2022-10-24 15:59:00','2022-10-24 18:02:00','2022-10-24 15:59:00',3,29);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EFHKSKBO',1,122,'2022-10-24 12:20:00','2022-10-24 17:18:00','2022-10-24 17:20:00','2022-10-24 15:18:00',4,8);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'ESKNUMMS',1,122,'2022-10-25 00:21:00','2022-10-24 20:19:00','2022-10-24 21:21:00','2022-10-24 19:19:00',19,33);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSGAS',1,121,'2022-10-25 20:08:00','2022-10-25 01:07:00','2022-10-25 00:08:00','2022-10-24 22:07:00',21,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'EFHKUMMS',1,121,'2022-10-25 01:59:00','2022-10-24 22:58:00','2022-10-24 22:59:00','2022-10-24 20:58:00',19,8);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSPIM',1,120,'2022-10-25 18:03:00','2022-10-25 00:03:00','2022-10-24 23:03:00','2022-10-24 21:03:00',25,19);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LATIUMMS',1,120,'2022-10-24 18:10:00','2022-10-24 14:10:00','2022-10-24 15:10:00','2022-10-24 13:10:00',19,10);
@@ -15265,20 +14722,563 @@ INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,
 VALUES (1,300,300,'LGAVUMMS',1,120,'2022-10-24 11:42:00','2022-10-24 08:42:00','2022-10-24 08:42:00','2022-10-24 06:42:00',19,15);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LDZASKBO',1,89,'2022-10-24 04:31:00','2022-10-24 09:02:00','2022-10-24 09:31:00','2022-10-24 08:02:00',4,39);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EETNSKBO',1,89,'2022-10-24 13:34:00','2022-10-24 19:05:00','2022-10-24 18:34:00','2022-10-24 17:05:00',4,37);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LKPRUMMS',1,89,'2022-10-24 18:18:00','2022-10-24 14:49:00','2022-10-24 15:18:00','2022-10-24 13:49:00',19,22);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LOWWSKBO',1,88,'2022-10-24 18:49:00','2022-10-24 23:21:00','2022-10-24 23:49:00','2022-10-24 22:21:00',4,1);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ESKNSEQM',1,88,'2022-10-24 04:38:00','2022-10-24 09:10:00','2022-10-24 09:38:00','2022-10-24 08:10:00',9,33);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LZIBSKBO',1,87,'2022-10-24 20:33:00','2022-10-24 01:06:00','2022-10-24 01:33:00','2022-10-24 00:06:00',4,7);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LOWWSPIM',1,87,'2022-10-24 03:42:00','2022-10-24 08:15:00','2022-10-24 08:42:00','2022-10-24 07:15:00',25,1);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LDZASKBO',1,86,'2022-10-24 12:28:00','2022-10-24 17:02:00','2022-10-24 17:28:00','2022-10-24 16:02:00',4,39);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSKBO',1,86,'2022-10-24 15:16:00','2022-10-24 20:50:00','2022-10-24 20:16:00','2022-10-24 18:50:00',4,15);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'LJLJUMMS',1,86,'2022-10-24 13:12:00','2022-10-24 09:46:00','2022-10-24 10:12:00','2022-10-24 08:46:00',19,20);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSEQM',1,85,'2022-10-25 19:05:00','2022-10-25 00:40:00','2022-10-25 00:05:00','2022-10-24 22:40:00',9,27);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSVMI',1,85,'2022-10-24 14:48:00','2022-10-24 19:23:00','2022-10-24 18:48:00','2022-10-24 17:23:00',18,15);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LMMLSKBO',1,84,'2022-10-24 12:56:00','2022-10-24 17:32:00','2022-10-24 17:56:00','2022-10-24 16:32:00',4,5);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LZIBSEQM',1,84,'2022-10-24 22:45:00','2022-10-24 03:21:00','2022-10-24 03:45:00','2022-10-24 02:21:00',9,7);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EHAMSPIM',1,84,'2022-10-24 01:36:00','2022-10-24 06:12:00','2022-10-24 06:36:00','2022-10-24 05:12:00',25,31);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'EDDIUMMS',1,84,'2022-10-24 18:02:00','2022-10-24 14:38:00','2022-10-24 15:02:00','2022-10-24 13:38:00',19,6);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSPIM',1,83,'2022-10-24 03:31:00','2022-10-24 09:08:00','2022-10-24 08:31:00','2022-10-24 07:08:00',25,27);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSGAS',1,83,'2022-10-24 06:44:00','2022-10-24 11:21:00','2022-10-24 10:44:00','2022-10-24 09:21:00',21,27);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASGAS',1,83,'2022-10-25 20:41:00','2022-10-25 01:18:00','2022-10-25 00:41:00','2022-10-24 23:18:00',21,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LFPGSKBO',1,82,'2022-10-24 08:26:00','2022-10-24 13:04:00','2022-10-24 13:26:00','2022-10-24 12:04:00',4,14);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EHAMSKBO',1,82,'2022-10-24 02:48:00','2022-10-24 07:26:00','2022-10-24 07:48:00','2022-10-24 06:26:00',4,31);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASLLP',1,82,'2022-10-24 00:29:00','2022-10-24 05:07:00','2022-10-24 04:29:00','2022-10-24 03:07:00',38,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LOWWSKBO',1,81,'2022-10-24 06:42:00','2022-10-24 11:21:00','2022-10-24 11:42:00','2022-10-24 10:21:00',4,1);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LFPGSKBO',1,81,'2022-10-24 20:25:00','2022-10-24 01:04:00','2022-10-24 01:25:00','2022-10-24 00:04:00',4,14);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ESKNSKBO',1,81,'2022-10-24 00:57:00','2022-10-24 05:36:00','2022-10-24 05:57:00','2022-10-24 04:36:00',4,33);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LZIBSPIM',1,81,'2022-10-24 00:52:00','2022-10-24 05:31:00','2022-10-24 05:52:00','2022-10-24 04:31:00',25,7);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LATISKBO',1,80,'2022-10-24 15:31:00','2022-10-24 20:11:00','2022-10-24 20:31:00','2022-10-24 19:11:00',4,10);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASVMI',1,80,'2022-10-24 01:56:00','2022-10-24 06:36:00','2022-10-24 05:56:00','2022-10-24 04:36:00',18,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EETNSPIM',1,80,'2022-10-24 22:37:00','2022-10-24 04:17:00','2022-10-24 03:37:00','2022-10-24 02:17:00',25,37);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASKBO',1,79,'2022-10-24 07:55:00','2022-10-24 13:36:00','2022-10-24 12:55:00','2022-10-24 11:36:00',4,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LMMLSPIM',1,79,'2022-10-24 21:50:00','2022-10-24 02:31:00','2022-10-24 02:50:00','2022-10-24 01:31:00',25,5);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LFPGSPIM',1,78,'2022-10-24 13:53:00','2022-10-24 18:35:00','2022-10-24 18:53:00','2022-10-24 17:35:00',25,14);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'ENGMUMMS',1,77,'2022-10-25 01:03:00','2022-10-24 21:46:00','2022-10-24 22:03:00','2022-10-24 20:46:00',19,32);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSEQM',1,76,'2022-10-24 06:56:00','2022-10-24 12:40:00','2022-10-24 11:56:00','2022-10-24 10:40:00',9,27);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SCELSBBR',1,76,'2022-10-24 05:07:00','2022-10-24 02:51:00','2022-10-24 08:07:00','2022-10-24 06:51:00',36,13);
 
 INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LSZBSPIM',1,76,'2022-10-24 01:59:00','2022-10-24 06:43:00','2022-10-24 06:59:00','2022-10-24 05:43:00',25,11);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LHBPSKBO',1,75,'2022-10-24 01:39:00','2022-10-24 06:24:00','2022-10-24 06:39:00','2022-10-24 05:24:00',4,26);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LEMDSKBO',1,74,'2022-10-24 20:29:00','2022-10-24 01:15:00','2022-10-24 01:29:00','2022-10-24 00:15:00',4,34);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EHAMSEQM',1,74,'2022-10-24 02:43:00','2022-10-24 07:29:00','2022-10-24 07:43:00','2022-10-24 06:29:00',9,31);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LSZBSEQM',1,74,'2022-10-24 15:24:00','2022-10-24 20:10:00','2022-10-24 20:24:00','2022-10-24 19:10:00',9,11);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LIRASPIM',1,74,'2022-10-24 12:35:00','2022-10-24 17:21:00','2022-10-24 17:35:00','2022-10-24 16:21:00',25,12);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSGAS',1,74,'2022-10-24 05:28:00','2022-10-24 10:14:00','2022-10-24 09:28:00','2022-10-24 08:14:00',21,15);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LHBPSKBO',1,73,'2022-10-24 07:37:00','2022-10-24 12:24:00','2022-10-24 12:37:00','2022-10-24 11:24:00',4,26);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LATISEQM',1,73,'2022-10-24 17:47:00','2022-10-24 22:34:00','2022-10-24 22:47:00','2022-10-24 21:34:00',9,10);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LSZBSEQM',1,73,'2022-10-24 21:23:00','2022-10-24 02:10:00','2022-10-24 02:23:00','2022-10-24 01:10:00',9,11);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASPIM',1,73,'2022-10-24 23:38:00','2022-10-24 05:25:00','2022-10-24 04:38:00','2022-10-24 03:25:00',25,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LATISEQM',1,72,'2022-10-24 23:46:00','2022-10-24 04:34:00','2022-10-24 04:46:00','2022-10-24 03:34:00',9,10);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LATISPIM',1,72,'2022-10-24 18:23:00','2022-10-24 23:11:00','2022-10-24 23:23:00','2022-10-24 22:11:00',25,10);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASPIM',1,72,'2022-10-24 11:37:00','2022-10-24 17:25:00','2022-10-24 16:37:00','2022-10-24 15:25:00',25,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LMMLSKBO',1,71,'2022-10-24 20:43:00','2022-10-24 01:32:00','2022-10-24 01:43:00','2022-10-24 00:32:00',4,5);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EPMOSKBO',1,71,'2022-10-24 12:47:00','2022-10-24 17:36:00','2022-10-24 17:47:00','2022-10-24 16:36:00',4,30);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EDDISEQM',1,71,'2022-10-25 19:29:00','2022-10-25 00:18:00','2022-10-25 00:29:00','2022-10-24 23:18:00',9,6);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSEQM',1,71,'2022-10-24 12:51:00','2022-10-24 18:40:00','2022-10-24 17:51:00','2022-10-24 16:40:00',9,27);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LFPGSKBO',1,70,'2022-10-24 14:14:00','2022-10-24 19:04:00','2022-10-24 19:14:00','2022-10-24 18:04:00',4,14);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EHAMSEQM',1,70,'2022-10-24 10:39:00','2022-10-24 15:29:00','2022-10-24 15:39:00','2022-10-24 14:29:00',9,31);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
 VALUES (1,300,300,'SCELSBBR',1,70,'2022-10-24 21:01:00','2022-10-24 18:51:00','2022-10-25 00:01:00','2022-10-24 22:51:00',36,13);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASPIM',1,70,'2022-10-24 17:35:00','2022-10-24 23:25:00','2022-10-24 22:35:00','2022-10-24 21:25:00',25,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LFPGSEQM',1,69,'2022-10-25 19:55:00','2022-10-25 00:46:00','2022-10-25 00:55:00','2022-10-24 23:46:00',9,14);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASVMI',1,69,'2022-10-24 17:45:00','2022-10-24 22:36:00','2022-10-24 21:45:00','2022-10-24 20:36:00',18,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LIRASPIM',1,69,'2022-10-24 04:30:00','2022-10-24 09:21:00','2022-10-24 09:30:00','2022-10-24 08:21:00',25,12);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ENGMSPIM',1,69,'2022-10-24 01:38:00','2022-10-24 06:29:00','2022-10-24 06:38:00','2022-10-24 05:29:00',25,32);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EDDISKBO',1,68,'2022-10-24 17:44:00','2022-10-24 22:36:00','2022-10-24 22:44:00','2022-10-24 21:36:00',4,6);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EBCISKBO',1,68,'2022-10-24 09:23:00','2022-10-24 14:15:00','2022-10-24 14:23:00','2022-10-24 13:15:00',4,23);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LJLJSEQM',1,68,'2022-10-24 22:40:00','2022-10-24 03:32:00','2022-10-24 03:40:00','2022-10-24 02:32:00',9,20);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LEMDSEQM',1,68,'2022-10-24 21:54:00','2022-10-24 02:46:00','2022-10-24 02:54:00','2022-10-24 01:46:00',9,34);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EETNSVMI',1,68,'2022-10-24 16:33:00','2022-10-24 21:25:00','2022-10-24 20:33:00','2022-10-24 19:25:00',18,37);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LKPRSEQM',1,67,'2022-10-24 05:51:00','2022-10-24 10:44:00','2022-10-24 10:51:00','2022-10-24 09:44:00',9,22);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LKPRSPIM',1,67,'2022-10-24 00:52:00','2022-10-24 05:45:00','2022-10-24 05:52:00','2022-10-24 04:45:00',25,22);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASLLP',1,67,'2022-10-24 08:14:00','2022-10-24 13:07:00','2022-10-24 12:14:00','2022-10-24 11:07:00',38,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASKBO',1,66,'2022-10-24 23:42:00','2022-10-24 05:36:00','2022-10-24 04:42:00','2022-10-24 03:36:00',4,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LATISEQM',1,66,'2022-10-24 11:40:00','2022-10-24 16:34:00','2022-10-24 16:40:00','2022-10-24 15:34:00',9,10);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LDZASEQM',1,66,'2022-10-24 03:42:00','2022-10-24 08:36:00','2022-10-24 08:42:00','2022-10-24 07:36:00',9,39);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LJLJSKBO',1,65,'2022-10-24 20:18:00','2022-10-24 01:13:00','2022-10-24 01:18:00','2022-10-24 00:13:00',4,20);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LEMDSKBO',1,65,'2022-10-24 08:20:00','2022-10-24 13:15:00','2022-10-24 13:20:00','2022-10-24 12:15:00',4,34);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LKPRSEQM',1,65,'2022-10-24 11:49:00','2022-10-24 16:44:00','2022-10-24 16:49:00','2022-10-24 15:44:00',9,22);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ESKNSEQM',1,65,'2022-10-24 12:15:00','2022-10-24 17:10:00','2022-10-24 17:15:00','2022-10-24 16:10:00',9,33);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSVMI',1,65,'2022-10-24 17:05:00','2022-10-24 22:00:00','2022-10-24 21:05:00','2022-10-24 20:00:00',18,27);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ELLXSKBO',1,64,'2022-10-24 12:45:00','2022-10-24 17:41:00','2022-10-24 17:45:00','2022-10-24 16:41:00',4,16);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LIRASEQM',1,64,'2022-10-24 15:58:00','2022-10-24 20:54:00','2022-10-24 20:58:00','2022-10-24 19:54:00',9,12);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EPMOSEQM',1,64,'2022-10-24 08:36:00','2022-10-24 13:32:00','2022-10-24 13:36:00','2022-10-24 12:32:00',9,30);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LDZASPIM',1,64,'2022-10-25 19:54:00','2022-10-25 00:50:00','2022-10-25 00:54:00','2022-10-24 23:50:00',25,39);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSCEL',1,64,'2022-10-24 13:44:00','2022-10-24 19:40:00','2022-10-24 17:44:00','2022-10-24 16:40:00',13,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LATISKBO',1,63,'2022-10-24 07:14:00','2022-10-24 12:11:00','2022-10-24 12:14:00','2022-10-24 11:11:00',4,10);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSEQM',1,63,'2022-10-24 14:12:00','2022-10-24 20:09:00','2022-10-24 19:12:00','2022-10-24 18:09:00',9,15);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LHBPSPIM',1,63,'2022-10-24 06:47:00','2022-10-24 11:44:00','2022-10-24 11:47:00','2022-10-24 10:44:00',25,26);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EPMOSPIM',1,63,'2022-10-24 10:07:00','2022-10-24 15:04:00','2022-10-24 15:07:00','2022-10-24 14:04:00',25,30);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSGAS',1,63,'2022-10-24 07:10:00','2022-10-24 13:07:00','2022-10-24 11:10:00','2022-10-24 10:07:00',21,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSKBO',1,62,'2022-10-24 17:50:00','2022-10-24 23:48:00','2022-10-24 22:50:00','2022-10-24 21:48:00',4,27);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LKPRSKBO',1,62,'2022-10-24 00:38:00','2022-10-24 05:36:00','2022-10-24 05:38:00','2022-10-24 04:36:00',4,22);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LJLJSEQM',1,62,'2022-10-24 06:34:00','2022-10-24 11:32:00','2022-10-24 11:34:00','2022-10-24 10:32:00',9,20);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ENGMSEQM',1,62,'2022-10-24 23:49:00','2022-10-24 04:47:00','2022-10-24 04:49:00','2022-10-24 03:47:00',9,32);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EFHKSPIM',1,62,'2022-10-24 04:07:00','2022-10-24 10:05:00','2022-10-24 09:07:00','2022-10-24 08:05:00',25,8);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASGAS',1,62,'2022-10-24 12:20:00','2022-10-24 17:18:00','2022-10-24 16:20:00','2022-10-24 15:18:00',21,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSVMI',1,61,'2022-10-24 21:46:00','2022-10-24 03:45:00','2022-10-24 01:46:00','2022-10-24 00:45:00',18,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ELLXSPIM',1,61,'2022-10-24 18:49:00','2022-10-24 23:48:00','2022-10-24 23:49:00','2022-10-24 22:48:00',25,16);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSGAS',1,61,'2022-10-24 11:15:00','2022-10-24 16:14:00','2022-10-24 15:15:00','2022-10-24 14:14:00',21,15);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EDDISKBO',1,60,'2022-10-24 11:36:00','2022-10-24 16:36:00','2022-10-24 16:36:00','2022-10-24 15:36:00',4,6);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSEQM',1,60,'2022-10-24 22:09:00','2022-10-24 04:09:00','2022-10-24 03:09:00','2022-10-24 02:09:00',9,15);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSPIM',1,60,'2022-10-24 15:08:00','2022-10-24 21:08:00','2022-10-24 20:08:00','2022-10-24 19:08:00',25,27);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LZIBSPIM',1,60,'2022-10-24 16:31:00','2022-10-24 21:31:00','2022-10-24 21:31:00','2022-10-24 20:31:00',25,7);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EFHKSLLP',1,60,'2022-10-24 08:17:00','2022-10-24 13:17:00','2022-10-24 12:17:00','2022-10-24 11:17:00',38,8);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LATISKBO',1,29,'2022-10-24 22:40:00','2022-10-24 04:11:00','2022-10-24 03:40:00','2022-10-24 03:11:00',4,10);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASEQM',1,29,'2022-10-24 03:17:00','2022-10-24 09:48:00','2022-10-24 08:17:00','2022-10-24 07:48:00',9,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EKCHSPIM',1,29,'2022-10-24 10:05:00','2022-10-24 15:36:00','2022-10-24 15:05:00','2022-10-24 14:36:00',25,28);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LJLJSKBO',1,28,'2022-10-24 03:41:00','2022-10-24 09:13:00','2022-10-24 08:41:00','2022-10-24 08:13:00',4,20);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EKCHSPIM',1,28,'2022-10-24 02:04:00','2022-10-24 07:36:00','2022-10-24 07:04:00','2022-10-24 06:36:00',25,28);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EHAMSPIM',1,28,'2022-10-24 08:40:00','2022-10-24 14:12:00','2022-10-24 13:40:00','2022-10-24 13:12:00',25,31);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LDZASKBO',1,27,'2022-10-24 19:29:00','2022-10-24 01:02:00','2022-10-24 00:29:00','2022-10-24 00:02:00',4,39);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EFHKSLLP',1,27,'2022-10-25 19:44:00','2022-10-25 01:17:00','2022-10-24 23:44:00','2022-10-24 23:17:00',38,8);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LOWWSKBO',1,26,'2022-10-24 11:47:00','2022-10-24 17:21:00','2022-10-24 16:47:00','2022-10-24 16:21:00',4,1);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LZIBSKBO',1,26,'2022-10-24 13:32:00','2022-10-24 19:06:00','2022-10-24 18:32:00','2022-10-24 18:06:00',4,7);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSABE',1,26,'2022-10-24 11:33:00','2022-10-24 17:07:00','2022-10-24 14:33:00','2022-10-24 14:07:00',35,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ENGMSEQM',1,25,'2022-10-24 05:12:00','2022-10-24 10:47:00','2022-10-24 10:12:00','2022-10-24 09:47:00',9,32);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LJLJSPIM',1,25,'2022-10-24 05:03:00','2022-10-24 10:38:00','2022-10-24 10:03:00','2022-10-24 09:38:00',25,20);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSGAS',1,25,'2022-10-24 12:32:00','2022-10-24 19:07:00','2022-10-24 16:32:00','2022-10-24 16:07:00',21,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSKBO',1,24,'2022-10-24 09:12:00','2022-10-24 15:48:00','2022-10-24 14:12:00','2022-10-24 13:48:00',4,27);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EFHKSVMI',1,24,'2022-10-24 09:25:00','2022-10-24 15:01:00','2022-10-24 13:25:00','2022-10-24 13:01:00',18,8);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EDDISPIM',1,24,'2022-10-24 14:17:00','2022-10-24 19:53:00','2022-10-24 19:17:00','2022-10-24 18:53:00',25,6);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EBCISPIM',1,24,'2022-10-24 06:08:00','2022-10-24 11:44:00','2022-10-24 11:08:00','2022-10-24 10:44:00',25,23);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSGAS',1,24,'2022-10-24 13:45:00','2022-10-24 19:21:00','2022-10-24 17:45:00','2022-10-24 17:21:00',21,27);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LJLJSEQM',1,23,'2022-10-24 13:55:00','2022-10-24 19:32:00','2022-10-24 18:55:00','2022-10-24 18:32:00',9,20);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSVMI',1,23,'2022-10-24 22:23:00','2022-10-24 04:00:00','2022-10-24 02:23:00','2022-10-24 02:00:00',18,27);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EHAMSPIM',1,22,'2022-10-24 16:34:00','2022-10-24 22:12:00','2022-10-24 21:34:00','2022-10-24 21:12:00',25,31);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSABE',1,22,'2022-10-25 19:29:00','2022-10-25 01:07:00','2022-10-24 22:29:00','2022-10-24 22:07:00',35,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EFHKSVMI',1,21,'2022-10-24 21:22:00','2022-10-24 03:01:00','2022-10-24 01:22:00','2022-10-24 01:01:00',18,8);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LOWWSPIM',1,21,'2022-10-25 18:36:00','2022-10-25 00:15:00','2022-10-24 23:36:00','2022-10-24 23:15:00',25,1);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSLLP',1,21,'2022-10-24 23:27:00','2022-10-24 06:06:00','2022-10-24 03:27:00','2022-10-24 03:06:00',38,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASGAS',1,21,'2022-10-24 03:39:00','2022-10-24 09:18:00','2022-10-24 07:39:00','2022-10-24 07:18:00',21,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSGAS',1,20,'2022-10-24 21:41:00','2022-10-24 03:21:00','2022-10-24 01:41:00','2022-10-24 01:21:00',21,27);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASEQM',1,18,'2022-10-24 21:06:00','2022-10-24 03:48:00','2022-10-24 02:06:00','2022-10-24 01:48:00',9,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LDZASPIM',1,18,'2022-10-24 03:08:00','2022-10-24 08:50:00','2022-10-24 08:08:00','2022-10-24 07:50:00',25,39);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EBCISEQM',1,17,'2022-10-24 19:55:00','2022-10-24 01:38:00','2022-10-24 00:55:00','2022-10-24 00:38:00',9,23);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LEMDSEQM',1,17,'2022-10-24 05:03:00','2022-10-24 10:46:00','2022-10-24 10:03:00','2022-10-24 09:46:00',9,34);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LKPRSPIM',1,17,'2022-10-24 08:02:00','2022-10-24 13:45:00','2022-10-24 13:02:00','2022-10-24 12:45:00',25,22);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LIRASKBO',1,16,'2022-10-24 11:23:00','2022-10-24 17:07:00','2022-10-24 16:23:00','2022-10-24 16:07:00',4,12);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSVMI',1,16,'2022-10-24 05:01:00','2022-10-24 11:45:00','2022-10-24 09:01:00','2022-10-24 08:45:00',18,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSCEL',1,16,'2022-10-24 20:21:00','2022-10-24 02:05:00','2022-10-24 00:21:00','2022-10-24 00:05:00',13,15);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LHBPSKBO',1,15,'2022-10-25 18:39:00','2022-10-25 00:24:00','2022-10-24 23:39:00','2022-10-24 23:24:00',4,26);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EBCISEQM',1,15,'2022-10-24 11:53:00','2022-10-24 17:38:00','2022-10-24 16:53:00','2022-10-24 16:38:00',9,23);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSVMI',1,15,'2022-10-24 05:38:00','2022-10-24 11:23:00','2022-10-24 09:38:00','2022-10-24 09:23:00',18,15);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LMMLSPIM',1,15,'2022-10-24 04:46:00','2022-10-24 10:31:00','2022-10-24 09:46:00','2022-10-24 09:31:00',25,5);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASLLP',1,15,'2022-10-24 15:22:00','2022-10-24 21:07:00','2022-10-24 19:22:00','2022-10-24 19:07:00',38,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EFHKSCEL',1,15,'2022-10-24 15:42:00','2022-10-24 21:27:00','2022-10-24 19:42:00','2022-10-24 19:27:00',13,8);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EFHKSGAS',1,15,'2022-10-24 20:54:00','2022-10-24 02:39:00','2022-10-24 00:54:00','2022-10-24 00:39:00',21,8);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EHAMSKBO',1,14,'2022-10-24 19:40:00','2022-10-24 01:26:00','2022-10-24 00:40:00','2022-10-24 00:26:00',4,31);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ENGMSKBO',1,14,'2022-10-24 13:19:00','2022-10-24 19:05:00','2022-10-24 18:19:00','2022-10-24 18:05:00',4,32);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LFPGSEQM',1,14,'2022-10-24 13:00:00','2022-10-24 18:46:00','2022-10-24 18:00:00','2022-10-24 17:46:00',9,14);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EDDISPIM',1,14,'2022-10-24 06:07:00','2022-10-24 11:53:00','2022-10-24 11:07:00','2022-10-24 10:53:00',25,6);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EETNSLLP',1,14,'2022-10-24 01:47:00','2022-10-24 07:33:00','2022-10-24 05:47:00','2022-10-24 05:33:00',38,37);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ESKNSKBO',1,13,'2022-10-24 15:49:00','2022-10-24 21:36:00','2022-10-24 20:49:00','2022-10-24 20:36:00',4,33);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ELLXSPIM',1,13,'2022-10-24 02:01:00','2022-10-24 07:48:00','2022-10-24 07:01:00','2022-10-24 06:48:00',25,16);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LBSFSVMI',1,11,'2022-10-24 10:11:00','2022-10-24 16:00:00','2022-10-24 14:11:00','2022-10-24 14:00:00',18,27);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EFHKSVMI',1,11,'2022-10-24 15:12:00','2022-10-24 21:01:00','2022-10-24 19:12:00','2022-10-24 19:01:00',18,8);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LEMDSPIM',1,11,'2022-10-24 17:29:00','2022-10-24 23:18:00','2022-10-24 22:29:00','2022-10-24 22:18:00',25,34);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSGAS',1,11,'2022-10-24 00:18:00','2022-10-24 07:07:00','2022-10-24 04:18:00','2022-10-24 04:07:00',21,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LSZBSEQM',1,10,'2022-10-24 02:20:00','2022-10-24 08:10:00','2022-10-24 07:20:00','2022-10-24 07:10:00',9,11);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSGAS',1,10,'2022-10-24 22:24:00','2022-10-24 04:14:00','2022-10-24 02:24:00','2022-10-24 02:14:00',21,15);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LDZASEQM',1,9,'2022-10-25 18:45:00','2022-10-25 00:36:00','2022-10-24 23:45:00','2022-10-24 23:36:00',9,39);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LZIBSKBO',1,8,'2022-10-24 01:14:00','2022-10-24 07:06:00','2022-10-24 06:14:00','2022-10-24 06:06:00',4,7);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ESKNSPIM',1,8,'2022-10-24 15:40:00','2022-10-24 21:32:00','2022-10-24 20:40:00','2022-10-24 20:32:00',25,33);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LSZBSPIM',1,8,'2022-10-24 08:51:00','2022-10-24 14:43:00','2022-10-24 13:51:00','2022-10-24 13:43:00',25,11);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LSZBSKBO',1,7,'2022-10-24 19:59:00','2022-10-24 01:52:00','2022-10-24 00:59:00','2022-10-24 00:52:00',4,11);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EBCISPIM',1,7,'2022-10-24 21:51:00','2022-10-24 03:44:00','2022-10-24 02:51:00','2022-10-24 02:44:00',25,23);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSGAS',1,7,'2022-10-24 16:21:00','2022-10-24 22:14:00','2022-10-24 20:21:00','2022-10-24 20:14:00',21,15);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EHAMSKBO',1,6,'2022-10-24 07:32:00','2022-10-24 13:26:00','2022-10-24 12:32:00','2022-10-24 12:26:00',4,31);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EPMOSPIM',1,6,'2022-10-24 17:10:00','2022-10-24 23:04:00','2022-10-24 22:10:00','2022-10-24 22:04:00',25,30);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EHAMSKBO',1,5,'2022-10-24 13:31:00','2022-10-24 19:26:00','2022-10-24 18:31:00','2022-10-24 18:26:00',4,31);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ELLXSKBO',1,5,'2022-10-24 19:46:00','2022-10-24 01:41:00','2022-10-24 00:46:00','2022-10-24 00:41:00',4,16);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ENGMSPIM',1,5,'2022-10-24 16:34:00','2022-10-24 22:29:00','2022-10-24 21:34:00','2022-10-24 21:29:00',25,32);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LOWWSKBO',1,4,'2022-10-24 23:25:00','2022-10-24 05:21:00','2022-10-24 04:25:00','2022-10-24 04:21:00',4,1);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LJLJSKBO',1,4,'2022-10-24 11:17:00','2022-10-24 17:13:00','2022-10-24 16:17:00','2022-10-24 16:13:00',4,20);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LZIBSEQM',1,4,'2022-10-24 13:25:00','2022-10-24 19:21:00','2022-10-24 18:25:00','2022-10-24 18:21:00',9,7);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EETNSLLP',1,4,'2022-10-25 19:37:00','2022-10-25 01:33:00','2022-10-24 23:37:00','2022-10-24 23:33:00',38,37);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EKCHSKBO',1,3,'2022-10-24 03:58:00','2022-10-24 09:55:00','2022-10-24 08:58:00','2022-10-24 08:55:00',4,28);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LHBPSKBO',1,3,'2022-10-24 12:27:00','2022-10-24 18:24:00','2022-10-24 17:27:00','2022-10-24 17:24:00',4,26);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EDDISEQM',1,3,'2022-10-24 02:21:00','2022-10-24 08:18:00','2022-10-24 07:21:00','2022-10-24 07:18:00',9,6);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ENGMSPIM',1,3,'2022-10-24 08:32:00','2022-10-24 14:29:00','2022-10-24 13:32:00','2022-10-24 13:29:00',25,32);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ESKNSPIM',1,3,'2022-10-24 23:35:00','2022-10-24 05:32:00','2022-10-24 04:35:00','2022-10-24 04:32:00',25,33);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASCEL',1,3,'2022-10-24 21:56:00','2022-10-24 03:53:00','2022-10-24 01:56:00','2022-10-24 01:53:00',13,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EVRASCEL',1,3,'2022-10-24 13:56:00','2022-10-24 19:53:00','2022-10-24 17:56:00','2022-10-24 17:53:00',13,2);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'EKCHSKBO',1,2,'2022-10-24 19:57:00','2022-10-24 01:55:00','2022-10-24 00:57:00','2022-10-24 00:55:00',4,28);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LEMDSEQM',1,2,'2022-10-24 12:48:00','2022-10-24 18:46:00','2022-10-24 17:48:00','2022-10-24 17:46:00',9,34);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LSZBSEQM',1,2,'2022-10-24 08:12:00','2022-10-24 14:10:00','2022-10-24 13:12:00','2022-10-24 13:10:00',9,11);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'UMMSSBBR',1,2,'2022-10-24 01:54:00','2022-10-24 07:52:00','2022-10-24 04:54:00','2022-10-24 04:52:00',36,19);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LFPGSPIM',1,2,'2022-10-24 20:37:00','2022-10-24 02:35:00','2022-10-24 01:37:00','2022-10-24 01:35:00',25,14);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'ESKNSPIM',1,1,'2022-10-24 07:33:00','2022-10-24 13:32:00','2022-10-24 12:33:00','2022-10-24 12:32:00',25,33);
+
+INSERT INTO vuelo (estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)
+VALUES (1,350,350,'LGAVSCEL',1,1,'2022-10-24 02:06:00','2022-10-24 08:05:00','2022-10-24 06:06:00','2022-10-24 06:05:00',13,15);
 

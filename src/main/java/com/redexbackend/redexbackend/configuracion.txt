@@ -1,0 +1,5 @@
+CapacidadAeropuertoAmerica,850
+CapacidadAeropuertoEuropa,900
+CapacidadAvionAmerica,300
+CapacidadAvionEuropa,350
+CapacidadAvionInterc,350

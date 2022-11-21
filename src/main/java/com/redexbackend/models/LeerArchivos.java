@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,7 +27,8 @@ public class LeerArchivos {
   public LeerArchivos(){}
 
   private boolean esIntercontinental(Aeropuerto salida, Aeropuerto destino){
-    if(salida.getCiudad().getPais().getContinente().getCodigo() != destino.getCiudad().getPais().getContinente().getCodigo())
+    if(salida.getCiudad().getPais().getContinente().getCodigo() != 
+      destino.getCiudad().getPais().getContinente().getCodigo())
       return true;
     return false;
   }
@@ -38,39 +40,46 @@ public class LeerArchivos {
     return false;
   }
 
-  public int obtenerCapacidad(HashMap<String, Aeropuerto> aeropuertos, String origen, String destino) {
+  public int obtenerCapacidad(HashMap<String, Aeropuerto> aeropuertos, String origen, String destino, HashMap<String, Configuracion> configuracion) {
     String continenteOrigen = aeropuertos.get(origen).getCiudad().getPais().getContinente().getCodigo();
     String continenteDestino = aeropuertos.get(destino).getCiudad().getPais().getContinente().getCodigo();
 
     if (continenteOrigen == continenteDestino) {
       if (continenteOrigen == "EUR")
-        return 250;
+        return configuracion.get("CapacidadAvionEuropa").getValor();
       else
-        return 300;
+        return configuracion.get("CapacidadAvionAmerica").getValor();
     } else {
-      return 350;
+      return configuracion.get("CapacidadAvionInterc").getValor();
     }
   }
 
   public int obtenerDuracion(Calendar partida, Calendar destino, Aeropuerto aPartida, Aeropuerto aDestino) {
-    long diff = ((destino.getTime().getTime() - partida.getTime().getTime()) / 60000);
-    
-    if(esIntercontinental(aPartida, aDestino) && diff <= 360){
-      diff += 1440;
-      destino.add(Calendar.HOUR, 24);
-    }
+    long diff = TimeUnit.MINUTES.convert((destino.getTime().getTime() - partida.getTime().getTime()), TimeUnit.MILLISECONDS);
 
     if(diff <= 0){
       diff += 1440;
       destino.add(Calendar.HOUR, 24);
     }
 
+    if(esIntercontinental(aPartida, aDestino)){
+      while(diff > 1440){
+        diff -= 1440;
+        destino.add(Calendar.HOUR, -24);
+      }
+    }else{
+      while(diff > 720){
+        diff -= 720;
+        destino.add(Calendar.HOUR, -24);
+      }
+    }
+
     return (int)diff;
   }
 
-  public void leerVuelosTXT(HashMap<String, Aeropuerto> aeropuertos, List<Vuelo> vuelos){
+  public void leerVuelosTXT(HashMap<String, Aeropuerto> aeropuertos, List<Vuelo> vuelos, HashMap<String, Configuracion> configuracion){
     String[] informacion;
-    String line, yy = "2022", mm = "10", dd = "24";
+    String line;
     int duracion, capacidad;
     Aeropuerto salida, llegada;
     Calendar horaSalida = Calendar.getInstance(), 
@@ -88,8 +97,8 @@ public class LeerArchivos {
       while ((line = br.readLine()) != null) {
         informacion = line.split("-");
 
-        horaSalida.setTime(dateFormat.parse(yy + "-" + mm + "-" + dd + " " + informacion[2] + ":00"));
-        horaLlegada.setTime(dateFormat.parse(yy + "-" + mm + "-" + dd + " " + informacion[3] + ":00"));
+        horaSalida.setTime(dateFormat.parse("2022-10-24" + " " + informacion[2] + ":00"));
+        horaLlegada.setTime(dateFormat.parse("2022-10-24" + " " + informacion[3] + ":00"));
 
         horaSalidaUTC0.setTime(horaSalida.getTime());
         horaLlegadaUTC0.setTime(horaLlegada.getTime());
@@ -119,7 +128,7 @@ public class LeerArchivos {
         salida = aeropuertos.get(informacion[0]);
         llegada = aeropuertos.get(informacion[1]);
         
-        capacidad = obtenerCapacidad(aeropuertos, informacion[0], informacion[1]);
+        capacidad = obtenerCapacidad(aeropuertos, informacion[0], informacion[1], configuracion);
         duracion = obtenerDuracion(horaSalidaUTC0, horaLlegadaUTC0, salida, llegada);
 
         Vuelo vuelo = new Vuelo(informacion[0] + informacion[1], salida, llegada, horaSalida.getTime(), horaLlegada.getTime(), horaSalidaUTC0.getTime(), horaLlegadaUTC0.getTime(), capacidad, duracion, 1, true);
@@ -340,7 +349,7 @@ public class LeerArchivos {
     return ciudades;
   }
 
-  public HashMap<String, Aeropuerto> leerAeropuertos(HashMap<String, Ciudad> ciudades, HashMap<String, Integer> timeZones) {
+  public HashMap<String, Aeropuerto> leerAeropuertos(HashMap<String, Ciudad> ciudades, HashMap<String, Integer> timeZones, HashMap<String, Configuracion> configuracion) {
     HashMap<String, Aeropuerto> aeropuertos = new HashMap<>();
     String[] informacion;
     String line, codigoContinente;
@@ -353,10 +362,10 @@ public class LeerArchivos {
         informacion = line.split(";");
         codigoContinente = ciudades.get(informacion[4]).getPais().getContinente().getCodigo();
         if (codigoContinente == "AMN" || codigoContinente == "AMS" || codigoContinente == "AMC")
-          capacidad = 850;
+          capacidad = configuracion.get("CapacidadAeropuertoAmerica").getValor();
         else
-          capacidad = 900;
-        Aeropuerto aeropuerto = new Aeropuerto(informacion[0], informacion[1], informacion[1], capacidad, 1000,
+          capacidad = configuracion.get("CapacidadAeropuertoEuropa").getValor();
+        Aeropuerto aeropuerto = new Aeropuerto(informacion[0], informacion[1], informacion[1], capacidad, capacidad,
             informacion[6], informacion[7], ciudades.get(informacion[4]), timeZones.get(informacion[1]), 1);
         ciudades.get(informacion[4]).setAeropuerto(aeropuerto);
         aeropuertos.put(informacion[1], aeropuerto);
@@ -404,9 +413,9 @@ public class LeerArchivos {
         );
         bw.newLine();
         bw.write(
-          "VALUES (1,'" + 
+          "VALUES (1," + 
           vuelo.getCapacidad() + "," + 
-          vuelo.getCapacidadActual() + "," + 
+          vuelo.getCapacidadActual() + ",'" + 
           vuelo.getCodigo() + "',1," + 
           vuelo.getDuracion() + ",'" + 
           dateFormat.format(vuelo.getFechaDestino()) + "','" + 
@@ -447,6 +456,27 @@ public class LeerArchivos {
     } catch (Exception ex){
       System.out.println(ex.getMessage());
     }
-
   }
+
+  public HashMap<String, Configuracion> leerConfiguracion(){
+    HashMap<String, Configuracion> configuraciones = new HashMap<>();
+    String[] informacion;
+    String line;
+    File configFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\configuracion.txt");
+    try {
+      BufferedReader br = new BufferedReader(new FileReader(configFile));
+      while ((line = br.readLine()) != null) {
+        informacion = line.split(",");
+        Configuracion configuracion = new Configuracion();
+        configuracion.setNombre(informacion[0]);
+        configuracion.setValor(Integer.parseInt(informacion[1]));
+        configuraciones.put(informacion[0], configuracion);
+      }
+      br.close();
+    } catch (Exception ex) {
+      System.out.println("Se ha producido un error: " + ex.getMessage());
+    }
+    return configuraciones;
+  }
+
 }

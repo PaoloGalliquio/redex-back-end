@@ -1,6 +1,7 @@
 package com.redexbackend.models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import lombok.*;
@@ -167,4 +168,15 @@ public class Aeropuerto extends BaseEntity implements Comparable<Aeropuerto> {
     return this.vuelos;
   }
 
+  public void setConfiguracion(HashMap<String, Configuracion> configuraciones){
+    if(ciudad.getPais().getContinente().getCodigo() == "EUR"){
+      System.out.println(ciudad.getPais().getContinente().getCodigo() + ": " + configuraciones.get("CapacidadAeropuertoEuropa").getValor());
+      this.capacidad = configuraciones.get("CapacidadAeropuertoEuropa").getValor();
+    }
+    else{
+      System.out.println(ciudad.getPais().getContinente().getCodigo() + ": " + configuraciones.get("CapacidadAeropuertoAmerica").getValor());
+      this.capacidad = configuraciones.get("CapacidadAeropuertoAmerica").getValor();
+    }
+    cantidadReservada = 0;
+  }
 }

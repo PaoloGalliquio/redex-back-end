@@ -1,6 +1,7 @@
 package com.redexbackend.models;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -97,5 +98,21 @@ public class Vuelo extends BaseEntity {
     this.capacidadActual = capacidad;
     this.duracion = vuelo.duracion;
     this.disponible = vuelo.disponible;
+  }
+
+  public void setConfiguracion(HashMap<String, Configuracion> configuraciones){
+    try{
+      if(aeropuertoPartida.getCiudad().getPais().getContinente().getCodigo() == aeropuertoDestino.getCiudad().getPais().getContinente().getCodigo()){
+        if(aeropuertoPartida.getCiudad().getPais().getContinente().getCodigo() == "EUR")
+          capacidad = configuraciones.get("CapacidadAvionEuropa").getValor();
+        else
+          capacidad = configuraciones.get("CapacidadAvionAmerica").getValor();
+      }
+      else
+        capacidad = configuraciones.get("CapacidadAvionInterc").getValor();
+      capacidadActual = capacidad;
+    }catch(Exception ex){
+      System.out.println("Se ha producido un error: " + ex.getMessage());
+    }
   }
 }

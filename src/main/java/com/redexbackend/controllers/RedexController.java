@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.redexbackend.models.AStar;
 import com.redexbackend.models.Aeropuerto;
 import com.redexbackend.models.Ciudad;
+import com.redexbackend.models.Configuracion;
 import com.redexbackend.models.Continente;
 import com.redexbackend.models.Envio;
 import com.redexbackend.models.LeerArchivos;
@@ -29,6 +30,7 @@ import com.redexbackend.models.Pais;
 import com.redexbackend.models.Vuelo;
 import com.redexbackend.service.AeropuertoService;
 import com.redexbackend.service.CiudadService;
+import com.redexbackend.service.ConfiguracionService;
 import com.redexbackend.service.ContinenteService;
 import com.redexbackend.service.EnvioService;
 import com.redexbackend.service.PaisService;
@@ -51,11 +53,14 @@ public class RedexController {
   private VueloService vueloService = new VueloService();
   @Autowired
   private EnvioService envioService = new EnvioService();
+  @Autowired
+  private ConfiguracionService configuracionService = new ConfiguracionService();
 
   LeerArchivos lector = new LeerArchivos();
 
   Calendar inicioSimulacion = Calendar.getInstance();
 
+  HashMap<String, Configuracion> configuraciones = new HashMap<>();
   List<Continente> continentesList;
   List<Pais> paisesList;
   List<Ciudad> ciudadesList;
@@ -70,15 +75,25 @@ public class RedexController {
 
   @GetMapping(value = "/init")
   List<Aeropuerto> init(){
+    List<Configuracion> configuracionList = configuracionService.getAll();
+    for (Configuracion configuracion : configuracionList){
+      System.out.println(configuracion.getNombre() + ": " + configuracion.getValor());
+      configuraciones.put(configuracion.getNombre(), configuracion);
+    }
+
     continentesList = continenteService.getAll();
     paisesList = paisService.getAll();
     ciudadesList = ciudadService.getAll();
 
     aeropuertosList = aeropuertoService.getAll();
     for (Aeropuerto aeropuerto : aeropuertosList){
+      aeropuerto.setConfiguracion(configuraciones);
       aeropuertos.put(aeropuerto.getCodigo(), aeropuerto);
 
       List<Vuelo> listaDeVuelos = vueloService.getVuelos(aeropuerto.getId());
+      // for (Vuelo vuelo : listaDeVuelos)
+      //   vuelo.setConfiguracion(configuraciones);
+
       vuelosList.addAll(listaDeVuelos);
 
       aeropuerto.setVuelos(listaDeVuelos);
@@ -180,6 +195,14 @@ public class RedexController {
   String fillDataBase() {
     HashMap<String, Integer> timeZones = lector.leerTimeZones();
 
+    configuraciones = lector.leerConfiguracion();
+    try {
+      for (HashMap.Entry<String, Configuracion> configuracion : configuraciones.entrySet())
+        configuracion.getValue().setId(configuracionService.insert(configuracion.getValue()).getId());
+    } catch (Exception ex){
+      return ex.getMessage();
+    }
+
     HashMap<String, Continente> continentes = lector.leerContinentes();
     try {
       for (HashMap.Entry<String, Continente> continente : continentes.entrySet())
@@ -204,7 +227,7 @@ public class RedexController {
       return ex.getMessage();
     }
 
-    aeropuertos = lector.leerAeropuertos(ciudades, timeZones);
+    aeropuertos = lector.leerAeropuertos(ciudades, timeZones, configuraciones);
     try {
       for (HashMap.Entry<String, Aeropuerto> aeropuerto : aeropuertos.entrySet())
         aeropuerto.getValue().setId(aeropuertoService.insert(aeropuerto.getValue()).getId());
@@ -212,7 +235,7 @@ public class RedexController {
       return ex.getMessage();
     }
 
-    lector.leerVuelosTXT(aeropuertos, vuelosList);
+    lector.leerVuelosTXT(aeropuertos, vuelosList, configuraciones);
     lector.escribirSQL(vuelosList);
 
     return "Data inicializada";
