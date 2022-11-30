@@ -249,7 +249,6 @@ public class LeerArchivos {
           envio.setFechaLimiteUTC(fechaLimiteUTC.getTime());
           envioService.insert(envio);
         }
-        else break;
       }
       br.close();
     } catch (Exception ex) {

@@ -109,7 +109,7 @@ public class RedexController {
     Calendar siguienteBloque = Calendar.getInstance();
     siguienteBloque.setTime(fecha);
     siguienteBloque.add(Calendar.HOUR_OF_DAY, 6);
-    lector.leerEnviosTXT(aeropuertos, archivo, fecha, envioService);
+    //lector.leerEnviosTXT(aeropuertos, archivo, fecha, envioService);
     archivo = null;
 
     System.out.println("\nBloque analizado: " + inicioSimulacion.getTime().toString() + " - " + siguienteBloque.getTime().toString());
