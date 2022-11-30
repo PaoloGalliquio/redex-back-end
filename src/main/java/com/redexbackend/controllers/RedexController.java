@@ -75,11 +75,9 @@ public class RedexController {
 
   @GetMapping(value = "/init")
   List<Aeropuerto> init(){
-    List<Configuracion> configuracionList = configuracionService.getAll();
-    for (Configuracion configuracion : configuracionList){
-      System.out.println(configuracion.getNombre() + ": " + configuracion.getValor());
-      configuraciones.put(configuracion.getNombre(), configuracion);
-    }
+    //List<Configuracion> configuracionList = configuracionService.getAll();
+    // for (Configuracion configuracion : configuracionList)
+    //   configuraciones.put(configuracion.getNombre(), configuracion);
 
     continentesList = continenteService.getAll();
     paisesList = paisService.getAll();
@@ -87,7 +85,7 @@ public class RedexController {
 
     aeropuertosList = aeropuertoService.getAll();
     for (Aeropuerto aeropuerto : aeropuertosList){
-      aeropuerto.setConfiguracion(configuraciones);
+      //aeropuerto.setConfiguracion(configuraciones);
       aeropuertos.put(aeropuerto.getCodigo(), aeropuerto);
 
       List<Vuelo> listaDeVuelos = vueloService.getVuelos(aeropuerto.getId());
@@ -106,6 +104,7 @@ public class RedexController {
 
   @PostMapping(value = "/simulator/initial")
   Map<String, Object> simulador(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
+    Envio lastEnvio = null;
     inicioSimulacion.setTime(fecha);
     Calendar siguienteBloque = Calendar.getInstance();
     siguienteBloque.setTime(fecha);
@@ -121,7 +120,8 @@ public class RedexController {
       envio.setAeropuertoPartida(aeropuertos.get(envio.getAeropuertoPartida().getCodigo()));
       envio.setAeropuertoDestino(aeropuertos.get(envio.getAeropuertoDestino().getCodigo()));
       Aeropuerto answer = AStar.aStar(envio);
-      AStar.obtenerPlanesDeVuelo(answer, envio, inicioSimulacion);
+      lastEnvio = AStar.obtenerPlanesDeVuelo(answer, envio, inicioSimulacion);
+      if(lastEnvio != null) break;
     }
 
     List<Vuelo> vuelosInDate = vuelosList.stream()
@@ -133,6 +133,7 @@ public class RedexController {
     Map<String, Object> result = new HashMap<>();
     result.put("envios", enviosInDate);
     result.put("vuelos", vuelosInDate);
+    result.put("ultimoEnvio", lastEnvio);
 
     return result;
   }
@@ -169,6 +170,17 @@ public class RedexController {
     result.put("vuelos", vuelosInDate);
 
     return result;
+  }
+
+  @GetMapping(value = "/configuraciones/list")
+  Map<String, Configuracion> listConfiguraciones() {
+    return configuraciones;
+  }
+
+  @PostMapping(value = "/configuraciones/update")
+  Map<String, Configuracion> updateConfiguraciones() {
+    configuracionService.update(null);
+    return configuraciones;
   }
 
   @GetMapping(value = "/aeropuerto/list")

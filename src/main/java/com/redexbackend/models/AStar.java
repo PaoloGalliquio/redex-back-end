@@ -393,7 +393,7 @@ public class AStar {
         return null;
     }
 
-    public static void obtenerPlanesDeVuelo(Aeropuerto target, Envio envio, Calendar fechaSimu) {
+    public static Envio obtenerPlanesDeVuelo(Aeropuerto target, Envio envio, Calendar fechaSimu) {
         var origen = envio.getAeropuertoPartida();
         var destino = envio.getAeropuertoDestino();
         var fechaEnvio = envio.getFechaEnvio();
@@ -401,7 +401,7 @@ public class AStar {
 
         Aeropuerto n = target;
         if (n == null){
-            return;
+            return null;
         }
 
         List<Integer> capacidadVuelos = new ArrayList<>();
@@ -451,7 +451,7 @@ public class AStar {
 
         if(esMayor(hEnvio.getTime(), hULlegada.getTime(), origen, destino)){
             System.out.println(envio.getCodigo() + " se cae");
-            return;
+            return envio;
         }
         else
             cambiarCapacidades(listaVuelos, envio.getNumeroPaquetes());
@@ -491,6 +491,7 @@ public class AStar {
         planDeVuelo.setDuracionTotal(duracion);
         planDeVuelos.add(planDeVuelo);
         envio.setPlanesDeVuelo(planDeVuelos);
+        return null;
     }
 
     public static boolean esMayor(Date primeraSalida, Date ultimaLlegada, Aeropuerto origen, Aeropuerto destino){
