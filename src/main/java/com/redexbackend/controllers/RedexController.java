@@ -117,9 +117,10 @@ public class RedexController {
     List<Envio> enviosInDate = envioService.getInRange(inicioSimulacion.getTime(), siguienteBloque.getTime());
 
     for (Envio envio : enviosInDate) {
+      System.out.println(envio.getCodigo());
       envio.setAeropuertoPartida(aeropuertos.get(envio.getAeropuertoPartida().getCodigo()));
       envio.setAeropuertoDestino(aeropuertos.get(envio.getAeropuertoDestino().getCodigo()));
-      Aeropuerto answer = AStar.aStar(envio);
+      Aeropuerto answer = AStar.aStar(envio, inicioSimulacion);
       lastEnvio = AStar.obtenerPlanesDeVuelo(answer, envio, inicioSimulacion);
       if(lastEnvio != null) break;
     }
@@ -158,7 +159,7 @@ public class RedexController {
     for (Envio envio : enviosInDate) {
       envio.setAeropuertoPartida(aeropuertos.get(envio.getAeropuertoPartida().getCodigo()));
       envio.setAeropuertoDestino(aeropuertos.get(envio.getAeropuertoDestino().getCodigo()));
-      Aeropuerto answer = AStar.aStar(envio);
+      Aeropuerto answer = AStar.aStar(envio, inicioSimulacion);
       AStar.obtenerPlanesDeVuelo(answer, envio, bloqueActual);
     }
 
