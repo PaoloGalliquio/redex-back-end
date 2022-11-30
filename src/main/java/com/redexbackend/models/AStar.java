@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.concurrent.TimeUnit;
 
 public class AStar {
 
@@ -71,6 +72,26 @@ public class AStar {
             // Si hay cruce entre vuelos
 
             return -1;
+        }
+    }
+
+    public static int seCruzan(Envio envio, Date nuevoVuelo, Calendar fechaSimu) {
+        Calendar hSalidaVuelo = Calendar.getInstance();
+
+        int diaSimu = fechaSimu.get(Calendar.DAY_OF_MONTH), mesSimu = fechaSimu.get(Calendar.MONTH), aaSimu = fechaSimu.get(Calendar.YEAR);
+
+        hSalidaVuelo.setTime(nuevoVuelo);
+        hSalidaVuelo.set(aaSimu, mesSimu, diaSimu);
+
+        long diff = TimeUnit.MINUTES.convert((hSalidaVuelo.getTime().getTime() - envio.getFechaEnvioUTC().getTime()), TimeUnit.MILLISECONDS);
+
+        if (diff >= 0) {
+            
+            return (int)diff;
+        } else {
+            // Si hay cruce entre vuelos
+
+            return (int) diff + 24 * 60;
         }
     }
 
@@ -320,9 +341,10 @@ public class AStar {
 
     //Versión que se usa en el Service
     
-    public static Aeropuerto aStar(Envio envio) {
+    public static Aeropuerto aStar(Envio envio, Calendar fechaSimu) {
         envio.getAeropuertoPartida().g = 0;
         Aeropuerto start = envio.getAeropuertoPartida();
+        start.comoLlegar = null;
         Aeropuerto target = envio.getAeropuertoDestino();
         int nroPaquetes = envio.getNumeroPaquetes();
         PriorityQueue<Aeropuerto> closedList = new PriorityQueue<>();
@@ -330,6 +352,8 @@ public class AStar {
 
         start.f = start.g + start.calculateHeuristic(start, target);
         openList.add(start);
+
+        int cont;
         
         if(start.getCapacidad() < nroPaquetes){
             return null;
@@ -342,7 +366,15 @@ public class AStar {
             }
 
             if (n.getCodigo() == target.getCodigo()) {
-                return n;
+                cont = 0;
+                Aeropuerto rpta = n;
+                while(!(n.parent.getCodigo() == start.getCodigo())){
+                    n = n.parent;
+                    cont++;
+                }
+                if(cont != 0)n.parent = null;
+                else n.parent.parent = null;
+                return rpta;
             }
 
             for (Vuelo vuelo : n.getVuelos()) {
@@ -352,8 +384,10 @@ public class AStar {
                     continue;
                 int tiempoIntermedio = 0;
                 for (Aeropuerto aero : openList) {
-                    if (aero.comoLlegar == null)
-                        continue;
+                    if (aero.getCodigo() == start.getCodigo()){
+                        tiempoIntermedio = seCruzan(envio, vuelo.getFechaPartidaUTC0(), fechaSimu);
+                        break;
+                    }
                     if (aero.comoLlegar.getAeropuertoDestino().getCodigo().equals(vuelo.getAeropuertoPartida().getCodigo())) {
                         tiempoIntermedio = seCruzan(aero.comoLlegar, vuelo);
                         break;
@@ -423,7 +457,7 @@ public class AStar {
                 capacidadVuelos.add(n.comoLlegar.getCapacidadActual());
             }
             listaVuelos.add(n.comoLlegar);
-            
+
             if((n.comoLlegar.getCapacidadActual() - nroPaquetes )== 0)
                 n.comoLlegar.setDisponible(false);
 
@@ -431,6 +465,7 @@ public class AStar {
 
             primeraSalida = n.comoLlegar.getFechaPartida();
             UTCPSalida = n.comoLlegar.getAeropuertoPartida().getHusoHorario();
+
             n = n.parent;
         }
         Collections.reverse(capacidadVuelos);
@@ -450,6 +485,8 @@ public class AStar {
         }
 
         if(esMayor(hEnvio.getTime(), hULlegada.getTime(), origen, destino)){
+            System.out.println("Hora de envio: " + hEnvio.getTime());
+            System.out.println("Hora de llegada: " + hULlegada.getTime());
             System.out.println(envio.getCodigo() + " se cae");
             return envio;
         }
