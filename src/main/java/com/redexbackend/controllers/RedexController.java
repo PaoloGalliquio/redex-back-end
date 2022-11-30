@@ -112,7 +112,7 @@ public class RedexController {
     lector.leerEnviosTXT(aeropuertos, archivo, fecha, envioService);
     archivo = null;
 
-    System.out.println("Bloque analizado: " + inicioSimulacion.getTime().toString() + " - " + siguienteBloque.getTime().toString());
+    System.out.println("\nBloque analizado: " + inicioSimulacion.getTime().toString() + " - " + siguienteBloque.getTime().toString());
 
     List<Envio> enviosInDate = envioService.getInRange(inicioSimulacion.getTime(), siguienteBloque.getTime());
 
@@ -130,6 +130,9 @@ public class RedexController {
         v.getFechaPartidaUTC0().before(siguienteBloque.getTime())
       )).collect(Collectors.toList());
 
+    System.out.println("Vuelos enviados: " + vuelosInDate.size());
+      for (Vuelo vuelo : vuelosInDate)
+        System.out.println("  " + vuelo.getCodigo() + ": " + vuelo.getFechaPartidaUTC0().toString());
     Map<String, Object> result = new HashMap<>();
     result.put("envios", enviosInDate);
     result.put("vuelos", vuelosInDate);
@@ -148,7 +151,7 @@ public class RedexController {
     siguienteBloque.setTime(bloqueActual.getTime());
     siguienteBloque.add(Calendar.HOUR, 6);
 
-    System.out.println("Bloque analizado: " + bloqueActual.getTime().toString() + " - " + siguienteBloque.getTime().toString());
+    System.out.println("\nBloque analizado: " + bloqueActual.getTime().toString() + " - " + siguienteBloque.getTime().toString());
 
     List<Envio> enviosInDate = envioService.getInRange(bloqueActual.getTime(), siguienteBloque.getTime());
 
@@ -165,6 +168,9 @@ public class RedexController {
         v.getFechaPartidaUTC0().before(siguienteBloque.getTime())
       )).collect(Collectors.toList());
 
+    System.out.println("Vuelos enviados: " + vuelosInDate.size());
+    for (Vuelo vuelo : vuelosInDate)
+      System.out.println("  " + vuelo.getCodigo() + ": " + vuelo.getFechaPartidaUTC0().toString());
     Map<String, Object> result = new HashMap<>();
     result.put("envios", enviosInDate);
     result.put("vuelos", vuelosInDate);

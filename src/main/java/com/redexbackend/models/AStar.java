@@ -496,7 +496,6 @@ public class AStar {
 
     public static boolean esMayor(Date primeraSalida, Date ultimaLlegada, Aeropuerto origen, Aeropuerto destino){
         long min = (Math.abs(ultimaLlegada.getTime() - primeraSalida.getTime()))/60000;
-        System.out.println(min);
         if(origen.getCiudad().getPais().getContinente().getCodigo().charAt(0) == destino.getCiudad().getPais().getContinente().getCodigo().charAt(0)){
             if(min > 24*60)
                 return true;
