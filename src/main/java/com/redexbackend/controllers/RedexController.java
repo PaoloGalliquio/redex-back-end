@@ -102,6 +102,13 @@ public class RedexController {
     return aeropuertosList;
   }
 
+  void actualizarVuelos(Calendar fecha){
+    int diaSimu = fecha.get(Calendar.DAY_OF_MONTH), 
+        mesSimu = fecha.get(Calendar.MONTH), 
+        aaSimu = fecha.get(Calendar.YEAR);
+    
+  }
+
   @PostMapping(value = "/simulator/initial")
   Map<String, Object> simulador(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
     Envio lastEnvio = null;
@@ -111,6 +118,7 @@ public class RedexController {
     siguienteBloque.add(Calendar.HOUR_OF_DAY, 6);
     //lector.leerEnviosTXT(aeropuertos, archivo, fecha, envioService);
     archivo = null;
+    actualizarVuelos(inicioSimulacion);
 
     System.out.println("\nBloque analizado: " + inicioSimulacion.getTime().toString() + " - " + siguienteBloque.getTime().toString());
 
