@@ -167,7 +167,7 @@ public class RedexController {
       envio.setAeropuertoDestino(aeropuertos.get(envio.getAeropuertoDestino().getCodigo()));
       Aeropuerto answer = AStar.aStar(envio, inicioSimulacion);
       lastEnvio = AStar.obtenerPlanesDeVuelo(answer, envio, inicioSimulacion);
-      if(lastEnvio != null) break;
+      //if(lastEnvio != null) break;
     }
 
     List<Vuelo> vuelosInDate = vuelosList.stream()
@@ -197,7 +197,8 @@ public class RedexController {
     siguienteBloque.setTime(bloqueActual.getTime());
     siguienteBloque.add(Calendar.HOUR, 6);
 
-    actualizarVuelos(inicioSimulacion);
+    actualizarVuelos(bloqueActual);
+    System.out.println(" Vuelo: " + vuelosList.get(0).getFechaPartidaUTC0().toString());
     System.out.println("\nBloque analizado: " + bloqueActual.getTime().toString() + " - " + siguienteBloque.getTime().toString());
 
     List<Envio> enviosInDate = envioService.getInRange(bloqueActual.getTime(), siguienteBloque.getTime());
@@ -207,7 +208,7 @@ public class RedexController {
       envio.setAeropuertoDestino(aeropuertos.get(envio.getAeropuertoDestino().getCodigo()));
       Aeropuerto answer = AStar.aStar(envio, inicioSimulacion);
       lastEnvio = AStar.obtenerPlanesDeVuelo(answer, envio, inicioSimulacion);
-      if(lastEnvio != null) break;
+      //if(lastEnvio != null) break;
     }
 
     List<Vuelo> vuelosInDate = vuelosList.stream()
@@ -221,9 +222,28 @@ public class RedexController {
     result.put("vuelos", vuelosInDate);
     result.put("ultimoEnvio", lastEnvio);
 
+    return result;
+  }
+
+  @PostMapping(value = "/simulator/perBlockRestart")
+  String restartBlock(@RequestParam(value = "block",required = true) int block){
+    Calendar bloqueActual = Calendar.getInstance(), siguienteBloque = Calendar.getInstance();
+    
+    bloqueActual.setTime(inicioSimulacion.getTime());
+    bloqueActual.add(Calendar.HOUR, 6*block);
+
+    siguienteBloque.setTime(bloqueActual.getTime());
+    siguienteBloque.add(Calendar.HOUR, 6);
+
+    List<Vuelo> vuelosInDate = vuelosList.stream()
+      .filter(v -> (
+        v.getFechaPartidaUTC0().after(bloqueActual.getTime()) && 
+        v.getFechaPartidaUTC0().before(siguienteBloque.getTime())
+      )).collect(Collectors.toList());
+
     reiniciarVuelos(vuelosInDate);
 
-    return result;
+    return "00328901315659603963";
   }
 
   @GetMapping(value = "/configuraciones/list")
