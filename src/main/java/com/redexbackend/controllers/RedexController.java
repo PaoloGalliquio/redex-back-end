@@ -225,7 +225,7 @@ public class RedexController {
     return result;
   }
 
-  @PostMapping(value = "/simulator/perBlockRestart")
+  @PostMapping(value = "/simulator/restartBlock")
   String restartBlock(@RequestParam(value = "block",required = true) int block){
     Calendar bloqueActual = Calendar.getInstance(), siguienteBloque = Calendar.getInstance();
     
