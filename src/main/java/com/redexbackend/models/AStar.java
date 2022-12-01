@@ -42,40 +42,24 @@ public class AStar {
         return duracion;
     }
 
-    public static int seCruzan(Vuelo vueloEnLista, Vuelo nuevoVuelo) {
+    public static int tiempoHastaVuelo(Vuelo vueloEnLista, Vuelo nuevoVuelo) {
         Calendar hSalida = Calendar.getInstance();
         Calendar hLlegada = Calendar.getInstance();
-        int UTCSalida = vueloEnLista.getAeropuertoDestino().getHusoHorario();
-        int UTCLlegada = nuevoVuelo.getAeropuertoPartida().getHusoHorario();
-        long difFechas, difHoras, difMin, difDias;
 
-        hSalida.setTime(vueloEnLista.getFechaDestino());
+        hSalida.setTime(vueloEnLista.getFechaDestinoUTC0());
         hSalida.add(Calendar.HOUR_OF_DAY, 1); // agregar el tiempo de espera de 1 hora entre escalas
-        hSalida.add(Calendar.HOUR_OF_DAY, -(UTCSalida)); // mover a un mismo formato de fecha
 
-        hLlegada.setTime(nuevoVuelo.getFechaPartida());
-        hLlegada.add(Calendar.HOUR_OF_DAY, -(UTCLlegada)); // mover a un mismo formato de fecha
+        hLlegada.setTime(nuevoVuelo.getFechaPartidaUTC0());
 
-        if (hSalida.getTime().compareTo(hLlegada.getTime()) <= 0) {
-            // No hay cruce entre los vuelos
-            hSalida.add(Calendar.HOUR_OF_DAY, -1); // quitar la hora extra entre escalas, eso forma parte del tiempo
-                                                   // intermedio
-            difFechas = hLlegada.getTime().getTime() - hSalida.getTime().getTime();
-            difMin = (difFechas / (1000 * 60)) % 60;
-            difHoras = (difFechas / (1000 * 60 * 60)) % 24;
-            difDias = (difFechas / (1000 * 60 * 60 * 24)) % 365; // el alcance máximo entre diferencia de vuelos llega
-                                                                 // hasta días
-            // System.out.println(hSalida.getTime() + " ---- " + hLlegada.getTime());
+        long diff = TimeUnit.MINUTES.convert((hLlegada.getTime().getTime() - hSalida.getTime().getTime()), TimeUnit.MILLISECONDS);
 
-            return (int) difDias * 24 * 60 + (int) difHoras * 60 + (int) difMin;
-        } else {
-            // Si hay cruce entre vuelos
-
-            return -1;
-        }
+        if (diff <= 0)
+            return (int) diff;
+        else 
+            return (int) diff + 24*60;
     }
 
-    public static int seCruzan(Envio envio, Date nuevoVuelo, Calendar fechaSimu) {
+    public static int tiempoHastaVuelo(Envio envio, Date nuevoVuelo, Calendar fechaSimu) {
         Calendar hSalidaVuelo = Calendar.getInstance();
 
         int diaSimu = fechaSimu.get(Calendar.DAY_OF_MONTH), mesSimu = fechaSimu.get(Calendar.MONTH), aaSimu = fechaSimu.get(Calendar.YEAR);
@@ -85,22 +69,17 @@ public class AStar {
 
         long diff = TimeUnit.MINUTES.convert((hSalidaVuelo.getTime().getTime() - envio.getFechaEnvioUTC().getTime()), TimeUnit.MILLISECONDS);
 
-        if (diff >= 0) {
-            
-            return (int)diff;
-        } else {
-            // Si hay cruce entre vuelos
-
+        if (diff >= 0)
+            return (int) diff;
+        else 
             return (int) diff + 24 * 60;
-        }
     }
 
     public static boolean sobrepasaCapacidad(Vuelo nuevoVuelo, Integer nroPaquetes) {
-        if(nuevoVuelo.getCapacidadActual() < nroPaquetes || nuevoVuelo.getAeropuertoDestino().getCapacidad() < nroPaquetes){
+        if(nuevoVuelo.getCapacidadActual() < nroPaquetes)
             return true;
-        }else{
+        else
             return false;
-        }
     }
 
     public static boolean compararFechas(Vuelo vuelo, Date fechaEnvio, Aeropuerto origen){
@@ -195,7 +174,7 @@ public class AStar {
                     // comollegar.aerodestino es el hace referencia al aeropuerto actual
                     if (aero.comoLlegar.getAeropuertoDestino().getCodigo()
                             .equals(vuelo.getAeropuertoPartida().getCodigo())) {
-                        tiempoIntermedio = seCruzan(aero.comoLlegar, vuelo);
+                        tiempoIntermedio = tiempoHastaVuelo(aero.comoLlegar, vuelo);
                         break;
                     }
                 }
@@ -242,8 +221,8 @@ public class AStar {
     }
 
     public static void cambiarCapacidades(List<Vuelo> vuelos, Integer nroPaquetes){
-        for(int i = 0; i <vuelos.size(); i++){
-            vuelos.get(i).setCapacidadActual(vuelos.get(i).getCapacidadActual() - nroPaquetes);
+        for (Vuelo vuelo : vuelos){
+            vuelo.setCapacidadActual(vuelo.getCapacidadActual() - nroPaquetes);
         }
     }
 
@@ -307,17 +286,17 @@ public class AStar {
         Collections.reverse(capacidadVuelos);
         Collections.reverse(listaVuelos);
 
+        int duracionEnvio = 0;
         hPSalida.setTime(primeraSalida);
         hPSalida.add(Calendar.HOUR_OF_DAY, -(UTCPSalida));
         hULlegada.setTime(ultimaLlegada);
         hULlegada.add(Calendar.HOUR_OF_DAY, -(UTCULlegada)+1); //agregar la hora extra del destino final
 
-        if(esMayor(hPSalida.getTime(), hULlegada.getTime(), origen, destino)){
+        if(esMayor(hPSalida.getTime(), hULlegada.getTime(), origen, destino, duracionEnvio)){
             System.out.println("Supera la ventana de tiempo");
             return;
-        }else{//Cambiar las capacidades de los vuelos
+        }else
             cambiarCapacidades(listaVuelos, nroPaquetes);
-        }
 
         minAHora(fechaEnvio, hULlegada.getTime());
         System.out.println("Inicio del Plan de Vuelo: "+fechaEnvio);
@@ -352,8 +331,6 @@ public class AStar {
 
         start.f = start.g + start.calculateHeuristic(start, target);
         openList.add(start);
-
-        int cont;
         
         if(start.getCapacidad() < nroPaquetes){
             return null;
@@ -366,14 +343,10 @@ public class AStar {
             }
 
             if (n.getCodigo() == target.getCodigo()) {
-                cont = 0;
                 Aeropuerto rpta = n;
-                while(!(n.parent.getCodigo() == start.getCodigo())){
+                while(!(n.parent.getCodigo() == start.getCodigo()))
                     n = n.parent;
-                    cont++;
-                }
-                if(cont != 0)n.parent = null;
-                else n.parent.parent = null;
+                n.parent.parent = null;
                 return rpta;
             }
 
@@ -385,18 +358,19 @@ public class AStar {
                 int tiempoIntermedio = 0;
                 for (Aeropuerto aero : openList) {
                     if (aero.getCodigo() == start.getCodigo()){
-                        tiempoIntermedio = seCruzan(envio, vuelo.getFechaPartidaUTC0(), fechaSimu);
+                        tiempoIntermedio = tiempoHastaVuelo(envio, vuelo.getFechaPartidaUTC0(), fechaSimu);
                         break;
                     }
-                    if (aero.comoLlegar.getAeropuertoDestino().getCodigo().equals(vuelo.getAeropuertoPartida().getCodigo())) {
-                        tiempoIntermedio = seCruzan(aero.comoLlegar, vuelo);
+                    else if (aero.comoLlegar.getAeropuertoDestino().getCodigo().equals(vuelo.getAeropuertoPartida().getCodigo())) {
+                        tiempoIntermedio = tiempoHastaVuelo(aero.comoLlegar, vuelo);
                         break;
                     }
                 }
+
                 if (tiempoIntermedio < 0 || sobrepasaCapacidad(vuelo, nroPaquetes))
                     continue;
 
-                int totalWeight = n.g + tiempoIntermedio + obtenerTiempo(vuelo);
+                int totalWeight = n.g + tiempoIntermedio + vuelo.getDuracion();
 
                 if (!openList.contains(vuelo.getAeropuertoDestino()) && !closedList.contains(vuelo.getAeropuertoDestino())) {
                     vuelo.getAeropuertoDestino().comoLlegar = vuelo;
@@ -412,7 +386,6 @@ public class AStar {
                         vuelo.getAeropuertoDestino().f = 
                             vuelo.getAeropuertoDestino().g + 
                             vuelo.getAeropuertoDestino().calculateHeuristic(vuelo.getAeropuertoDestino(), target);
-                        //vuelo.setCapacidadActual(vuelo.getCapacidadActual() - nroPaquetes);
 
                         if (closedList.contains(vuelo.getAeropuertoDestino())) {
                             closedList.remove(vuelo.getAeropuertoDestino());
@@ -430,62 +403,41 @@ public class AStar {
     public static Envio obtenerPlanesDeVuelo(Aeropuerto target, Envio envio, Calendar fechaSimu) {
         var origen = envio.getAeropuertoPartida();
         var destino = envio.getAeropuertoDestino();
-        var fechaEnvio = envio.getFechaEnvio();
         var nroPaquetes = envio.getNumeroPaquetes();
-
+        int duracionEnvio = 0;
         Aeropuerto n = target;
-        if (n == null){
+        if (n == null)
             return null;
-        }
 
         List<Integer> capacidadVuelos = new ArrayList<>();
 
         List<Vuelo> listaVuelos = new ArrayList<>();
 
-        Date primeraSalida = new Date(), ultimaLlegada = new Date();
+        Date ultimaLlegada = new Date();
         boolean primeraVez = true;
-        Calendar hPSalida = Calendar.getInstance(), hULlegada = Calendar.getInstance(), hEnvio = Calendar.getInstance(), hVuelo = Calendar.getInstance();
-        int UTCPSalida=0, UTCULlegada=0;
-
-        int diaSimu = fechaSimu.get(Calendar.DAY_OF_MONTH), mesSimu = fechaSimu.get(Calendar.MONTH), aaSimu = fechaSimu.get(Calendar.YEAR);
+        Calendar hULlegada = Calendar.getInstance();
 
         while (n.parent != null) {
             if(primeraVez){
-                ultimaLlegada = n.comoLlegar.getFechaDestino();
-                UTCULlegada = n.comoLlegar.getAeropuertoDestino().getHusoHorario();
+                ultimaLlegada = n.comoLlegar.getFechaDestinoUTC0();
                 primeraVez = false;
-                capacidadVuelos.add(n.comoLlegar.getCapacidadActual());
             }
             listaVuelos.add(n.comoLlegar);
 
-            if((n.comoLlegar.getCapacidadActual() - nroPaquetes )== 0)
+            if((n.comoLlegar.getCapacidadActual() - nroPaquetes ) == 0)
                 n.comoLlegar.setDisponible(false);
 
             capacidadVuelos.add(n.comoLlegar.getCapacidadActual());
-
-            primeraSalida = n.comoLlegar.getFechaPartida();
-            UTCPSalida = n.comoLlegar.getAeropuertoPartida().getHusoHorario();
 
             n = n.parent;
         }
         Collections.reverse(capacidadVuelos);
         Collections.reverse(listaVuelos);
 
-        hPSalida.setTime(primeraSalida);
-        hPSalida.add(Calendar.HOUR_OF_DAY, -(UTCPSalida));
         hULlegada.setTime(ultimaLlegada);
-        hULlegada.add(Calendar.HOUR_OF_DAY, -(UTCULlegada)+1);
-        hEnvio.setTime(fechaEnvio);
-        hEnvio.add(Calendar.HOUR_OF_DAY, -(UTCPSalida));
-        hEnvio.set(Calendar.DAY_OF_MONTH, hPSalida.get(Calendar.DAY_OF_MONTH));
-        hEnvio.set(Calendar.MONTH, hPSalida.get(Calendar.MONTH));
 
-        if(!esMayor(hEnvio.getTime(), hPSalida.getTime())){
-            hEnvio.add(Calendar.HOUR_OF_DAY, 1);
-        }
-
-        if(esMayor(hEnvio.getTime(), hULlegada.getTime(), origen, destino)){
-            System.out.println("Hora de envio: " + hEnvio.getTime());
+        if(esMayor(envio.getFechaEnvioUTC(), hULlegada.getTime(), origen, destino, duracionEnvio)){
+            System.out.println("Hora de envio: " + envio.getFechaEnvioUTC());
             System.out.println("Hora de llegada: " + hULlegada.getTime());
             System.out.println(envio.getCodigo() + " se cae");
             return envio;
@@ -497,27 +449,13 @@ public class AStar {
         List<VueloPorPlanDeVuelo> vueloPorPlanDeVuelos = new ArrayList<>();
         PlanDeVuelo planDeVuelo = new PlanDeVuelo();
         String codigo = "";
-        int duracion = 0;
         planDeVuelo.setFechaPlan(new Date());
         planDeVuelo.setNumeroPaquetes(nroPaquetes);
         planDeVuelo.setEnvio(envio);
 
-        for (Vuelo v : listaVuelos){
-            hVuelo.setTime(v.getFechaPartida());
-            hVuelo.set(aaSimu, mesSimu, diaSimu);
-            v.setFechaPartida(hVuelo.getTime());
-            hVuelo.add(Calendar.MINUTE, v.getDuracion());
-            v.setFechaDestino(hVuelo.getTime());
-            hVuelo.setTime(v.getFechaPartida());
-            hVuelo.add(Calendar.HOUR, -(v.getAeropuertoPartida().getHusoHorario()));
-            v.setFechaPartidaUTC0(hVuelo.getTime());
-            hVuelo.setTime(v.getFechaDestino());
-            hVuelo.add(Calendar.HOUR, -(v.getAeropuertoDestino().getHusoHorario()));
-            v.setFechaDestinoUTC0(hVuelo.getTime());
-            
+        for (Vuelo v : listaVuelos){            
             VueloPorPlanDeVuelo vueloPorPlanDeVuelo = new VueloPorPlanDeVuelo();
             codigo += v.getCodigo();
-            duracion += v.getDuracion();
             vueloPorPlanDeVuelo.setPlanDeVuelo(planDeVuelo);
             vueloPorPlanDeVuelo.setVuelo(v);
             vueloPorPlanDeVuelo.setFechaVuelo(v.getFechaPartida());
@@ -525,22 +463,26 @@ public class AStar {
         }
         planDeVuelo.setVuelosPorPlanDeVuelo(vueloPorPlanDeVuelos);
         planDeVuelo.setCodigo(codigo);
-        planDeVuelo.setDuracionTotal(duracion);
+        planDeVuelo.setDuracionTotal(duracionEnvio);
         planDeVuelos.add(planDeVuelo);
         envio.setPlanesDeVuelo(planDeVuelos);
         return null;
     }
 
-    public static boolean esMayor(Date primeraSalida, Date ultimaLlegada, Aeropuerto origen, Aeropuerto destino){
-        long min = (Math.abs(ultimaLlegada.getTime() - primeraSalida.getTime()))/60000;
+    public static boolean esMayor(Date primeraSalida, Date ultimaLlegada, Aeropuerto origen, Aeropuerto destino, int duracion){
+        duracion = (int) TimeUnit.MINUTES.convert((ultimaLlegada.getTime() - primeraSalida.getTime()), TimeUnit.MILLISECONDS);
         if(origen.getCiudad().getPais().getContinente().getCodigo().charAt(0) == destino.getCiudad().getPais().getContinente().getCodigo().charAt(0)){
-            if(min > 24*60)
+            if(duracion > 24*60){
+                System.out.println("    Duración: " + duracion);
                 return true;
+            }
             else 
                 return false;
         }else{
-            if(min > 48*60)
+            if(duracion > 48*60){
+                System.out.println("    Duración: " + duracion);
                 return true;
+            }
             else 
                 return false;
         }

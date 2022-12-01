@@ -103,10 +103,48 @@ public class RedexController {
   }
 
   void actualizarVuelos(Calendar fecha){
+    Calendar hVuelo = Calendar.getInstance();
     int diaSimu = fecha.get(Calendar.DAY_OF_MONTH), 
         mesSimu = fecha.get(Calendar.MONTH), 
         aaSimu = fecha.get(Calendar.YEAR);
-    
+    for (Vuelo vuelo : vuelosList){
+      hVuelo.setTime(vuelo.getFechaPartida());
+      hVuelo.set(aaSimu, mesSimu, diaSimu);
+      vuelo.setFechaPartida(hVuelo.getTime());
+
+      hVuelo.add(Calendar.HOUR, -(vuelo.getAeropuertoPartida().getHusoHorario()));
+      vuelo.setFechaPartidaUTC0(hVuelo.getTime());
+      
+      hVuelo.add(Calendar.MINUTE, vuelo.getDuracion());
+      vuelo.setFechaDestinoUTC0(hVuelo.getTime());
+      
+      hVuelo.setTime(vuelo.getFechaDestinoUTC0());
+      hVuelo.add(Calendar.HOUR, (vuelo.getAeropuertoDestino().getHusoHorario()));
+      vuelo.setFechaDestino(hVuelo.getTime());
+    }
+  }
+
+  void reiniciarVuelos(List<Vuelo> vuelos){
+    Calendar hVuelo = Calendar.getInstance();
+    for (Vuelo vuelo : vuelos){
+      vuelo.setCapacidadActual(vuelo.getCapacidad());
+      
+      hVuelo.setTime(vuelo.getFechaPartida());
+      hVuelo.add(Calendar.DAY_OF_MONTH, 1);
+      vuelo.setFechaPartida(hVuelo.getTime());
+      
+      hVuelo.setTime(vuelo.getFechaPartidaUTC0());
+      hVuelo.add(Calendar.DAY_OF_MONTH, 1);
+      vuelo.setFechaPartidaUTC0(hVuelo.getTime());
+      
+      hVuelo.setTime(vuelo.getFechaDestino());
+      hVuelo.add(Calendar.DAY_OF_MONTH, 1);
+      vuelo.setFechaDestino(hVuelo.getTime());
+      
+      hVuelo.setTime(vuelo.getFechaDestinoUTC0());
+      hVuelo.add(Calendar.DAY_OF_MONTH, 1);
+      vuelo.setFechaDestinoUTC0(hVuelo.getTime());
+    }
   }
 
   @PostMapping(value = "/simulator/initial")
@@ -125,7 +163,6 @@ public class RedexController {
     List<Envio> enviosInDate = envioService.getInRange(inicioSimulacion.getTime(), siguienteBloque.getTime());
 
     for (Envio envio : enviosInDate) {
-      System.out.println(envio.getCodigo());
       envio.setAeropuertoPartida(aeropuertos.get(envio.getAeropuertoPartida().getCodigo()));
       envio.setAeropuertoDestino(aeropuertos.get(envio.getAeropuertoDestino().getCodigo()));
       Aeropuerto answer = AStar.aStar(envio, inicioSimulacion);
@@ -138,20 +175,20 @@ public class RedexController {
         v.getFechaPartidaUTC0().after(inicioSimulacion.getTime()) && 
         v.getFechaPartidaUTC0().before(siguienteBloque.getTime())
       )).collect(Collectors.toList());
-
-    System.out.println("Vuelos enviados: " + vuelosInDate.size());
-      for (Vuelo vuelo : vuelosInDate)
-        System.out.println("  " + vuelo.getCodigo() + ": " + vuelo.getFechaPartidaUTC0().toString());
+    
     Map<String, Object> result = new HashMap<>();
     result.put("envios", enviosInDate);
     result.put("vuelos", vuelosInDate);
     result.put("ultimoEnvio", lastEnvio);
+
+    reiniciarVuelos(vuelosInDate);
 
     return result;
   }
 
   @PostMapping(value = "/simulator/perBlock")
   Map<String, Object> simulatorPerDay(@RequestParam(value = "block",required = true) int block){
+    Envio lastEnvio = null;
     Calendar bloqueActual = Calendar.getInstance(), siguienteBloque = Calendar.getInstance();
     
     bloqueActual.setTime(inicioSimulacion.getTime());
@@ -160,6 +197,7 @@ public class RedexController {
     siguienteBloque.setTime(bloqueActual.getTime());
     siguienteBloque.add(Calendar.HOUR, 6);
 
+    actualizarVuelos(inicioSimulacion);
     System.out.println("\nBloque analizado: " + bloqueActual.getTime().toString() + " - " + siguienteBloque.getTime().toString());
 
     List<Envio> enviosInDate = envioService.getInRange(bloqueActual.getTime(), siguienteBloque.getTime());
@@ -168,7 +206,8 @@ public class RedexController {
       envio.setAeropuertoPartida(aeropuertos.get(envio.getAeropuertoPartida().getCodigo()));
       envio.setAeropuertoDestino(aeropuertos.get(envio.getAeropuertoDestino().getCodigo()));
       Aeropuerto answer = AStar.aStar(envio, inicioSimulacion);
-      AStar.obtenerPlanesDeVuelo(answer, envio, bloqueActual);
+      lastEnvio = AStar.obtenerPlanesDeVuelo(answer, envio, inicioSimulacion);
+      if(lastEnvio != null) break;
     }
 
     List<Vuelo> vuelosInDate = vuelosList.stream()
@@ -177,12 +216,12 @@ public class RedexController {
         v.getFechaPartidaUTC0().before(siguienteBloque.getTime())
       )).collect(Collectors.toList());
 
-    System.out.println("Vuelos enviados: " + vuelosInDate.size());
-    for (Vuelo vuelo : vuelosInDate)
-      System.out.println("  " + vuelo.getCodigo() + ": " + vuelo.getFechaPartidaUTC0().toString());
     Map<String, Object> result = new HashMap<>();
     result.put("envios", enviosInDate);
     result.put("vuelos", vuelosInDate);
+    result.put("ultimoEnvio", lastEnvio);
+
+    reiniciarVuelos(vuelosInDate);
 
     return result;
   }
