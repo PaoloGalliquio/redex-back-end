@@ -75,9 +75,9 @@ public class RedexController {
 
   @GetMapping(value = "/init")
   List<Aeropuerto> init(){
-    //List<Configuracion> configuracionList = configuracionService.getAll();
-    // for (Configuracion configuracion : configuracionList)
-    //   configuraciones.put(configuracion.getNombre(), configuracion);
+    List<Configuracion> configuracionList = configuracionService.getAll();
+    for (Configuracion configuracion : configuracionList)
+      configuraciones.put(configuracion.getNombre(), configuracion);
 
     continentesList = continenteService.getAll();
     paisesList = paisService.getAll();
