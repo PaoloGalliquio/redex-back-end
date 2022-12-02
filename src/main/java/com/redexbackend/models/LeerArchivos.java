@@ -237,23 +237,162 @@ public class LeerArchivos {
           envio.setAeropuertoPartida(aeropuertoSalida);
           envio.setAeropuertoDestino(aeropuertos.get(destinoNumPaquetes[0]));
           envio.setNumeroPaquetes(Integer.parseInt(destinoNumPaquetes[1]));
-          if(esIntercontinental(envio)){
-            fechaLimite.add(Calendar.DATE, 1);
-            fechaLimiteUTC.add(Calendar.DATE, 1);
-          }
-          else{
-            fechaLimite.add(Calendar.DATE, 2);
-            fechaLimiteUTC.add(Calendar.DATE, 2);
-          }
+          if(esIntercontinental(envio))
+            fechaLimite.add(Calendar.HOUR_OF_DAY, 24);
+          else
+            fechaLimite.add(Calendar.HOUR_OF_DAY, 48);
+          fechaLimiteUTC.setTime(fechaLimite.getTime());
+          fechaLimiteUTC.add(Calendar.HOUR_OF_DAY, -aeropuertoSalida.getHusoHorario());
           envio.setFechaLimite(fechaLimite.getTime());
           envio.setFechaLimiteUTC(fechaLimiteUTC.getTime());
           envioService.insert(envio);
+          
         }
       }
       br.close();
     } catch (Exception ex) {
       System.out.println("Se ha producido un error: " + ex.getMessage());
     }
+  }
+
+  public void escribirEnviosSQL(HashMap<String, Aeropuerto> aeropuertos, MultipartFile file, Date fechaInicio){
+    var convertedFile = toFile(file);
+    String[] informacion, destinoNumPaquetes;
+    String line;
+    File enviosSQL = new File("envios.sql");
+    Calendar fechaFin = Calendar.getInstance(), 
+      fechaLimite = Calendar.getInstance(), fechaEnvio = Calendar.getInstance(), 
+      fechaLimiteUTC = Calendar.getInstance(), fechaEnvioUTC = Calendar.getInstance();
+    fechaFin.setTime(fechaInicio);
+    fechaFin.add(Calendar.DAY_OF_MONTH, 5);
+    Aeropuerto aeropuertoSalida;
+    try{
+      BufferedReader br = new BufferedReader(new FileReader(convertedFile));
+      FileOutputStream fos = new FileOutputStream(enviosSQL);
+      BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+      bw.write("use `redex-db`;");
+      bw.newLine();
+      bw.newLine();
+      while ((line = br.readLine()) != null) {
+        informacion = line.split("-");
+        destinoNumPaquetes = informacion[3].split(":");
+        aeropuertoSalida = aeropuertos.get(informacion[0].substring(0, 4));
+        obtenerTiemposDeEnvio(fechaEnvio, fechaEnvioUTC, fechaLimite, fechaLimiteUTC, informacion, aeropuertoSalida.getHusoHorario());
+        Envio envio = new Envio();
+        envio.setCodigo(informacion[0]);
+        envio.setFechaEnvio(fechaEnvio.getTime());
+        envio.setFechaEnvioUTC(fechaEnvioUTC.getTime());
+        envio.setAeropuertoPartida(aeropuertoSalida);
+        envio.setAeropuertoDestino(aeropuertos.get(destinoNumPaquetes[0]));
+        envio.setNumeroPaquetes(Integer.parseInt(destinoNumPaquetes[1]));
+        if(esIntercontinental(envio))
+          fechaLimite.add(Calendar.HOUR_OF_DAY, 24);
+        else
+          fechaLimite.add(Calendar.HOUR_OF_DAY, 48);
+        fechaLimiteUTC.setTime(fechaLimite.getTime());
+        fechaLimiteUTC.add(Calendar.HOUR_OF_DAY, -aeropuertoSalida.getHusoHorario());
+        envio.setFechaLimite(fechaLimite.getTime());
+        envio.setFechaLimiteUTC(fechaLimiteUTC.getTime());
+        bw.write(lineaEnvioSQL(envio));
+        bw.newLine();
+        bw.newLine();
+      }
+      bw.close();
+      br.close();
+    } catch (Exception ex) {
+      System.out.println("Se ha producido un error: " + ex.getMessage());
+    }
+  }
+
+  public void escribirEnviosSQL(HashMap<String, Aeropuerto> aeropuertos){
+    String[] aeroNames = new String[]{"BIKF","EBCI","EDDI","EETN","EFHK","EGLL","EHAM","EIDW","EKCH","ELLX","ENGM","EPMO","ESKN","EVRA","LATI","LBSF","LDZA","LEMD","LFPG","LGAV","LHBP","LIRA","LJLJ","LKPR","LMML","LOWW","LPPT","LSZB","LZIB","SABE","SBBR","SCEL","SEQM","SGAS","SKBO","SLLP","SPIM","SUAA","SVMI","UMMS"};
+    String[] informacion, destinoNumPaquetes;
+    String line;
+    Calendar fechaLimite = Calendar.getInstance(), fechaEnvio = Calendar.getInstance(), 
+      fechaLimiteUTC = Calendar.getInstance(), fechaEnvioUTC = Calendar.getInstance();
+    Aeropuerto aeropuertoSalida;
+    int i = 0;
+    for(String aero : aeroNames){
+      try{
+        File enviosSQL = new File("envios_" + aero + ".sql");
+        File archivoLeido = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\envios_historicos.v01\\pack_enviado_" + aero + ".txt");
+        BufferedReader br = new BufferedReader(new FileReader(archivoLeido));
+        FileOutputStream fos = new FileOutputStream(enviosSQL);
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+        bw.write("use `redex-db`;");
+        bw.newLine();
+        bw.newLine();
+        while ((line = br.readLine()) != null) {
+          informacion = line.split("-");
+          destinoNumPaquetes = informacion[3].split(":");
+          aeropuertoSalida = aeropuertos.get(informacion[0].substring(0, 4));
+          obtenerTiemposDeEnvio(fechaEnvio, fechaEnvioUTC, fechaLimite, fechaLimiteUTC, informacion, aeropuertoSalida.getHusoHorario());
+          Envio envio = new Envio();
+          envio.setCodigo(informacion[0]);
+          envio.setFechaEnvio(fechaEnvio.getTime());
+          envio.setFechaEnvioUTC(fechaEnvioUTC.getTime());
+          envio.setAeropuertoPartida(aeropuertoSalida);
+          envio.setAeropuertoDestino(aeropuertos.get(destinoNumPaquetes[0]));
+          envio.setNumeroPaquetes(Integer.parseInt(destinoNumPaquetes[1]));
+          if(esIntercontinental(envio))
+            fechaLimite.add(Calendar.HOUR_OF_DAY, 24);
+          else
+            fechaLimite.add(Calendar.HOUR_OF_DAY, 48);
+          fechaLimiteUTC.setTime(fechaLimite.getTime());
+          fechaLimiteUTC.add(Calendar.HOUR_OF_DAY, -aeropuertoSalida.getHusoHorario());
+          envio.setFechaLimite(fechaLimite.getTime());
+          envio.setFechaLimiteUTC(fechaLimiteUTC.getTime());
+          if (i % 5000 == 0){
+            bw.write(";\n\n");
+            bw.write(lineaEnvioInsertSQL());
+          }else bw.write(",\n");
+          bw.write(lineaEnvioValuesSQL(envio));
+          i++;
+        }
+        bw.write(";\n");
+        bw.close();
+        br.close();
+      } catch (Exception ex) {
+        System.out.println("Se ha producido un error: " + ex.getMessage());
+      }
+    }
+  }
+
+  String lineaEnvioSQL(Envio envio){
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    String datos = "'" + 
+      envio.getCodigo() + "','" + 
+      format.format(envio.getFechaEnvio()) + "','" + 
+      format.format(envio.getFechaEnvioUTC()) + "','" +
+      format.format(envio.getFechaLimite()) + "','" +
+      format.format(envio.getFechaLimiteUTC()) + "'," +
+      envio.getNumeroPaquetes() + "," +
+      envio.getAeropuertoDestino().getId() + "," +
+      envio.getAeropuertoPartida().getId();
+    String linea = "INSERT INTO envio (estado,codigo,fecha_envio,fecha_envioutc,fecha_limite,fecha_limiteutc,numero_paquetes,id_aeropuerto_destino,id_aeropuerto_partida)\nVALUES(1," + datos + ");";
+    return linea;
+  }
+
+  String lineaEnvioInsertSQL(){
+    String linea = 
+    "INSERT INTO envio (estado,codigo,fecha_envio,fecha_envioutc,fecha_limite,fecha_limiteutc,numero_paquetes,id_aeropuerto_destino,id_aeropuerto_partida)\n" + 
+    "VALUES\n";
+    return linea;
+  }
+
+  String lineaEnvioValuesSQL(Envio envio){
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    String datos = "'" + 
+      envio.getCodigo() + "','" + 
+      format.format(envio.getFechaEnvio()) + "','" + 
+      format.format(envio.getFechaEnvioUTC()) + "','" +
+      format.format(envio.getFechaLimite()) + "','" +
+      format.format(envio.getFechaLimiteUTC()) + "'," +
+      envio.getNumeroPaquetes() + "," +
+      envio.getAeropuertoDestino().getId() + "," +
+      envio.getAeropuertoPartida().getId();
+    String linea = "(1," + datos + ")";
+    return linea;
   }
 
   void obtenerTiemposDeEnvio(Calendar fechaEnvio, Calendar fechaEnvioUTC, Calendar fechaLimite, Calendar fechaLimiteUTC, String[] informacion, Integer husoHorario){
@@ -405,14 +544,13 @@ public class LeerArchivos {
       bw.write("use `redex-db`;");
       bw.newLine();
       bw.newLine();
+      bw.write(
+        "INSERT INTO vuelo " + 
+        "(estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida) VALUES\n"
+      );
       for (Vuelo vuelo : vuelos){
         bw.write(
-          "INSERT INTO vuelo " + 
-          "(estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida)"
-        );
-        bw.newLine();
-        bw.write(
-          "VALUES (1," + 
+          "(1," + 
           vuelo.getCapacidad() + "," + 
           vuelo.getCapacidadActual() + ",'" + 
           vuelo.getCodigo() + "',1," + 
@@ -422,10 +560,9 @@ public class LeerArchivos {
           dateFormat.format(vuelo.getFechaDestinoUTC0()) + "','" + 
           dateFormat.format(vuelo.getFechaPartidaUTC0()) + "'," + 
           vuelo.getAeropuertoDestino().getId() + "," + 
-          vuelo.getAeropuertoPartida().getId() + ");");
-        bw.newLine();
-        bw.newLine();
+          vuelo.getAeropuertoPartida().getId() + "),\n");
       }
+      bw.write(";\n");
       bw.close();
     } catch (Exception ex){
       System.out.println(ex.getMessage());
@@ -449,6 +586,28 @@ public class LeerArchivos {
             bw.write(line);
             bw.newLine();
           }
+        }
+      }
+      bw.close();
+    } catch (Exception ex){
+      System.out.println(ex.getMessage());
+    }
+  }
+
+  public void escribirEnvios(){
+    String[] aeropuertos = new String[]{"BIKF","EBCI","EDDI","EETN","EFHK","EGLL","EHAM","EIDW","EKCH","ELLX","ENGM","EPMO","ESKN","EVRA","LATI","LBSF","LDZA","LEMD","LFPG","LGAV","LHBP","LIRA","LJLJ","LKPR","LMML","LOWW","LPPT","LSZB","LZIB","SABE","SBBR","SCEL","SEQM","SGAS","SKBO","SLLP","SPIM","SUAA","SVMI","UMMS"};
+    String line;
+    BufferedReader br;
+    File archivoLeido, envios = new File("enviosCompletos.txt");
+    try{
+      FileOutputStream fos = new FileOutputStream(envios);
+      BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+      for (String aeropuerto : aeropuertos) {
+        archivoLeido = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\envios_historicos.v01\\pack_enviado_" + aeropuerto + ".txt");
+        br = new BufferedReader(new FileReader(archivoLeido));
+        while((line = br.readLine()) != null){
+          bw.write(line);
+          bw.newLine();
         }
       }
       bw.close();

@@ -181,8 +181,6 @@ public class RedexController {
     result.put("vuelos", vuelosInDate);
     result.put("ultimoEnvio", lastEnvio);
 
-    reiniciarVuelos(vuelosInDate);
-
     return result;
   }
 
@@ -198,7 +196,6 @@ public class RedexController {
     siguienteBloque.add(Calendar.HOUR, 6);
 
     actualizarVuelos(bloqueActual);
-    System.out.println(" Vuelo: " + vuelosList.get(0).getFechaPartidaUTC0().toString());
     System.out.println("\nBloque analizado: " + bloqueActual.getTime().toString() + " - " + siguienteBloque.getTime().toString());
 
     List<Envio> enviosInDate = envioService.getInRange(bloqueActual.getTime(), siguienteBloque.getTime());
@@ -275,6 +272,12 @@ public class RedexController {
   @GetMapping(value = "/continente/list")
   List<Continente> listContinentes() {
     return continentesList;
+  }
+
+  @GetMapping(value = "/escribirEnviosSQL")
+  String escribirEnviosSQL(){
+    lector.escribirEnviosSQL(aeropuertos);
+    return "Terminado";
   }
 
   @GetMapping(value = "/fillDataBase")
