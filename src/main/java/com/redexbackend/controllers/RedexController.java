@@ -159,18 +159,19 @@ public class RedexController {
     }
   }
 
-  @PostMapping(value = "/simulator/initial")
-  public void simuladorSocket(@RequestParam(value = "fecha",required = true) Date fecha){
-    inicioSimulacionSocket = Calendar.getInstance();
-    inicioSimulacionSocket.setTime(fecha);
-    Calendar siguienteBloque = Calendar.getInstance();
-    siguienteBloque.setTime(fecha);
-    siguienteBloque.add(Calendar.HOUR_OF_DAY, 6);
-  }
+  // @PostMapping(value = "/simulator/initial")
+  // public void simuladorSocket(@RequestParam(value = "fecha",required = true) Date fecha){
+  //   inicioSimulacionSocket = Calendar.getInstance();
+  //   inicioSimulacionSocket.setTime(fecha);
+  //   Calendar siguienteBloque = Calendar.getInstance();
+  //   siguienteBloque.setTime(fecha);
+  //   siguienteBloque.add(Calendar.HOUR_OF_DAY, 6);
+  // }
 
   // @Scheduled(fixedRate = 90000)
   // public void simluatorPerBlock() {
   //   if(inicioSimulacionSocket != null){
+  //     Envio lastEnvio = null;
   //     Calendar bloqueActual = Calendar.getInstance(), siguienteBloque = Calendar.getInstance();
       
   //     bloqueActual.setTime(inicioSimulacionSocket.getTime());
@@ -179,11 +180,31 @@ public class RedexController {
   //     siguienteBloque.setTime(bloqueActual.getTime());
   //     siguienteBloque.add(Calendar.HOUR, 6);
 
-  //     if(bloque % 4 == 0)
-  //       actualizarVuelos(bloqueActual);
+  //     if(bloque % 4 == 0) actualizarVuelos(bloqueActual);
+  //     bloque++;
+
+  //     List<Envio> enviosInDate = envioService.getInRange(inicioSimulacion.getTime(), siguienteBloque.getTime());
+
+  //     for (Envio envio : enviosInDate) {
+  //       envio.setAeropuertoPartida(aeropuertos.get(envio.getAeropuertoPartida().getCodigo()));
+  //       envio.setAeropuertoDestino(aeropuertos.get(envio.getAeropuertoDestino().getCodigo()));
+  //       Aeropuerto answer = AStar.aStar(envio, inicioSimulacion);
+  //       lastEnvio = AStar.obtenerPlanesDeVuelo(answer, envio, inicioSimulacion);
+  //       //if(lastEnvio != null) break;
+  //     }
+
+  //     List<Vuelo> vuelosInDate = vuelosList.stream()
+  //       .filter(v -> (
+  //         v.getFechaPartidaUTC0().after(inicioSimulacion.getTime()) && 
+  //         v.getFechaPartidaUTC0().before(siguienteBloque.getTime())
+  //       )).collect(Collectors.toList());
+      
+  //     Map<String, Object> result = new HashMap<>();
+  //     result.put("envios", enviosInDate);
+  //     result.put("vuelos", vuelosInDate);
+  //     result.put("ultimoEnvio", lastEnvio);
   
-  
-  //     template.convertAndSend("/greetings", "Hello");
+  //     template.convertAndSend("/simulator", result);
   //   }
   // }
 
