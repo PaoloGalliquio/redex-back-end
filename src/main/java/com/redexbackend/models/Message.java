@@ -2,8 +2,6 @@ package com.redexbackend.models;
 
 import lombok.*;
 
-import java.util.Date;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

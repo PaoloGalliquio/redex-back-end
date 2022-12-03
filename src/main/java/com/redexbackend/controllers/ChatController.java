@@ -6,13 +6,23 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
+@EnableScheduling
 @Controller
 public class ChatController {
 
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
+    Message mensaje = new Message();
+
+    @Scheduled(fixedRate = 5000)
+    public void greeting() {
+        System.out.println("scheduled");
+        simpMessagingTemplate.convertAndSend("/topic/greetings", "Hello");
+    }
 
     @MessageMapping("/message")
     @SendTo("/chatroom/public")
