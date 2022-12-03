@@ -7,9 +7,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,10 +42,14 @@ import com.redexbackend.service.PaisService;
 import com.redexbackend.service.VueloService;
 import com.redexbackend.util.SortVuelos;
 
+@EnableScheduling
+@Controller
 @RestController
 @RequestMapping("/Redex")
 @CrossOrigin
 public class RedexController {
+  @Autowired
+  private SimpMessagingTemplate template;
   @Autowired
   private ContinenteService continenteService = new ContinenteService();
   @Autowired
@@ -59,6 +68,9 @@ public class RedexController {
   LeerArchivos lector = new LeerArchivos();
 
   Calendar inicioSimulacion = Calendar.getInstance();
+  Calendar inicioSimulacionSocket = null;
+  int bloque = 0;
+  Timer time = null;
 
   HashMap<String, Configuracion> configuraciones = new HashMap<>();
   List<Continente> continentesList;
@@ -146,6 +158,34 @@ public class RedexController {
       vuelo.setFechaDestinoUTC0(hVuelo.getTime());
     }
   }
+
+  @PostMapping(value = "/simulator/initial")
+  public void simuladorSocket(@RequestParam(value = "fecha",required = true) Date fecha){
+    inicioSimulacionSocket = Calendar.getInstance();
+    inicioSimulacionSocket.setTime(fecha);
+    Calendar siguienteBloque = Calendar.getInstance();
+    siguienteBloque.setTime(fecha);
+    siguienteBloque.add(Calendar.HOUR_OF_DAY, 6);
+  }
+
+  // @Scheduled(fixedRate = 90000)
+  // public void simluatorPerBlock() {
+  //   if(inicioSimulacionSocket != null){
+  //     Calendar bloqueActual = Calendar.getInstance(), siguienteBloque = Calendar.getInstance();
+      
+  //     bloqueActual.setTime(inicioSimulacionSocket.getTime());
+  //     bloqueActual.add(Calendar.HOUR, 6*bloque);
+  
+  //     siguienteBloque.setTime(bloqueActual.getTime());
+  //     siguienteBloque.add(Calendar.HOUR, 6);
+
+  //     if(bloque % 4 == 0)
+  //       actualizarVuelos(bloqueActual);
+  
+  
+  //     template.convertAndSend("/greetings", "Hello");
+  //   }
+  // }
 
   @PostMapping(value = "/simulator/initial")
   Map<String, Object> simulador(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {

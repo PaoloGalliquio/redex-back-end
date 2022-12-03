@@ -18,11 +18,11 @@ public class ChatController {
     private SimpMessagingTemplate simpMessagingTemplate;
     Message mensaje = new Message();
 
-    @Scheduled(fixedRate = 5000)
-    public void greeting() {
-        System.out.println("scheduled");
-        simpMessagingTemplate.convertAndSend("/topic/greetings", "Hello");
-    }
+    // @Scheduled(fixedRate = 5000)
+    // public void greeting() {
+    //     System.out.println("scheduled");
+    //     simpMessagingTemplate.convertAndSend("/greetings", "Hello");
+    // }
 
     @MessageMapping("/message")
     @SendTo("/chatroom/public")
