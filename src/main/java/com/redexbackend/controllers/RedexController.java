@@ -1,5 +1,6 @@
 package com.redexbackend.controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -7,7 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,10 +69,8 @@ public class RedexController {
 
   LeerArchivos lector = new LeerArchivos();
 
-  Calendar inicioSimulacion = Calendar.getInstance();
-  Calendar inicioSimulacionSocket = null;
+  Calendar inicioSimulacion = null;
   int bloque = 0;
-  Timer time = null;
 
   HashMap<String, Configuracion> configuraciones = new HashMap<>();
   List<Continente> continentesList;
@@ -161,33 +159,38 @@ public class RedexController {
     }
   }
 
+  private String getMoment(){
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+    return "[" + dateFormat.format(new Date()) + "]: ";
+  }
+
   @MessageMapping("/simulator")
   public void simulatorSocket(@Payload Fecha fecha){
-    System.out.println("\n[" + (new Date()).toString() + "]: " + "Inicio de simulación: " + fecha.toString().toString());
-    inicioSimulacionSocket = Calendar.getInstance();
-    inicioSimulacionSocket.setTime(fecha.getFecha());
+    System.out.println("\n" + getMoment() + "Inicio de simulación: " + fecha.toString().toString());
+    inicioSimulacion = Calendar.getInstance();
+    inicioSimulacion.setTime(fecha.getFecha());
   }
 
   @Scheduled(fixedRate = 90000)
   public void simluatorPerBlock() {
-    if(inicioSimulacionSocket != null){
+    if(inicioSimulacion != null){
       Envio lastEnvio = null;
       Calendar bloqueActual = Calendar.getInstance(), siguienteBloque = Calendar.getInstance();
       
-      bloqueActual.setTime(inicioSimulacionSocket.getTime());
+      bloqueActual.setTime(inicioSimulacion.getTime());
       bloqueActual.add(Calendar.HOUR, 6*bloque);
       
       siguienteBloque.setTime(bloqueActual.getTime());
       siguienteBloque.add(Calendar.HOUR, 6);
       siguienteBloque.add(Calendar.MINUTE, -1);
-      System.out.println("\n[" + (new Date()).toString() + "]: " + "Bloque analizado: " + bloqueActual.getTime().toString() + " - " + siguienteBloque.getTime().toString());
+      System.out.println("\n" + getMoment() + "Bloque analizado: " + bloqueActual.getTime().toString() + " - " + siguienteBloque.getTime().toString());
 
       if(bloque % 4 == 0) actualizarVuelos(bloqueActual); // Pasa 1 día cada 4 bloques
       bloque++;
 
-      System.out.println("[" + (new Date()).toString() + "]: " + bloqueActual.getTime().toString() + " - leyendo datos...");
+      System.out.println(getMoment() + bloqueActual.getTime().toString() + " - leyendo datos...");
       List<Envio> enviosInDate = lector.getEnviosInRange(aeropuertos, bloqueActual.getTime(), siguienteBloque.getTime());
-      System.out.println("[" + (new Date()).toString() + "]: " + bloqueActual.getTime().toString() + " - envios encontrados: " + enviosInDate.size());
+      System.out.println(getMoment() + bloqueActual.getTime().toString() + " - envios encontrados: " + enviosInDate.size());
 
       for (Envio envio : enviosInDate) {
         envio.setAeropuertoPartida(aeropuertos.get(envio.getAeropuertoPartida().getCodigo()));
@@ -208,7 +211,7 @@ public class RedexController {
       result.put("vuelos", vuelosInDate);
       result.put("ultimoEnvio", lastEnvio);
   
-      System.out.println(bloqueActual.getTime().toString() + " - enviando respuesta...");
+      System.out.println(getMoment() + bloqueActual.getTime().toString() + " - enviando respuesta...");
       template.convertAndSend("/simulator/response", result);
 
       reiniciarVuelos(vuelosInDate);
@@ -226,9 +229,9 @@ public class RedexController {
 
     System.out.println("\nBloque analizado: " + inicioSimulacion.getTime().toString() + " - " + siguienteBloque.getTime().toString());
 
-    System.out.println("[" + (new Date()).toString() + "]: " + inicioSimulacion.getTime().toString() + " - llamando data...");
+    System.out.println(getMoment() + inicioSimulacion.getTime().toString() + " - llamando data...");
     List<Envio> enviosInDate = envioService.getInRange(inicioSimulacion.getTime(), siguienteBloque.getTime());
-    System.out.println("[" + (new Date()).toString() + "]: " + inicioSimulacion.getTime().toString() + " - envios encontrados: " + enviosInDate.size());
+    System.out.println(getMoment() + inicioSimulacion.getTime().toString() + " - envios encontrados: " + enviosInDate.size());
 
     for (Envio envio : enviosInDate) {
       envio.setAeropuertoPartida(aeropuertos.get(envio.getAeropuertoPartida().getCodigo()));
@@ -266,9 +269,9 @@ public class RedexController {
     actualizarVuelos(bloqueActual);
     System.out.println("\nBloque analizado: " + bloqueActual.getTime().toString() + " - " + siguienteBloque.getTime().toString());
 
-    System.out.println("[" + (new Date()).toString() + "]: " + bloqueActual.getTime().toString() + " - llamando data...");
+    System.out.println(getMoment() + bloqueActual.getTime().toString() + " - llamando data...");
     List<Envio> enviosInDate = envioService.getInRange(bloqueActual.getTime(), siguienteBloque.getTime());
-    System.out.println("[" + (new Date()).toString() + "]: " + bloqueActual.getTime().toString() + " - envios encontrados: " + enviosInDate.size());
+    System.out.println(getMoment() + bloqueActual.getTime().toString() + " - envios encontrados: " + enviosInDate.size());
 
     for (Envio envio : enviosInDate) {
       envio.setAeropuertoPartida(aeropuertos.get(envio.getAeropuertoPartida().getCodigo()));
