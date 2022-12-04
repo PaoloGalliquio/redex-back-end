@@ -163,13 +163,9 @@ public class RedexController {
 
   @MessageMapping("/simulator")
   public void simulatorSocket(@Payload Fecha fecha){
-    System.out.println("\nInicio de simulación: " + fecha.toString().toString());
+    System.out.println("\n[" + (new Date()).toString() + "]: " + "Inicio de simulación: " + fecha.toString().toString());
     inicioSimulacionSocket = Calendar.getInstance();
     inicioSimulacionSocket.setTime(fecha.getFecha());
-    Calendar siguienteBloque = Calendar.getInstance();
-    siguienteBloque.setTime(fecha.getFecha());
-    siguienteBloque.add(Calendar.HOUR_OF_DAY, 6);
-    simluatorPerBlock();
   }
 
   @Scheduled(fixedRate = 90000)
@@ -184,7 +180,7 @@ public class RedexController {
       siguienteBloque.setTime(bloqueActual.getTime());
       siguienteBloque.add(Calendar.HOUR, 6);
       siguienteBloque.add(Calendar.MINUTE, -1);
-      System.out.println("\nBloque analizado: " + bloqueActual.getTime().toString() + " - " + siguienteBloque.getTime().toString());
+      System.out.println("\n[" + (new Date()).toString() + "]: " + "Bloque analizado: " + bloqueActual.getTime().toString() + " - " + siguienteBloque.getTime().toString());
 
       if(bloque % 4 == 0) actualizarVuelos(bloqueActual); // Pasa 1 día cada 4 bloques
       bloque++;
