@@ -11,6 +11,8 @@ import java.util.Timer;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -22,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.redexbackend.models.AStar;
 import com.redexbackend.models.Aeropuerto;
@@ -30,6 +31,7 @@ import com.redexbackend.models.Ciudad;
 import com.redexbackend.models.Configuracion;
 import com.redexbackend.models.Continente;
 import com.redexbackend.models.Envio;
+import com.redexbackend.models.Fecha;
 import com.redexbackend.models.LeerArchivos;
 import com.redexbackend.models.Pais;
 import com.redexbackend.models.Vuelo;
@@ -159,69 +161,78 @@ public class RedexController {
     }
   }
 
-  // @PostMapping(value = "/simulator/initial")
-  // public void simuladorSocket(@RequestParam(value = "fecha",required = true) Date fecha){
-  //   inicioSimulacionSocket = Calendar.getInstance();
-  //   inicioSimulacionSocket.setTime(fecha);
-  //   Calendar siguienteBloque = Calendar.getInstance();
-  //   siguienteBloque.setTime(fecha);
-  //   siguienteBloque.add(Calendar.HOUR_OF_DAY, 6);
-  // }
+  @MessageMapping("/simulator")
+  public void simulatorSocket(@Payload Fecha fecha){
+    System.out.println("\nInicio de simulación: " + fecha.toString().toString());
+    inicioSimulacionSocket = Calendar.getInstance();
+    inicioSimulacionSocket.setTime(fecha.getFecha());
+    Calendar siguienteBloque = Calendar.getInstance();
+    siguienteBloque.setTime(fecha.getFecha());
+    siguienteBloque.add(Calendar.HOUR_OF_DAY, 6);
+    simluatorPerBlock();
+  }
 
-  // @Scheduled(fixedRate = 90000)
-  // public void simluatorPerBlock() {
-  //   if(inicioSimulacionSocket != null){
-  //     Envio lastEnvio = null;
-  //     Calendar bloqueActual = Calendar.getInstance(), siguienteBloque = Calendar.getInstance();
+  @Scheduled(fixedRate = 90000)
+  public void simluatorPerBlock() {
+    if(inicioSimulacionSocket != null){
+      Envio lastEnvio = null;
+      Calendar bloqueActual = Calendar.getInstance(), siguienteBloque = Calendar.getInstance();
       
-  //     bloqueActual.setTime(inicioSimulacionSocket.getTime());
-  //     bloqueActual.add(Calendar.HOUR, 6*bloque);
-  
-  //     siguienteBloque.setTime(bloqueActual.getTime());
-  //     siguienteBloque.add(Calendar.HOUR, 6);
-
-  //     if(bloque % 4 == 0) actualizarVuelos(bloqueActual);
-  //     bloque++;
-
-  //     List<Envio> enviosInDate = envioService.getInRange(inicioSimulacion.getTime(), siguienteBloque.getTime());
-
-  //     for (Envio envio : enviosInDate) {
-  //       envio.setAeropuertoPartida(aeropuertos.get(envio.getAeropuertoPartida().getCodigo()));
-  //       envio.setAeropuertoDestino(aeropuertos.get(envio.getAeropuertoDestino().getCodigo()));
-  //       Aeropuerto answer = AStar.aStar(envio, inicioSimulacion);
-  //       lastEnvio = AStar.obtenerPlanesDeVuelo(answer, envio, inicioSimulacion);
-  //       //if(lastEnvio != null) break;
-  //     }
-
-  //     List<Vuelo> vuelosInDate = vuelosList.stream()
-  //       .filter(v -> (
-  //         v.getFechaPartidaUTC0().after(inicioSimulacion.getTime()) && 
-  //         v.getFechaPartidaUTC0().before(siguienteBloque.getTime())
-  //       )).collect(Collectors.toList());
+      bloqueActual.setTime(inicioSimulacionSocket.getTime());
+      bloqueActual.add(Calendar.HOUR, 6*bloque);
       
-  //     Map<String, Object> result = new HashMap<>();
-  //     result.put("envios", enviosInDate);
-  //     result.put("vuelos", vuelosInDate);
-  //     result.put("ultimoEnvio", lastEnvio);
+      siguienteBloque.setTime(bloqueActual.getTime());
+      siguienteBloque.add(Calendar.HOUR, 6);
+      siguienteBloque.add(Calendar.MINUTE, -1);
+      System.out.println("\nBloque analizado: " + bloqueActual.getTime().toString() + " - " + siguienteBloque.getTime().toString());
+
+      if(bloque % 4 == 0) actualizarVuelos(bloqueActual); // Pasa 1 día cada 4 bloques
+      bloque++;
+
+      System.out.println("[" + (new Date()).toString() + "]: " + bloqueActual.getTime().toString() + " - leyendo datos...");
+      List<Envio> enviosInDate = lector.getEnviosInRange(aeropuertos, bloqueActual.getTime(), siguienteBloque.getTime());
+      System.out.println("[" + (new Date()).toString() + "]: " + bloqueActual.getTime().toString() + " - envios encontrados: " + enviosInDate.size());
+
+      for (Envio envio : enviosInDate) {
+        envio.setAeropuertoPartida(aeropuertos.get(envio.getAeropuertoPartida().getCodigo()));
+        envio.setAeropuertoDestino(aeropuertos.get(envio.getAeropuertoDestino().getCodigo()));
+        Aeropuerto answer = AStar.aStar(envio, bloqueActual);
+        lastEnvio = AStar.obtenerPlanesDeVuelo(answer, envio, bloqueActual);
+        if(lastEnvio != null) break;
+      }
+
+      List<Vuelo> vuelosInDate = vuelosList.stream()
+        .filter(v -> (
+          v.getFechaPartidaUTC0().after(bloqueActual.getTime()) && 
+          v.getFechaPartidaUTC0().before(siguienteBloque.getTime())
+        )).collect(Collectors.toList());
+      
+      Map<String, Object> result = new HashMap<>();
+      result.put("envios", enviosInDate);
+      result.put("vuelos", vuelosInDate);
+      result.put("ultimoEnvio", lastEnvio);
   
-  //     template.convertAndSend("/simulator", result);
-  //   }
-  // }
+      System.out.println(bloqueActual.getTime().toString() + " - enviando respuesta...");
+      template.convertAndSend("/simulator/response", result);
+
+      reiniciarVuelos(vuelosInDate);
+    }
+  }
 
   @PostMapping(value = "/simulator/initial")
-  Map<String, Object> simulador(@RequestParam(value = "file",required = true) MultipartFile archivo, @RequestParam(value = "fecha",required = true) Date fecha) {
+  Map<String, Object> simulador(@RequestParam(value = "fecha",required = true) Date fecha) {
     Envio lastEnvio = null;
     inicioSimulacion.setTime(fecha);
     Calendar siguienteBloque = Calendar.getInstance();
     siguienteBloque.setTime(fecha);
     siguienteBloque.add(Calendar.HOUR_OF_DAY, 6);
-    //lector.leerEnviosTXT(aeropuertos, archivo, fecha, envioService);
-    archivo = null;
     actualizarVuelos(inicioSimulacion);
 
     System.out.println("\nBloque analizado: " + inicioSimulacion.getTime().toString() + " - " + siguienteBloque.getTime().toString());
 
+    System.out.println("[" + (new Date()).toString() + "]: " + inicioSimulacion.getTime().toString() + " - llamando data...");
     List<Envio> enviosInDate = envioService.getInRange(inicioSimulacion.getTime(), siguienteBloque.getTime());
+    System.out.println("[" + (new Date()).toString() + "]: " + inicioSimulacion.getTime().toString() + " - envios encontrados: " + enviosInDate.size());
 
     for (Envio envio : enviosInDate) {
       envio.setAeropuertoPartida(aeropuertos.get(envio.getAeropuertoPartida().getCodigo()));
@@ -259,7 +270,9 @@ public class RedexController {
     actualizarVuelos(bloqueActual);
     System.out.println("\nBloque analizado: " + bloqueActual.getTime().toString() + " - " + siguienteBloque.getTime().toString());
 
+    System.out.println("[" + (new Date()).toString() + "]: " + bloqueActual.getTime().toString() + " - llamando data...");
     List<Envio> enviosInDate = envioService.getInRange(bloqueActual.getTime(), siguienteBloque.getTime());
+    System.out.println("[" + (new Date()).toString() + "]: " + bloqueActual.getTime().toString() + " - envios encontrados: " + enviosInDate.size());
 
     for (Envio envio : enviosInDate) {
       envio.setAeropuertoPartida(aeropuertos.get(envio.getAeropuertoPartida().getCodigo()));

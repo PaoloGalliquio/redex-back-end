@@ -437,9 +437,9 @@ public class AStar {
         hULlegada.setTime(ultimaLlegada);
 
         if(esMayor(envio.getFechaEnvioUTC(), hULlegada.getTime(), origen, destino, duracionEnvio)){
-            System.out.println("Hora de envio: " + envio.getFechaEnvioUTC());
-            System.out.println("Hora de llegada: " + hULlegada.getTime());
-            System.out.println(envio.getCodigo() + " se cae");
+            System.out.println("Hora de envio: " + envio.getFechaEnvioUTC().toString());
+            System.out.println("Hora de llegada: " + hULlegada.getTime().toString());
+            System.out.println(envio.getCodigo() + " se cae\n");
             return envio;
         }
         else
@@ -466,6 +466,8 @@ public class AStar {
         planDeVuelo.setDuracionTotal(duracionEnvio);
         planDeVuelos.add(planDeVuelo);
         envio.setPlanesDeVuelo(planDeVuelos);
+        // if(vueloPorPlanDeVuelos.size() >= 2)
+        //     System.out.println(envio.getCodigo() + " - aquí");
         return null;
     }
 
@@ -473,14 +475,14 @@ public class AStar {
         duracion = (int) TimeUnit.MINUTES.convert((ultimaLlegada.getTime() - primeraSalida.getTime()), TimeUnit.MILLISECONDS);
         if(origen.getCiudad().getPais().getContinente().getCodigo().charAt(0) == destino.getCiudad().getPais().getContinente().getCodigo().charAt(0)){
             if(duracion > 24*60){
-                System.out.println("    Duración: " + duracion);
+                System.out.println("\nDuración: " + duracion);
                 return true;
             }
             else 
                 return false;
         }else{
             if(duracion > 48*60){
-                System.out.println("    Duración: " + duracion);
+                System.out.println("\nDuración: " + duracion);
                 return true;
             }
             else 

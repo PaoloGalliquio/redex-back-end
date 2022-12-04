@@ -304,6 +304,56 @@ public class LeerArchivos {
     }
   }
 
+  public List<Envio> getEnviosInRange(HashMap<String, Aeropuerto> aeropuertos, Date fechaInicio, Date fechaFinal){
+    List<Envio> envios = new ArrayList<>();
+    String[] aeroCodes = new String[]{
+      "BIKF","EBCI","EDDI","EETN","EFHK","EGLL","EHAM","EIDW","EKCH","ELLX","ENGM","EPMO","ESKN","EVRA","LATI","LBSF","LDZA","LEMD","LFPG","LGAV",
+      "LHBP","LIRA","LJLJ","LKPR","LMML","LOWW","LPPT","LSZB","LZIB","SABE","SBBR","SCEL","SEQM","SGAS","SKBO","SLLP","SPIM","SUAA","SVMI","UMMS"};
+    String[] informacion, destinoNumPaquetes;
+    String line;
+    Calendar fechaLimite = Calendar.getInstance(), fechaEnvio = Calendar.getInstance(), 
+      fechaLimiteUTC = Calendar.getInstance(), fechaEnvioUTC = Calendar.getInstance();
+    Aeropuerto aeropuertoSalida;
+    for(String code : aeroCodes){
+      try {
+        File archivo = new File(System.getProperty("user.dir") + 
+          "\\src\\main\\java\\com\\redexbackend\\redexbackend\\envios_historicos.v01\\pack_enviado_" + code + ".txt");
+        BufferedReader br = new BufferedReader(new FileReader(archivo));
+        while ((line = br.readLine()) != null){
+          informacion = line.split("-");
+          destinoNumPaquetes = informacion[3].split(":");
+          aeropuertoSalida = aeropuertos.get(code);
+          obtenerTiemposDeEnvio(fechaEnvio, fechaEnvioUTC, fechaLimite, fechaLimiteUTC, informacion, aeropuertoSalida.getHusoHorario());
+          if(fechaEnvioUTC.getTime().compareTo(fechaFinal) > 0){
+            // System.out.println(code + " - primer envío: " + envios.get(0).getCodigo() + " - " + envios.get(0).getFechaEnvioUTC());
+            // System.out.println(code + " - primer último: " + envios.get(envios.size() - 1).getCodigo() + " - " + envios.get(envios.size() - 1).getFechaEnvioUTC() +"\n");
+            break;
+          }
+          if(fechaEnvioUTC.getTime().compareTo(fechaInicio) >= 0 && fechaEnvioUTC.getTime().compareTo(fechaFinal) <= 0){
+            Envio envio = new Envio();
+            envio.setCodigo(informacion[0]);
+            envio.setFechaEnvio(fechaEnvio.getTime());
+            envio.setFechaEnvioUTC(fechaEnvioUTC.getTime());
+            envio.setAeropuertoPartida(aeropuertoSalida);
+            envio.setAeropuertoDestino(aeropuertos.get(destinoNumPaquetes[0]));
+            envio.setNumeroPaquetes(Integer.parseInt(destinoNumPaquetes[1]));
+            if(esIntercontinental(envio)) fechaLimite.add(Calendar.HOUR_OF_DAY, 24);
+            else fechaLimite.add(Calendar.HOUR_OF_DAY, 48);
+            fechaLimiteUTC.setTime(fechaLimite.getTime());
+            fechaLimiteUTC.add(Calendar.HOUR_OF_DAY, -aeropuertoSalida.getHusoHorario());
+            envio.setFechaLimite(fechaLimite.getTime());
+            envio.setFechaLimiteUTC(fechaLimiteUTC.getTime());
+            envios.add(envio);
+          }
+        }
+        br.close();
+      } catch (Exception ex) {
+        System.out.println("Se ha producido un error: " + ex.getMessage());
+      }
+    }
+    return envios;
+  }
+
   public void escribirEnviosSQL(HashMap<String, Aeropuerto> aeropuertos){
     String[] aeroNames = new String[]{"BIKF","EBCI","EDDI","EETN","EFHK","EGLL","EHAM","EIDW","EKCH","ELLX","ENGM","EPMO","ESKN","EVRA","LATI","LBSF","LDZA","LEMD","LFPG","LGAV","LHBP","LIRA","LJLJ","LKPR","LMML","LOWW","LPPT","LSZB","LZIB","SABE","SBBR","SCEL","SEQM","SGAS","SKBO","SLLP","SPIM","SUAA","SVMI","UMMS"};
     String[] informacion, destinoNumPaquetes;
@@ -410,8 +460,7 @@ public class LeerArchivos {
     fechaEnvio.setTime(fecha);
     fechaEnvioUTC.setTime(fecha);
     fechaEnvioUTC.add(Calendar.HOUR, -husoHorario);
-    fechaLimite.setTime(fechaEnvio.getTime());
-    fechaEnvioUTC.setTime(fechaEnvioUTC.getTime());
+    fechaLimite.setTime(fecha);
   }
 
   private File toFile(MultipartFile multipartFile){
