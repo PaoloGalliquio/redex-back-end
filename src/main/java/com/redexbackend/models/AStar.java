@@ -439,7 +439,10 @@ public class AStar {
         if(esMayor(envio.getFechaEnvioUTC(), hULlegada.getTime(), origen, destino, duracionEnvio)){
             System.out.println("Hora de envio: " + envio.getFechaEnvioUTC().toString());
             System.out.println("Hora de llegada: " + hULlegada.getTime().toString());
-            System.out.println(envio.getCodigo() + " se cae\n");
+            System.out.println(envio.getCodigo() + " se cae");
+            for(Vuelo vuelo : listaVuelos)
+                System.out.print(" -> " + vuelo.getCodigo() + "(" + vuelo.getFechaPartidaUTC0().toString() + ")");
+            System.out.println("\n");
             return envio;
         }
         else

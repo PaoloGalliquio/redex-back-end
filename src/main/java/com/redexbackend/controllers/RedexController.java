@@ -120,18 +120,18 @@ public class RedexController {
         mesSimu = fecha.get(Calendar.MONTH), 
         aaSimu = fecha.get(Calendar.YEAR);
     for (Vuelo vuelo : vuelosList){
-      hVuelo.setTime(vuelo.getFechaPartida());
+      hVuelo.setTime(vuelo.getFechaPartidaUTC0());
       hVuelo.set(aaSimu, mesSimu, diaSimu);
+      vuelo.setFechaPartidaUTC0(hVuelo.getTime());
+
+      hVuelo.add(Calendar.HOUR, vuelo.getAeropuertoPartida().getHusoHorario());
       vuelo.setFechaPartida(hVuelo.getTime());
 
-      hVuelo.add(Calendar.HOUR, -(vuelo.getAeropuertoPartida().getHusoHorario()));
-      vuelo.setFechaPartidaUTC0(hVuelo.getTime());
-      
+      hVuelo.setTime(vuelo.getFechaPartidaUTC0());
       hVuelo.add(Calendar.MINUTE, vuelo.getDuracion());
       vuelo.setFechaDestinoUTC0(hVuelo.getTime());
-      
-      hVuelo.setTime(vuelo.getFechaDestinoUTC0());
-      hVuelo.add(Calendar.HOUR, (vuelo.getAeropuertoDestino().getHusoHorario()));
+
+      hVuelo.add(Calendar.HOUR, vuelo.getAeropuertoDestino().getHusoHorario());
       vuelo.setFechaDestino(hVuelo.getTime());
     }
   }
@@ -164,9 +164,24 @@ public class RedexController {
     return "[" + dateFormat.format(new Date()) + "]: ";
   }
 
+  private String formatDate(Date fecha){
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+    return dateFormat.format(fecha);
+  }
+
+  private String formatDate(Calendar fecha){
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+    return dateFormat.format(fecha.getTime());
+  }
+
+  private String formatDay(Calendar fecha){
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+    return dateFormat.format(fecha.getTime());
+  }
+
   @MessageMapping("/simulator")
   public void simulatorSocket(@Payload Fecha fecha){
-    System.out.println("\n" + getMoment() + "Inicio de simulación: " + fecha.toString().toString());
+    System.out.println("\n" + getMoment() + "Inicio de simulación: " + formatDate(fecha.getFecha()));
     inicioSimulacion = Calendar.getInstance();
     inicioSimulacion.setTime(fecha.getFecha());
   }
@@ -183,14 +198,17 @@ public class RedexController {
       siguienteBloque.setTime(bloqueActual.getTime());
       siguienteBloque.add(Calendar.HOUR, 6);
       siguienteBloque.add(Calendar.MINUTE, -1);
-      System.out.println("\n" + getMoment() + "Bloque analizado: " + bloqueActual.getTime().toString() + " - " + siguienteBloque.getTime().toString());
+      System.out.println("\n" + getMoment() + "Bloque analizado: " + formatDate(bloqueActual) + " - " + formatDate(siguienteBloque));
 
-      if(bloque % 4 == 0) actualizarVuelos(bloqueActual); // Pasa 1 día cada 4 bloques
+      if(bloque % 4 == 0){
+        System.out.println(getMoment() + "Actulizando vuelos a " + formatDay(bloqueActual) + "...");
+        actualizarVuelos(bloqueActual); // Pasa 1 día cada 4 bloques
+      }
       bloque++;
 
-      System.out.println(getMoment() + bloqueActual.getTime().toString() + " - leyendo datos...");
+      System.out.println(getMoment() + "Leyendo datos...");
       List<Envio> enviosInDate = lector.getEnviosInRange(aeropuertos, bloqueActual.getTime(), siguienteBloque.getTime());
-      System.out.println(getMoment() + bloqueActual.getTime().toString() + " - envios encontrados: " + enviosInDate.size());
+      System.out.println(getMoment() + "Envios encontrados: " + enviosInDate.size());
 
       for (Envio envio : enviosInDate) {
         envio.setAeropuertoPartida(aeropuertos.get(envio.getAeropuertoPartida().getCodigo()));
@@ -211,7 +229,7 @@ public class RedexController {
       result.put("vuelos", vuelosInDate);
       result.put("ultimoEnvio", lastEnvio);
   
-      System.out.println(getMoment() + bloqueActual.getTime().toString() + " - enviando respuesta...");
+      System.out.println(getMoment() + "Enviando respuesta...");
       template.convertAndSend("/simulator/response", result);
 
       reiniciarVuelos(vuelosInDate);
