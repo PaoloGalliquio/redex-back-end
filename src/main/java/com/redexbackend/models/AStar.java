@@ -445,8 +445,12 @@ public class AStar {
             System.out.println("\n");
             return envio;
         }
-        else
+        else{
             cambiarCapacidades(listaVuelos, envio.getNumeroPaquetes());
+            duracionEnvio = (int)(ultimaLlegada.getTime() - envio.getFechaEnvioUTC().getTime())/60000 + 60;
+            hULlegada.add(Calendar.HOUR, 1);
+            envio.setFechaFinalizadoUTC(hULlegada.getTime());
+        }
 
         List<PlanDeVuelo> planDeVuelos = new ArrayList<>();
         List<VueloPorPlanDeVuelo> vueloPorPlanDeVuelos = new ArrayList<>();
