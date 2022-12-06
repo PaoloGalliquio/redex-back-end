@@ -311,9 +311,10 @@ public class LeerArchivos {
       "LHBP","LIRA","LJLJ","LKPR","LMML","LOWW","LPPT","LSZB","LZIB","SABE","SBBR","SCEL","SEQM","SGAS","SKBO","SLLP","SPIM","SUAA","SVMI","UMMS"};
     String[] informacion, destinoNumPaquetes;
     String line;
-    Calendar fechaLimite = Calendar.getInstance(), fechaEnvio = Calendar.getInstance(), 
-      fechaLimiteUTC = Calendar.getInstance(), fechaEnvioUTC = Calendar.getInstance();
+    Calendar fechaLimite = Calendar.getInstance(), fechaEnvio = Calendar.getInstance(), fechaLimiteUTC = Calendar.getInstance(), fechaEnvioUTC = Calendar.getInstance(), fechaFinaLimite = Calendar.getInstance();
     Aeropuerto aeropuertoSalida;
+    fechaFinaLimite.setTime(fechaFinal);
+    fechaFinaLimite.add(Calendar.DAY_OF_WEEK, 1);
     for(String code : aeroCodes){
       try {
         File archivo = new File(System.getProperty("user.dir") + 
@@ -324,11 +325,7 @@ public class LeerArchivos {
           destinoNumPaquetes = informacion[3].split(":");
           aeropuertoSalida = aeropuertos.get(code);
           obtenerTiemposDeEnvio(fechaEnvio, fechaEnvioUTC, fechaLimite, fechaLimiteUTC, informacion, aeropuertoSalida.getHusoHorario());
-          if(fechaEnvioUTC.getTime().compareTo(fechaFinal) > 0){
-            // System.out.println(code + " - primer envío: " + envios.get(0).getCodigo() + " - " + envios.get(0).getFechaEnvioUTC());
-            // System.out.println(code + " - primer último: " + envios.get(envios.size() - 1).getCodigo() + " - " + envios.get(envios.size() - 1).getFechaEnvioUTC() +"\n");
-            break;
-          }
+          if(fechaEnvioUTC.getTime().compareTo(fechaFinaLimite.getTime()) > 0) break;
           if(fechaEnvioUTC.getTime().compareTo(fechaInicio) >= 0 && fechaEnvioUTC.getTime().compareTo(fechaFinal) <= 0){
             Envio envio = new Envio();
             envio.setCodigo(informacion[0]);

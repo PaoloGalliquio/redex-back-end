@@ -77,7 +77,7 @@ public class RedexController {
   List<Pais> paisesList;
   List<Ciudad> ciudadesList;
   HashMap<String, Aeropuerto> aeropuertos = new HashMap<>();
-  List<Aeropuerto> aeropuertosList;
+  List<Aeropuerto> aeropuertosList = null;
   List<Vuelo> vuelosList = new ArrayList<>();
 
   @GetMapping(value = "/test")
@@ -87,6 +87,7 @@ public class RedexController {
 
   @GetMapping(value = "/init")
   List<Aeropuerto> init(){
+    System.out.println("\n" + getMoment() + "Inicializando data...");
     List<Configuracion> configuracionList = configuracionService.getAll();
     for (Configuracion configuracion : configuracionList)
       configuraciones.put(configuracion.getNombre(), configuracion);
@@ -111,10 +112,12 @@ public class RedexController {
 
     Collections.sort(vuelosList, new SortVuelos());
 
+    System.out.println(getMoment() + "Data inicializada.\n");
     return aeropuertosList;
   }
 
   void actualizarVuelos(Calendar fecha){
+    System.out.println(getMoment() + "Actualizando vuelos a " + formatDay(fecha) + "...");
     Calendar hVuelo = Calendar.getInstance();
     int diaSimu = fecha.get(Calendar.DAY_OF_MONTH), 
         mesSimu = fecha.get(Calendar.MONTH), 
@@ -181,6 +184,10 @@ public class RedexController {
 
   @MessageMapping("/simulator")
   public void simulatorSocket(@Payload Fecha fecha){
+    if (aeropuertosList == null){
+      System.out.println("\n" + getMoment() + "Data no inicializada.");
+      return;
+    }
     System.out.println("\n" + getMoment() + "Inicio de simulación: " + formatDate(fecha.getFecha()));
     inicioSimulacion = Calendar.getInstance();
     inicioSimulacion.setTime(fecha.getFecha());
@@ -188,6 +195,7 @@ public class RedexController {
 
   @Scheduled(fixedRate = 90000)
   public void simluatorPerBlock() {
+    if(bloque == 20) inicioSimulacion = null;
     if(inicioSimulacion != null){
       Envio lastEnvio = null;
       Calendar bloqueActual = Calendar.getInstance(), siguienteBloque = Calendar.getInstance();
@@ -200,10 +208,8 @@ public class RedexController {
       siguienteBloque.add(Calendar.MINUTE, -1);
       System.out.println("\n" + getMoment() + "Bloque analizado: " + formatDate(bloqueActual) + " - " + formatDate(siguienteBloque));
 
-      if(bloque % 4 == 0){
-        System.out.println(getMoment() + "Actulizando vuelos a " + formatDay(bloqueActual) + "...");
-        actualizarVuelos(bloqueActual); // Pasa 1 día cada 4 bloques
-      }
+      if(bloque % 4 == 0) actualizarVuelos(bloqueActual);
+
       bloque++;
 
       System.out.println(getMoment() + "Leyendo datos...");
