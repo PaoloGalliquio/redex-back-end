@@ -209,7 +209,6 @@ public class RedexController {
       System.out.println("\n" + getMoment() + "Bloque analizado: " + formatDate(bloqueActual) + " - " + formatDate(siguienteBloque));
 
       if(bloque % 4 == 0) actualizarVuelos(bloqueActual);
-
       bloque++;
 
       System.out.println(getMoment() + "Leyendo datos...");
