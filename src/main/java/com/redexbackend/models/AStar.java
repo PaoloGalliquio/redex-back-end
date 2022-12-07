@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.concurrent.TimeUnit;
 
@@ -405,6 +406,9 @@ public class AStar {
         var destino = envio.getAeropuertoDestino();
         var nroPaquetes = envio.getNumeroPaquetes();
         int duracionEnvio = 0;
+        Map <String, Object> envioBasico = new HashMap<>();
+        envioBasico.put("codigo", envio.getCodigo());
+        envioBasico.put("numeroPaquetes", envio.getNumeroPaquetes());
         Aeropuerto n = target;
         if (n == null)
             return null;
@@ -463,6 +467,7 @@ public class AStar {
             vueloPorPlanDeVuelo.setVuelo(v);
             vueloPorPlanDeVuelo.setFechaVuelo(v.getFechaPartida());
             vueloPorPlanDeVuelos.add(vueloPorPlanDeVuelo);
+            v.getEnvios().add(envioBasico);
         }
         planDeVuelo.setVuelosPorPlanDeVuelo(vueloPorPlanDeVuelos);
         planDeVuelo.setCodigo(codigo);

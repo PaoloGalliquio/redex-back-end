@@ -159,6 +159,8 @@ public class RedexController {
       hVuelo.setTime(vuelo.getFechaDestinoUTC0());
       hVuelo.add(Calendar.DAY_OF_MONTH, 1);
       vuelo.setFechaDestinoUTC0(hVuelo.getTime());
+
+      vuelo.setEnvios(new ArrayList<>());
     }
   }
 

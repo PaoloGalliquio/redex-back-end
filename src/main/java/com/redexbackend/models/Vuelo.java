@@ -1,7 +1,10 @@
 package com.redexbackend.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -13,12 +16,12 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Vuelo")
 @SQLDelete(sql = "update Vuelo set estado = 0 where id = ?")
 @Where(clause = "estado = 1")
-@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
@@ -58,6 +61,13 @@ public class Vuelo extends BaseEntity {
 
   @Column(name = "disponible")
   private Boolean disponible; // 1: Para disponible, 0: Para no disponible
+
+  @Transient
+  private List<Map<String, Object>> envios;
+
+  public Vuelo(){
+    envios = new ArrayList<>();
+  }
 
   public Vuelo(String codigo, Aeropuerto aeropuertoPartida, Aeropuerto aeropuertoDestino, Date fechaPartida,
       Date fechaDestino, Date fechaPartidaUTC0, Date fechaDestinoUTC0, int capacidad, int estado, boolean disponible) {
