@@ -422,8 +422,8 @@ public class RedexController {
       return ex.getMessage();
     }
 
-    lector.leerVuelosTXT(aeropuertos, vuelosList, configuraciones);
-    lector.escribirSQL(vuelosList);
+    HashMap<String, Vuelo> vuelos = lector.leerVuelosTXT(aeropuertos, vuelosList, configuraciones);
+    lector.escribirSQL(vuelos);
 
     return "Data inicializada";
   }

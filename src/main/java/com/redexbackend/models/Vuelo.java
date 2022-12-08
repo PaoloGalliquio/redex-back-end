@@ -83,9 +83,8 @@ public class Vuelo extends BaseEntity {
     this.disponible = disponible;
   }
 
-  public Vuelo(String codigo, Aeropuerto aeropuertoPartida, Aeropuerto aeropuertoDestino, Date fechaPartida,
+  public Vuelo(Aeropuerto aeropuertoPartida, Aeropuerto aeropuertoDestino, Date fechaPartida,
       Date fechaDestino, Date fechaPartidaUTC0, Date fechaDestinoUTC0, int capacidad, int duracion, int estado, boolean disponible) {
-    this.codigo = codigo;
     this.aeropuertoPartida = aeropuertoPartida;
     this.aeropuertoDestino = aeropuertoDestino;
     this.fechaPartida = fechaPartida;

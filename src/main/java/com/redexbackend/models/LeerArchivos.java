@@ -77,9 +77,9 @@ public class LeerArchivos {
     return (int)diff;
   }
 
-  public void leerVuelosTXT(HashMap<String, Aeropuerto> aeropuertos, List<Vuelo> vuelos, HashMap<String, Configuracion> configuracion){
+  public HashMap<String, Vuelo> leerVuelosTXT(HashMap<String, Aeropuerto> aeropuertos, List<Vuelo> vuelos, HashMap<String, Configuracion> configuracion){
     String[] informacion;
-    String line;
+    String line, codigo;
     int duracion, capacidad;
     Aeropuerto salida, llegada;
     Calendar horaSalida = Calendar.getInstance(), 
@@ -88,6 +88,7 @@ public class LeerArchivos {
       horaLlegadaUTC0 = Calendar.getInstance(),
       diaActual = Calendar.getInstance(),
       diaSiguie = Calendar.getInstance();
+    HashMap<String, Vuelo> vuelosHashMap = new HashMap<>();
     File vuelostxt = new File(System.getProperty("user.dir") + "\\src\\main\\java\\com\\redexbackend\\redexbackend\\vuelos.txt");
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     try {
@@ -130,14 +131,22 @@ public class LeerArchivos {
         
         capacidad = obtenerCapacidad(aeropuertos, informacion[0], informacion[1], configuracion);
         duracion = obtenerDuracion(horaSalidaUTC0, horaLlegadaUTC0, salida, llegada);
-
-        Vuelo vuelo = new Vuelo(informacion[0] + informacion[1], salida, llegada, horaSalida.getTime(), horaLlegada.getTime(), horaSalidaUTC0.getTime(), horaLlegadaUTC0.getTime(), capacidad, duracion, 1, true);
+        codigo = informacion[0] + informacion[1];
+        Vuelo vuelo = new Vuelo(salida, llegada, horaSalida.getTime(), horaLlegada.getTime(), horaSalidaUTC0.getTime(), horaLlegadaUTC0.getTime(), capacidad, duracion, 1, true);
         horaSalidaUTC0.add(Calendar.HOUR, 24);
         horaLlegadaUTC0.add(Calendar.HOUR, 24);
         horaSalida.add(Calendar.HOUR, 24);
         horaLlegada.add(Calendar.HOUR, 24);
         
         vuelo.setDuracion(duracion);
+
+        for(int i = 1; i <= 100; i++){
+          if (!vuelosHashMap.containsKey(codigo + i)){
+            vuelo.setCodigo(codigo + i);
+            vuelosHashMap.put(codigo + i, vuelo);
+            break;
+          }
+        }
 
         vuelos.add(vuelo);
 
@@ -147,6 +156,7 @@ public class LeerArchivos {
     } catch (Exception ex) {
       System.out.println("Se ha producido un error: " + ex.getMessage());
     }
+    return vuelosHashMap;
   }
 
   public void leerEnviosTXT(HashMap<String, Aeropuerto> aeropuertos, List<List<Envio>> enviosList, MultipartFile file, Date fechaInicio){
@@ -578,6 +588,40 @@ public class LeerArchivos {
       System.out.println("Se ha producido un error: " + ex.getMessage());
     }
     return timezones;
+  }
+
+  public void escribirSQL(HashMap<String, Vuelo> vuelos){
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    try{
+      File file = new File("vuelos.sql");
+      FileOutputStream fos = new FileOutputStream(file);
+      BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+      bw.write("use `redex-db`;");
+      bw.newLine();
+      bw.newLine();
+      bw.write(
+        "INSERT INTO vuelo " + 
+        "(estado,capacidad,capacidad_actual,codigo,disponible,duracion,fecha_destino,fecha_partida,fecha_destinoutc0,fecha_partidautc0,id_aeropuerto_destino,id_aeropuerto_partida) VALUES\n"
+      );
+      for (var vuelo : vuelos.entrySet()){
+        bw.write(
+          "(1," + 
+          vuelo.getValue().getCapacidad() + "," + 
+          vuelo.getValue().getCapacidadActual() + ",'" + 
+          vuelo.getValue().getCodigo() + "',1," + 
+          vuelo.getValue().getDuracion() + ",'" + 
+          dateFormat.format(vuelo.getValue().getFechaDestino()) + "','" + 
+          dateFormat.format(vuelo.getValue().getFechaPartida()) + "','" + 
+          dateFormat.format(vuelo.getValue().getFechaDestinoUTC0()) + "','" + 
+          dateFormat.format(vuelo.getValue().getFechaPartidaUTC0()) + "'," + 
+          vuelo.getValue().getAeropuertoDestino().getId() + "," + 
+          vuelo.getValue().getAeropuertoPartida().getId() + "),\n");
+      }
+      bw.write(";\n");
+      bw.close();
+    } catch (Exception ex){
+      System.out.println(ex.getMessage());
+    }
   }
 
   public void escribirSQL(List<Vuelo> vuelos){
