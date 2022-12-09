@@ -70,6 +70,7 @@ public class RedexController {
   LeerArchivos lector = new LeerArchivos();
 
   Calendar inicioSimulacion = null;
+  Calendar inicioColapso = null;
   int bloque = 0;
 
   HashMap<String, Configuracion> configuraciones = new HashMap<>();
@@ -164,26 +165,70 @@ public class RedexController {
     }
   }
 
-  private String getMoment(){
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-    return "[" + dateFormat.format(new Date()) + "]: ";
+  //region Colapso logístico
+  @MessageMapping("/collapse")
+  public void collapseSocket(@Payload Fecha fecha){
+    if (aeropuertosList == null){
+      System.out.println("\n" + getMoment() + "Data no inicializada.");
+      return;
+    }
+    System.out.println("\n" + getMoment() + "Inicio de colapso: " + formatDate(fecha.getFecha()));
+    inicioColapso = Calendar.getInstance();
+    inicioColapso.setTime(fecha.getFecha());
   }
 
-  private String formatDate(Date fecha){
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-    return dateFormat.format(fecha);
-  }
+  @Scheduled(fixedRate = 90000)
+  public void collapsePerBlock() {
+    if(inicioColapso != null){
+      Envio lastEnvio = null;
+      Calendar bloqueActual = Calendar.getInstance(), siguienteBloque = Calendar.getInstance();
+      
+      bloqueActual.setTime(inicioColapso.getTime());
+      bloqueActual.add(Calendar.HOUR, 6*bloque);
+      
+      siguienteBloque.setTime(bloqueActual.getTime());
+      siguienteBloque.add(Calendar.HOUR, 6);
+      siguienteBloque.add(Calendar.MINUTE, -1);
+      System.out.println("\n" + getMoment() + "Bloque analizado: " + formatDate(bloqueActual) + " - " + formatDate(siguienteBloque));
 
-  private String formatDate(Calendar fecha){
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-    return dateFormat.format(fecha.getTime());
-  }
+      if(bloque % 4 == 0) actualizarVuelos(bloqueActual);
+      bloque++;
 
-  private String formatDay(Calendar fecha){
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
-    return dateFormat.format(fecha.getTime());
-  }
+      System.out.println(getMoment() + "Leyendo datos...");
+      List<Envio> enviosInDate = lector.getEnviosInRange(aeropuertos, bloqueActual.getTime(), siguienteBloque.getTime());
+      System.out.println(getMoment() + "Envios encontrados: " + enviosInDate.size());
 
+      for (Envio envio : enviosInDate) {
+        envio.setAeropuertoPartida(aeropuertos.get(envio.getAeropuertoPartida().getCodigo()));
+        envio.setAeropuertoDestino(aeropuertos.get(envio.getAeropuertoDestino().getCodigo()));
+        Aeropuerto answer = AStar.aStar(envio, bloqueActual);
+        lastEnvio = AStar.obtenerPlanesDeVuelo(answer, envio, bloqueActual);
+        if(lastEnvio != null){
+          inicioColapso = null;
+          break;
+        }
+      }
+
+      List<Vuelo> vuelosInDate = vuelosList.stream()
+        .filter(v -> (
+          v.getFechaPartidaUTC0().after(bloqueActual.getTime()) && 
+          v.getFechaPartidaUTC0().before(siguienteBloque.getTime())
+        )).collect(Collectors.toList());
+      
+      Map<String, Object> result = new HashMap<>();
+      result.put("envios", enviosInDate);
+      result.put("vuelos", vuelosInDate);
+      result.put("ultimoEnvio", lastEnvio);
+  
+      System.out.println(getMoment() + "Enviando respuesta...");
+      template.convertAndSend("/simulator/response", result);
+
+      reiniciarVuelos(vuelosInDate);
+    }
+  }
+  //endregion
+
+  //region Simulación 5 días
   @MessageMapping("/simulator")
   public void simulatorSocket(@Payload Fecha fecha){
     if (aeropuertosList == null){
@@ -222,7 +267,10 @@ public class RedexController {
         envio.setAeropuertoDestino(aeropuertos.get(envio.getAeropuertoDestino().getCodigo()));
         Aeropuerto answer = AStar.aStar(envio, bloqueActual);
         lastEnvio = AStar.obtenerPlanesDeVuelo(answer, envio, bloqueActual);
-        if(lastEnvio != null) break;
+        if(lastEnvio != null){
+          inicioSimulacion = null;
+          break; 
+        }
       }
 
       List<Vuelo> vuelosInDate = vuelosList.stream()
@@ -242,7 +290,31 @@ public class RedexController {
       reiniciarVuelos(vuelosInDate);
     }
   }
+  //endregion
 
+  //region Formato de fechas
+  private String getMoment(){
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+    return "[" + dateFormat.format(new Date()) + "]: ";
+  }
+
+  private String formatDate(Date fecha){
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+    return dateFormat.format(fecha);
+  }
+
+  private String formatDate(Calendar fecha){
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+    return dateFormat.format(fecha.getTime());
+  }
+
+  private String formatDay(Calendar fecha){
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+    return dateFormat.format(fecha.getTime());
+  }
+  //endregion
+
+  //region Simulación legacy
   @PostMapping(value = "/simulator/initial")
   Map<String, Object> simulador(@RequestParam(value = "fecha",required = true) Date fecha) {
     Envio lastEnvio = null;
@@ -340,6 +412,7 @@ public class RedexController {
 
     return "00328901315659603963";
   }
+  //endregion
 
   @GetMapping(value = "/configuraciones/list")
   Map<String, Configuracion> listConfiguraciones() {
