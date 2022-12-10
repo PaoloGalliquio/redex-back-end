@@ -204,13 +204,14 @@ public class RedexController {
         Aeropuerto answer = AStar.aStar(envio, bloqueActual);
         lastEnvio = AStar.obtenerPlanesDeVuelo(answer, envio, bloqueActual);
         if(lastEnvio != null){
-          inicioColapso = null;
+          //inicioColapso = null;
           break;
         }
       }
 
       List<Vuelo> vuelosInDate = vuelosList.stream()
         .filter(v -> (
+          v.getEnvios().size() != 0 &&
           v.getFechaPartidaUTC0().after(bloqueActual.getTime()) && 
           v.getFechaPartidaUTC0().before(siguienteBloque.getTime())
         )).collect(Collectors.toList());
@@ -268,13 +269,14 @@ public class RedexController {
         Aeropuerto answer = AStar.aStar(envio, bloqueActual);
         lastEnvio = AStar.obtenerPlanesDeVuelo(answer, envio, bloqueActual);
         if(lastEnvio != null){
-          inicioSimulacion = null;
+          //inicioSimulacion = null;
           break; 
         }
       }
 
       List<Vuelo> vuelosInDate = vuelosList.stream()
         .filter(v -> (
+          v.getEnvios().size() != 0 &&
           v.getFechaPartidaUTC0().after(bloqueActual.getTime()) && 
           v.getFechaPartidaUTC0().before(siguienteBloque.getTime())
         )).collect(Collectors.toList());
