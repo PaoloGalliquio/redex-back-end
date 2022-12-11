@@ -114,6 +114,8 @@ public class RedexController {
     Collections.sort(vuelosList, new SortVuelos());
 
     System.out.println(getMoment() + "Data inicializada.\n");
+    // inicioSimulacion = Calendar.getInstance();
+    // inicioSimulacion.set(2023, 1, 12, 0, 0, 0);
     return aeropuertosList;
   }
 
@@ -175,6 +177,8 @@ public class RedexController {
     System.out.println("\n" + getMoment() + "Inicio de colapso: " + formatDate(fecha.getFecha()));
     inicioColapso = Calendar.getInstance();
     inicioColapso.setTime(fecha.getFecha());
+    inicioSimulacion = null;
+    bloque = 0;
   }
 
   @Scheduled(fixedRate = 90000)
@@ -205,6 +209,7 @@ public class RedexController {
         lastEnvio = AStar.obtenerPlanesDeVuelo(answer, envio, bloqueActual);
         if(lastEnvio != null){
           inicioColapso = null;
+          bloque = 0;
           break;
         }
       }
@@ -222,7 +227,7 @@ public class RedexController {
       result.put("ultimoEnvio", lastEnvio);
   
       System.out.println(getMoment() + "Enviando respuesta...");
-      template.convertAndSend("/simulator/response", result);
+      template.convertAndSend("/collapse/response", result);
 
       reiniciarVuelos(vuelosInDate);
     }
@@ -239,6 +244,8 @@ public class RedexController {
     System.out.println("\n" + getMoment() + "Inicio de simulación: " + formatDate(fecha.getFecha()));
     inicioSimulacion = Calendar.getInstance();
     inicioSimulacion.setTime(fecha.getFecha());
+    inicioColapso = null;
+    bloque = 0;
   }
 
   @Scheduled(fixedRate = 90000)
@@ -270,6 +277,7 @@ public class RedexController {
         lastEnvio = AStar.obtenerPlanesDeVuelo(answer, envio, bloqueActual);
         if(lastEnvio != null){
           inicioSimulacion = null;
+          bloque = 0;
           break; 
         }
       }
