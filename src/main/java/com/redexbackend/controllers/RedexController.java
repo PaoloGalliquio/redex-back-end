@@ -204,7 +204,7 @@ public class RedexController {
         Aeropuerto answer = AStar.aStar(envio, bloqueActual);
         lastEnvio = AStar.obtenerPlanesDeVuelo(answer, envio, bloqueActual);
         if(lastEnvio != null){
-          //inicioColapso = null;
+          inicioColapso = null;
           break;
         }
       }
@@ -269,7 +269,7 @@ public class RedexController {
         Aeropuerto answer = AStar.aStar(envio, bloqueActual);
         lastEnvio = AStar.obtenerPlanesDeVuelo(answer, envio, bloqueActual);
         if(lastEnvio != null){
-          //inicioSimulacion = null;
+          inicioSimulacion = null;
           break; 
         }
       }
